@@ -1,0 +1,17 @@
+{
+  "STSMODBLOODYWOLF-BLOODYWOLF.aromaPrinciple": "[sine][blue]……等待……[/blue][/sine]",
+  "STSMODBLOODYWOLF-BLOODYWOLF.banter.alive.endTurnPing": "……",
+  "STSMODBLOODYWOLF-BLOODYWOLF.banter.dead.endTurnPing": "……",
+  "STSMODBLOODYWOLF-BLOODYWOLF.cardsModifierDescription": "血狼破军的卡牌现在会出现在奖励和商店中。",
+  "STSMODBLOODYWOLF-BLOODYWOLF.cardsModifierTitle": "血狼破军卡牌",
+  "STSMODBLOODYWOLF-BLOODYWOLF.description": "全军出击，我咬死你！",
+  "STSMODBLOODYWOLF-BLOODYWOLF.eventDeathPrevention": "区。",
+  "STSMODBLOODYWOLF-BLOODYWOLF.goldMonologue": "[sine]这些金币……也许能派上用场……[/sine]",
+  "STSMODBLOODYWOLF-BLOODYWOLF.possessiveAdjective": "他的",
+  "STSMODBLOODYWOLF-BLOODYWOLF.pronounObject": "他",
+  "STSMODBLOODYWOLF-BLOODYWOLF.pronounPossessive": "他的",
+  "STSMODBLOODYWOLF-BLOODYWOLF.pronounSubject": "他",
+  "STSMODBLOODYWOLF-BLOODYWOLF.title": "血狼破军",
+  "STSMODBLOODYWOLF-BLOODYWOLF.titleObject": "血狼破军",
+  "STSMODBLOODYWOLF-BLOODYWOLF.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+}

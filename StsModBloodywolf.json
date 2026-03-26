@@ -1,0 +1,11 @@
+{
+  "id": "StsModBloodywolf",
+  "name": "血狼破军",
+  "author": "SkyF",
+  "description": "使用全新人物血狼破军攻克这座高塔。",
+  "version": "1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": ["BaseLib"],
+  "affects_gameplay": true
+}

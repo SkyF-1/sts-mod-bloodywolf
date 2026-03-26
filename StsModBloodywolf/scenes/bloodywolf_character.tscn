@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cab62ea3w1ru2"]
+
+[ext_resource type="Texture2D" uid="uid://b2y33lbwxu5s" path="res://StsModBloodywolf/scenes/bloodywolf_character.png" id="1_rpkxk"]
+
+[node name="BloodywolfCharacter" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -147)
+texture = ExtResource("1_rpkxk")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -178.0
+offset_top = -270.0
+offset_right = 188.0
+offset_bottom = -33.0
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -143)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -337)

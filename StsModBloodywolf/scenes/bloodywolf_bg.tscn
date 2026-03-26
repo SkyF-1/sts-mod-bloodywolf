@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://basfkw130jvjf"]
+
+[ext_resource type="Texture2D" uid="uid://dj81xmyahb505" path="res://StsModBloodywolf/scenes/bloodywolf_bg.png" id="1_7xqys"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -958.0
+offset_top = -580.0
+offset_right = 962.0
+offset_bottom = 579.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48000002
+anchor_top = 0.5
+anchor_right = 0.48000002
+anchor_bottom = 0.5
+offset_left = 37.399963
+offset_top = 1.5
+offset_right = 2527.2703
+offset_bottom = 1504.5
+texture = ExtResource("1_7xqys")

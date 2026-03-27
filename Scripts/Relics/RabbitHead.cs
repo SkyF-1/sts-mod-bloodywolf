@@ -9,7 +9,6 @@ using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-// 加入哪个遗物池，此处为通用
 [Pool(typeof(BloodywolfRelicPool))]
 public class RabbitHead : CustomRelicModel
 {

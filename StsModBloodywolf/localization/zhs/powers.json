@@ -1,0 +1,5 @@
+{
+    "STSBLOODYWOLF-CLOUT_POWER.description": "血狼破军的存在正在为高塔所知。\n你的回合开始时，失去[blue]1[/blue]层[gold]影响[/gold]。\n你每受到[blue]1[/blue]次未被[gold]格挡[/gold]的攻击伤害，失去[blue]1[/blue]层[gold]影响[/gold]。",
+    "STSBLOODYWOLF-CLOUT_POWER.smartDescription": "血狼破军的存在正在为高塔所知。\n你的回合开始时，失去[blue]1[/blue]层[gold]影响[/gold]。\n你每受到[blue]1[/blue]次未被[gold]格挡[/gold]的攻击伤害，失去[blue]1[/blue]层[gold]影响[/gold]。\n你现在有[blue]{Amount}[/blue]层[gold]影响[/gold]。",
+    "STSBLOODYWOLF-CLOUT_POWER.title": "影响计量条"
+}

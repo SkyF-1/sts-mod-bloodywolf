@@ -4,9 +4,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
-namespace MegaCrit.Sts2.Core.Models.Powers;
+namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class WeakPower : CustomPowerModel
+public sealed class CloutPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 

@@ -8,7 +8,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 - [ ] 核心逻辑
   - [x] 影响逻辑
   - [x] “评定X”逻辑
-  - [ ] “言论X”逻辑
+  - [x] “言论X”逻辑
   - [ ] “失去X影响：”逻辑
   - [ ] “X层 数据”逻辑
   - [ ] “X层 醒目留言”逻辑
@@ -19,7 +19,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 - [ ] 卡牌实装
   - [ ] 攻击牌
     - [x] 打击
-    - [ ] 清算
+    - [x] 清算
     - [ ] 清洗
     - [ ] 中伤
     - [ ] 新神已至
@@ -62,7 +62,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装
-  - [ ] 兔头（初始）
+  - [x] 兔头（初始）
   - [ ] 武魂真身（替换兔头）
   - [ ] 消音麦
   - [ ] 损坏的扫帚
@@ -71,3 +71,4 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [ ] 制式水枪（先古之民）
   - [ ] 神秘书刀（先古之民）
 - [ ] 药水实装
+  - [ ] 300电池

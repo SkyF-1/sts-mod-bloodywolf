@@ -7,6 +7,8 @@
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-2, -147)
+rotation = 0.25830874
+scale = Vector2(-1, 1)
 texture = ExtResource("1_rpkxk")
 
 [node name="Bounds" type="Control" parent="."]
@@ -24,4 +26,4 @@ position = Vector2(0, -143)
 
 [node name="IntentPos" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -337)
+position = Vector2(0, -411)

@@ -78,6 +78,7 @@ public class Bloodywolf : PlaceholderCharacterModel
         ModelDb.Card<DefendWolf>(),
         ModelDb.Card<DefendWolf>(),
         ModelDb.Card<DefendWolf>(),
+        ModelDb.Card<Review>()
     ];
 
     // 初始遗物

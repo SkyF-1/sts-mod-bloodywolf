@@ -6,14 +6,14 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 
 ### To do list
 - [ ] 核心逻辑
-  - [ ] 影响逻辑
-  - [ ] “评定X”逻辑
+  - [x] 影响逻辑
+  - [x] “评定X”逻辑
   - [ ] “言论X”逻辑
   - [ ] “失去X影响：”逻辑
   - [ ] “X层 数据”逻辑
   - [ ] “X层 醒目留言”逻辑
 - [ ] 能力实装
-  - [ ] 影响计量条（每回合减1，受未格挡伤害时额外减1）
+  - [x] 影响
   - [ ] 数据
   - [ ] 醒目留言
 - [ ] 卡牌实装
@@ -35,7 +35,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 反串
   - [ ] 技能牌
     - [x] 防御
-    - [ ] 测评
+    - [x] 测评
     - [ ] 风评反转
     - [ ] 冷处理
     - [ ] 装唐

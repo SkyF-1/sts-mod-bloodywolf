@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3fnw1aosrvxt"
-path.bptc="res://.godot/imported/stsmodbloodywolf-clout_power.png-73da6ef2daab12bb84623e9fdb6a074e.bptc.ctex"
+uid="uid://b60752klq4u56"
+path="res://.godot/imported/stsmodbloodywolf-review.png-8751895f55929799595b053d3595ac86.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/powers/stsmodbloodywolf-clout_power.png"
-dest_files=["res://.godot/imported/stsmodbloodywolf-clout_power.png-73da6ef2daab12bb84623e9fdb6a074e.bptc.ctex"]
+source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-review.png"
+dest_files=["res://.godot/imported/stsmodbloodywolf-review.png-8751895f55929799595b053d3595ac86.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

@@ -1,6 +1,6 @@
 {
-    "BLOODYWOLF-RATE.description": "获得X层[gold]影响[/gold]。",
-    "BLOODYWOLF-RATE.title": "评定X",
+    "BLOODYWOLF-RATE.description": "获得[gold]影响[/gold]。",
+    "BLOODYWOLF-RATE.title": "评定",
     "BLOODYWOLF-HOTTAKE.description": "有至少X层[gold]影响[/gold]时触发的额外效果。",
     "BLOODYWOLF-HOTTAKE.title": "言论X"
 }

@@ -28,7 +28,7 @@ public sealed class HighAndMighty : CustomCardModel
     };
 
 	public HighAndMighty()
-		: base(2, CardType.Skill, CardRarity.Common, TargetType.AllEnemies)
+		: base(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

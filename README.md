@@ -21,14 +21,14 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 打击
     - [x] 清算
     - [ ] 清洗
-    - [ ] 中伤
+    - [x] 中伤
     - [ ] 新神已至
     - [x] 哈哈大笑
     - [ ] 带节奏
     - [ ] 杯论打击
     - [ ] 拉表
-    - [ ] 锐气直击
-    - [ ] 盯帧
+    - [x] 锐气直击
+    - [x] 盯帧
     - [ ] 鞭子抽你
     - [ ] 假账
     - [ ] 暴论
@@ -46,12 +46,13 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 再部署
     - [ ] 解包
     - [x] 高高在上
-    - [ ] 懂你意思
+    - [x] 懂你意思
     - [ ] 彩蛋征集
-    - [ ] 绝活
+    - [x] 绝活
     - [ ] 支支吾吾
     - [ ] 今晚不播
     - [ ] “黏住！”
+    - [x] 谨言慎行
   - [ ] 能力牌
     - [ ] 焦点位
     - [ ] 若智形态

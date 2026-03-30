@@ -27,13 +27,13 @@ public sealed class Liquidate : CustomCardModel
         HoverTipFactory.FromPower<VulnerablePower>()
     };
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>(new DynamicVar[4]
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
 		new DamageVar(5m, ValueProp.Move),
         new HotTakeVar(3m),
 		new PowerVar<WeakPower>(1m),
 		new PowerVar<VulnerablePower>(1m)
-	});
+	};
 
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
 	public Liquidate()

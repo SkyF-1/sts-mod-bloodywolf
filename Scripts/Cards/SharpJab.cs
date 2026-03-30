@@ -10,15 +10,11 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class StrikeWolf : CustomCardModel
+public sealed class SharpJab : CustomCardModel
 {
-	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6m, ValueProp.Move)];
-    
-
-	public StrikeWolf()
-		: base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move)];
+	public SharpJab()
+		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -32,6 +28,6 @@ public sealed class StrikeWolf : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(3m);
+		base.DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 }

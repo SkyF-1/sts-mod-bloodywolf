@@ -12,18 +12,19 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Review : CustomCardModel
+public sealed class TourDeForce : CustomCardModel
 {
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(3m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
+        new List<IHoverTip>
+        {
+            HoverTipFactory.FromPower<CloutPower>()
+        };
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(7m)];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	public Review()
-		: base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+	public TourDeForce()
+		: base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
@@ -38,6 +39,6 @@ public sealed class Review : CustomCardModel
 
 	protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars[RateVar.Key].UpgradeValueBy(1m);
     }
 }

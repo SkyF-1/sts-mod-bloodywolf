@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class HighAndMighty : CustomCardModel
-{
+{/// 高高在上
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -40,7 +40,7 @@ public sealed class HighAndMighty : CustomCardModel
         {
             await PowerCmd.Apply<WeakPower>(
                 enemy, 
-                base.DynamicVars.Weak.IntValue, 
+                base.DynamicVars.Weak.BaseValue, 
                 base.Owner.Creature, 
                 this);
         }

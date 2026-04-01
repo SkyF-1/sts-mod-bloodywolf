@@ -20,7 +20,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Liquidate : CustomCardModel
-{
+{/// 清算
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<WeakPower>(),

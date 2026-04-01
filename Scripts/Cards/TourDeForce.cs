@@ -13,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class TourDeForce : CustomCardModel
-{
+{/// 绝活
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
         new List<IHoverTip>
         {

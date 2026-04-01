@@ -4,33 +4,32 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class DefendWolf : CustomCardModel
-{/// 防御
-	public override bool GainsBlock => true;
-
-	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
-
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(5m, ValueProp.Move)];
+public sealed class Unrivaled : CustomCardModel
+{/// 独步天下
+	protected override IEnumerable<DynamicVar> CanonicalVars => [
+    new CardsVar(2)
+    ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	public DefendWolf()
-		: base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+	public Unrivaled()
+		: base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{
-		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-	}
+    {
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+        await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
+    }
 
 	protected override void OnUpgrade()
-	{
-		base.DynamicVars.Block.UpgradeValueBy(3m);
-	}
+    {
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
+    }
 }

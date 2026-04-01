@@ -3,17 +3,17 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.DynamicVars;
 
-public class HotTakeVar : DynamicVar
+public class CloutLossVar : DynamicVar
 {
-    public const string Key = "Bloodywolf-HotTake";
+    public const string Key = "Bloodywolf-CloutLoss";
     public static readonly string LocKey = Key.ToUpperInvariant();
 
-    public HotTakeVar(decimal baseValue) : base(Key, baseValue)
+    public CloutLossVar(decimal baseValue) : base(Key, baseValue)
     {
         this.WithTooltip(LocKey);
     }
 
-    public HotTakeVar(string name, decimal baseValue) : base(name, baseValue)
+    public CloutLossVar(string name, decimal baseValue) : base(name, baseValue)
     {
         this.WithTooltip(LocKey);
     }

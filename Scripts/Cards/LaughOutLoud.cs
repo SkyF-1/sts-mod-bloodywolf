@@ -18,7 +18,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class LaughOutLoud : CustomCardModel
-{
+{/// 哈哈大笑
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {

@@ -1,5 +1,8 @@
 {
     "STSMODBLOODYWOLF-CLOUT_POWER.description": "触发[gold]言论[/gold]的特殊效果。\n[gold]影响[/gold]会在你的回合开始时减少[blue]1[/blue]层。受到未被[gold]格挡[/gold]的攻击伤害时会额外减少[blue]1[/blue]层。",
     "STSMODBLOODYWOLF-CLOUT_POWER.smartDescription": "触发[gold]言论[/gold]的特殊效果。[gold]影响[/gold]会在你的回合开始时减少[blue]1[/blue]层。受到未被[gold]格挡[/gold]的攻击伤害时会额外减少[blue]1[/blue]层。\n你现在有[blue]{Amount}[/blue]层[gold]影响[/gold]。",
-    "STSMODBLOODYWOLF-CLOUT_POWER.title": "影响"
+    "STSMODBLOODYWOLF-CLOUT_POWER.title": "影响",
+    "STSMODBLOODYWOLF-UNRIVALED_POWER.description": "你的回合开始时，额外抽[blue]2[/blue]张牌。",
+    "STSMODBLOODYWOLF-UNRIVALED_POWER.smartDescription": "你的回合开始时，额外抽[blue]{Amount}[/blue]张牌。",
+    "STSMODBLOODYWOLF-UNRIVALED_POWER.title": "独步天下"
 }

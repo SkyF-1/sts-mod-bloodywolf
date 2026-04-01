@@ -11,7 +11,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class SharpJab : CustomCardModel
-{
+{/// 锐气直击
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move)];
 	public SharpJab()
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)

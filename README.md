@@ -22,9 +22,9 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 清算
     - [ ] 清洗
     - [x] 中伤
-    - [ ] 新神已至
+    - [x] 新神已至
     - [x] 哈哈大笑
-    - [ ] 带节奏
+    - [x] 带节奏
     - [ ] 杯论打击
     - [ ] 拉表
     - [x] 锐气直击
@@ -33,6 +33,8 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 假账
     - [ ] 暴论
     - [ ] 反串
+    - [ ] 清点
+    - [ ] 横向比较
   - [ ] 技能牌
     - [x] 防御
     - [x] 测评
@@ -52,14 +54,23 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 支支吾吾
     - [ ] 今晚不播
     - [ ] “黏住！”
+    - [ ] 不通过
+    - [ ] 都是恩人
     - [x] 谨言慎行
+    - [ ] 偷玩
+    - [ ] 不要不要
+    - [x] 制作精良
+    - [ ] 杂谈
+    - [ ] 歌唱
   - [ ] 能力牌
     - [ ] 焦点位
     - [ ] 若智形态
     - [ ] 测试服
-    - [ ] 独步天下
+    - [x] 独步天下
     - [ ] 争议频发
     - [ ] 先进经验
+    - [x] 要打就来
+    - [ ] 时效性
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装
@@ -68,6 +79,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [ ] 消音麦
   - [ ] 损坏的扫帚
   - [ ] 白银沙漏
+  - [ ] 切片员
   - [ ] 异域碟片（先古之民）
   - [ ] 制式水枪（先古之民）
   - [ ] 神秘书刀（先古之民）

@@ -22,5 +22,17 @@
     "STSMODBLOODYWOLF-DISCREET.title": "谨言慎行",
     "STSMODBLOODYWOLF-DISCREET.description": "获得{BaseBlock:diff()}点[gold]格挡[/gold]。[gold]言论[/gold]{Bloodywolf-HotTake:inverseDiff()}：\n再获得{BonusBlock:diff()}点[gold]格挡[/gold]。",
     "STSMODBLOODYWOLF-I_GET_YOU.title": "懂你意思",
-    "STSMODBLOODYWOLF-I_GET_YOU.description": "选择1名敌人，你与其各获得{Block:diff()}点[gold]格挡[/gold]。"
+    "STSMODBLOODYWOLF-I_GET_YOU.description": "选择1名敌人，你与其各获得{Block:diff()}点[gold]格挡[/gold]。",
+    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.title": "新神已至",
+    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.description": "对所有敌人造成{Damage:diff()}点伤害{Repeat:diff()}次，[gold]言论[/gold]{Bloodywolf-HotTake:inverseDiff()}：\n额外造成4次。",
+    "STSMODBLOODYWOLF-STIR_UP.title": "带节奏",
+    "STSMODBLOODYWOLF-STIR_UP.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]。",
+    "STSMODBLOODYWOLF-WELL_MADE.title": "制作精良",
+    "STSMODBLOODYWOLF-WELL_MADE.description": "获得{Block:diff()}点[gold]格挡[/gold]。[gold]言论[/gold]{Bloodywolf-HotTake:inverseDiff()}：\n抽{Cards:diff()}张牌。",
+    "STSMODBLOODYWOLF-BRING_IT_ON.title": "要打就来",
+    "STSMODBLOODYWOLF-BRING_IT_ON.description": "所有生物获得{StrengthPower:diff()}点[gold]力量[/gold]。",
+    "STSMODBLOODYWOLF-UNRIVALED.title": "独步天下",
+    "STSMODBLOODYWOLF-UNRIVALED.description": "抽{Cards:diff()}张牌。\n你的回合开始时，额外抽2张牌。",
+    "STSMODBLOODYWOLF-CUP_THEORY_STRIKE.title": "杯论打击",
+    "STSMODBLOODYWOLF-CUP_THEORY_STRIKE.description": "造成{Damage:diff()}点伤害。\n如果造成了未被格挡的伤害，给予目标{VulnerablePower:diff()}层[gold]易伤[/gold]。"
 }

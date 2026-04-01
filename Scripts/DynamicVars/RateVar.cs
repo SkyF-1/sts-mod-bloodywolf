@@ -12,4 +12,9 @@ public class RateVar : DynamicVar
     {
         this.WithTooltip(LocKey);
     }
+
+    public RateVar(string name, decimal baseValue) : base(name, baseValue)
+    {
+        this.WithTooltip(LocKey);
+    }
 }

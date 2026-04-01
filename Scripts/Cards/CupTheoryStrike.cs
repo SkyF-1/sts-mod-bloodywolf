@@ -7,25 +7,28 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class FrameCheck : CustomCardModel
-{/// 盯帧
+public sealed class CupTheoryStrike : CustomCardModel
+{/// 杯论打击
+	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<VulnerablePower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(6m, ValueProp.Move),
-        new PowerVar<VulnerablePower>(1m)
+        new DamageVar(13m, ValueProp.Move),
+        new PowerVar<VulnerablePower>(2m)
     };
 
-	public FrameCheck()
-		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+	public CupTheoryStrike()
+		: base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -35,15 +38,24 @@ public sealed class FrameCheck : CustomCardModel
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(
-            cardPlay.Target, 
+        
+	}
+
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
+	{
+		if ( cardSource == this && result.UnblockedDamage > 0)
+		{
+			await PowerCmd.Apply<VulnerablePower>(
+            target, 
             base.DynamicVars.Vulnerable.BaseValue, 
             base.Owner.Creature, 
             this);
+		}
 	}
 
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars.Vulnerable.UpgradeValueBy(1m);
 	}
 }

@@ -13,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Review : CustomCardModel
-{
+{/// 测评
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(3m)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>

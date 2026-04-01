@@ -11,9 +11,8 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class IGetYou : CustomCardModel
-{
+{/// 懂你意思
 	public override bool GainsBlock => true;
-	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Retain, CardKeyword.Exhaust };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [

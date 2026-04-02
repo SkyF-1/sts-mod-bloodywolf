@@ -25,8 +25,8 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 新神已至
     - [x] 哈哈大笑
     - [x] 带节奏
-    - [ ] 杯论打击
-    - [ ] 拉表
+    - [x] 杯论打击
+    - [x] 拉表
     - [x] 锐气直击
     - [x] 盯帧
     - [ ] 鞭子抽你
@@ -35,6 +35,16 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 反串
     - [ ] 清点
     - [ ] 横向比较
+    - [ ] 回旋镖
+    - [ ] 暴雷
+    - [ ] 引火上身
+    - [ ] 影响力
+    - [ ] 利刃
+    - [ ] 定论
+    - [ ] 蠕动
+    - [ ] 回踩
+    - [ ] 上位替代
+    - [ ] 控轴输出
   - [ ] 技能牌
     - [x] 防御
     - [x] 测评
@@ -62,6 +72,9 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 制作精良
     - [ ] 杂谈
     - [ ] 歌唱
+    - [ ] 藏一手
+    - [ ] 号召
+    - [ ] 优化
   - [ ] 能力牌
     - [ ] 焦点位
     - [ ] 若智形态

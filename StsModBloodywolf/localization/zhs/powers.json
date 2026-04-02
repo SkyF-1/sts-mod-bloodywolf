@@ -4,5 +4,8 @@
     "STSMODBLOODYWOLF-CLOUT_POWER.title": "影响",
     "STSMODBLOODYWOLF-UNRIVALED_POWER.description": "你的回合开始时，额外抽[blue]2[/blue]张牌。",
     "STSMODBLOODYWOLF-UNRIVALED_POWER.smartDescription": "你的回合开始时，额外抽[blue]{Amount}[/blue]张牌。",
-    "STSMODBLOODYWOLF-UNRIVALED_POWER.title": "独步天下"
+    "STSMODBLOODYWOLF-UNRIVALED_POWER.title": "独步天下",
+    "STSMODBLOODYWOLF-SUPER_CHAT_POWER.description": "醒目留言的生物在拥有格挡时受到的攻击伤害翻倍。",
+    "STSMODBLOODYWOLF-SUPER_CHAT_POWER.smartDescription": "[blue]{Amount}[/blue]回合内，拥有格挡时受到的攻击伤害翻倍。",
+    "STSMODBLOODYWOLF-SUPER_CHAT_POWER.title": "醒目留言"
 }

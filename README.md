@@ -11,11 +11,11 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [x] “言论X”逻辑
   - [ ] “失去X影响：”逻辑
   - [ ] “X层 数据”逻辑
-  - [ ] “X层 醒目留言”逻辑
+  - [X] “X层 醒目留言”逻辑
 - [ ] 能力实装
   - [x] 影响
   - [ ] 数据
-  - [ ] 醒目留言
+  - [X] 醒目留言
 - [ ] 卡牌实装
   - [ ] 攻击牌
     - [x] 打击
@@ -29,10 +29,10 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 拉表
     - [x] 锐气直击
     - [x] 盯帧
-    - [ ] 鞭子抽你
+    - [x] 鞭子抽你
     - [ ] 假账
     - [ ] 暴论
-    - [ ] 反串
+    - [x] 反串
     - [ ] 清点
     - [ ] 横向比较
     - [ ] 回旋镖
@@ -50,7 +50,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 测评
     - [ ] 风评反转
     - [ ] 冷处理
-    - [ ] 装唐
+    - [x] 装唐
     - [ ] 绝不认输
     - [ ] 全撤了
     - [ ] 全军出击
@@ -97,4 +97,4 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [ ] 制式水枪（先古之民）
   - [ ] 神秘书刀（先古之民）
 - [ ] 药水实装
-  - [ ] 300电池
+  - [X] 300电池

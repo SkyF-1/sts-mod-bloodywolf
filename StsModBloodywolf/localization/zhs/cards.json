@@ -38,5 +38,9 @@
     "STSMODBLOODYWOLF-WHIP_YOU.title": "鞭子抽你",
     "STSMODBLOODYWOLF-WHIP_YOU.description": "造成{Damage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n抽{Cards:diff()}张牌。",
     "STSMODBLOODYWOLF-PULL_TABLE.title": "拉表",
-    "STSMODBLOODYWOLF-PULL_TABLE.description": "造成{Damage:diff()}点伤害。\n你每评定1次，在这场战斗中其伤害增加{Increase:diff()}。"
+    "STSMODBLOODYWOLF-PULL_TABLE.description": "造成{Damage:diff()}点伤害。\n你每评定1次，在这场战斗中其伤害增加{Increase:diff()}。",
+    "STSMODBLOODYWOLF-PLAY_DUMB.title": "装唐",
+    "STSMODBLOODYWOLF-PLAY_DUMB.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n给予{SuperChatPower:diff()}层[gold]醒目留言[/gold]。",
+    "STSMODBLOODYWOLF-TROLL.title": "反串",
+    "STSMODBLOODYWOLF-TROLL.description": "造成{CalculationBase:diff()}点伤害。\n每有1名其他敌人，此牌的伤害增加{CalculationExtra:diff()}。"
 }

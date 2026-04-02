@@ -24,7 +24,7 @@ public sealed class WellMade : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public WellMade()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 

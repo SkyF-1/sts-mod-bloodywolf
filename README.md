@@ -45,6 +45,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 回踩
     - [ ] 上位替代
     - [ ] 控轴输出
+    - [ ] 最终攻克
   - [ ] 技能牌
     - [x] 防御
     - [x] 测评
@@ -55,7 +56,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 全撤了
     - [ ] 全军出击
     - [ ] 我咬死你（衍生）
-    - [ ] 再部署
+    - [x] 再部署
     - [ ] 解包
     - [x] 高高在上
     - [x] 懂你意思

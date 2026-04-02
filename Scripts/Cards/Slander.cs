@@ -21,7 +21,7 @@ public sealed class Slander : CustomCardModel
         HoverTipFactory.FromPower<CloutPower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
-        new DamageVar(9m, ValueProp.Move),
+            new DamageVar(9m, ValueProp.Move),
         new RateVar(2m)
     };
 

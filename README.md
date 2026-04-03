@@ -34,12 +34,12 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 暴论
     - [x] 反串
     - [ ] 清点
-    - [ ] 横向比较
+    - [x] 横向比较
     - [ ] 回旋镖
-    - [ ] 暴雷
+    - [ ] 爆雷
     - [ ] 引火上身
     - [ ] 影响力
-    - [ ] 利刃
+    - [x] 利刃
     - [ ] 定论
     - [ ] 蠕动
     - [ ] 回踩
@@ -53,7 +53,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 冷处理
     - [x] 装唐
     - [ ] 绝不认输
-    - [ ] 全撤了
+    - [x] 全撤了
     - [ ] 全军出击
     - [ ] 我咬死你（衍生）
     - [x] 再部署
@@ -73,11 +73,12 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 制作精良
     - [ ] 杂谈
     - [ ] 歌唱
-    - [ ] 藏一手
+    - [x] 藏一手
     - [ ] 号召
     - [ ] 优化
+    - [ ] 零帧部署
   - [ ] 能力牌
-    - [ ] 焦点位
+    - [x] 焦点位
     - [ ] 若智形态
     - [ ] 测试服
     - [x] 独步天下
@@ -85,6 +86,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 先进经验
     - [x] 要打就来
     - [ ] 时效性
+    - [ ] 剜心
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装

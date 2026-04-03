@@ -22,6 +22,6 @@ public class RabbitHead : CustomRelicModel
     public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await PowerCmd.Apply<CloutPower>(base.Owner.Creature, 3m, base.Owner.Creature, null);
+		await PowerCmd.Apply<CloutPower>(base.Owner.Creature, 3m, null, null);
 	}
 }

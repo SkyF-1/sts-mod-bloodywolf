@@ -18,6 +18,7 @@ public sealed class FinalAssault : CustomCardModel
 {
     /// 最终攻克
     private const string _calculatedHitsKey = "CalculatedHits";
+    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{

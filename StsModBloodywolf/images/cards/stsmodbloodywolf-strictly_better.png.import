@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co1god4ifaiol"
-path="res://.godot/imported/stsmodbloodywolf-StrictlyBetter.png-e77614324e02ff3f3b2d53e09a5667b0.ctex"
+uid="uid://dr6w8r66re6w2"
+path="res://.godot/imported/stsmodbloodywolf-strictly_better.png-f03748c6c536d3e2a997ba6e1f6896f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-StrictlyBetter.png"
-dest_files=["res://.godot/imported/stsmodbloodywolf-StrictlyBetter.png-e77614324e02ff3f3b2d53e09a5667b0.ctex"]
+source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-strictly_better.png"
+dest_files=["res://.godot/imported/stsmodbloodywolf-strictly_better.png-f03748c6c536d3e2a997ba6e1f6896f9.ctex"]
 
 [params]
 

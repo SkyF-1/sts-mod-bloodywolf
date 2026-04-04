@@ -6,15 +6,17 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
-namespace MegaCrit.Sts2.Core.Models.Cards;
+namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Verdict : CustomCardModel
 {/// 定论
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(24m, ValueProp.Move) };
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(17m, ValueProp.Move) };
+    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Verdict()
 		: base(4, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)

@@ -18,22 +18,22 @@ public class Bloodywolf : PlaceholderCharacterModel
     public override CharacterGender Gender => CharacterGender.Masculine;
 
     // 初始血量
-    public override int StartingHp => 80;
+    public override int StartingHp => 79;
 
     // 人物模型tscn路径。要自定义见下。
     public override string CustomVisualPath => "res://StsModBloodywolf/scenes/bloodywolf_character.tscn";
     // 卡牌拖尾路径。
-    // public override string CustomTrailPath => "res://scenes/vfx/card_trail_ironclad.tscn";
+    // public override string CustomTrailPath => "res://scenes/vfx/card_trail_bloodywolf.tscn";
     // 人物头像路径。
-    public override string CustomIconTexturePath => "res://icon.svg";
+    public override string CustomIconTexturePath => "res://icon.png";
     // 人物头像2号。
-    // public override string CustomIconPath => "res://scenes/ui/character_icons/ironclad_icon.tscn";
+    // public override string CustomIconPath => "res://scenes/ui/character_icons/bloodywolf_icon.tscn";
     // 能量表盘tscn路径。要自定义见下。
     public override string CustomEnergyCounterPath => "res://StsModBloodywolf/scenes/bloodywolf_energy_counter.tscn";
     // 篝火休息动画。
-    // public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/ironclad_rest_site.tscn";
+    // public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/bloodywolf_rest_site.tscn";
     // 商店人物动画。
-    // public override string CustomMerchantAnimPath => "res://scenes/merchant/characters/ironclad_merchant.tscn";
+    // public override string CustomMerchantAnimPath => "res://scenes/merchant/characters/bloodywolf_merchant.tscn";
     // 多人模式-手指。
     // public override string CustomArmPointingTexturePath => null;
     // 多人模式剪刀石头布-石头。

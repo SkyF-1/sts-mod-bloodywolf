@@ -1,6 +1,7 @@
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Players;
+
 namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class UnrivaledPower : CustomPowerModel

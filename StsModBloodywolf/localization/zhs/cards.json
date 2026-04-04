@@ -24,7 +24,7 @@
     "STSMODBLOODYWOLF-I_GET_YOU.title": "懂你意思",
     "STSMODBLOODYWOLF-I_GET_YOU.description": "选择1名敌人，你与其各获得{Block:diff()}点[gold]格挡[/gold]。",
     "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.title": "新神已至",
-    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.description": "对所有敌人造成{Damage:diff()}点伤害{CalculationBase:diff()}次。你每有2层[gold]影响[/gold]，\n额外造成{CalculationExtra:diff()}次。{InCombat:\n（共{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.description": "对所有敌人造成{Damage:diff()}点伤害{CalculationBase:diff()}次。你每有2层[gold]影响[/gold]，额外造成{CalculationExtra:diff()}次。{InCombat:\n（共{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-STIR_UP.title": "带节奏",
     "STSMODBLOODYWOLF-STIR_UP.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]。",
     "STSMODBLOODYWOLF-WELL_MADE.title": "制作精良",

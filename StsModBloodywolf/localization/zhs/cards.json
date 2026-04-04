@@ -48,9 +48,17 @@
     "STSMODBLOODYWOLF-BLADE.title": "利刃",
     "STSMODBLOODYWOLF-BLADE.description": "造成{Damage:diff()}点伤害。\n每当你评定时，从[gold]弃牌堆[/gold]返回你的手牌。",
     "STSMODBLOODYWOLF-CROSS_COMPARE.title": "横向比较",
-    "STSMODBLOODYWOLF-CROSS_COMPARE.description": "选择1名敌人，对其他敌人造成相当于其[gold]格挡[/gold]数的伤害。\n（造成{CalculatedDamage:diff()}点伤害）",
+    "STSMODBLOODYWOLF-CROSS_COMPARE.description": "选择1名敌人，对其他敌人造成相当于其[gold]格挡[/gold]数的伤害。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
     "STSMODBLOODYWOLF-SPOT_LIGHT.title": "焦点位",
     "STSMODBLOODYWOLF-SPOT_LIGHT.description": "[gold]评定[/gold]{Bloodywolf-Rate:diff()}。\n失去{DexterityPower:diff()}点[gold]敏捷[/gold]。",
     "STSMODBLOODYWOLF-HOLD_BACK.title": "藏一手",
-    "STSMODBLOODYWOLF-HOLD_BACK.description": "给[gold]手牌[/gold]中的一张牌添加[gold]保留[/gold]。"
+    "STSMODBLOODYWOLF-HOLD_BACK.description": "给[gold]手牌[/gold]中的一张牌添加[gold]保留[/gold]。",
+    "STSMODBLOODYWOLF-STRICTLY_BETTER.title": "上位替代",
+    "STSMODBLOODYWOLF-STRICTLY_BETTER.description": "造成{Damage:diff()}点伤害。这张牌的耗能减少1。",
+    "STSMODBLOODYWOLF-REPUTATION_REVERSE.title": "风评反转",
+    "STSMODBLOODYWOLF-REPUTATION_REVERSE.description": "[gold]失去[/gold]{Bloodywolf-CloutLoss:diff()}[gold]影响[/gold]：抽{Cards:diff()}张牌。",
+    "STSMODBLOODYWOLF-FINAL_ASSAULT.title": "最终攻克",
+    "STSMODBLOODYWOLF-FINAL_ASSAULT.description": "你在本回合中每打出过1张技能牌，就造成{Damage:diff()}点伤害一次。结束你的回合。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-VERDICT.title": "定论",
+    "STSMODBLOODYWOLF-VERDICT.description": "造成{Damage:diff()}点伤害。你每评定过一次，这张牌的耗能减少1。"
 }

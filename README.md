@@ -40,16 +40,16 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 引火上身
     - [ ] 影响力
     - [x] 利刃
-    - [ ] 定论
+    - [x] 定论
     - [ ] 蠕动
     - [ ] 回踩
-    - [ ] 上位替代
+    - [x] 上位替代
     - [ ] 控轴输出
-    - [ ] 最终攻克
+    - [x] 最终攻克
   - [ ] 技能牌
     - [x] 防御
     - [x] 测评
-    - [ ] 风评反转
+    - [x] 风评反转
     - [ ] 冷处理
     - [x] 装唐
     - [ ] 绝不认输

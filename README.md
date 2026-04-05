@@ -31,7 +31,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 盯帧
     - [x] 鞭子抽你
     - [ ] 假账
-    - [ ] 反串
+    - [x] 反串
     - [x] 狼性竞争
     - [ ] 清点
     - [x] 横向比较
@@ -54,8 +54,8 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 装唐
     - [ ] 绝不认输
     - [x] 全撤了
-    - [ ] 全军出击
-    - [ ] 我咬死你（衍生）
+    - [x] 全军出击
+    - [x] 我咬死你（衍生）
     - [x] 再部署
     - [ ] 解包
     - [x] 高高在上
@@ -64,7 +64,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 绝活
     - [ ] 支支吾吾
     - [x] 今晚不播
-    - [ ] “黏住！”
+    - [x] “黏住！”
     - [ ] 不通过
     - [ ] 都是恩人
     - [x] 谨言慎行
@@ -86,7 +86,6 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 先进经验
     - [x] 要打就来
     - [ ] 时效性
-    - [ ] 剜心
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装

@@ -40,7 +40,6 @@ public sealed class FinalAssault : CustomCardModel
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
-        PlayerCmd.EndTurn(base.Owner, canBackOut: false);
 	}
 
 	protected override void OnUpgrade()

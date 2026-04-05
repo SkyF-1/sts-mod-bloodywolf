@@ -24,11 +24,12 @@ public sealed class CloutPower : CustomPowerModel
 			await PowerCmd.TickDownDuration(this);
 		}
 	}
-	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? _, CardModel? __)
-	{
-		if (target == base.Owner && result.UnblockedDamage > 0)
-		{
-			await PowerCmd.TickDownDuration(this);
-		}
-	}
+	// 已废弃
+	// public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? _, CardModel? __)
+	// {
+	// 	if (target == base.Owner && result.UnblockedDamage > 0)
+	// 	{
+	// 		await PowerCmd.TickDownDuration(this);
+	// 	}
+	// }
 }

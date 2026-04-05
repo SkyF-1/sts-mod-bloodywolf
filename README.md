@@ -31,8 +31,8 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 盯帧
     - [x] 鞭子抽你
     - [ ] 假账
-    - [ ] 暴论
-    - [x] 反串
+    - [ ] 反串
+    - [x] 狼性竞争
     - [ ] 清点
     - [x] 横向比较
     - [ ] 回旋镖
@@ -63,18 +63,18 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 彩蛋征集
     - [x] 绝活
     - [ ] 支支吾吾
-    - [ ] 今晚不播
+    - [x] 今晚不播
     - [ ] “黏住！”
     - [ ] 不通过
     - [ ] 都是恩人
     - [x] 谨言慎行
     - [ ] 偷玩
-    - [ ] 不要不要
+    - [x] 不要不要
     - [x] 制作精良
     - [ ] 杂谈
     - [ ] 歌唱
     - [x] 藏一手
-    - [ ] 号召
+    - [x] 号召
     - [ ] 优化
     - [ ] 零帧部署
   - [ ] 能力牌

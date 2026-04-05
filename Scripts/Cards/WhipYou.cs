@@ -28,7 +28,7 @@ public sealed class WhipYou : CustomCardModel
 
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
 	public WhipYou()
-		: base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -56,5 +56,6 @@ public sealed class WhipYou : CustomCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
+		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }

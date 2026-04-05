@@ -15,29 +15,30 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class CrossCompare : CustomCardModel
 {/// 横向比较
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
-	{
-		new CalculationBaseVar(0m),
-		new CalculationExtraVar(1m),
-		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? target) => target?.Block ?? 0)
-	};
+    {
+        new DamageVar(7m, ValueProp.Move)
+    };
 	public CrossCompare()
-		: base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        IEnumerable<Creature> targets = base.CombatState.Enemies.Where(creature => creature != cardPlay.Target);
-        foreach (Creature target in targets)
-        {
-            await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(target)
-                .WithHitFx("vfx/vfx_attack_slash")
-                .Execute(choiceContext);
-        }
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(base.CombatState)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
     }
-
-	protected override void OnUpgrade()
+    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
 	{
-		base.EnergyCost.UpgradeBy(-1);
+		if ((dealer == base.Owner.Creature || dealer?.PetOwner == base.Owner) && !target.IsPlayer && result.WasBlockBroken && cardSource == this)
+		{
+			await CardCmd.AutoPlay(choiceContext, this, null);
+		}
 	}
+    protected override void OnUpgrade()
+    {
+        base.DynamicVars.Damage.UpgradeValueBy(2m);
+    }
 }

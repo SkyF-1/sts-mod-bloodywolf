@@ -13,6 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class StrictlyBetter : CustomCardModel
 {
     /// 上位替代
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Retain };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(14m, ValueProp.Move)

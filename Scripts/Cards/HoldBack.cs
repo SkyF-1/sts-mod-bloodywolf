@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -16,7 +18,10 @@ public sealed class HoldBack : CustomCardModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{ HoverTipFactory.FromKeyword(CardKeyword.Retain) };
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
+    {
+        new BlockVar(5m, ValueProp.Move)
+    };
 	public HoldBack()
 		: base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
@@ -33,6 +38,6 @@ public sealed class HoldBack : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		RemoveKeyword(CardKeyword.Exhaust);
+		base.DynamicVars.Block.UpgradeValueBy(2m);
 	}
 }

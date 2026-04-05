@@ -17,7 +17,7 @@ public sealed class WellMade : CustomCardModel
 	public override bool GainsBlock => true;
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-    new BlockVar(8m, ValueProp.Move),
+    new BlockVar(10m, ValueProp.Move),
     new HotTakeVar(5m),
     new CardsVar(1)
     ];
@@ -42,6 +42,5 @@ public sealed class WellMade : CustomCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Block.UpgradeValueBy(3m);
-        base.DynamicVars[HotTakeVar.Key].UpgradeValueBy(-2m);
 	}
 }

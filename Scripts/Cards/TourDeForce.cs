@@ -39,6 +39,6 @@ public sealed class TourDeForce : CustomCardModel
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars[RateVar.Key].UpgradeValueBy(1m);
+        base.DynamicVars[RateVar.Key].UpgradeValueBy(2m);
     }
 }

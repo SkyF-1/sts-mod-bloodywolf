@@ -29,7 +29,7 @@ public sealed class Liquidate : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(5m, ValueProp.Move),
+		new DamageVar(8m, ValueProp.Move),
         new HotTakeVar(3m),
 		new PowerVar<WeakPower>(1m),
 		new PowerVar<VulnerablePower>(1m)

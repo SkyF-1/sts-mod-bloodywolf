@@ -45,7 +45,7 @@ public sealed class IBiteYou : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars.Damage.UpgradeValueBy(1m);
 	}
 
 	public static async Task<CardModel?> CreateInHand(Player owner, CombatState combatState)

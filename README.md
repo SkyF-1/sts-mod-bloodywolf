@@ -38,11 +38,11 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 回旋镖
     - [ ] 爆雷
     - [ ] 引火上身
-    - [ ] 影响力
+    - [x] 影响力
     - [x] 利刃
     - [x] 定论
-    - [ ] 蠕动
-    - [ ] 回踩
+    - [x] 蠕动
+    - [x] 回踩
     - [x] 上位替代
     - [ ] 控轴输出
     - [x] 最终攻克
@@ -65,7 +65,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 支支吾吾
     - [x] 今晚不播
     - [x] “黏住！”
-    - [ ] 不通过
+    - [x] 不通过
     - [ ] 都是恩人
     - [x] 谨言慎行
     - [ ] 偷玩
@@ -77,6 +77,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 号召
     - [ ] 优化
     - [ ] 零帧部署
+    - [x] 先说结论
   - [ ] 能力牌
     - [x] 焦点位
     - [ ] 若智形态
@@ -86,6 +87,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 先进经验
     - [x] 要打就来
     - [ ] 时效性
+    - [ ] 捂嘴
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装

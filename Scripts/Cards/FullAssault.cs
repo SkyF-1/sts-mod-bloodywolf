@@ -19,7 +19,7 @@ public sealed class FullAssault : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(3)};
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>()};
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>(base.IsUpgraded)};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public FullAssault()
@@ -30,15 +30,16 @@ public sealed class FullAssault : CustomCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		for (int i = 0; i < base.DynamicVars.Cards.IntValue; i++)
+		IEnumerable<CardModel> enumerable = await IBiteYou.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
+		if (!base.IsUpgraded)
 		{
-			await IBiteYou.CreateInHand(base.Owner, base.CombatState);
-			await Cmd.Wait(0.1f);
+			return;
 		}
+		foreach (CardModel item in enumerable)
+		{
+			CardCmd.Upgrade(item);
+		}
+
 	}
 
-	protected override void OnUpgrade()
-	{
-		base.DynamicVars.Cards.UpgradeValueBy(1m);
-	}
 }

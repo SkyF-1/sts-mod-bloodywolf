@@ -20,8 +20,8 @@ public sealed class PlayDumb : CustomCardModel
         HoverTipFactory.FromPower<SuperChatPower>()
     };
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(7m, ValueProp.Move),
-        new PowerVar<SuperChatPower>(2m)
+        new BlockVar(8m, ValueProp.Move),
+        new BlockVar("GivenBlock", 4m, ValueProp.Unpowered)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -33,7 +33,8 @@ public sealed class PlayDumb : CustomCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<SuperChatPower>(cardPlay.Target, base.DynamicVars[SuperChatPower.Key].BaseValue, base.Owner.Creature, this);
+		BlockVar givenBlock = new BlockVar(base.DynamicVars["GivenBlock"].BaseValue, ValueProp.Unpowered);
+		await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);
 	}
 
 	protected override void OnUpgrade()

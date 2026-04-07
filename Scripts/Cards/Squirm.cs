@@ -17,15 +17,10 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Squirm : CustomCardModel
 {
     /// 蠕动
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<SuperChatPower>()
-    };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(3m, ValueProp.Move),
+        new DamageVar(5m, ValueProp.Move),
         new CardsVar(1),
-        new PowerVar<SuperChatPower>(2m)
     };
 
     public Squirm()
@@ -43,19 +38,8 @@ public sealed class Squirm : CustomCardModel
             .Execute(choiceContext);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
-    public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
-	{
-		if ( cardSource == this && result.UnblockedDamage <= 0)
-		{
-			await PowerCmd.Apply<SuperChatPower>(
-            target, 
-            base.DynamicVars.Vulnerable.BaseValue, 
-            base.Owner.Creature, 
-            this);
-		}
-	}
     protected override void OnUpgrade()
     {
-        base.DynamicVars["SuperChatPower"].UpgradeValueBy(1m);
+        base.DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

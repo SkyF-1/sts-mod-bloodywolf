@@ -19,7 +19,8 @@ public sealed class ConclusionFirst : CustomCardModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
-        HoverTipFactory.FromPower<CloutPower>()
+        HoverTipFactory.FromPower<CloutPower>(),
+        HoverTipFactory.FromPower<CupLossPower>()
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -33,6 +34,11 @@ public sealed class ConclusionFirst : CustomCardModel
         await PowerCmd.Apply<CloutPower>(
         base.Owner.Creature, 
         base.DynamicVars[RateVar.Key].BaseValue, 
+        base.Owner.Creature, 
+        this);
+        await PowerCmd.Apply<CupLossPower>(
+        base.CombatState.HittableEnemies, 
+        1m, 
         base.Owner.Creature, 
         this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);

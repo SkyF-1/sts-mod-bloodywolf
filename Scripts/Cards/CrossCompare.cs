@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -34,7 +35,7 @@ public sealed class CrossCompare : CustomCardModel
 	{
 		if ((dealer == base.Owner.Creature || dealer?.PetOwner == base.Owner) && !target.IsPlayer && result.WasBlockBroken && cardSource == this)
 		{
-			await CardCmd.AutoPlay(choiceContext, this, null);
+			await PowerCmd.Apply<CupLossPower>(target, 1m, base.Owner.Creature, this);
 		}
 	}
     protected override void OnUpgrade()

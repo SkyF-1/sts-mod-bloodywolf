@@ -79,8 +79,8 @@
     "STSMODBLOODYWOLF-FULL_ASSAULT.description": "添加{Cards:diff()}张[gold]{IfUpgraded:show:我咬死你+|我咬死你}[/gold]到你的手牌。",
     "STSMODBLOODYWOLF-I_BITE_YOU.title": "我咬死你",
     "STSMODBLOODYWOLF-I_BITE_YOU.description": "造成{Damage:diff()}点伤害。\n[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
-    "STSMODBLOODYWOLF-SQUIRM.title": "蠕动",
-    "STSMODBLOODYWOLF-SQUIRM.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。",
+    "STSMODBLOODYWOLF-BY_THE_WAY.title": "顺手的事",
+    "STSMODBLOODYWOLF-BY_THE_WAY.description": "给予{Block:diff()}点[gold]格挡[/gold]。\n造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。",
     "STSMODBLOODYWOLF-BACK_STOMP.title": "回踩",
     "STSMODBLOODYWOLF-BACK_STOMP.description": "造成{Damage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n将[gold]弃牌堆[/gold]中的{Cards:diff()}张牌置入你的[gold]手牌[/gold]。",
     "STSMODBLOODYWOLF-BACK_STOMP.selectionScreenPrompt": "选择{Cards:diff()}张牌加入你的[gold]手牌[/gold]。",
@@ -96,6 +96,12 @@
     "STSMODBLOODYWOLF-TEST_SERVER.title": "测试服",
     "STSMODBLOODYWOLF-TEST_SERVER.description": "获得{Data:diff()}层[gold]数据[/gold]。",
     "STSMODBLOODYWOLF-OVERRULE.title": "不容分说",
-    "STSMODBLOODYWOLF-OVERRULE.description": "在这场战斗内，只要你对敌人造成未被格挡的伤害，就使其[gold]杯级丧失[/gold]。"
-
+    "STSMODBLOODYWOLF-OVERRULE.description": "在这场战斗内，只要你对敌人造成未被格挡的伤害，就使其[gold]杯级丧失[/gold]。",
+    "STSMODBLOODYWOLF-ANCIENT_CARD.title": "先古卡牌",
+    "STSMODBLOODYWOLF-ANCIENT_CARD.description": "释放双倍伤害的[gold]新神已至[/gold]。",
+    "STSMODBLOODYWOLF-OPTIMIZE.title": "优化",
+    "STSMODBLOODYWOLF-OPTIMIZE.description": "[gold]消耗[/gold]{IfUpgraded:show:1~2|1}张牌。\n然后[gold]评定[/gold]等同于其{IfUpgraded:show:能耗之和|能耗}的数量。",
+    "STSMODBLOODYWOLF-OPTIMIZE.selectionScreenPrompt": "选择{IfUpgraded:show:1~2|1}张牌[gold]消耗[/gold]。",
+    "STSMODBLOODYWOLF-RESONANT_WORDS.title": "掷地有声",
+    "STSMODBLOODYWOLF-RESONANT_WORDS.description": "对所有敌人\n造成{CalculatedDamage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n额外造成相当于所有敌人[gold]格挡[/gold]总数的伤害。"
 }

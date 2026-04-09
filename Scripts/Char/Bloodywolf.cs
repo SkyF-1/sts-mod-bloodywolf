@@ -33,7 +33,7 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 篝火休息动画。
     // public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/bloodywolf_rest_site.tscn";
     // 商店人物动画。
-    // public override string CustomMerchantAnimPath => "res://scenes/merchant/characters/bloodywolf_merchant.tscn";
+    public override string CustomMerchantAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_merchant.tscn";
     // 多人模式-手指。
     // public override string CustomArmPointingTexturePath => null;
     // 多人模式剪刀石头布-石头。

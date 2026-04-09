@@ -1,48 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqrrrouxybfhh"]
+[gd_scene load_steps=6 format=3 uid="uid://bqrrrouxybfhh"]
 
-[ext_resource type="Texture2D" uid="uid://267pv862vsi2" path="res://icon.svg" id="1_85qf2"]
 [ext_resource type="Texture2D" uid="uid://23qurc6c0l5j" path="res://StsModBloodywolf/scenes/bloodywolf_energy_counter.png" id="2_iyqtu"]
-[ext_resource type="Script" path="res://addons/mega_text/MegaLabel.cs" id="mega_label"]
-[ext_resource type="FontVariation" path="res://themes/kreon_bold_shared.tres" id="kreon_bold_shared_font"]
 
-[sub_resource type="Curve" id="Curve_85qf2"]
-_data = [Vector2(0.006, 0.031), 0.0, 4.464, 0, 0, Vector2(0.298, 0.736), 0.832, 0.832, 0, 0, Vector2(0.99, 0.933), -0.247, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_ns61i"]
+_data = [Vector2(0.00596422, 0.0309963), 0.0, 4.46389, 0, 0, Vector2(0.298211, 0.736162), 0.832039, 0.832039, 0, 0, Vector2(0.99006, 0.932841), -0.247478, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_1ytbd"]
-offsets = PackedFloat32Array(0, 0.35164836, 0.64835167, 1)
+[sub_resource type="Gradient" id="Gradient_tkdgk"]
+offsets = PackedFloat32Array(0, 0.330526, 0.652632, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_e0ctn"]
+_data = [Vector2(0.00596422, 0.0309963), 0.0, 2.09119, 0, 0, Vector2(1, 0.995203), 0.241291, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="FontVariation" id="FontVariation_x0k5t"]
 spacing_glyph = 2
 
-[sub_resource type="FontVariation" id="FontVariation_kreon_bold_shared_font"]
-base_font = ExtResource("kreon_bold_shared_font")
-spacing_glyph = 2
-
-[node name="TestEnergyCounter" type="Control"]
+[node name="BloodywolfEnergyCounter" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 128.0
 offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="BurstBack" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(64, 64)
+position = Vector2(65, 63)
 emitting = false
 amount = 1
-texture = ExtResource("1_85qf2")
 one_shot = true
 local_coords = true
 gravity = Vector2(0, 0)
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
 radial_accel_max = 10.0
 angle_max = 260.0
-scale_amount_min = 1.5
-scale_amount_max = 1.5
-scale_amount_curve = SubResource("Curve_85qf2")
-color = Color(1, 0.49411765, 0.48235294, 0.6)
-color_ramp = SubResource("Gradient_1ytbd")
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_ns61i")
+color = Color(0, 0.796078, 0.85098, 0.6)
+color_ramp = SubResource("Gradient_tkdgk")
 
 [node name="Layers" type="Control" parent="."]
 unique_name_in_owner = true
@@ -52,33 +52,39 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Layer1" type="TextureRect" parent="Layers"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -38.0
-offset_top = -19.0
-offset_right = 44.0
-offset_bottom = -19.0
+offset_left = -32.0
+offset_top = -52.0
+offset_right = 38.0
+offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_iyqtu")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="RotationLayers" type="Control" parent="Layers"]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="BurstFront" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(64, 64)
+position = Vector2(65, 63)
 emitting = false
 amount = 1
-texture = ExtResource("1_85qf2")
 lifetime = 0.5
 one_shot = true
 local_coords = true
@@ -87,11 +93,11 @@ angular_velocity_min = 30.0
 angular_velocity_max = 30.0
 radial_accel_max = 10.0
 angle_max = 260.0
-scale_amount_min = 1.5
-scale_amount_max = 1.5
-scale_amount_curve = SubResource("Curve_85qf2")
-color = Color(1, 0.49411765, 0.48235294, 0.6)
-color_ramp = SubResource("Gradient_1ytbd")
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_e0ctn")
+color = Color(0, 0.796078, 0.85098, 0.6)
+color_ramp = SubResource("Gradient_tkdgk")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -104,16 +110,15 @@ offset_right = -16.0
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
-theme_override_colors/font_outline_color = Color(0.4, 0.4, 0.8, 1)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.0862749, 0.242979, 0.393015, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 16
 theme_override_constants/shadow_outline_size = 16
-theme_override_fonts/font = SubResource("FontVariation_kreon_bold_shared_font")
+theme_override_fonts/font = SubResource("FontVariation_x0k5t")
 theme_override_font_sizes/font_size = 36
-script = ExtResource("mega_label")
 text = "3/3"
 horizontal_alignment = 1
 vertical_alignment = 1

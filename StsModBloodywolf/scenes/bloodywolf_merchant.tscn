@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmw7wyb2ipt2s"]
+
+[ext_resource type="Script" uid="uid://ckmmg7522m8v1" path="res://Scripts/BloodywolfMerchant.cs" id="1_ci2nu"]
+[ext_resource type="Texture2D" uid="uid://b2y33lbwxu5s" path="res://StsModBloodywolf/scenes/bloodywolf_character.png" id="1_mkdpg"]
+
+[node name="BloodywolfMerchant" type="Node2D"]
+script = ExtResource("1_ci2nu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -120)
+texture = ExtResource("1_mkdpg")

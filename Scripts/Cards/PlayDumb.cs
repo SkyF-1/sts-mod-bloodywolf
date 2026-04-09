@@ -15,10 +15,6 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class PlayDumb : CustomCardModel
 {// 装唐
 	public override bool GainsBlock => true;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<SuperChatPower>()
-    };
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(8m, ValueProp.Move),
         new BlockVar("GivenBlock", 4m, ValueProp.Unpowered)

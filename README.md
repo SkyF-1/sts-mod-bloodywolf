@@ -41,7 +41,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 影响力
     - [x] 利刃
     - [x] 定论
-    - [x] 蠕动
+    - [x] 顺手的事
     - [x] 回踩
     - [x] 上位替代
     - [ ] 控轴输出
@@ -57,7 +57,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 全军出击
     - [x] 我咬死你（衍生）
     - [x] 再部署
-    - [ ] 解包
+    - [x] 解包
     - [x] 高高在上
     - [x] 懂你意思
     - [ ] 彩蛋征集
@@ -75,19 +75,21 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 歌唱
     - [x] 藏一手
     - [x] 号召
-    - [ ] 优化
+    - [x] 优化
     - [ ] 零帧部署
     - [x] 先说结论
   - [ ] 能力牌
     - [x] 焦点位
     - [ ] 若智形态
-    - [ ] 测试服
+    - [x] 测试服
     - [x] 独步天下
     - [ ] 争议频发
     - [ ] 先进经验
     - [x] 要打就来
     - [ ] 时效性
     - [ ] 捂嘴
+    - [ ] 风波四起
+    - [ ] 不容分说
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装

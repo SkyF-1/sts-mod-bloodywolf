@@ -14,17 +14,18 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Squirm : CustomCardModel
+public sealed class ByTheWay : CustomCardModel
 {
-    /// 蠕动
+    /// 顺手的事
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(5m, ValueProp.Move),
+        new BlockVar(5m, ValueProp.Unpowered),
+        new DamageVar(6m, ValueProp.Move),
         new CardsVar(1),
     };
 
-    public Squirm()
-        : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public ByTheWay()
+        : base(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -33,6 +34,7 @@ public sealed class Squirm : CustomCardModel
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

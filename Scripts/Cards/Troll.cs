@@ -32,8 +32,10 @@ public sealed class Troll : CustomCardModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-
-        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+        if(cardPlay.Target != null)
+        {
+            await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+        }
     }
 
     protected override void OnUpgrade()

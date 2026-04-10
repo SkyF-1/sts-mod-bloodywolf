@@ -18,6 +18,7 @@ public sealed class UnrivaledPower : CustomPowerModel
 		{
 			return count;
 		}
+		Flash();
 		return count + (decimal)base.Amount;
 	}
 }

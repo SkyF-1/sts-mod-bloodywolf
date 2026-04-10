@@ -24,6 +24,7 @@ public sealed class CupLossPower : CustomPowerModel
 		}
         if (creature.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
         {
+			Flash();
             await CreatureCmd.GainBlock(creature, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
         }
 	}

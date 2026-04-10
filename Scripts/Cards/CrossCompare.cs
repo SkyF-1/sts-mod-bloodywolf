@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
@@ -15,6 +16,10 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class CrossCompare : CustomCardModel
 {/// 横向比较
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+    {
+        HoverTipFactory.FromPower<CupLossPower>()
+    };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(7m, ValueProp.Move)

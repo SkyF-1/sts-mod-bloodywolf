@@ -20,6 +20,7 @@ public sealed class OverrulePower : CustomPowerModel
 	{
 		if (dealer == base.Owner && result.UnblockedDamage > 0)
 		{
+			Flash();
 			await PowerCmd.Apply<CupLossPower>(target, 1m, dealer, null);
 		}
 	}

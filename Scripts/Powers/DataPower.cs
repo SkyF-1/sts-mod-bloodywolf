@@ -21,7 +21,7 @@ public sealed class DataPower : CustomPowerModel
 	public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {
         modifiedAmount = amount;
-        if (canonicalPower is CloutPower && giver == base.Owner && target == base.Owner)
+        if (amount > 0 && canonicalPower is CloutPower && giver == base.Owner && target == base.Owner)
         {
             Flash();
             modifiedAmount = amount + 1m;

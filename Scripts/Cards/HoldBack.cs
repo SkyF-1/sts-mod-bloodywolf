@@ -20,15 +20,16 @@ public sealed class HoldBack : CustomCardModel
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new BlockVar(5m, ValueProp.Move)
+        new BlockVar(6m, ValueProp.Move)
     };
 	public HoldBack()
-		: base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
 		CardModel? cardModel = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 1), context: choiceContext, player: base.Owner, filter: (CardModel c) => !c.Keywords.Contains(CardKeyword.Retain), source: this)).FirstOrDefault();
 		if (cardModel != null)
 		{
@@ -38,6 +39,6 @@ public sealed class HoldBack : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Block.UpgradeValueBy(2m);
+		base.DynamicVars.Block.UpgradeValueBy(3m);
 	}
 }

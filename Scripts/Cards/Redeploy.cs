@@ -29,13 +29,14 @@ public sealed class Redeploy : CustomCardModel
 	{
 		CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, base.DynamicVars.Cards.IntValue);
 		CardPile pile = PileType.Discard.GetPile(base.Owner);
+		if (pile.Cards.Count == 0)
+		{
+			return;
+		}
 		IEnumerable<CardModel> cardModels = await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs);
 		foreach (CardModel cardModel in cardModels)
         {
-            if (cardModel != null)
-            {
-                await CardPileCmd.Add(cardModel, PileType.Draw, CardPilePosition.Top);
-            }
+            await CardPileCmd.Add(cardModel, PileType.Draw, CardPilePosition.Top);
         }
 	}
 

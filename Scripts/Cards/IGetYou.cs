@@ -26,10 +26,11 @@ public sealed class IGetYou : CustomCardModel
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{  
+	{   
+        BlockVar givenBlock = new BlockVar(base.DynamicVars.Block.BaseValue, ValueProp.Unpowered);
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+        await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);
 	}
 
 	protected override void OnUpgrade()

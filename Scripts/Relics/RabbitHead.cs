@@ -11,7 +11,7 @@ namespace StsModBloodywolf.Scripts.Relics;
 public class RabbitHead : CustomRelicModel
 {
     // 稀有度
-    public override RelicRarity Rarity => RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Starter;
     // 小图标
     public override string PackedIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
     // 轮廓图标

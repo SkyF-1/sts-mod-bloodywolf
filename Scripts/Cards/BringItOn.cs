@@ -21,7 +21,7 @@ public sealed class BringItOn : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<StrengthPower>(4m)
+        new PowerVar<StrengthPower>(2m)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 

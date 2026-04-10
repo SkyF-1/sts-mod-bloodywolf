@@ -40,6 +40,6 @@ public sealed class NewGodArrives : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars.Damage.UpgradeValueBy(1m);
 	}
 }

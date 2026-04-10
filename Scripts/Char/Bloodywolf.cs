@@ -31,7 +31,7 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 能量表盘tscn路径。要自定义见下。
     public override string CustomEnergyCounterPath => "res://StsModBloodywolf/scenes/bloodywolf_energy_counter.tscn";
     // 篝火休息动画。
-    // public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/bloodywolf_rest_site.tscn";
+    public override string CustomRestSiteAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_rest_site.tscn";
     // 商店人物动画。
     public override string CustomMerchantAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_merchant.tscn";
     // 多人模式-手指。

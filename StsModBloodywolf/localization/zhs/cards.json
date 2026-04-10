@@ -97,11 +97,11 @@
     "STSMODBLOODYWOLF-TEST_SERVER.description": "获得{Data:diff()}层[gold]数据[/gold]。",
     "STSMODBLOODYWOLF-OVERRULE.title": "不容分说",
     "STSMODBLOODYWOLF-OVERRULE.description": "在这场战斗内，只要你对敌人造成未被格挡的伤害，就使其[gold]杯级丧失[/gold]。",
-    "STSMODBLOODYWOLF-ANCIENT_CARD.title": "先古卡牌",
-    "STSMODBLOODYWOLF-ANCIENT_CARD.description": "释放双倍伤害的[gold]新神已至[/gold]。",
     "STSMODBLOODYWOLF-OPTIMIZE.title": "优化",
     "STSMODBLOODYWOLF-OPTIMIZE.description": "[gold]消耗[/gold]{IfUpgraded:show:1~2|1}张牌。\n然后[gold]评定[/gold]等同于其{IfUpgraded:show:能耗之和|能耗}的数量。",
     "STSMODBLOODYWOLF-OPTIMIZE.selectionScreenPrompt": "选择{IfUpgraded:show:1~2|1}张牌[gold]消耗[/gold]。",
     "STSMODBLOODYWOLF-RESONANT_WORDS.title": "掷地有声",
-    "STSMODBLOODYWOLF-RESONANT_WORDS.description": "对所有敌人\n造成{CalculatedDamage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n额外造成相当于所有敌人[gold]格挡[/gold]总数的伤害。"
+    "STSMODBLOODYWOLF-RESONANT_WORDS.description": "对所有敌人\n造成{CalculatedDamage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n额外造成相当于所有敌人[gold]格挡[/gold]总数的伤害。",
+    "STSMODBLOODYWOLF-DO_OR_DIE.title": "背水一战",
+    "STSMODBLOODYWOLF-DO_OR_DIE.description": "清空你的[gold]影响[/gold]。\n[gold]消耗[/gold]你的[gold]抽牌堆[/gold]和[gold]弃牌堆[/gold]。"
 }

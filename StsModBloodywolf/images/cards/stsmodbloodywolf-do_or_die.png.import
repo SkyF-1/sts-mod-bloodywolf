@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4lilopljvlet"
-path="res://.godot/imported/stsmodbloodywolf-ancient_card.png-0f66d6fbe0283131d4a219f2f25f1cae.ctex"
+uid="uid://cbx2rq74mwwps"
+path="res://.godot/imported/stsmodbloodywolf-do_or_die.png-aac8809b7f3a2ebc7bdcc78004819158.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-ancient_card.png"
-dest_files=["res://.godot/imported/stsmodbloodywolf-ancient_card.png-0f66d6fbe0283131d4a219f2f25f1cae.ctex"]
+source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-do_or_die.png"
+dest_files=["res://.godot/imported/stsmodbloodywolf-do_or_die.png-aac8809b7f3a2ebc7bdcc78004819158.ctex"]
 
 [params]
 

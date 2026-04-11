@@ -12,8 +12,8 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 角色名称颜色
     public override Color NameColor => new(0.5f, 0.5f, 1f);
     // 能量图标轮廓颜色
-    public override Color EnergyLabelOutlineColor => new(0.1f, 0.1f, 1f);
-
+    public override Color EnergyLabelOutlineColor => new("#1c3f6d");
+    public override Color MapDrawingColor => new("#1c3f6d");
     // 人物性别（男女中立）
     public override CharacterGender Gender => CharacterGender.Masculine;
 

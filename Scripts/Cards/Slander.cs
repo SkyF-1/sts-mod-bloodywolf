@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Slander : CustomCardModel
-{/// 中伤
+{/// 诋毁
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {

@@ -5,17 +5,17 @@
 https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 
 ### To do list
-- [ ] 核心逻辑
+- [x] 核心逻辑
   - [x] 影响逻辑
   - [x] “评定X”逻辑
   - [x] “言论X”逻辑
-  - [ ] “失去X影响：”逻辑
-  - [ ] “X层 数据”逻辑
-  - [X] “X层 醒目留言”逻辑
+  - [x] “失去X影响：”逻辑
+  - [x] “X层 数据”逻辑
+  - [x] “杯级丧失”逻辑
 - [ ] 能力实装
   - [x] 影响
   - [ ] 数据
-  - [X] 醒目留言
+  - [x] 杯级丧失
 - [ ] 卡牌实装
   - [ ] 攻击牌
     - [x] 打击
@@ -76,11 +76,11 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 藏一手
     - [x] 号召
     - [x] 优化
-    - [ ] 零帧部署
+    - [x] 零帧部署
     - [x] 先说结论
   - [ ] 能力牌
     - [x] 焦点位
-    - [ ] 若智形态
+    - [x] 若智形态
     - [x] 测试服
     - [x] 独步天下
     - [ ] 争议频发
@@ -89,7 +89,8 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [ ] 时效性
     - [ ] 捂嘴
     - [ ] 风波四起
-    - [ ] 不容分说
+    - [x] 不容分说
+    - [x] 礼尚往来
   - [ ] 诅咒牌
     - [ ] 急躁
 - [ ] 遗物实装
@@ -103,4 +104,5 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
   - [ ] 制式水枪（先古之民）
   - [ ] 神秘书刀（先古之民）
 - [ ] 药水实装
-  - [X] 300电池
+  - [x] 300电池
+  - [x] 流体舆论

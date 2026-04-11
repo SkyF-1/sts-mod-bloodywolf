@@ -35,6 +35,6 @@ public sealed class Stick : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		AddKeyword(CardKeyword.Retain);
+		base.DynamicVars.Block.UpgradeValueBy(3m);
 	}
 }

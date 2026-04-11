@@ -59,7 +59,7 @@
     "STSMODBLOODYWOLF-REPUTATION_REVERSE.title": "风评反转",
     "STSMODBLOODYWOLF-REPUTATION_REVERSE.description": "失去{Bloodywolf-CloutLoss:diff()}[gold]影响[/gold]：\n抽{Cards:diff()}张牌。",
     "STSMODBLOODYWOLF-FINAL_ASSAULT.title": "最终攻克",
-    "STSMODBLOODYWOLF-FINAL_ASSAULT.description": "你在本回合中每打出过1张技能牌，就造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-FINAL_ASSAULT.description": "在这个回合内每打出过一张技能牌，就造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-VERDICT.title": "定论",
     "STSMODBLOODYWOLF-VERDICT.description": "造成{Damage:diff()}点伤害。\n你每[gold]评定[/gold]过一次，这张牌的耗能减少1。",
     "STSMODBLOODYWOLF-NO_STREAM_TONIGHT.title": "今晚不播",
@@ -103,5 +103,11 @@
     "STSMODBLOODYWOLF-RESONANT_WORDS.title": "掷地有声",
     "STSMODBLOODYWOLF-RESONANT_WORDS.description": "对所有敌人\n造成{CalculatedDamage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n额外造成相当于所有敌人[gold]格挡[/gold]总数的伤害。",
     "STSMODBLOODYWOLF-DO_OR_DIE.title": "背水一战",
-    "STSMODBLOODYWOLF-DO_OR_DIE.description": "清空你的[gold]影响[/gold]。\n[gold]消耗[/gold]你的[gold]抽牌堆[/gold]和[gold]弃牌堆[/gold]。"
+    "STSMODBLOODYWOLF-DO_OR_DIE.description": "清空你的[gold]影响[/gold]。\n[gold]消耗[/gold]你的[gold]抽牌堆[/gold]和[gold]弃牌堆[/gold]。",
+    "STSMODBLOODYWOLF-RECIPROCITY.title": "礼尚往来",
+    "STSMODBLOODYWOLF-RECIPROCITY.description": "每当你给予[gold]格挡[/gold]时，自身也获得等量的[gold]格挡[/gold]。",
+    "STSMODBLOODYWOLF-FOOL_FORM.title": "若智形态",
+    "STSMODBLOODYWOLF-FOOL_FORM.description": "回合结束时，获得等同于你[gold]影响[/gold]层数的[gold]格挡[/gold]。",
+    "STSMODBLOODYWOLF-ZERO_FRAME_DEPLOY.title": "零帧部署",
+    "STSMODBLOODYWOLF-ZERO_FRAME_DEPLOY.description": "将[gold]抽牌堆[/gold]中能耗为0的牌置入你的[gold]手牌[/gold]。"
 }

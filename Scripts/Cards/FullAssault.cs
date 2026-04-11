@@ -23,7 +23,7 @@ public sealed class FullAssault : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public FullAssault()
-		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 

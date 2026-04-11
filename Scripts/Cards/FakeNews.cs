@@ -49,6 +49,6 @@ public sealed class FakeNews : CustomCardModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Block.UpgradeValueBy(4m);
+        base.DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

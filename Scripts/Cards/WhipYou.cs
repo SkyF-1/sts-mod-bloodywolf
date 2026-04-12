@@ -23,7 +23,7 @@ public sealed class WhipYou : CustomCardModel
 	{
 		new DamageVar(8m, ValueProp.Move),
         new HotTakeVar(5m),
-        new CardsVar(1)
+        new CardsVar(2)
 	};
 
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
@@ -56,6 +56,5 @@ public sealed class WhipYou : CustomCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
-		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }

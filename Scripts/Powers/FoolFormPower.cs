@@ -21,7 +21,7 @@ public sealed class FoolFormPower : CustomPowerModel
     {
         decimal cloutStacks = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
 
-        if (cloutStacks > 0)
+        if (cloutStacks > 0 && side == CombatSide.Player)
         {
             await CreatureCmd.GainBlock(base.Owner, new BlockVar(cloutStacks, ValueProp.Unpowered), null);
         }

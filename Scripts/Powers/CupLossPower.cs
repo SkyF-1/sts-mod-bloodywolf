@@ -13,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Powers;
 public sealed class CupLossPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Debuff;
-	public override PowerStackType StackType => PowerStackType.Single;
+	public override PowerStackType StackType => PowerStackType.Counter;
 	public const string Key = "CupLossPower";
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
@@ -21,7 +21,7 @@ public sealed class CupLossPower : CustomPowerModel
 	{
 		if (creature == base.Owner && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Remove(this);
+			await PowerCmd.TickDownDuration(this);
 		}
         if (creature.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
         {

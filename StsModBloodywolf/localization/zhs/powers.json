@@ -11,8 +11,8 @@
     "STSMODBLOODYWOLF-STICK_POWER.description": "黏住的玩家在下一回合开始时格挡不会消失。",
     "STSMODBLOODYWOLF-STICK_POWER.smartDescription": "你在下一回合开始时格挡不会消失。",
     "STSMODBLOODYWOLF-STICK_POWER.title": "黏住",
-    "STSMODBLOODYWOLF-CUP_LOSS_POWER.description": "[gold]杯级丧失[/gold]的生物在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n如果其造成了未被格挡的伤害，退出[gold]杯级丧失[/gold]状态。",
-    "STSMODBLOODYWOLF-CUP_LOSS_POWER.smartDescription": "[gold]{OwnerName}[/gold]在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n如果其造成了未被格挡的伤害，退出[gold]杯级丧失[/gold]状态。",
+    "STSMODBLOODYWOLF-CUP_LOSS_POWER.description": "[gold]杯级丧失[/gold]的生物在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n造成未被格挡的伤害后，其层数减少1。",
+    "STSMODBLOODYWOLF-CUP_LOSS_POWER.smartDescription": "[gold]{OwnerName}[/gold]在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n造成{Amount}次未被格挡的伤害后失效。",
     "STSMODBLOODYWOLF-CUP_LOSS_POWER.title": "杯级丧失",
     "STSMODBLOODYWOLF-DATA_POWER.description": "你下次的[gold]评定[/gold]数值加[blue]1[/blue]。",
     "STSMODBLOODYWOLF-DATA_POWER.smartDescription": "你下{Amount}次的[gold]评定[/gold]数值加[blue]1[/blue]。",
@@ -25,5 +25,9 @@
     "STSMODBLOODYWOLF-RECIPROCITY_POWER.title": "礼尚往来",
     "STSMODBLOODYWOLF-FOOL_FORM_POWER.description": "回合结束时，获得等同于你[gold]影响[/gold]层数的[gold]格挡[/gold]。",
     "STSMODBLOODYWOLF-FOOL_FORM_POWER.smartDescription": "回合结束时，获得等同于你[gold]影响[/gold]层数的[gold]格挡[/gold]。",
-    "STSMODBLOODYWOLF-FOOL_FORM_POWER.title": "若智形态"
+    "STSMODBLOODYWOLF-FOOL_FORM_POWER.title": "若智形态",
+    "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.description": "回合结束前，你的下一张攻击牌耗能为[blue]0[/blue]{energyPrefix:energyIcons(1)}。",
+    "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.smartDescription": "回合结束前，你的下一张攻击牌耗能为[blue]0[/blue]{energyPrefix:energyIcons(1)}。",
+    "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.title": "免费攻击",
+    "STSMODBLOODYWOLF-FUCKING_TERRIBLE_POWER.title": "太难听了"
 }

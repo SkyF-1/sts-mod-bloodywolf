@@ -37,7 +37,7 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 横向比较
     - [ ] 回旋镖
     - [ ] 爆雷
-    - [ ] 引火上身
+    - [x] 引火上身
     - [x] 影响力
     - [x] 利刃
     - [x] 定论
@@ -66,13 +66,13 @@ https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
     - [x] 今晚不播
     - [x] “黏住！”
     - [x] 不通过
-    - [ ] 都是恩人
+    - [x] 都是恩人
     - [x] 谨言慎行
     - [ ] 偷玩
     - [x] 不要不要
     - [x] 制作精良
     - [ ] 杂谈
-    - [ ] 歌唱
+    - [x] 歌唱
     - [x] 藏一手
     - [x] 号召
     - [x] 优化

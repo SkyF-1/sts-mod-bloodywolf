@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Players;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -34,6 +35,7 @@ public sealed class IBiteYou : CustomCardModel
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
 		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target);
 		await PowerCmd.Apply<CloutPower>(
             base.Owner.Creature, 

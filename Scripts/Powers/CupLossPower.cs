@@ -17,16 +17,16 @@ public sealed class CupLossPower : CustomPowerModel
 	public const string Key = "CupLossPower";
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? creature, CardModel? __)
+	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? __)
 	{
-		if (creature == base.Owner && result.UnblockedDamage > 0)
+		if (dealer == base.Owner && result.UnblockedDamage > 0)
 		{
 			await PowerCmd.TickDownDuration(this);
 		}
-        if (creature.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
+        if (dealer != null && dealer.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
         {
 			Flash();
-            await CreatureCmd.GainBlock(creature, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
+            await CreatureCmd.GainBlock(dealer, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
         }
 	}
 }

@@ -2,6 +2,9 @@ using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
+using BaseLib.Config;
+using StsModBloodywolf.Scripts.Config;
+using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts;
 
@@ -19,5 +22,7 @@ public class Entry
 		// 使得tscn可以加载自定义脚本
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(Entry).Assembly);
 		Log.Debug("Mod initialized!");
+		ModConfigRegistry.Register("StsModBloodywolf", new BloodywolfModConfig());
+		BloodywolfAudioService.Initialize();
 	}
 }

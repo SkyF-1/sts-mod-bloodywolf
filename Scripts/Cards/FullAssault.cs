@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -29,6 +30,7 @@ public sealed class FullAssault : CustomCardModel
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		IEnumerable<CardModel> enumerable = await IBiteYou.CreateInHand(base.Owner, base.DynamicVars.Cards.IntValue, base.CombatState);
 		if (!base.IsUpgraded)

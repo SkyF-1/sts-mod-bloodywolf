@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -29,7 +30,8 @@ public sealed class NewGodArrives : CustomCardModel
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
+    {	
+		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
             .WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target)).FromCard(this)
 			.TargetingAllOpponents(base.CombatState)

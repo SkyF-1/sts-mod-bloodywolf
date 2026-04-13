@@ -28,7 +28,7 @@ public sealed class Sing : CustomCardModel
     };
 
 	public Sing()
-		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
 	}
     protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;

@@ -16,7 +16,7 @@ public sealed class Troll : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(11m, ValueProp.Move),
-        new BlockVar(4m, ValueProp.Move)
+        new BlockVar(4m, ValueProp.Unpowered)
     };
 
     public Troll()

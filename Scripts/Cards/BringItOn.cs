@@ -26,7 +26,7 @@ public sealed class BringItOn : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public BringItOn()
-		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.AllAllies)
+		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.None)
 	{
 	}
 

@@ -29,5 +29,8 @@
     "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.description": "回合结束前，你的下一张攻击牌耗能为[blue]0[/blue]{energyPrefix:energyIcons(1)}。",
     "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.smartDescription": "回合结束前，你的下一张攻击牌耗能为[blue]0[/blue]{energyPrefix:energyIcons(1)}。",
     "STSMODBLOODYWOLF-TEMPORARY_FREE_ATTACK_POWER.title": "免费攻击",
-    "STSMODBLOODYWOLF-FUCKING_TERRIBLE_POWER.title": "太难听了"
+    "STSMODBLOODYWOLF-FUCKING_TERRIBLE_POWER.title": "太难听了",
+    "STSMODBLOODYWOLF-LANDMINE_POWER.description": "你的下一回合开始时，对自己造成伤害。",
+    "STSMODBLOODYWOLF-LANDMINE_POWER.smartDescription": "你的下一回合开始时，对自己造成[blue]{Amount}[/blue]点伤害。",
+    "STSMODBLOODYWOLF-LANDMINE_POWER.title": "爆雷"
 }

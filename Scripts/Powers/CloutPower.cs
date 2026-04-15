@@ -19,9 +19,9 @@ public sealed class CloutPower : CustomPowerModel
 
 	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 	{
-		if (side == CombatSide.Enemy)
+		if (side == base.Owner.Side)
 		{
-			await PowerCmd.TickDownDuration(this);
+			await PowerCmd.Decrement(this);
 		}
 	}
 	// 已废弃

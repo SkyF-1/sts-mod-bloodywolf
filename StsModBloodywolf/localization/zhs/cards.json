@@ -11,6 +11,8 @@
     "STSMODBLOODYWOLF-REVIEW.description": "[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
     "STSMODBLOODYWOLF-LIQUIDATE.title": "清算",
     "STSMODBLOODYWOLF-LIQUIDATE.description": "造成{Damage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:inverseDiff()}：\n给予{WeakPower:diff()}层[gold]虚弱[/gold]和{VulnerablePower:diff()}层[gold]易伤[/gold]。",
+    "STSMODBLOODYWOLF-PURGE.title": "清洗",
+    "STSMODBLOODYWOLF-PURGE.description": "对所有敌人造成{Damage:diff()}点伤害。[gold]言论[/gold]{Bloodywolf-HotTake:inverseDiff()}：\n给予{WeakPower:diff()}层[gold]虚弱[/gold]和{VulnerablePower:diff()}层[gold]易伤[/gold]。",
     "STSMODBLOODYWOLF-SHARP_JAB.title": "锐气直击",
     "STSMODBLOODYWOLF-SHARP_JAB.description": "造成{Damage:diff()}点伤害。",
     "STSMODBLOODYWOLF-FRAME_CHECK.title": "盯帧",
@@ -123,6 +125,11 @@
     "STSMODBLOODYWOLF-LOVE_AND_HATE.title": "爱恨交加",
     "STSMODBLOODYWOLF-LOVE_AND_HATE.description": "造成{Damage:diff()}点伤害。\n给予其他敌人{Block:diff()}点[gold]格挡[/gold]",
     "STSMODBLOODYWOLF-LANDMINE.title": "爆雷",
-    "STSMODBLOODYWOLF-LANDMINE.description": "对所有敌人造成{Damage:diff()}点伤害。你的下一回合开始时，对自己造成{SelfDamage:inverseDiff()}点伤害。"
-
+    "STSMODBLOODYWOLF-LANDMINE.description": "对所有敌人造成{Damage:diff()}点伤害。你的下一回合开始时，对自己造成{SelfDamage:inverseDiff()}点伤害。",
+    "STSMODBLOODYWOLF-TALLY.title": "清点计算",
+    "STSMODBLOODYWOLF-TALLY.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n每造成一次未被格挡的伤害，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
+    "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.title": "先进经验",
+    "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.description": "从3张其他角色的{IfUpgraded:show:[gold]升级过的[/gold]}技能牌中选择1张加入你的[gold]手牌[/gold]。这张牌在本回合免费打出。",
+    "STSMODBLOODYWOLF-CONTROVERSY.title": "争议频发",
+    "STSMODBLOODYWOLF-CONTROVERSY.description": "你的回合开始时，失去1[gold]影响[/gold]：\n获得{Energy:energyIcons()}。"
 }

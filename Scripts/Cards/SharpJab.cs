@@ -28,6 +28,6 @@ public sealed class SharpJab : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }

@@ -18,7 +18,7 @@ public sealed class OverrulePower : CustomPowerModel
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? __)
 	{
-		if (dealer == base.Owner && result.UnblockedDamage > 0)
+		if (dealer == base.Owner && target.IsEnemy && result.UnblockedDamage > 0)
 		{
 			Flash();
 			await PowerCmd.Apply<CupLossPower>(target, 1m, dealer, null);

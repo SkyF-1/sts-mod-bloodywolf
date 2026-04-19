@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -20,7 +21,8 @@ public sealed class Controversy : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new EnergyVar(1)
+        new EnergyVar(1),
+        new CloutLossVar(1m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
     public Controversy()

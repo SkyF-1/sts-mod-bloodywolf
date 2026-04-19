@@ -15,7 +15,7 @@ public sealed class AdvancedExperience : CustomCardModel
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	private CardModel? _mockGeneratedCard;
 	public AdvancedExperience()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 

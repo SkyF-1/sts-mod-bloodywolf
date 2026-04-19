@@ -124,12 +124,21 @@
     "STSMODBLOODYWOLF-AXIS_OUTPUT.description": "将[gold]弃牌堆[/gold]中耗能为0{energyPrefix:energyIcons(1)}的牌洗入[gold]抽牌堆[/gold]。每洗入一张牌，造成{Damage:diff()}点伤害。",
     "STSMODBLOODYWOLF-LOVE_AND_HATE.title": "爱恨交加",
     "STSMODBLOODYWOLF-LOVE_AND_HATE.description": "造成{Damage:diff()}点伤害。\n给予其他敌人{Block:diff()}点[gold]格挡[/gold]",
-    "STSMODBLOODYWOLF-LANDMINE.title": "爆雷",
+    "STSMODBLOODYWOLF-LANDMINE.title": "爆了！",
     "STSMODBLOODYWOLF-LANDMINE.description": "对所有敌人造成{Damage:diff()}点伤害。你的下一回合开始时，对自己造成{SelfDamage:inverseDiff()}点伤害。",
     "STSMODBLOODYWOLF-TALLY.title": "清点计算",
     "STSMODBLOODYWOLF-TALLY.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n每造成一次未被格挡的伤害，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
     "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.title": "先进经验",
     "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.description": "从3张其他角色的{IfUpgraded:show:[gold]升级过的[/gold]}技能牌中选择1张加入你的[gold]手牌[/gold]。这张牌在本回合免费打出。",
     "STSMODBLOODYWOLF-CONTROVERSY.title": "争议频发",
-    "STSMODBLOODYWOLF-CONTROVERSY.description": "你的回合开始时，失去1[gold]影响[/gold]：\n获得{Energy:energyIcons()}。"
+    "STSMODBLOODYWOLF-CONTROVERSY.description": "你的回合开始时，失去1[gold]影响[/gold]：\n获得{Energy:energyIcons()}。",
+    "STSMODBLOODYWOLF-GOOD_KARMA.title": "善有善报",
+    "STSMODBLOODYWOLF-GOOD_KARMA.description": "每当你给予[gold]格挡[/gold]时，对所有敌人造成{GoodKarmaPower:diff()}点伤害。",
+    "STSMODBLOODYWOLF-BOOST_BARRAGE.title": "鼓吹轰击",
+    "STSMODBLOODYWOLF-BOOST_BARRAGE.description": "造成{Damage:diff()}点伤害X次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n将X的数值翻倍。",
+    "STSMODBLOODYWOLF-END_OF_TUNNEL.title": "苦尽甘来",
+    "STSMODBLOODYWOLF-END_OF_TUNNEL.description": "在本回合中，你每使用过一个{energyPrefix:energyIcons(1)}，就获得{energyPrefix:energyIcons(1)}并造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-FAKE_ACCOUNT.title": "假账",
+    "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n下回合内，你最先抽到的{FakeAccountPower:diff()}张攻击牌会对随机敌人自动打出。"
+
 }

@@ -22,3 +22,11 @@ offset_top = 1.5
 offset_right = 2527.2703
 offset_bottom = 1504.5
 texture = ExtResource("1_7xqys")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 1834.0
+offset_top = 333.0
+offset_right = 2047.0
+offset_bottom = 395.0
+text = "【此处应有血狼帅照】"

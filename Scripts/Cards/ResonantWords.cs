@@ -19,7 +19,7 @@ public sealed class ResonantWords : CustomCardModel
     /// 掷地有声
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new HotTakeVar(5m),
+        new HotTakeVar(3m),
         new CalculationBaseVar(6m),
         new ExtraDamageVar(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>

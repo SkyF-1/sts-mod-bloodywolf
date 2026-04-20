@@ -23,7 +23,7 @@ public sealed class FluidSentimentPotion : CustomPotionModel
 	public override TargetType TargetType => TargetType.AllEnemies;
     public override string? CustomPackedImagePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomPackedOutlinePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}_outline.png";
-	public override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<SuperChatPower>() };
+	public override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CupLossPower>() };
 
 	protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? _)
 	{

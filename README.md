@@ -6,7 +6,7 @@
 https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 
 ### 前置要求
-本mod目前使用https://github.com/Alchyr/BaseLib-StS2作为前置开发。如果你想要游玩此mod，请务必一同下载此前置，并放在游戏根目录的mods文件夹中。
+本mod目前使用https://github.com/Alchyr/BaseLib-StS2 作为前置开发。如果你想要游玩此mod，请务必一同下载此前置，并放在游戏根目录的mods文件夹中。
 
 目前在开发中使用的BaseLib版本为v0.3.0。如果你使用更高版本的BaseLib，可能有发生问题的风险。如果你遇到问题，请报告给我。
 

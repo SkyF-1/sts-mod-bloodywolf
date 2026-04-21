@@ -18,7 +18,7 @@ public sealed class LoveAndHate : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(9m, ValueProp.Move),
+		new DamageVar(10m, ValueProp.Move),
         new BlockVar(6m, ValueProp.Unpowered)
 	};
 

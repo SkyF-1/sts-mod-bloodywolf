@@ -31,7 +31,7 @@ public sealed class Tally : CustomCardModel
     };
 
     public Tally()
-        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 

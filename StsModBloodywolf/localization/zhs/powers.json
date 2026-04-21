@@ -44,5 +44,8 @@
     "STSMODBLOODYWOLF-FAKE_ACCOUNT_POWER.title": "假账",
     "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.description": "回合结束前，你抽到的下一张攻击牌会对随机敌人自动打出。",
     "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.smartDescription": "回合结束前，你抽到的下[blue]{Amount}[/blue]张攻击牌会对随机敌人自动打出。",
-    "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.title": "真账"
+    "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.title": "真账",
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.description": "回合结束前，你每打出一张技能牌，[gold]评定[gold][blue]1[/blue]。",
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.smartDescription": "回合结束前，你每打出一张技能牌，[gold]评定[gold][blue]{Amount}[/blue]。",
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.title": "舆论风暴"
 }

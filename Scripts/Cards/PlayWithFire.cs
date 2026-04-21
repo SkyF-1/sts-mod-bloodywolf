@@ -35,6 +35,7 @@ public sealed class PlayWithFire : CustomCardModel
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
         IEnumerable<CardModel> cards = GetCards().ToList();
         int cardCount = cards.Count();

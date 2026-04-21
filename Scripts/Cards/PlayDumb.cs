@@ -28,6 +28,7 @@ public sealed class PlayDumb : CustomCardModel
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
 		BlockVar givenBlock = new BlockVar(base.DynamicVars["GivenBlock"].BaseValue, ValueProp.Unpowered);
 		await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);

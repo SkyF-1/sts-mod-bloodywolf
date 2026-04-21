@@ -26,7 +26,7 @@
     "STSMODBLOODYWOLF-I_GET_YOU.title": "懂你意思",
     "STSMODBLOODYWOLF-I_GET_YOU.description": "选择1名敌人，你与其各获得{Block:diff()}点[gold]格挡[/gold]。",
     "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.title": "新神已至",
-    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.description": "对所有敌人造成{Damage:diff()}点伤害{CalculationBase:diff()}次。你每有2层[gold]影响[/gold]，额外造成{CalculationExtra:diff()}次。{InCombat:\n（共{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-NEW_GOD_ARRIVES.description": "对所有敌人造成{Damage:diff()}点伤害{CalculationBase:diff()}次。你每有2层[gold]影响[/gold]，额外造成{CalculationExtra:diff()}次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-STIR_UP.title": "带节奏",
     "STSMODBLOODYWOLF-STIR_UP.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]。",
     "STSMODBLOODYWOLF-WELL_MADE.title": "制作精良",
@@ -139,6 +139,9 @@
     "STSMODBLOODYWOLF-END_OF_TUNNEL.title": "苦尽甘来",
     "STSMODBLOODYWOLF-END_OF_TUNNEL.description": "在本回合中，你每使用过一个{energyPrefix:energyIcons(1)}，就获得{energyPrefix:energyIcons(1)}并造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-FAKE_ACCOUNT.title": "假账",
-    "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n下回合内，你最先抽到的{FakeAccountPower:diff()}张攻击牌会对随机敌人自动打出。"
-
+    "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n下回合内，你最先抽到的{FakeAccountPower:diff()}张攻击牌会对随机敌人自动打出。",
+    "STSMODBLOODYWOLF-CHAT.title": "杂谈",
+    "STSMODBLOODYWOLF-CHAT.description": "每有一名[gold]杯级丧失[/gold]的敌人，获得{Energy:energyIcons()}，抽{Cards:diff()}张牌，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
+    "STSMODBLOODYWOLF-GENTLE_GUIDANCE.title": "善意引导",
+    "STSMODBLOODYWOLF-GENTLE_GUIDANCE.description": "造成{Damage:diff()}点伤害。\n本回合每给予过一次[gold]格挡[/gold]，就额外造成1次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}"
 }

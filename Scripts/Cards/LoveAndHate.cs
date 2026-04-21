@@ -38,7 +38,7 @@ public sealed class LoveAndHate : CustomCardModel
         {
             if(enemy != cardPlay.Target)
             {
-                await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+                await CreatureCmd.GainBlock(enemy, base.DynamicVars.Block, cardPlay);
             }
         }
 	}

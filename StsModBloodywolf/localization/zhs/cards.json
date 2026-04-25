@@ -151,5 +151,7 @@
     "STSMODBLOODYWOLF-SHUT_UP.title": "捂嘴",
     "STSMODBLOODYWOLF-SHUT_UP.description": "你下{ShutUpPower:diff()}次受到生命值损伤时，失去3[gold]影响[/gold]：\n阻止这次伤害。",
     "STSMODBLOODYWOLF-UNRANKED.title": "榜上无名",
-    "STSMODBLOODYWOLF-UNRANKED.description": "你的回合开始时，\n给予所有[gold]杯级丧失[/gold]的敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。"
+    "STSMODBLOODYWOLF-UNRANKED.description": "你的回合开始时，\n给予所有[gold]杯级丧失[/gold]的敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。",
+    "STSMODBLOODYWOLF-INFILTRATE.title": "渗透",
+    "STSMODBLOODYWOLF-INFILTRATE.description": "敌人每有{perBlock:inverseDiff()}点[gold]格挡[/gold]，就给予其1层[gold]易伤[/gold]一次。"
 }

@@ -45,7 +45,13 @@
     "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.description": "回合结束前，你抽到的下一张攻击牌会对随机敌人自动打出。",
     "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.smartDescription": "回合结束前，你抽到的下[blue]{Amount}[/blue]张攻击牌会对随机敌人自动打出。",
     "STSMODBLOODYWOLF-REAL_ACCOUNT_POWER.title": "真账",
-    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.description": "回合结束前，你每打出一张技能牌，[gold]评定[gold][blue]1[/blue]。",
-    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.smartDescription": "回合结束前，你每打出一张技能牌，[gold]评定[gold][blue]{Amount}[/blue]。",
-    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.title": "舆论风暴"
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.description": "回合结束前，你每打出一张技能牌，[gold]评定[/gold][blue]1[/blue]。",
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.smartDescription": "回合结束前，你每打出一张技能牌，[gold]评定[/gold][blue]{Amount}[/blue]。",
+    "STSMODBLOODYWOLF-SENTIMENT_STORM_POWER.title": "舆论风暴",
+    "STSMODBLOODYWOLF-SHUT_UP_POWER.description": "你下[blue]1[/blue]次受到生命值损伤时，失去[blue]3[/blue][gold]影响[/gold]：阻止这次伤害。",
+    "STSMODBLOODYWOLF-SHUT_UP_POWER.smartDescription": "你下[blue]{Amount}[/blue]次受到生命值损伤时，失去[blue]3[/blue][gold]影响[/gold]：阻止这次伤害。",
+    "STSMODBLOODYWOLF-SHUT_UP_POWER.title": "捂嘴",
+    "STSMODBLOODYWOLF-UNRANKED_POWER.description": "你的回合开始时，给予所有[gold]杯级丧失[/gold]的敌人[blue]1[/blue]层[gold]易伤[/gold]。",
+    "STSMODBLOODYWOLF-UNRANKED_POWER.smartDescription": "你的回合开始时，给予所有[gold]杯级丧失[/gold]的敌人[blue]{Amount}[/blue]层[gold]易伤[/gold]。",
+    "STSMODBLOODYWOLF-UNRANKED_POWER.title": "榜上无名"
 }

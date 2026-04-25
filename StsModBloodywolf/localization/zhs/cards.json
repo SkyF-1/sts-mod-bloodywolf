@@ -131,7 +131,7 @@
     "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.title": "先进经验",
     "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.description": "从3张其他角色的{IfUpgraded:show:[gold]升级过的[/gold]}技能牌中选择1张加入你的[gold]手牌[/gold]。这张牌在本回合免费打出。",
     "STSMODBLOODYWOLF-CONTROVERSY.title": "争议频发",
-    "STSMODBLOODYWOLF-CONTROVERSY.description": "你的回合开始时，失去1[gold]影响[/gold]：\n获得{Energy:energyIcons()}。",
+    "STSMODBLOODYWOLF-CONTROVERSY.description": "你的回合开始时，\n失去1[gold]影响[/gold]：获得{Energy:energyIcons()}。",
     "STSMODBLOODYWOLF-GOOD_KARMA.title": "善有善报",
     "STSMODBLOODYWOLF-GOOD_KARMA.description": "每当你给予[gold]格挡[/gold]时，对所有敌人造成{GoodKarmaPower:diff()}点伤害。",
     "STSMODBLOODYWOLF-BOOST_BARRAGE.title": "鼓吹轰击",
@@ -147,5 +147,9 @@
     "STSMODBLOODYWOLF-SENTIMENT_STORM.title": "舆论风暴",
     "STSMODBLOODYWOLF-SENTIMENT_STORM.description": "打出此牌后，你在本回合每打出一张技能牌，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
     "STSMODBLOODYWOLF-VERTICAL_STRIKE.title": "纵向打击",
-    "STSMODBLOODYWOLF-VERTICAL_STRIKE.description": "造成{Damage:diff()}点伤害。\n对[gold]杯级丧失[/gold]的敌人造成双倍伤害。"
+    "STSMODBLOODYWOLF-VERTICAL_STRIKE.description": "造成{Damage:diff()}点伤害。\n对[gold]杯级丧失[/gold]的敌人造成双倍伤害。",
+    "STSMODBLOODYWOLF-SHUT_UP.title": "捂嘴",
+    "STSMODBLOODYWOLF-SHUT_UP.description": "你下{ShutUpPower:diff()}次受到生命值损伤时，失去3[gold]影响[/gold]：\n阻止这次伤害。",
+    "STSMODBLOODYWOLF-UNRANKED.title": "榜上无名",
+    "STSMODBLOODYWOLF-UNRANKED.description": "你的回合开始时，\n给予所有[gold]杯级丧失[/gold]的敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。"
 }

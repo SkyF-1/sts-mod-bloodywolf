@@ -2,6 +2,8 @@
     "STSMODBLOODYWOLF-SUPER_CHAT_POTION.title": "300电池",
     "STSMODBLOODYWOLF-SUPER_CHAT_POTION.description": "给予[blue]3[/blue]层[gold]醒目留言[/gold]。",
     "STSMODBLOODYWOLF-FLUID_SENTIMENT_POTION.title": "流体舆论",
-    "STSMODBLOODYWOLF-FLUID_SENTIMENT_POTION.description": "使所有敌人[gold]杯级丧失[/gold]。"
+    "STSMODBLOODYWOLF-FLUID_SENTIMENT_POTION.description": "使所有敌人[gold]杯级丧失[/gold]。",
+    "STSMODBLOODYWOLF-EXPOSURE_POTION.title": "活动流量",
+    "STSMODBLOODYWOLF-EXPOSURE_POTION.description": "你[gold]评定[/gold][blue]5[/blue]。"
 
 }

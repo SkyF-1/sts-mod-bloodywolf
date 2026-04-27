@@ -63,6 +63,6 @@ public sealed class Chat : CustomCardModel
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars[RateVar.Key].UpgradeValueBy(1);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

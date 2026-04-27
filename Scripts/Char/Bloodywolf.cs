@@ -5,6 +5,7 @@ using Godot;
 using StsModBloodywolf.Scripts.Cards;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Relics;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace StsModBloodywolf.Scripts.Char;
 public class Bloodywolf : PlaceholderCharacterModel
@@ -80,6 +81,18 @@ public class Bloodywolf : PlaceholderCharacterModel
         ModelDb.Card<DefendWolf>(),
         ModelDb.Card<Review>(),
         ModelDb.Card<Liquidate>(),
+
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        
     ];
 
     // 初始遗物

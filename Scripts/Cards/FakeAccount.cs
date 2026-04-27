@@ -16,7 +16,7 @@ public sealed class FakeAccount : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(6m, ValueProp.Move),
+		new DamageVar(8m, ValueProp.Move),
         new PowerVar<FakeAccountPower>(1m)
 	};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

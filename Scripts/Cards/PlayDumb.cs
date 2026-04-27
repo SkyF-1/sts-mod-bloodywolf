@@ -17,7 +17,7 @@ public sealed class PlayDumb : CustomCardModel
 	public override bool GainsBlock => true;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(10m, ValueProp.Move),
-        new BlockVar("GivenBlock", 4m, ValueProp.Unpowered)
+        new BlockVar("givenBlock", 4m, ValueProp.Unpowered)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -30,7 +30,7 @@ public sealed class PlayDumb : CustomCardModel
 	{  
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		BlockVar givenBlock = new BlockVar(base.DynamicVars["GivenBlock"].BaseValue, ValueProp.Unpowered);
+		BlockVar givenBlock = new BlockVar(base.DynamicVars["givenBlock"].BaseValue, ValueProp.Unpowered);
 		await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);
 	}
 

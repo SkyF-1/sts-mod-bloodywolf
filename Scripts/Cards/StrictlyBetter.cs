@@ -16,7 +16,7 @@ public sealed class StrictlyBetter : CustomCardModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Retain };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(14m, ValueProp.Move)
+        new DamageVar(18m, ValueProp.Move)
     };
 
     public StrictlyBetter()
@@ -37,6 +37,6 @@ public sealed class StrictlyBetter : CustomCardModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars.Damage.UpgradeValueBy(5m);
     }
 }

@@ -36,7 +36,7 @@ public sealed class PullTable : CustomCardModel
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
 		new DamageVar(5m, ValueProp.Move),
-		new DynamicVar("Increase", 2m)
+		new DynamicVar("Increase", 3m)
 	};
 
 	public PullTable()
@@ -65,6 +65,7 @@ public sealed class PullTable : CustomCardModel
 	protected override void OnUpgrade()
 	{
         base.DynamicVars.Damage.UpgradeValueBy(2m);
+        base.DynamicVars["Increase"].UpgradeValueBy(1m);
 	}
 
 	protected override void AfterDowngraded()

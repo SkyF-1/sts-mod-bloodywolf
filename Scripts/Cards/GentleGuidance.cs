@@ -20,7 +20,7 @@ public sealed class GentleGuidance : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(7m, ValueProp.Move),
+		new DamageVar(10m, ValueProp.Move),
 		new CalculationBaseVar(1m),
 		new CalculationExtraVar(1m),
 		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => 

@@ -14,7 +14,7 @@
     "STSMODBLOODYWOLF-CUP_LOSS_POWER.description": "[gold]杯级丧失[/gold]的生物在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n该生物造成未被格挡的伤害后，其层数减少[blue]1[/blue]。",
     "STSMODBLOODYWOLF-CUP_LOSS_POWER.smartDescription": "[gold]{OwnerName}[/gold]在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。\n[gold]{OwnerName}[/gold]造成[blue]{Amount}[/blue]次未被格挡的伤害后失效。",
     "STSMODBLOODYWOLF-CUP_LOSS_POWER.title": "杯级丧失",
-    "STSMODBLOODYWOLF-DATA_POWER.description": "你下次的[gold]评定[/gold]数值加[blue]1[/blue]。",
+    "STSMODBLOODYWOLF-DATA_POWER.description": "你下次的[gold]评定[/gold]数值加[blue]1[/blue]，然后[gold]数据[/gold]的层数减少[blue]1[/blue]。",
     "STSMODBLOODYWOLF-DATA_POWER.smartDescription": "你下[blue]{Amount}[/blue]次的[gold]评定[/gold]数值加[blue]1[/blue]。",
     "STSMODBLOODYWOLF-DATA_POWER.title": "数据",
     "STSMODBLOODYWOLF-OVERRULE_POWER.description": "你对敌人造成未被格挡的攻击伤害后，使其[gold]杯级丧失[/gold]。",

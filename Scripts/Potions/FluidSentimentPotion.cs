@@ -29,7 +29,7 @@ public sealed class FluidSentimentPotion : CustomPotionModel
 	{
         foreach (Creature enemy in base.Owner.Creature.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<CupLossPower>(enemy, 1m, base.Owner.Creature, null);
+            await PowerCmd.Apply<CupLossPower>(enemy, 5m, base.Owner.Creature, null);
         }
 	}
 }

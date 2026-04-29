@@ -25,7 +25,7 @@ public sealed class CupTheoryStrike : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(18m, ValueProp.Move),
-        new PowerVar<CupLossPower>(1m)
+        new PowerVar<CupLossPower>(5m)
     };
 
 	public CupTheoryStrike()

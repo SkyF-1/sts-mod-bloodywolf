@@ -23,7 +23,7 @@ public sealed class VerticalStrike : CustomCardModel
 	};
 
 	public VerticalStrike()
-		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)

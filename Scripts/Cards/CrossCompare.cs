@@ -22,10 +22,11 @@ public sealed class CrossCompare : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(7m, ValueProp.Move)
+        new DamageVar(7m, ValueProp.Move),
+        new PowerVar<CupLossPower>(7m)
     };
 	public CrossCompare()
-		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+		: base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
     {
     }
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -40,7 +41,7 @@ public sealed class CrossCompare : CustomCardModel
 	{
 		if ((dealer == base.Owner.Creature || dealer?.PetOwner == base.Owner) && !target.IsPlayer && result.WasBlockBroken && cardSource == this)
 		{
-			await PowerCmd.Apply<CupLossPower>(target, 1m, base.Owner.Creature, this);
+			await PowerCmd.Apply<CupLossPower>(target, base.DynamicVars["CupLossPower"].BaseValue, base.Owner.Creature, this);
 		}
 	}
     protected override void OnUpgrade()

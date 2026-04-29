@@ -15,7 +15,12 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class ConclusionFirst : CustomCardModel
 {/// 先说结论
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Innate, CardKeyword.Exhaust};
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) , new CardsVar(1)};
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
+    { 
+        new RateVar(2m),
+        new CardsVar(1),
+        new PowerVar<CupLossPower>(1m)
+    };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -38,7 +43,7 @@ public sealed class ConclusionFirst : CustomCardModel
         this);
         await PowerCmd.Apply<CupLossPower>(
         base.CombatState.HittableEnemies, 
-        1m, 
+        base.DynamicVars[CupLossPower.Key].BaseValue, 
         base.Owner.Creature, 
         this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);

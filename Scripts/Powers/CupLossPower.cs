@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -29,4 +30,19 @@ public sealed class CupLossPower : CustomPowerModel
             await CreatureCmd.GainBlock(dealer, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
         }
 	}
+	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	{
+		if (!CombatManager.Instance.IsOverOrEnding && side == base.Owner.Side && !base.Owner.IsDead )
+		{
+			var amount = base.Amount;
+			List<DamageResult> list = (await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.Owner, amount, ValueProp.Unblockable | ValueProp.Unpowered, null, null)).ToList();
+			DamageResult damageResult = list.FirstOrDefault();
+			if(base.Owner.IsAlive && damageResult != null)
+			{
+				var block = new BlockVar(damageResult.UnblockedDamage, ValueProp.Unpowered);
+				await CreatureCmd.GainBlock(base.Owner, block, null);
+			}
+		}
+	}
+
 }

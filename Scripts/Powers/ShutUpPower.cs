@@ -36,9 +36,13 @@ public sealed class ShutUpPower : CustomPowerModel
 		{
 			return amount;
 		}
-		PowerCmd.Apply<CloutPower>(base.Owner, -base.DynamicVars[CloutLossVar.Key].BaseValue, base.Owner, null);
-		Flash();
-		PowerCmd.Decrement(this);
-		return 0m;
+		if(amount > 0)
+		{
+			PowerCmd.Apply<CloutPower>(base.Owner, -base.DynamicVars[CloutLossVar.Key].BaseValue, base.Owner, null);
+			Flash();
+			PowerCmd.Decrement(this);
+			return 0m;
+		}
+		return amount;
 	}
 }

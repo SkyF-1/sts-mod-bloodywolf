@@ -13,7 +13,7 @@ public sealed class FoolFormPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
-	public override PowerStackType StackType => PowerStackType.Single;
+	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -23,7 +23,7 @@ public sealed class FoolFormPower : CustomPowerModel
 
         if (cloutStacks > 0 && side == CombatSide.Player)
         {
-            await CreatureCmd.GainBlock(base.Owner, new BlockVar(cloutStacks, ValueProp.Unpowered), null);
+            await CreatureCmd.GainBlock(base.Owner, new BlockVar(cloutStacks * base.Amount, ValueProp.Unpowered), null);
         }
     }
 }

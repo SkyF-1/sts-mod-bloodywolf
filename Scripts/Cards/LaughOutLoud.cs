@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,6 +12,8 @@ using MegaCrit.Sts2.Core.Saves;
 using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -27,8 +28,10 @@ public sealed class LaughOutLoud : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
         new DamageVar(8m, ValueProp.Move),
-        new PowerVar<WeakPower>(1m)
+        new HotTakeVar(3m),
+        new PowerVar<WeakPower>(2m)
     };
+    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
 
 	public LaughOutLoud()
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
@@ -50,17 +53,21 @@ public sealed class LaughOutLoud : CustomCardModel
             .Targeting(cardPlay.Target)
             .WithAttackerAnim("Attack", num)
             .Execute(choiceContext);
-
-        await PowerCmd.Apply<WeakPower>(
-            cardPlay.Target, 
-            base.DynamicVars.Weak.BaseValue, 
-            base.Owner.Creature, 
-            this);
+        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
+        {
+            await PowerCmd.Apply<WeakPower>(
+                cardPlay.Target, 
+                base.DynamicVars.Weak.BaseValue, 
+                base.Owner.Creature, 
+                this);
+        }
     }
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(1m);
+		base.DynamicVars.Damage.UpgradeValueBy(2m);
         base.DynamicVars.Weak.UpgradeValueBy(1m);
 	}
 }
+

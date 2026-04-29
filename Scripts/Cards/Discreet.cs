@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,7 +17,7 @@ public sealed class Discreet : CustomCardModel
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
     new BlockVar("BaseBlock", 8m, ValueProp.Move),
-    new HotTakeVar(5m),
+    new HotTakeVar(3m),
     new BlockVar("BonusBlock", 4m, ValueProp.Move),
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -50,3 +49,4 @@ public sealed class Discreet : CustomCardModel
         base.DynamicVars["BonusBlock"].UpgradeValueBy(2m);
 	}
 }
+

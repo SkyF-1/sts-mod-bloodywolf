@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,14 +16,14 @@ public sealed class WellMade : CustomCardModel
 	public override bool GainsBlock => true;
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-    new BlockVar(8m, ValueProp.Move),
+    new BlockVar(10m, ValueProp.Move),
     new HotTakeVar(5m),
     new CardsVar(1)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public WellMade()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 
@@ -42,6 +41,6 @@ public sealed class WellMade : CustomCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Block.UpgradeValueBy(3m);
-        base.DynamicVars[HotTakeVar.Key].UpgradeValueBy(-2m);
 	}
 }
+

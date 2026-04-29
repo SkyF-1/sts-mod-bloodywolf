@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.5.1">
+<Project Sdk="Godot.NET.Sdk/4.5.1"><Import Project="Sts2PathDiscovery.props" Condition="Exists('Sts2PathDiscovery.props')" />
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
@@ -7,8 +7,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <!-- 改成你的杀戮尖塔2目录 -->
-    <Sts2Dir>D:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
-    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+    <Sts2Dir Condition="'$(Sts2Dir)' == ''">D:\software\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir Condition="'$(Sts2DataDir)' == ''">$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,17 +22,16 @@
       <Private>false</Private>
     </Reference>
 
-    <Reference Include="BaseLib">
-      <HintPath>$(Sts2Dir)/mods/BaseLib/BaseLib.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+    
+
+    
   </ItemGroup>
 
   <!-- 自动复制dll和json -->
-  <Target Name="Copy Mod" AfterTargets="PostBuildEvent">
+  <Target Name="Copy Mod" AfterTargets="PostBuildEvent;Build">
     <Message Text="Copying mod to Slay the Spire 2 mods folder..." Importance="high" />
     <MakeDir Directories="$(Sts2Dir)\mods\" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\" />
     <Copy SourceFiles="$(MSBuildProjectName).json" DestinationFolder="$(Sts2Dir)/mods/$(MSBuildProjectName)/" />
   </Target>
-</Project>
+<PropertyGroup><NoWarn>$(NoWarn);STS001;STS003</NoWarn></PropertyGroup><ItemGroup><PackageReference Include="STS2.RitsuLib" Version="0.0.54" /><PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all" /></ItemGroup><ItemGroup><Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false" /></ItemGroup></Project>

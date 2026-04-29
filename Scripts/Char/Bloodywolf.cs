@@ -1,10 +1,11 @@
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Characters;
-using BaseLib.Abstracts;
+using BaseLibToRitsu.Generated;
 using Godot;
 using StsModBloodywolf.Scripts.Cards;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Relics;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace StsModBloodywolf.Scripts.Char;
 public class Bloodywolf : PlaceholderCharacterModel
@@ -12,28 +13,28 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 角色名称颜色
     public override Color NameColor => new(0.5f, 0.5f, 1f);
     // 能量图标轮廓颜色
-    public override Color EnergyLabelOutlineColor => new(0.1f, 0.1f, 1f);
-
+    public override Color EnergyLabelOutlineColor => new("#1c3f6d");
+    public override Color MapDrawingColor => new("#1c3f6d");
     // 人物性别（男女中立）
     public override CharacterGender Gender => CharacterGender.Masculine;
 
     // 初始血量
-    public override int StartingHp => 80;
+    public override int StartingHp => 79;
 
     // 人物模型tscn路径。要自定义见下。
     public override string CustomVisualPath => "res://StsModBloodywolf/scenes/bloodywolf_character.tscn";
     // 卡牌拖尾路径。
-    // public override string CustomTrailPath => "res://scenes/vfx/card_trail_ironclad.tscn";
+    // public override string CustomTrailPath => "res://scenes/vfx/card_trail_bloodywolf.tscn";
     // 人物头像路径。
-    public override string CustomIconTexturePath => "res://icon.svg";
+    public override string CustomIconTexturePath => "res://icon.png";
     // 人物头像2号。
-    // public override string CustomIconPath => "res://scenes/ui/character_icons/ironclad_icon.tscn";
+    // public override string CustomIconPath => "res://scenes/ui/character_icons/bloodywolf_icon.tscn";
     // 能量表盘tscn路径。要自定义见下。
     public override string CustomEnergyCounterPath => "res://StsModBloodywolf/scenes/bloodywolf_energy_counter.tscn";
     // 篝火休息动画。
-    // public override string CustomRestSiteAnimPath => "res://scenes/rest_site/characters/ironclad_rest_site.tscn";
+    public override string CustomRestSiteAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_rest_site.tscn";
     // 商店人物动画。
-    // public override string CustomMerchantAnimPath => "res://scenes/merchant/characters/ironclad_merchant.tscn";
+    public override string CustomMerchantAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_merchant.tscn";
     // 多人模式-手指。
     // public override string CustomArmPointingTexturePath => null;
     // 多人模式剪刀石头布-石头。
@@ -80,6 +81,18 @@ public class Bloodywolf : PlaceholderCharacterModel
         ModelDb.Card<DefendWolf>(),
         ModelDb.Card<Review>(),
         ModelDb.Card<Liquidate>(),
+
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<Splash>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        // ModelDb.Card<AdvancedExperience>(),
+        
     ];
 
     // 初始遗物

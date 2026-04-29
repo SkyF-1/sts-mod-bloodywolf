@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -21,12 +20,12 @@ public sealed class BringItOn : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<StrengthPower>(4m)
+        new PowerVar<StrengthPower>(2m)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public BringItOn()
-		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.AllAllies)
+		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.None)
 	{
 	}
 
@@ -45,3 +44,4 @@ public sealed class BringItOn : CustomCardModel
         base.EnergyCost.UpgradeBy(-1);
     }
 }
+

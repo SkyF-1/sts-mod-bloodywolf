@@ -1,54 +1,42 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class NewGodArrives : CustomCardModel
 {/// 新神已至
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
-	{
-		HoverTipFactory.Static(StaticHoverTip.ReplayStatic)
-	};
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+    protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(4m, ValueProp.Move),
-        new RepeatVar(2),
-        new HotTakeVar(8m)
+		new CalculationBaseVar(2m),
+		new CalculationExtraVar(1m),
+		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount / 2 ?? 0)
     };
 
 	public NewGodArrives()
 		: base(1, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 	{
 	}
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        //言论条件
-        if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
-        {
-            await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue + 4).FromCard(this)
+    {	
+		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
+            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target)).FromCard(this)
 			.TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
-        }else
-        {
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue).FromCard(this)
-			.TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_slash")
-			.Execute(choiceContext);
-        }
+        
     }
 
 	protected override void OnUpgrade()
@@ -56,3 +44,4 @@ public sealed class NewGodArrives : CustomCardModel
 		base.DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 }
+

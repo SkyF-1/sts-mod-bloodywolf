@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -19,12 +19,12 @@ public sealed class CupTheoryStrike : CustomCardModel
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
-        HoverTipFactory.FromPower<VulnerablePower>()
+        HoverTipFactory.FromPower<CupLossPower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(13m, ValueProp.Move),
-        new PowerVar<VulnerablePower>(2m)
+        new DamageVar(18m, ValueProp.Move),
+        new PowerVar<CupLossPower>(5m)
     };
 
 	public CupTheoryStrike()
@@ -45,9 +45,9 @@ public sealed class CupTheoryStrike : CustomCardModel
 	{
 		if ( cardSource == this && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Apply<VulnerablePower>(
+			await PowerCmd.Apply<CupLossPower>(
             target, 
-            base.DynamicVars.Vulnerable.BaseValue, 
+            base.DynamicVars["CupLossPower"].BaseValue, 
             base.Owner.Creature, 
             this);
 		}
@@ -55,7 +55,7 @@ public sealed class CupTheoryStrike : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(3m);
-        base.DynamicVars.Vulnerable.UpgradeValueBy(1m);
+		base.DynamicVars.Damage.UpgradeValueBy(6m);
 	}
 }
+

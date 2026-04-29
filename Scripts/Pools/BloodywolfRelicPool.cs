@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+using BaseLibToRitsu.Generated;
 
 namespace StsModBloodywolf.Scripts.Pools;
 public class BloodywolfRelicPool : CustomRelicPoolModel

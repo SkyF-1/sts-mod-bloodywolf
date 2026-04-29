@@ -1,9 +1,9 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -19,8 +19,9 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Liquidate : CustomCardModel
+public sealed class Liquidate : CustomCardModel, ITranscendenceCard
 {/// 清算
+	public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<Purge>();
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<WeakPower>(),
@@ -29,7 +30,7 @@ public sealed class Liquidate : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(5m, ValueProp.Move),
+		new DamageVar(8m, ValueProp.Move),
         new HotTakeVar(3m),
 		new PowerVar<WeakPower>(1m),
 		new PowerVar<VulnerablePower>(1m)
@@ -68,3 +69,4 @@ public sealed class Liquidate : CustomCardModel
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }
+

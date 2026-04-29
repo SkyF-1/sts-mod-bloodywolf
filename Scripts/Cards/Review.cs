@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Review : CustomCardModel
 {/// 测评
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(3m)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -23,7 +22,7 @@ public sealed class Review : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Review()
-		: base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+		: base(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
 	{
 	}
 
@@ -31,13 +30,14 @@ public sealed class Review : CustomCardModel
     {
         await PowerCmd.Apply<CloutPower>(
         base.Owner.Creature, 
-        base.DynamicVars[RateVar.Key].IntValue, 
+        base.DynamicVars[RateVar.Key].BaseValue, 
         base.Owner.Creature, 
         this);
     }
 
 	protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars[RateVar.Key].UpgradeValueBy(1m);
     }
 }
+

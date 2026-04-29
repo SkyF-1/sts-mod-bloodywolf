@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,9 +12,9 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Unrivaled : CustomCardModel
 {/// 独步天下
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-    new CardsVar(2)
-    ];
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	new CardsVar(2)
+	];
+	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Unrivaled()
 		: base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
@@ -23,13 +22,14 @@ public sealed class Unrivaled : CustomCardModel
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
-    }
+	{
+		await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+		await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
+	}
 
 	protected override void OnUpgrade()
-    {
-        base.DynamicVars.Cards.UpgradeValueBy(1m);
-    }
+	{
+		base.EnergyCost.UpgradeBy(-1);
+	}
 }
+

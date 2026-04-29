@@ -1,4 +1,4 @@
-using BaseLib.Extensions;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.DynamicVars;

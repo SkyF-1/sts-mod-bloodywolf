@@ -1,5 +1,14 @@
 {
   "STSMODBLOODYWOLF-RABBIT_HEAD.title": "兔头",
-  "STSMODBLOODYWOLF-RABBIT_HEAD.description": "战斗开始时，评定[blue]3[/blue]。",
-  "STSMODBLOODYWOLF-RABBIT_HEAD.flavor": "进塔前，他只是一个主播。"
+  "STSMODBLOODYWOLF-RABBIT_HEAD.description": "在每场战斗开始时，[gold]评定[/gold][blue]3[/blue]。",
+  "STSMODBLOODYWOLF-RABBIT_HEAD.flavor": "进塔前，他只是一个主播。",
+  "STSMODBLOODYWOLF-MARTIAL_SOUL.title": "武魂真身",
+  "STSMODBLOODYWOLF-MARTIAL_SOUL.description": "在每场战斗开始时，[gold]评定[/gold][blue]5[/blue]。",
+  "STSMODBLOODYWOLF-MARTIAL_SOUL.flavor": "你看到了什么，血狼破军。",
+  "STS_MOD_BLOODYWOLF_RELIC_RABBIT_HEAD.title": "兔头",
+  "STS_MOD_BLOODYWOLF_RELIC_RABBIT_HEAD.description": "在每场战斗开始时，[gold]评定[/gold][blue]3[/blue]。",
+  "STS_MOD_BLOODYWOLF_RELIC_RABBIT_HEAD.flavor": "进塔前，他只是一个主播。",
+  "STS_MOD_BLOODYWOLF_RELIC_MARTIAL_SOUL.title": "武魂真身",
+  "STS_MOD_BLOODYWOLF_RELIC_MARTIAL_SOUL.description": "在每场战斗开始时，[gold]评定[/gold][blue]5[/blue]。",
+  "STS_MOD_BLOODYWOLF_RELIC_MARTIAL_SOUL.flavor": "你看到了什么，血狼破军。"
 }

@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -52,3 +51,4 @@ public sealed class StirUp : CustomCardModel
 		base.DynamicVars[HotTakeVar.Key].UpgradeValueBy(2m);
 	}
 }
+

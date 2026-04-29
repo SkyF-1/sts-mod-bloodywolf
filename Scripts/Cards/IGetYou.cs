@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -21,14 +20,16 @@ public sealed class IGetYou : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public IGetYou()
-		: base(2, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
+		: base(1, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{  
+	{   
+        BlockVar givenBlock = new BlockVar(base.DynamicVars.Block.BaseValue, ValueProp.Unpowered);
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+        await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);
 	}
 
 	protected override void OnUpgrade()
@@ -36,3 +37,4 @@ public sealed class IGetYou : CustomCardModel
         base.DynamicVars.Block.UpgradeValueBy(10m);
     }
 }
+

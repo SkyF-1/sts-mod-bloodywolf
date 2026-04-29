@@ -1,5 +1,4 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
+using BaseLibToRitsu.Generated;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,14 +13,14 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Slander : CustomCardModel
-{/// 中伤
+{/// 诋毁
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
-        new DamageVar(9m, ValueProp.Move),
+            new DamageVar(9m, ValueProp.Move),
         new RateVar(2m)
     };
 
@@ -48,3 +47,4 @@ public sealed class Slander : CustomCardModel
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }
+

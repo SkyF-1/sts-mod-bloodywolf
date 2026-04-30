@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bqu4d66xd1gxa"]
+
+[ext_resource type="Shader" uid="uid://bq8jrv2gskt8t" path="res://StsModBloodywolf/materials/cup_loss_bar_overlay.gdshader" id="1_q2t7x"]
+
+[resource]
+shader = ExtResource("1_q2t7x")
+shader_parameter/modulate_color = Color(1, 0.2, 0.2, 0.6)
+shader_parameter/speed = 1.0
+shader_parameter/stripe_density = 8.0

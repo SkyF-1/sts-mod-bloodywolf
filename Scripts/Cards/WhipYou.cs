@@ -22,7 +22,7 @@ public sealed class WhipYou : CustomCardModel
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
 		new DamageVar(9m, ValueProp.Move),
-        new HotTakeVar(5m),
+        new HotTakeVar(3m),
         new CardsVar(2)
 	};
 

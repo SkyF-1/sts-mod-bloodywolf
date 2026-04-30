@@ -20,7 +20,7 @@ public sealed class TestServer : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DynamicVar("Data", 4m)
+        new DynamicVar("Data", 5m)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -36,6 +36,6 @@ public sealed class TestServer : CustomCardModel
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars["Data"].UpgradeValueBy(1m);
+        base.DynamicVars["Data"].UpgradeValueBy(2m);
     }
 }

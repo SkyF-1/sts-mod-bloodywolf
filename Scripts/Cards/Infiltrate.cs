@@ -29,7 +29,7 @@ public sealed class Infiltrate : CustomCardModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
-        new DynamicVar("perBlock", 2m),
+        new DynamicVar("perBlock", 3m),
         new PowerVar<VulnerablePower>(1m)
     };
 	public Infiltrate()

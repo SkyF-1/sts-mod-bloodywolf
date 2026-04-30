@@ -24,7 +24,7 @@ public sealed class CupTheoryStrike : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(18m, ValueProp.Move),
+        new DamageVar(12m, ValueProp.Move),
         new PowerVar<CupLossPower>(5m)
     };
 
@@ -56,6 +56,6 @@ public sealed class CupTheoryStrike : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(6m);
+		base.DynamicVars.Damage.UpgradeValueBy(4m);
 	}
 }

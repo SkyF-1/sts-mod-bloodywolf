@@ -18,7 +18,7 @@ public sealed class Veto : CustomCardModel
     /// 不通过
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<CupLossPower>(4m),
+        new PowerVar<CupLossPower>(3m),
         new CardsVar(1)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
@@ -36,7 +36,7 @@ public sealed class Veto : CustomCardModel
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await PowerCmd.Apply<CupLossPower>(cardPlay.Target, DynamicVars[CupLossPower.Key].BaseValue, base.Owner.Creature, this);
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, base.DynamicVars.Cards.IntValue);
+        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, base.DynamicVars.Cards.IntValue);
         CardPile pile = PileType.Draw.GetPile(base.Owner);
         if (pile.Cards.Count == 0)
         {
@@ -52,6 +52,5 @@ public sealed class Veto : CustomCardModel
     protected override void OnUpgrade()
     {
         base.DynamicVars[CupLossPower.Key].UpgradeValueBy(2m);
-        base.DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

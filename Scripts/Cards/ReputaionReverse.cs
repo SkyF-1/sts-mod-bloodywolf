@@ -17,11 +17,11 @@ public sealed class ReputationReverse : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new CloutLossVar(2m),
-        new CardsVar(4)
+        new CardsVar(3)
     };
     protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
     public ReputationReverse()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
@@ -43,6 +43,7 @@ public sealed class ReputationReverse : CustomCardModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars[CloutLossVar.Key].UpgradeValueBy(-1m);
+        //base.DynamicVars[CloutLossVar.Key].UpgradeValueBy(-1m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

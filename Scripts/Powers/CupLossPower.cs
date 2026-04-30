@@ -1,4 +1,6 @@
 using BaseLib.Abstracts;
+using BaseLib.Hooks;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -7,11 +9,14 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Hooks;
+using MegaCrit.Sts2.Core.Entities.Cards;
 
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class CupLossPower : CustomPowerModel
+public sealed class CupLossPower : CustomPowerModel, IHealthBarForecastSource
 {
 	public override PowerType Type => PowerType.Debuff;
 	public override PowerStackType StackType => PowerStackType.Counter;
@@ -45,4 +50,21 @@ public sealed class CupLossPower : CustomPowerModel
 		}
 	}
 
+	public int CalculateTotalDamageNextTurn()
+	{
+		
+		decimal damage = base.Amount;
+		damage = Hook.ModifyDamage(base.Owner.CombatState.RunState, base.Owner.CombatState, base.Owner, null, damage, ValueProp.Unblockable | ValueProp.Unpowered, null, ModifyDamageHookType.All, CardPreviewMode.None, out IEnumerable<AbstractModel> _);
+		return (int)damage;
+	}
+	public override IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)
+    {
+        yield return new HealthBarForecastSegment(
+            amount: this.CalculateTotalDamageNextTurn(),
+            color: new Color("#65cbf3"),
+            direction: HealthBarForecastDirection.FromRight
+			//order: 0,
+			//overlayMaterial: PreloadManager.Cache.GetMaterial("res://StsModBloodywolf/materials/cup_loss_bar_overlay.tres")
+        );
+    }
 }

@@ -17,7 +17,7 @@ public sealed class NoStreamTonight : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new CloutLossVar(1m),
-        new EnergyVar(1)
+        new EnergyVar(2)
     };
     protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 

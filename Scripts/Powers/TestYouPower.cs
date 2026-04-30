@@ -20,7 +20,7 @@ public sealed class TestYouPower : CustomPowerModel
 
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
 	{
-		if ( target == base.Owner && dealer != null && dealer.IsEnemy && !result.WasBlockBroken && props == ValueProp.Move)
+		if ( target == base.Owner && dealer != null && dealer.IsEnemy && !(result.UnblockedDamage > 0) && (target.Block > 0 || result.WasBlockBroken) && props == ValueProp.Move)
 		{
 			Flash();
 			await PowerCmd.Apply<CupLossPower>(dealer, base.Amount, base.Owner, null);

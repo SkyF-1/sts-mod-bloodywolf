@@ -6,9 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
@@ -24,7 +21,7 @@ public sealed class TestYou : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new BlockVar(8m, ValueProp.Move),
-        new PowerVar<CupLossPower>(6m)
+        new PowerVar<CupLossPower>(2m)
     };
 
 	public TestYou()
@@ -40,6 +37,6 @@ public sealed class TestYou : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Block.UpgradeValueBy(3m);
+		base.DynamicVars[CupLossPower.Key].UpgradeValueBy(1m);
 	}
 }

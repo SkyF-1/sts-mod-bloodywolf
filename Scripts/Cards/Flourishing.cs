@@ -17,19 +17,21 @@ public sealed class Flourishing : CustomCardModel
 {
     /// 风生水起
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
     public Flourishing()
         : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
     }
-
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
+	{
+		new CardsVar(1),
+	};
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<FlourishingPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<FlourishingPower>(base.Owner.Creature, base.DynamicVars.Cards.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.RemoveKeyword(CardKeyword.Exhaust);
+        base.DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

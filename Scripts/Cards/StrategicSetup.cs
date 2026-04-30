@@ -23,7 +23,7 @@ public sealed class StrategicSetup : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new RateVar(1m)
+        new RateVar(2m)
     };
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -42,14 +42,14 @@ public sealed class StrategicSetup : CustomCardModel
             base.Owner.Creature,
             this);
 
-        // 创建0费复制并放入抽牌堆顶
         CardModel clone = CreateClone();
         clone.EnergyCost.SetThisCombat(0);
-        var cardPosition = base.IsUpgraded ? CardPilePosition.Top : CardPilePosition.Random;
+        var cardPosition = CardPilePosition.Random;
         await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, addedByPlayer: true, position: cardPosition);
     }
 
     protected override void OnUpgrade()
     {
+        base.DynamicVars[RateVar.Key].UpgradeValueBy(1m);
     }
 }

@@ -52,6 +52,5 @@ public sealed class ConclusionFirst : CustomCardModel
 	protected override void OnUpgrade()
     {
         base.DynamicVars.Cards.UpgradeValueBy(1);
-        base.DynamicVars[RateVar.Key].UpgradeValueBy(1m);
     }
 }

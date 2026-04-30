@@ -59,6 +59,6 @@ public sealed class Tally : CustomCardModel
 	}
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(1m);
+        base.DynamicVars.Repeat.UpgradeValueBy(1m);
     }
 }

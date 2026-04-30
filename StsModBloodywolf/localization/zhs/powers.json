@@ -57,7 +57,10 @@
     "STSMODBLOODYWOLF-FLOURISHING_POWER.description": "回合结束前，你每[gold]评定[/gold]一次，抽[blue]1[/blue]张牌。",
     "STSMODBLOODYWOLF-FLOURISHING_POWER.smartDescription": "回合结束前，你每[gold]评定[/gold]一次，抽[blue]{Amount}[/blue]张牌。",
     "STSMODBLOODYWOLF-FLOURISHING_POWER.title": "风生水起",
-    "STSMODBLOODYWOLF-TEST_YOU_POWER.description": "如果敌人下一回合的攻击未能突破你的格挡，给予[blue]4[/blue]层[gold]杯级丧失[/gold]。",
-    "STSMODBLOODYWOLF-TEST_YOU_POWER.smartDescription": "如果敌人下一回合的攻击未能突破你的格挡，给予[blue]{Amount}[/blue]层[gold]杯级丧失[/gold]。",
-    "STSMODBLOODYWOLF-TEST_YOU_POWER.title": "考考你呀"
+    "STSMODBLOODYWOLF-TEST_YOU_POWER.description": "此次每格挡住一次敌人的攻击，就给予[blue]2[/blue]层[gold]杯级丧失[/gold]。",
+    "STSMODBLOODYWOLF-TEST_YOU_POWER.smartDescription": "此次每格挡住一次敌人的攻击，就给予[blue]{Amount}[/blue]层[gold]杯级丧失[/gold]。",
+    "STSMODBLOODYWOLF-TEST_YOU_POWER.title": "考考你呀",
+    "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.description": "你的下个回合开始时，[gold]评定[gold]。",
+    "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.smartDescription": "你的下个回合开始时，[gold]评定[gold][blue]{Amount}[/blue]。",
+    "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.title": "下回合影响"
 }

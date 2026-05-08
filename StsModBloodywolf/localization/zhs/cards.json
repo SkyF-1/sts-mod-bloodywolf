@@ -139,7 +139,7 @@
     "STSMODBLOODYWOLF-END_OF_TUNNEL.title": "苦尽甘来",
     "STSMODBLOODYWOLF-END_OF_TUNNEL.description": "在本回合中，你每使用过一个{energyPrefix:energyIcons(1)}，就获得{energyPrefix:energyIcons(1)}并造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-FAKE_ACCOUNT.title": "假账",
-    "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n下回合内，你最先抽到的{FakeAccountPower:diff()}张攻击牌会对随机敌人自动打出。",
+    "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。\n对随机敌人打出抽到的攻击牌，然后丢弃剩余的牌。",
     "STSMODBLOODYWOLF-CHAT.title": "杂谈",
     "STSMODBLOODYWOLF-CHAT.description": "每有一名[gold]杯级丧失[/gold]的敌人，获得{Energy:energyIcons()}，抽{Cards:diff()}张牌，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
     "STSMODBLOODYWOLF-GENTLE_GUIDANCE.title": "善意引导",
@@ -159,5 +159,7 @@
     "STSMODBLOODYWOLF-TEST_YOU.title": "考考你呀",
     "STSMODBLOODYWOLF-TEST_YOU.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n此次每格挡住一次敌人的攻击，就给予{CupLossPower:diff()}层\n[gold]杯级丧失[/gold]。",
     "STSMODBLOODYWOLF-EGG_COLLECTION.title": "彩蛋征集",
-    "STSMODBLOODYWOLF-EGG_COLLECTION.description": "[gold]评定[/gold]{Bloodywolf-Rate:diff()}。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n在下个回合[gold]评定[/gold]{bonusRate:diff()}。"
+    "STSMODBLOODYWOLF-EGG_COLLECTION.description": "[gold]评定[/gold]{Bloodywolf-Rate:diff()}。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n在下个回合[gold]评定[/gold]{bonusRate:diff()}。",
+    "STSMODBLOODYWOLF-RECKONING.title": "秋后算账",
+    "STSMODBLOODYWOLF-RECKONING.description": "造成你[gold]弃牌堆[/gold]中剩余牌数的伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]，将这张牌洗入你的[gold]抽牌堆[/gold]。\n{InCombat:（造成{CalculatedDamage:diff()}点伤害）|}"
 }

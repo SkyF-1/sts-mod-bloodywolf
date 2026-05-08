@@ -18,7 +18,7 @@ public sealed class WellMade : CustomCardModel
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
     new BlockVar(10m, ValueProp.Move),
-    new HotTakeVar(5m),
+    new HotTakeVar(3m),
     new CardsVar(1)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

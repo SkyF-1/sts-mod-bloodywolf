@@ -19,7 +19,7 @@ public sealed class CloutImpact : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(9m, ValueProp.Move),
-        new HotTakeVar(5m),
+        new HotTakeVar(3m),
         new DamageVar("BonusDamage", 5m, ValueProp.Move)
     };
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;

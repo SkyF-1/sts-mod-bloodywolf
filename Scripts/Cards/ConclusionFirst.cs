@@ -19,7 +19,7 @@ public sealed class ConclusionFirst : CustomCardModel
     { 
         new RateVar(2m),
         new CardsVar(1),
-        new PowerVar<CupLossPower>(1m)
+        new PowerVar<CupLossPower>(3m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>

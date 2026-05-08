@@ -15,11 +15,11 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Verdict : CustomCardModel
 {/// 定论
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(17m, ValueProp.Move) };
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(32m, ValueProp.Move) };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Verdict()
-		: base(4, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+		: base(7, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
 
@@ -41,7 +41,7 @@ public sealed class Verdict : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(4m);
+		base.DynamicVars.Damage.UpgradeValueBy(10m);
 	}
 
 }

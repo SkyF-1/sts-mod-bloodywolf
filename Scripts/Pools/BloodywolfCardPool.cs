@@ -8,7 +8,11 @@ public class BloodywolfCardPool : CustomCardPoolModel
     public override string Title => "BloodywolfCardPool";
 
     // 卡池的能量图标。暂时不支持加载，建议暂时使用原版，或者通过更改CardModel的EnergyIcon修改。
-    public override string EnergyColorName => "colorless";
+    // public override string EnergyColorName => "colorless";
+    // 描述中使用的能量图标。大小为24x24。
+    public override string? TextEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf.png";
+    // tooltip和卡牌左上角的能量图标。大小为74x74。
+    public override string? BigEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf_big.png";
 
     // 卡池的主题色。
     public override Color DeckEntryCardColor => new("#1f97a7");

@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class WeAreBuddies : CustomCardModel
 {// 都是恩人
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(6m, ValueProp.Unpowered)
+        new BlockVar(4m, ValueProp.Unpowered)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -22,7 +22,7 @@ public sealed class WeAreBuddies : CustomCardModel
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
-
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
 		await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
@@ -31,6 +31,6 @@ public sealed class WeAreBuddies : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Block.UpgradeValueBy(-2m);
+		RemoveKeyword(CardKeyword.Exhaust);
 	}
 }

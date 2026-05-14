@@ -36,13 +36,13 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 商店人物动画。
     public override string CustomMerchantAnimPath => "res://StsModBloodywolf/scenes/bloodywolf_merchant.tscn";
     // 多人模式-手指。
-    // public override string CustomArmPointingTexturePath => null;
+    public override string CustomArmPointingTexturePath => "res://StsModBloodywolf/scenes/bloodywolf_arm_pointing.png";
     // 多人模式剪刀石头布-石头。
-    // public override string CustomArmRockTexturePath => null;
+    public override string CustomArmRockTexturePath => "res://StsModBloodywolf/scenes/bloodywolf_arm_rock.png";
     // 多人模式剪刀石头布-布。
-    // public override string CustomArmPaperTexturePath => null;
+    public override string CustomArmPaperTexturePath => "res://StsModBloodywolf/scenes/bloodywolf_arm_paper.png";
     // 多人模式剪刀石头布-剪刀。
-    // public override string CustomArmScissorsTexturePath => null;
+    public override string CustomArmScissorsTexturePath => "res://StsModBloodywolf/scenes/bloodywolf_arm_scissors.png";
 
     // 人物选择背景。
     public override string CustomCharacterSelectBg => "res://StsModBloodywolf/scenes/bloodywolf_bg.tscn";

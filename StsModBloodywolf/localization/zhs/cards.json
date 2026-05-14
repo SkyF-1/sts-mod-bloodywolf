@@ -161,5 +161,7 @@
     "STSMODBLOODYWOLF-EGG_COLLECTION.title": "彩蛋征集",
     "STSMODBLOODYWOLF-EGG_COLLECTION.description": "[gold]评定[/gold]{Bloodywolf-Rate:diff()}。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n在下个回合[gold]评定[/gold]{bonusRate:diff()}。",
     "STSMODBLOODYWOLF-RECKONING.title": "秋后算账",
-    "STSMODBLOODYWOLF-RECKONING.description": "造成你[gold]弃牌堆[/gold]中剩余牌数的伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]，将这张牌洗入你的[gold]抽牌堆[/gold]。\n{InCombat:（造成{CalculatedDamage:diff()}点伤害）|}"
+    "STSMODBLOODYWOLF-RECKONING.description": "造成你[gold]弃牌堆[/gold]中剩余牌数的伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]，将这张牌洗入你的[gold]抽牌堆[/gold]。\n{InCombat:（造成{CalculatedDamage:diff()}点伤害）|}",
+    "STSMODBLOODYWOLF-BOOMERANG.title": "回旋镖",
+    "STSMODBLOODYWOLF-BOOMERANG.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n敌人获得额外{enemyAttack:inverseDiff()}点[gold]攻势[/gold]。"
 }

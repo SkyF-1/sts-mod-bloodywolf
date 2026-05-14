@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class SentimentStorm : CustomCardModel
 {/// 舆论风暴
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(1m) };
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {

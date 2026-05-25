@@ -62,5 +62,8 @@
     "STSMODBLOODYWOLF-TEST_YOU_POWER.title": "考考你呀",
     "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.description": "你的下个回合开始时，[gold]评定[gold]。",
     "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.smartDescription": "你的下个回合开始时，[gold]评定[gold][blue]{Amount}[/blue]。",
-    "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.title": "下回合影响"
+    "STSMODBLOODYWOLF-CLOUT_NEXT_TURN_POWER.title": "下回合影响",
+    "STSMODBLOODYWOLF-PRESTIGE_POWER.description": "你每[gold]评定[/gold]一次，就对随机一名敌人造成[blue]4[/blue]点伤害。",
+    "STSMODBLOODYWOLF-PRESTIGE_POWER.smartDescription": "你每[gold]评定[/gold]一次，就对随机一名敌人造成[blue]{Amount}[/blue]点伤害。",
+    "STSMODBLOODYWOLF-PRESTIGE_POWER.title": "威名"
 }

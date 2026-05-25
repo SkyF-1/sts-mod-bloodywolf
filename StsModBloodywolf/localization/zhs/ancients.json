@@ -35,7 +35,7 @@
 "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.1-0r.ancient": "[thinky_dots]你最近在塔里弄得很热闹啊……\n带上我的一部分吧，这会让你更轻松的。[/thinky_dots]",
   "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-0.ancient": "[thinky_dots]你又来了，挑战者。\n[red]父亲[/red]状态怎么样？[/thinky_dots]",
   "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-0.next": "回应",
-  "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1.char": "很坚实。感觉血量挺高的。",
+  "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1.char": "很坚实。感觉血量挺高的。\n但是他总是不亮血条。",
   "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1.next": "继续",
   "PAEL.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-2.ancient": "[thinky_dots]真有意思……[/thinky_dots]",
 
@@ -77,7 +77,7 @@
 
   "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-0r.ancient": "一直打，同接没涨了吧。",
   "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-0r.next": "继续",
-  "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1r.char": "没有啊，我不是为了同接才打的。",
+  "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1r.char": "（尴尬地笑）",
   "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-1r.next": "继续",
   "THE_ARCHITECT.talk.STSMODBLOODYWOLF-BLOODYWOLF.2-2r.ancient": "那就来吧。"
 }

@@ -72,8 +72,7 @@ public sealed class Boomerang : CustomCardModel
                 foreach (var player in targets)
                 {
                     await DamageCmd.Attack(6)
-                        .FromCard(this)
-                        .Targeting(player)
+                        .FromMonster(monsterModel)
                         .WithHitFx("vfx/vfx_attack_slash")
                         .Execute(choiceContext);
                 }

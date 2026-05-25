@@ -137,7 +137,7 @@
     "STSMODBLOODYWOLF-BOOST_BARRAGE.title": "鼓吹轰击",
     "STSMODBLOODYWOLF-BOOST_BARRAGE.description": "造成{Damage:diff()}点伤害X次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n将X的数值翻倍。",
     "STSMODBLOODYWOLF-END_OF_TUNNEL.title": "苦尽甘来",
-    "STSMODBLOODYWOLF-END_OF_TUNNEL.description": "在本回合中，你每使用过一个{energyPrefix:energyIcons(1)}，就获得{energyPrefix:energyIcons(1)}并造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-END_OF_TUNNEL.description": "每经过一个回合，就造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
     "STSMODBLOODYWOLF-FAKE_ACCOUNT.title": "假账",
     "STSMODBLOODYWOLF-FAKE_ACCOUNT.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。\n对随机敌人打出抽到的攻击牌，然后丢弃剩余的牌。",
     "STSMODBLOODYWOLF-CHAT.title": "杂谈",
@@ -163,5 +163,12 @@
     "STSMODBLOODYWOLF-RECKONING.title": "秋后算账",
     "STSMODBLOODYWOLF-RECKONING.description": "造成你[gold]弃牌堆[/gold]中剩余牌数的伤害。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n失去{Bloodywolf-CloutLoss:inverseDiff()}[gold]影响[/gold]，将这张牌洗入你的[gold]抽牌堆[/gold]。\n{InCombat:（造成{CalculatedDamage:diff()}点伤害）|}",
     "STSMODBLOODYWOLF-BOOMERANG.title": "回旋镖",
-    "STSMODBLOODYWOLF-BOOMERANG.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n敌人获得额外{enemyAttack:inverseDiff()}点[gold]攻势[/gold]。"
+    "STSMODBLOODYWOLF-BOOMERANG.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n敌人获得额外{enemyAttack:inverseDiff()}点[gold]攻势[/gold]。",
+    "STSMODBLOODYWOLF-PRESTIGE.title": "威名",
+    "STSMODBLOODYWOLF-PRESTIGE.description": "你每[gold]评定[/gold]一次，就对随机一名敌人造成{PrestigePower:diff()}点伤害。",
+    "STSMODBLOODYWOLF-HEM_AND_HAW.title": "支支吾吾",
+    "STSMODBLOODYWOLF-HEM_AND_HAW.description": "将{Cards:diff()}张随机{IfUpgraded:show:[gold]升级过[/gold]的}0{energyPrefix:energyIcons(1)}的牌加入你的[gold]手牌[/gold]。",
+    "STSMODBLOODYWOLF-BODYGUARD.title": "护至身前",
+    "STSMODBLOODYWOLF-BODYGUARD.description": "失去{Bloodywolf-CloutLoss:diff()}[gold]影响[/gold]：\n将这张牌洗入[gold]抽牌堆[/gold]，并将你[gold]抽牌堆[/gold]中的一张牌放入手牌。",
+    "STSMODBLOODYWOLF-BODYGUARD.selectionScreenPrompt": "选择一张牌。"
 }

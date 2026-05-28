@@ -18,7 +18,7 @@ public sealed class Veto : CustomCardModel
     /// 不通过
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<CupLossPower>(3m),
+        new PowerVar<CupLossPower>(4m),
         new CardsVar(1)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>

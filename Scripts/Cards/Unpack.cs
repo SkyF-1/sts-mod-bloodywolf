@@ -23,11 +23,11 @@ public sealed class Unpack : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new BlockVar(7m, ValueProp.Move),
-        new DynamicVar("Data", 2m)
+        new DynamicVar("Data", 3m)
     };
 
 	public Unpack()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

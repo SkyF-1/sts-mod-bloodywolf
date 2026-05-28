@@ -18,8 +18,7 @@ public sealed class LoveAndHate : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(10m, ValueProp.Move),
-        new BlockVar(6m, ValueProp.Unpowered)
+        new BlockVar(7m, ValueProp.Unpowered)
 	};
 
 	public LoveAndHate()
@@ -30,21 +29,12 @@ public sealed class LoveAndHate : CustomCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
-			.Execute(choiceContext);
-		ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
-        foreach(Creature enemy in base.CombatState.HittableEnemies)
-        {
-            if(enemy != cardPlay.Target)
-            {
-                await CreatureCmd.GainBlock(enemy, base.DynamicVars.Block, cardPlay);
-            }
-        }
+        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+		await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Block.BaseValue, ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.Move, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-        base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars.Block.UpgradeValueBy(2m);
 	}
 }

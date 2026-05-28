@@ -20,7 +20,7 @@ public sealed class EndOfTunnel : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(9m, ValueProp.Move),
+		new DamageVar(12m, ValueProp.Move),
 		new CalculationBaseVar(0m),
 		new CalculationExtraVar(1m),
 		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel c, Creature? __) => c.Owner.Creature.CombatState.RoundNumber)
@@ -29,7 +29,7 @@ public sealed class EndOfTunnel : CustomCardModel
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
 
 	public EndOfTunnel()
-		: base(4, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+		: base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
 
@@ -45,6 +45,6 @@ public sealed class EndOfTunnel : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(4m);
+		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }

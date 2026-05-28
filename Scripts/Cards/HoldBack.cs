@@ -15,7 +15,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class HoldBack : CustomCardModel
 {/// 藏一手
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
+    // public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{ HoverTipFactory.FromKeyword(CardKeyword.Retain) };
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>

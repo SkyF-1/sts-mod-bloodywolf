@@ -28,7 +28,7 @@ public sealed class BackStomp : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
     public BackStomp()
-        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 

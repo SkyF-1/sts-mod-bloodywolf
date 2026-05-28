@@ -16,7 +16,7 @@ public sealed class GoodKarmaPower : CustomPowerModel
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {
-        if (creature != base.Owner && cardSource?.Owner.Creature == base.Owner)
+        if (creature != base.Owner && cardSource?.Owner.Creature == base.Owner && !(amount <= 0m))
         {
             Flash();
 			await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), base.CombatState.HittableEnemies, base.Amount, ValueProp.Unpowered | ValueProp.SkipHurtAnim, base.Owner, null);

@@ -15,10 +15,8 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class DoOrDie : CustomCardModel
 {
     /// 背水一战
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
-
     public DoOrDie()
-        : base(3, CardType.Skill, CardRarity.Ancient, TargetType.Self)
+        : base(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {
     }
 

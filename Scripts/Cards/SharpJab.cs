@@ -19,7 +19,7 @@ public sealed class SharpJab : CustomCardModel
         HoverTipFactory.FromPower<CupLossPower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6, ValueProp.Move),
+        new DamageVar(7, ValueProp.Move),
         new PowerVar<CupLossPower>(3m)
     ];
 	public SharpJab()
@@ -38,6 +38,7 @@ public sealed class SharpJab : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(3m);
+		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars["CupLossPower"].UpgradeValueBy(1m);
 	}
 }

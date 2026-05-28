@@ -15,7 +15,7 @@ public sealed class Reciprocity : CustomCardModel
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Reciprocity()
-		: base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+		: base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 

@@ -24,8 +24,8 @@ public sealed class Sing : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new HotTakeVar(7m),
-        new CloutLossVar(3m)
+        new HotTakeVar(8m),
+        new CloutLossVar(2m)
     };
 
 	public Sing()

@@ -44,27 +44,25 @@ public sealed class Boomerang : CustomCardModel
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         // 言论条件
-        if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
+        if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             Creature targetCreature = cardPlay.Target;
-            MonsterModel monsterModel = targetCreature.Monster;
-            if (monsterModel == null) return;
-            
-            MoveState originalMove = monsterModel.NextMove;
+            MonsterModel monster = targetCreature.Monster;
+            if (monster == null) return;
+
+            MoveState originalMove = monster.NextMove;
             if (originalMove == null) return;
 
-            // 1. 修改意图列表（通过反射设置 Intents 的支持字段）
-            var intentsField = typeof(MoveState).GetField("<Intents>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (intentsField == null) throw new Exception("Cannot find Intents backing field");
-            var oldIntents = (IReadOnlyList<AbstractIntent>)intentsField.GetValue(originalMove);
-            var newIntents = new List<AbstractIntent>(oldIntents) { new SingleAttackIntent(6) }.AsReadOnly();
-            intentsField.SetValue(originalMove, newIntents);
+            // 1. 获取原状态的意图列表并复制一份
+            var oldIntents = originalMove.Intents;
+            var newIntents = new List<AbstractIntent>(oldIntents) { new SingleAttackIntent(6) };
 
-            // 2. 修改执行委托（组合原委托）
+            // 2. 获取原状态的执行委托
             var performField = typeof(MoveState).GetField("_onPerform", BindingFlags.NonPublic | BindingFlags.Instance);
             if (performField == null) throw new Exception("Cannot find _onPerform field");
             var originalPerform = (Func<IReadOnlyList<Creature>, Task>)performField.GetValue(originalMove);
-            
+
+            // 3. 组合新委托：原动作 + 额外伤害
             async Task CombinedPerform(IReadOnlyList<Creature> targets)
             {
                 await originalPerform(targets);
@@ -72,20 +70,26 @@ public sealed class Boomerang : CustomCardModel
                 foreach (var player in targets)
                 {
                     await DamageCmd.Attack(6)
-                        .FromMonster(monsterModel)
+                        .FromMonster(monster)
                         .WithHitFx("vfx/vfx_attack_slash")
                         .Execute(choiceContext);
                 }
             }
-            performField.SetValue(originalMove, (Func<IReadOnlyList<Creature>, Task>)CombinedPerform);
 
-            // 3. 刷新 UI 显示
+            // 创建临时状态，使用对象初始化器设置 FollowUpStateId
+            string tempStateId = originalMove.StateId + "_BOOSTED";
+            var tempMove = new MoveState(tempStateId, CombinedPerform, newIntents.ToArray())
+            {
+                FollowUpStateId = originalMove.FollowUpStateId ?? originalMove.FollowUpState?.Id,
+                MustPerformOnceBeforeTransitioning = originalMove.MustPerformOnceBeforeTransitioning
+            };
+            // 5. 强制替换当前状态
+            monster.SetMoveImmediate(tempMove, forceTransition: true);
+
+            // 6. 刷新UI
             var creatureNode = NCombatRoom.Instance?.GetCreatureNode(targetCreature);
             if (creatureNode != null)
                 await creatureNode.RefreshIntents();
-
-            // 可选：防止重复添加（记录已修改的怪物）
-            // _boostedMonsters.Add(targetCreature);
         }
     }
 

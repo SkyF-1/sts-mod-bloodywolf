@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class EggCollection : CustomCardModel
 {
-    /// 号召
+    /// 彩蛋征集
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -23,13 +23,13 @@ public sealed class EggCollection : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new RateVar(2m),
-        new HotTakeVar(5m),
+        new HotTakeVar(3m),
         new RateVar("bonusRate", 3m)
     };
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount + base.DynamicVars[RateVar.Key].BaseValue >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
     public EggCollection()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
     }
 

@@ -13,6 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class TestServer : CustomCardModel
 {/// 测试服
+	protected override bool HasEnergyCostX => true;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -31,7 +32,7 @@ public sealed class TestServer : CustomCardModel
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DataPower>(base.Owner.Creature, base.DynamicVars["Data"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DataPower>(base.Owner.Creature, base.DynamicVars["Data"].BaseValue * ResolveEnergyXValue(), base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

@@ -22,6 +22,6 @@ public class MartialSoul : CustomRelicModel
     public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await PowerCmd.Apply<CloutPower>(base.Owner.Creature, 5m, base.Owner.Creature, null);
+		await PowerCmd.Apply<CloutPower>(base.Owner.Creature, 7m, base.Owner.Creature, null);
 	}
 }

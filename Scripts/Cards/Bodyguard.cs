@@ -47,7 +47,7 @@ public sealed class Bodyguard : CustomCardModel
             await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Random);
         }
         if(cardModel != null)
-        await CardPileCmd.Add(cardModel, PileType.Hand);
+        await CardCmd.AutoPlay(choiceContext, cardModel, null);
     }
 
 	protected override void OnUpgrade()

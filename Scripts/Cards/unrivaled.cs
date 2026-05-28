@@ -13,19 +13,20 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Unrivaled : CustomCardModel
 {/// 独步天下
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-	new CardsVar(2)
+	new CardsVar(3),
+	new PowerVar<UnrivaledPower>(2m)
 	];
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Unrivaled()
-		: base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+		: base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-		await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, 2m, base.Owner.Creature, this);
+		await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, base.DynamicVars["UnrivaledPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

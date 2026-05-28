@@ -21,7 +21,7 @@ public sealed class TestYou : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new BlockVar(8m, ValueProp.Move),
-        new PowerVar<CupLossPower>(2m)
+        new PowerVar<CupLossPower>(3m)
     };
 
 	public TestYou()
@@ -37,6 +37,6 @@ public sealed class TestYou : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars[CupLossPower.Key].UpgradeValueBy(1m);
+		base.DynamicVars.Block.UpgradeValueBy(3m);
 	}
 }

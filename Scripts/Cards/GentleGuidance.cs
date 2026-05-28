@@ -15,44 +15,64 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class GentleGuidance : CustomCardModel
-{/// 善意引导
+{
+    private const string _increaseKey = "Increase";
+
+    private decimal _extraDamage;
+
+    private decimal ExtraDamage
+    {
+        get
+        {
+            return _extraDamage;
+        }
+        set
+        {
+            AssertMutable();
+            _extraDamage = value;
+        }
+    }
+
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
-	{
-		new DamageVar(10m, ValueProp.Move),
-		new CalculationBaseVar(1m),
-		new CalculationExtraVar(1m),
-		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => 
+    protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
+    {
+        new DamageVar(12m, ValueProp.Move),
+        new DynamicVar(_increaseKey, 6m)
+    };
+
+    public GentleGuidance()
+        : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    {
+    }
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_blunt")
+            .Execute(choiceContext);
+    }
+
+    public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
+    {
+        if (creature != base.Owner.Creature && cardSource?.Owner == base.Owner && !(amount <= 0m))
         {
-            if (card.CombatState == null) return 0m;
-            int blockCount = CombatManager.Instance.History.Entries
-                .OfType<BlockGainedEntry>()
-                .Count(e => e.HappenedThisTurn(card.CombatState)
-                && e.Receiver != card.Owner.Creature
-                && e.CardPlay?.Card.Owner == card.Owner);
-            return blockCount;
-        })
-	};
+            decimal baseValue = base.DynamicVars[_increaseKey].BaseValue;
+            base.DynamicVars.Damage.BaseValue += baseValue;
+            ExtraDamage += baseValue;
+        }
+    }
 
-	public GentleGuidance()
-		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
-	{
-	}
-
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{
-		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-			.WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target))
-			.FromCard(this)
-			.Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_blunt")
-			.Execute(choiceContext);
-	}
-
-	protected override void OnUpgrade()
-	{
+    protected override void OnUpgrade()
+    {
         base.DynamicVars.Damage.UpgradeValueBy(2m);
-	}
+        base.DynamicVars[_increaseKey].UpgradeValueBy(2m);
+    }
+
+    protected override void AfterDowngraded()
+    {
+        base.AfterDowngraded();
+        base.DynamicVars.Damage.BaseValue += ExtraDamage;
+    }
 }

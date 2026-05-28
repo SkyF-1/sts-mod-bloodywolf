@@ -26,7 +26,7 @@ public sealed class CrossCompare : CustomCardModel
         new PowerVar<CupLossPower>(7m)
     };
 	public CrossCompare()
-		: base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

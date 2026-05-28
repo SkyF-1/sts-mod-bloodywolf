@@ -18,19 +18,21 @@ public sealed class Stick : CustomCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new BlockVar(3m, ValueProp.Move),
+		new BlockVar(5m, ValueProp.Move),
 	};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Stick()
-		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
 
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
 		await PowerCmd.Apply<StickPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+		await PowerCmd.Apply<StickPower>(cardPlay.Target, 1m, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

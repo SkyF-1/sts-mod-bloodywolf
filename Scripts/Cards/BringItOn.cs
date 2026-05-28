@@ -14,6 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class BringItOn : CustomCardModel
 {/// 要打就来
+	public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {

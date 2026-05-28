@@ -64,6 +64,6 @@ public sealed class ZeroFrameDeploy : CustomCardModel
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        AddKeyword(CardKeyword.Innate);
     }
 }

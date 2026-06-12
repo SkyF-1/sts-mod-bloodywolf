@@ -13,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class GoodKarma : CustomCardModel
 {/// 善有善报
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<GoodKarmaPower>(7m)};
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<GoodKarmaPower>(1m)};
 	public GoodKarma()
 		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
@@ -26,6 +26,6 @@ public sealed class GoodKarma : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["GoodKarmaPower"].UpgradeValueBy(2m);
+		base.EnergyCost.UpgradeBy(-1);
 	}
 }

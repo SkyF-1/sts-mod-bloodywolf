@@ -19,7 +19,7 @@ public sealed class NewGodArrives : CustomCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(4m, ValueProp.Move),
-		new CalculationBaseVar(2m),
+		new CalculationBaseVar(1m),
 		new CalculationExtraVar(1m),
 		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount / 2 ?? 0)
     };

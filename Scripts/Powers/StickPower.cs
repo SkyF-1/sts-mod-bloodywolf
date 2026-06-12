@@ -34,14 +34,7 @@ public sealed class StickPower : CustomPowerModel
 			return Task.CompletedTask;
 		}
 		Flash();
+		PowerCmd.Remove(this);
 		return Task.CompletedTask;
-	}
-
-	public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
-	{
-		if (side == CombatSide.Player)
-		{
-			await PowerCmd.Remove(this);
-		}
 	}
 }

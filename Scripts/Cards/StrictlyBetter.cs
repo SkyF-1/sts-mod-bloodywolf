@@ -54,6 +54,6 @@ public sealed class StrictlyBetter : CustomCardModel
 	}
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(5m);
+        base.DynamicVars.Damage.UpgradeValueBy(6m);
     }
 }

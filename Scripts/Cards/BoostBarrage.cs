@@ -15,16 +15,16 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class BoostBarrage : CustomCardModel
-{
+{//鼓吹
 	protected override bool HasEnergyCostX => true;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(7m, ValueProp.Move),
-		new HotTakeVar(8m)
+		new CalculationBaseVar(2m),
+		new ExtraDamageVar(2m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0m)
 	};
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
 	public BoostBarrage()
 		: base(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
@@ -34,13 +34,7 @@ public sealed class BoostBarrage : CustomCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		int num = ResolveEnergyXValue();
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
-		{
-			num *= 2;
-		}
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(num).FromCard(this)
+		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).WithHitCount(ResolveEnergyXValue()).FromCard(this)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_giant_horizontal_slash", null, "slash_attack.mp3")
 			.Execute(choiceContext);
@@ -48,6 +42,6 @@ public sealed class BoostBarrage : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars.CalculationBase.UpgradeValueBy(3m);
 	}
 }

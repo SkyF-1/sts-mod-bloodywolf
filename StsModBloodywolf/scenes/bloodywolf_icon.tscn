@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://l58fexsipms"]
+
+[ext_resource type="Texture2D" uid="uid://dbpgvmvw51hic" path="res://StsModBloodywolf/icon.png" id="1_4ol0u"]
+
+[node name="BloodywolfIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(33, 27)
+scale = Vector2(0.21582033, 0.21582033)
+texture = ExtResource("1_4ol0u")

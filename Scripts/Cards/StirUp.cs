@@ -17,38 +17,36 @@ public sealed class StirUp : CustomCardModel
 {/// 带节奏
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(8m, ValueProp.Move),
-        new RepeatVar(2),
-        new HotTakeVar(3m),
-        new CloutLossVar(2m)
+        new DamageVar(21m, ValueProp.Move),
+        new CloutLossVar(3m),
+        new CardsVar(1)
     };
+    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
 	public StirUp()
 		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
-    protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue).FromCard(this)
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        //言论条件
-        if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
-        {
-            await PowerCmd.Apply<CloutPower>(
+        
+        await PowerCmd.Apply<CloutPower>(
             base.Owner.Creature, 
             -base.DynamicVars[CloutLossVar.Key].BaseValue,
             base.Owner.Creature, 
             null);
-        }
+
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars[HotTakeVar.Key].UpgradeValueBy(2m);
+		base.DynamicVars.Damage.UpgradeValueBy(6m);
 	}
 }

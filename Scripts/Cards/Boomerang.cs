@@ -23,9 +23,9 @@ public sealed class Boomerang : CustomCardModel
 {/// 回旋镖
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(6m, ValueProp.Move),
-        new RepeatVar(3),
-        new HotTakeVar(3m),
+        new DamageVar(3m, ValueProp.Move),
+        new RepeatVar(7),
+        // new HotTakeVar(3m),
         new DynamicVar("enemyAttack", 6m)
     };
 
@@ -33,7 +33,7 @@ public sealed class Boomerang : CustomCardModel
 		: base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
-    protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    // protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -43,8 +43,8 @@ public sealed class Boomerang : CustomCardModel
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        // 言论条件
-        if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
+        // 言论条件（现已弃用）
+        //if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             Creature targetCreature = cardPlay.Target;
             MonsterModel monster = targetCreature.Monster;
@@ -95,6 +95,6 @@ public sealed class Boomerang : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars.Repeat.UpgradeValueBy(2m);
 	}
 }

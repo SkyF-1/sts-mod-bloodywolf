@@ -19,7 +19,7 @@ public sealed class BackStomp : CustomCardModel
     /// 回踩
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(10m, ValueProp.Move),
+        new DamageVar(7m, ValueProp.Move),
         new HotTakeVar(3m),
         new CardsVar(1)
     };

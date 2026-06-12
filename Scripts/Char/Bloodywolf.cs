@@ -26,9 +26,9 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 卡牌拖尾路径。
     // public override string CustomTrailPath => "res://scenes/vfx/card_trail_bloodywolf.tscn";
     // 人物头像路径。
-    public override string CustomIconTexturePath => "res://icon.png";
+    public override string CustomIconTexturePath => "res://StsModBloodywolf/icon.png";
     // 人物头像2号。
-    // public override string CustomIconPath => "res://scenes/ui/character_icons/bloodywolf_icon.tscn";
+    public override string CustomIconPath => "res://StsModBloodywolf/scenes/bloodywolf_icon.tscn";
     // 能量表盘tscn路径。要自定义见下。
     public override string CustomEnergyCounterPath => "res://StsModBloodywolf/scenes/bloodywolf_energy_counter.tscn";
     // 篝火休息动画。

@@ -20,7 +20,7 @@ public sealed class TourDeForce : CustomCardModel
             HoverTipFactory.FromPower<CloutPower>()
         };
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
-	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(7m)];
+	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(8m)];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public TourDeForce()

@@ -29,8 +29,8 @@ public sealed class ExposurePotion : CustomPotionModel
     {
         new RateVar(5m)
     };
-	protected override async Task OnUse(PlayerChoiceContext _, Creature? __)
+	protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? __)
 	{
-        await PowerCmd.Apply<CloutPower>(base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, null);
 	}
 }

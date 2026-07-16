@@ -23,10 +23,10 @@ public sealed class TestYouPower : CustomPowerModel
 		if ( target == base.Owner && dealer != null && dealer.IsEnemy && !(result.UnblockedDamage > 0) && (target.Block > 0 || result.WasBlockBroken) && props == ValueProp.Move)
 		{
 			Flash();
-			await PowerCmd.Apply<CupLossPower>(dealer, base.Amount, base.Owner, null);
+			await PowerCmd.Apply<CupLossPower>(choiceContext, dealer, base.Amount, base.Owner, null);
 		}
 	}
-	public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == base.Owner.Side)
 		{

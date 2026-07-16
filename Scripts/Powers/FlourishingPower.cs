@@ -18,18 +18,13 @@ public sealed class FlourishingPower : CustomPowerModel
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
-	public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
-		if (!(amount <= 0m) && applier == base.Owner && power is CloutPower)
+		if (participants.Contains(base.Owner))
 		{
 			Flash();
-			await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), base.Amount, base.Owner.Player);
-		}
-	}
-	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
-	{
-		if (side == base.Owner.Side)
-		{
+			await PowerCmd.Apply<RateToDrawPower>(new ThrowingPlayerChoiceContext(), base.Owner, base.Amount, base.Owner, null);
+			await PowerCmd.Apply<RateToEnergyPower>(new ThrowingPlayerChoiceContext(), base.Owner, base.Amount, base.Owner, null);
 			await PowerCmd.Remove(this);
 		}
 	}

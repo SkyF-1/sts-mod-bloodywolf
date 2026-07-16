@@ -15,7 +15,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ShutUp : CustomCardModel
+public sealed class ShutUp : BloodywolfCardModel
 {
     /// 捂嘴
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -29,9 +29,9 @@ public sealed class ShutUp : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ShutUpPower>(base.Owner.Creature, base.DynamicVars[ShutUpPower.Key].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<ShutUpPower>(choiceContext, base.Owner.Creature, base.DynamicVars[ShutUpPower.Key].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

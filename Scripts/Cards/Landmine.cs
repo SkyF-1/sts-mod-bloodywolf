@@ -11,41 +11,46 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Landmine : CustomCardModel
-{/// 爆雷
+public sealed class Landmine : BloodywolfCardModel
+{/// 爆了！
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(42m, ValueProp.Move),
-        new DamageVar("SelfDamage", 21m, ValueProp.Unpowered)
+        new CalculationBaseVar(16m),
+		new ExtraDamageVar(4m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0m)
     };
 
 	public Landmine()
-		: base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+		: base(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
 		ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)
             .TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
-        var canonicalPower = ModelDb.Power<LandminePower>();          // 获取规范实例
-        var mutablePower = canonicalPower.ToMutable() as LandminePower; // 创建可变副本
-        if(mutablePower != null) 
-        {
-            mutablePower.SourceCard = this;
-            await PowerCmd.Apply(mutablePower, base.Owner.Creature, base.DynamicVars["SelfDamage"].BaseValue, base.Owner.Creature, this);
-        }
+        await PowerCmd.Remove(cloutPower);
+        // var canonicalPower = ModelDb.Power<LandminePower>();          // 获取规范实例
+        // var mutablePower = canonicalPower.ToMutable() as LandminePower; // 创建可变副本
+        // if(mutablePower != null) 
+        // {
+        //     mutablePower.SourceCard = this;
+        //     await PowerCmd.Apply(choiceContext, mutablePower, base.Owner.Creature, base.DynamicVars["SelfDamage"].BaseValue, base.Owner.Creature, this);
+        // }
     }
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(10m);
+		base.DynamicVars.CalculationBase.UpgradeValueBy(5m);
+		base.DynamicVars.ExtraDamage.UpgradeValueBy(1m);
 	}
 }

@@ -61,7 +61,7 @@ public class Bloodywolf : PlaceholderCharacterModel
     // 死亡音效
     // public override string CustomDeathSfx => null;
     // 角色选择音效
-    // public override string CharacterSelectSfx => null;
+    public override string CharacterSelectSfx => "res://StsModBloodywolf/audio/char/sfx.ogg";
     // 过渡音效。这个不能删。
     public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
 

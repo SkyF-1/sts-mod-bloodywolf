@@ -17,7 +17,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class WhipYou : CustomCardModel
+public sealed class WhipYou : BloodywolfCardModel
 {/// 鞭子抽你
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
@@ -33,7 +33,7 @@ public sealed class WhipYou : CustomCardModel
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NThinSliceVfx.Create(cardPlay.Target));
@@ -46,8 +46,8 @@ public sealed class WhipYou : CustomCardModel
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        //言论条件
-        if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
+        //言论条�?        
+		if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         }

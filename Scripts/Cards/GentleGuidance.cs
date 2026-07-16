@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class GentleGuidance : CustomCardModel
+public sealed class GentleGuidance : BloodywolfCardModel
 {
     private const string _increaseKey = "Increase";
 
@@ -46,7 +46,7 @@ public sealed class GentleGuidance : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)

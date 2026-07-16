@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Prestige : CustomCardModel
+public sealed class Prestige : BloodywolfCardModel
 {/// 威名
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new PowerVar<PrestigePower>(8m)
@@ -24,9 +24,9 @@ public sealed class Prestige : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<PrestigePower>(base.Owner.Creature, base.DynamicVars["PrestigePower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<PrestigePower>(choiceContext, base.Owner.Creature, base.DynamicVars["PrestigePower"].BaseValue, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

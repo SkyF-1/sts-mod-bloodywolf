@@ -11,7 +11,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class AxisOutput : CustomCardModel
+public sealed class AxisOutput : BloodywolfCardModel
 {
     /// 控轴输出
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -26,23 +26,20 @@ public sealed class AxisOutput : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取弃牌堆中费用为0的牌
         CardPile discardPile = PileType.Discard.GetPile(base.Owner);
         var zeroCostCards = discardPile.Cards.Where(card => card.EnergyCost.GetWithModifiers(CostModifiers.All) == 0 && !card.EnergyCost.CostsX).ToList();
 
         if (zeroCostCards.Count == 0)
         {
-            return; // 如果没有符合条件的牌，直接返回
+            return;      
         }
 
         foreach (CardModel card in zeroCostCards)
-        {
-            // 将牌洗入抽牌堆
+        {         
             await CardPileCmd.Add(card, PileType.Draw);
 
-            // 每洗入一张牌，造成伤害
             ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
             await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
                 .Targeting(cardPlay.Target)

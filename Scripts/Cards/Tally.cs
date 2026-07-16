@@ -15,7 +15,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Tally : CustomCardModel
+public sealed class Tally : BloodywolfCardModel
 {
     /// 清点计算
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -37,7 +37,7 @@ public sealed class Tally : CustomCardModel
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue)
@@ -50,7 +50,7 @@ public sealed class Tally : CustomCardModel
 	{
 		if ( cardSource == this && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Apply<CloutPower>(
+			await PowerCmd.Apply<CloutPower>(choiceContext, 
             base.Owner.Creature, 
             base.DynamicVars[RateVar.Key].BaseValue, 
             base.Owner.Creature, 

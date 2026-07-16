@@ -13,8 +13,8 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ColdShoulder : CustomCardModel
-{/// 冷处理
+public sealed class ColdShoulder : BloodywolfCardModel
+{/// 冷处�?
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -27,9 +27,9 @@ public sealed class ColdShoulder : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ColdShoulderPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<ColdShoulderPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

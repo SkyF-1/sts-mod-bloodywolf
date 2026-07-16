@@ -16,11 +16,11 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 
-public sealed class Redeploy : CustomCardModel
-{    /// 再部署
+public sealed class Redeploy : BloodywolfCardModel
+{    /// 再部�?	
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(4m, ValueProp.Move),
+        // new DamageVar(4m, ValueProp.Move),
         new CloutLossVar(2m)
     };
     
@@ -33,21 +33,25 @@ public sealed class Redeploy : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{		
 		// 失去1影响
 		decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+		var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
 		if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
 		{
-			await PowerCmd.Apply<CloutPower>(
+			await PowerCmd.Apply<CloutPower>(choiceContext, 
 				base.Owner.Creature,
 				-base.DynamicVars[CloutLossVar.Key].BaseValue,
 				base.Owner.Creature,
 				this);
 		}
+		else if (cloutPower != null)
+		{
+			await PowerCmd.Remove(cloutPower);
+		}
 		
-		
-		// 将弃牌堆的1张牌置于抽牌堆顶
+		// 将弃牌堆�?张牌置于抽牌堆顶
 		CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
 		CardPile pile = PileType.Discard.GetPile(base.Owner);
 		if (pile.Cards.Count > 0)
@@ -59,18 +63,15 @@ public sealed class Redeploy : CustomCardModel
 			}
 		}
 	}
-	
-
-	protected override PileType GetResultPileType()
+	protected override PileType GetResultPileTypeForCardPlay()
 	{
-		PileType resultPileType = base.GetResultPileType();
-		if (resultPileType != PileType.Discard)
+		PileType resultPileTypeForCardPlay = base.GetResultPileTypeForCardPlay();
+		if (resultPileTypeForCardPlay != PileType.Discard)
 		{
-			return resultPileType;
+			return resultPileTypeForCardPlay;
 		}
 		return PileType.Hand;
 	}
-
 
 	protected override void OnUpgrade()
 	{

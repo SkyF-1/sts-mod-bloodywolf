@@ -11,9 +11,8 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Stick : CustomCardModel
-{/// “黏住！”
-
+public sealed class Stick : BloodywolfCardModel
+{/// “黏住！�?
 	public override bool GainsBlock => true;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -27,12 +26,12 @@ public sealed class Stick : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		await PowerCmd.Apply<StickPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
-		await PowerCmd.Apply<StickPower>(cardPlay.Target, 1m, base.Owner.Creature, this);
+		await PowerCmd.Apply<StickPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
+		await PowerCmd.Apply<StickPower>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

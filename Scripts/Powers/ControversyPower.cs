@@ -32,7 +32,7 @@ public sealed class ControversyPower : CustomPowerModel
 			decimal CloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
 			if (CloutValue >= base.DynamicVars[CloutLossVar.Key].BaseValue)
 			{
-				await PowerCmd.Apply<CloutPower>(
+				await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), 
 				base.Owner, 
 				-base.DynamicVars[CloutLossVar.Key].BaseValue,
 				base.Owner, 

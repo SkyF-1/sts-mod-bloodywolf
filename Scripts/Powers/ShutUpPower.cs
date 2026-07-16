@@ -38,7 +38,7 @@ public sealed class ShutUpPower : CustomPowerModel
 		}
 		if(amount > 0)
 		{
-			PowerCmd.Apply<CloutPower>(base.Owner, -base.DynamicVars[CloutLossVar.Key].BaseValue, base.Owner, null);
+			PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, -base.DynamicVars[CloutLossVar.Key].BaseValue, base.Owner, null);
 			Flash();
 			PowerCmd.Decrement(this);
 			return 0m;

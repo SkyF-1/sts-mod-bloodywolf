@@ -12,13 +12,13 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ConclusionFirst : CustomCardModel
+public sealed class ConclusionFirst : BloodywolfCardModel
 {/// 先说结论
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Innate, CardKeyword.Exhaust};
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
     { 
         new RateVar(2m),
-        new CardsVar(1),
+        new CardsVar(2),
         new PowerVar<CupLossPower>(3m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -34,14 +34,14 @@ public sealed class ConclusionFirst : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(
+        await PowerCmd.Apply<CloutPower>(choiceContext, 
         base.Owner.Creature, 
         base.DynamicVars[RateVar.Key].BaseValue, 
         base.Owner.Creature, 
         this);
-        await PowerCmd.Apply<CupLossPower>(
+        await PowerCmd.Apply<CupLossPower>(choiceContext, 
         base.CombatState.HittableEnemies, 
         base.DynamicVars[CupLossPower.Key].BaseValue, 
         base.Owner.Creature, 

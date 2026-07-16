@@ -19,37 +19,40 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Infiltrate : CustomCardModel
-{/// 渗透
+public sealed class Infiltrate : BloodywolfCardModel
+{/// 渗�?
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
-        HoverTipFactory.FromPower<VulnerablePower>()
+        HoverTipFactory.FromPower<VulnerablePower>(),
+        HoverTipFactory.FromPower<WeakPower>()
     };
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
-        new DynamicVar("perBlock", 3m),
-        new PowerVar<VulnerablePower>(1m)
+        new DynamicVar("perBlock", 1m),
+        new PowerVar<VulnerablePower>(1m),
+        new PowerVar<WeakPower>(1m)
     };
 	public Infiltrate()
 		: base(0, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         int blockAmount = cardPlay.Target.Block;
         int Count = blockAmount / DynamicVars["perBlock"].IntValue;
         for(int i = 0; i < Count; i++)
         {
-            await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
+            await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
         }
     }
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["perBlock"].UpgradeValueBy(-1m);
+		base.AddKeyword(CardKeyword.Retain);
 	}
 }

@@ -13,8 +13,8 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class RetreatAll : CustomCardModel
-{/// 全撤了
+public sealed class RetreatAll : BloodywolfCardModel
+{/// 全撤�?
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(1m)];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -28,12 +28,12 @@ public sealed class RetreatAll : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
         IEnumerable<CardModel> cards = PileType.Hand.GetPile(base.Owner).Cards;
         decimal cardCount = cards.Count();
         await CardCmd.Discard(choiceContext, cards);
-        await PowerCmd.Apply<CloutPower>(base.Owner.Creature, cardCount, base.Owner.Creature, this);
+        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, cardCount, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

@@ -10,18 +10,18 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class GoodKarma : CustomCardModel
+public sealed class GoodKarma : BloodywolfCardModel
 {/// 善有善报
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<GoodKarmaPower>(1m)};
 	public GoodKarma()
-		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+		: base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<GoodKarmaPower>(base.Owner.Creature, base.DynamicVars["GoodKarmaPower"].BaseValue, base.Owner.Creature, this);
+		await PowerCmd.Apply<GoodKarmaPower>(choiceContext, base.Owner.Creature, base.DynamicVars["GoodKarmaPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

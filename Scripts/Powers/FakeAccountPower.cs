@@ -19,11 +19,11 @@ public sealed class FakeAccountPower : CustomPowerModel
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == base.Owner.Side)
 		{
-			await PowerCmd.Apply<RealAccountPower>(base.Owner, Amount, base.Owner, null);
+			await PowerCmd.Apply<RealAccountPower>(new BlockingPlayerChoiceContext(), base.Owner, Amount, base.Owner, null);
 			await PowerCmd.Remove(this);
 		}
 	}

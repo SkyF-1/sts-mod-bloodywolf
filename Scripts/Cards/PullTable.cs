@@ -13,7 +13,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class PullTable : CustomCardModel
+public sealed class PullTable : BloodywolfCardModel
 {
 	private const string _increaseKey = "Increase";
 
@@ -44,7 +44,7 @@ public sealed class PullTable : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
@@ -52,13 +52,13 @@ public sealed class PullTable : CustomCardModel
 			.Execute(choiceContext);
 	}
 
-	public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
 		{
 			decimal baseValue = base.DynamicVars["Increase"].BaseValue;
-		    base.DynamicVars.Damage.BaseValue += baseValue;
-		    ExtraDamage += baseValue;
+				base.DynamicVars.Damage.BaseValue += baseValue;
+				ExtraDamage += baseValue;
 		}
 	}
 

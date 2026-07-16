@@ -12,12 +12,12 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Discreet : CustomCardModel
+public sealed class Discreet : BloodywolfCardModel
 {// 谨言慎行
 	public override bool GainsBlock => true;
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-    new BlockVar("BaseBlock", 8m, ValueProp.Move),
+    new BlockVar("BaseBlock", 7m, ValueProp.Move),
     new HotTakeVar(3m),
     new BlockVar("BonusBlock", 4m, ValueProp.Move),
     ];
@@ -28,13 +28,13 @@ public sealed class Discreet : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        // 基础格挡值
+        // 基础格挡�?        
         decimal blockAmount = base.DynamicVars["BaseBlock"].BaseValue;
 
-        // 如果声望达到阈值（言论5），则加上额外格挡
+        // 如果声望达到阈值（言�?），则加上额外格�?        
         if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             blockAmount += base.DynamicVars["BonusBlock"].BaseValue;

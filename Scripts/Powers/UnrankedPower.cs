@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 
 namespace StsModBloodywolf.Scripts.Powers;
@@ -15,7 +16,7 @@ public sealed class UnrankedPower : CustomPowerModel
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-	public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == base.Owner.Side)
 		{
@@ -23,7 +24,7 @@ public sealed class UnrankedPower : CustomPowerModel
 			IEnumerable<Creature> enemies = combatState.HittableEnemies;
 			foreach(Creature enemy in enemies.Where(e => e.GetPowerAmount<CupLossPower>() > 0))
 			{
-				await PowerCmd.Apply<VulnerablePower>(enemy, Amount, enemy, null);
+				await PowerCmd.Apply<VulnerablePower>(new BlockingPlayerChoiceContext(), enemy, Amount, enemy, null);
 			}
 		}
 	}

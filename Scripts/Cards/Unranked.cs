@@ -15,7 +15,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Unranked : CustomCardModel
+public sealed class Unranked : BloodywolfCardModel
 {
     /// 榜上无名
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -25,16 +25,16 @@ public sealed class Unranked : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<VulnerablePower>(1m)
+        new PowerVar<VulnerablePower>(2m)
     };
     public Unranked()
         : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<UnrankedPower>(base.Owner.Creature, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<UnrankedPower>(choiceContext, base.Owner.Creature, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

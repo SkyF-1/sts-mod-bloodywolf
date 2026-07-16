@@ -11,7 +11,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class WeAreBuddies : CustomCardModel
+public sealed class WeAreBuddies : BloodywolfCardModel
 {// 都是恩人
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(4m, ValueProp.Unpowered)
@@ -23,10 +23,10 @@ public sealed class WeAreBuddies : CustomCardModel
 	{
 	}
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
 		await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<TemporaryFreeAttackPower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<TemporaryFreeAttackPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

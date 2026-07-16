@@ -10,9 +10,9 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class IGetYou : CustomCardModel
-{/// 懂你意思
-	public override bool GainsBlock => true;
+public sealed class IGetYou : BloodywolfCardModel
+{/// 懂你意�?	
+    public override bool GainsBlock => true;
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Retain, CardKeyword.Exhaust };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -25,7 +25,7 @@ public sealed class IGetYou : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{   
         BlockVar givenBlock = new BlockVar(base.DynamicVars.Block.BaseValue, ValueProp.Unpowered);
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");

@@ -10,7 +10,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class DefendWolf : CustomCardModel
+public sealed class DefendWolf : BloodywolfCardModel
 {/// 防御
 	public override bool GainsBlock => true;
 
@@ -24,7 +24,7 @@ public sealed class DefendWolf : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
 	}

@@ -11,7 +11,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ReputationReverse : CustomCardModel
+public sealed class ReputationReverse : BloodywolfCardModel
 {
     /// 风评反转
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -27,17 +27,22 @@ public sealed class ReputationReverse : CustomCardModel
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
         if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(
+            await PowerCmd.Apply<CloutPower>(choiceContext, 
                 base.Owner.Creature,
                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
                 base.Owner.Creature,
                 this);
             await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+        }
+        else if (cloutPower != null)
+        {
+            await PowerCmd.Remove(cloutPower);
         }
     }
 

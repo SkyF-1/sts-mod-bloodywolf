@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Rally : CustomCardModel
+public sealed class Rally : BloodywolfCardModel
 {
     /// 号召
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -34,9 +34,9 @@ public sealed class Rally : CustomCardModel
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
 
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)

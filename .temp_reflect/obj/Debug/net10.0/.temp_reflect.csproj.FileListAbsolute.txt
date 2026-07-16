@@ -1,0 +1,15 @@
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\bin\Debug\net10.0\.temp_reflect.exe
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\bin\Debug\net10.0\.temp_reflect.deps.json
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\bin\Debug\net10.0\.temp_reflect.runtimeconfig.json
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\bin\Debug\net10.0\.temp_reflect.dll
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\bin\Debug\net10.0\.temp_reflect.pdb
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.GeneratedMSBuildEditorConfig.editorconfig
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.AssemblyInfoInputs.cache
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.AssemblyInfo.cs
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.csproj.CoreCompileInputs.cache
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.sourcelink.json
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.dll
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\refint\.temp_reflect.dll
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.pdb
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\.temp_reflect.genruntimeconfig.cache
+D:\_Programme\sts-mod-bloodywolf\.temp_reflect\obj\Debug\net10.0\ref\.temp_reflect.dll

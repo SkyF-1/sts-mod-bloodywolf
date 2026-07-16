@@ -13,7 +13,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class HighAndMighty : CustomCardModel
+public sealed class HighAndMighty : BloodywolfCardModel
 {/// 高高在上
     //public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
@@ -27,7 +27,7 @@ public sealed class HighAndMighty : CustomCardModel
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         BlockVar givenBlock = new BlockVar(base.DynamicVars["givenBlock"].BaseValue, ValueProp.Unpowered);
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);

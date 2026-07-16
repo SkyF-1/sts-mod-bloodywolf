@@ -13,11 +13,11 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Bodyguard : CustomCardModel
+public sealed class Bodyguard : BloodywolfCardModel
 {/// 护至身前
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
     { 
-        new CloutLossVar(2m)
+        new CloutLossVar(3m)
     };
     protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
@@ -28,13 +28,22 @@ public sealed class Bodyguard : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(
+        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
+        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
+        {
+            await PowerCmd.Apply<CloutPower>(choiceContext,
                 base.Owner.Creature,
                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
                 base.Owner.Creature,
                 this);
+        }
+        else if (cloutPower != null)
+        {
+            await PowerCmd.Remove(cloutPower);
+        }
 
         CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
 		List<CardModel> cardsIn = (from c in PileType.Draw.GetPile(base.Owner).Cards

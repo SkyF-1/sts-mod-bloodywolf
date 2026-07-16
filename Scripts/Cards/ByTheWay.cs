@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ByTheWay : CustomCardModel
+public sealed class ByTheWay : BloodywolfCardModel
 {
     /// 顺手的事
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -31,7 +31,7 @@ public sealed class ByTheWay : CustomCardModel
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);

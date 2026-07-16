@@ -15,23 +15,23 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class HemAndHaw : CustomCardModel
+public sealed class HemAndHaw : BloodywolfCardModel
 {/// 支支吾吾
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{
-	new CardsVar(2),
-	new PowerVar<HemAndHawPower>(3m)
+	new CardsVar(3),
+	new PowerVar<HemAndHawPower>(5m)
 	};
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public HemAndHaw()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<HemAndHawPower>(base.Owner.Creature, base.DynamicVars["HemAndHawPower"].BaseValue, base.Owner.Creature, this);
+		await PowerCmd.Apply<HemAndHawPower>(choiceContext, base.Owner.Creature, base.DynamicVars["HemAndHawPower"].BaseValue, base.Owner.Creature, this);
 		IEnumerable<CardModel> forCombat = CardFactory.GetForCombat(base.Owner, base.Owner.Character.CardPool.GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint).Where(delegate(CardModel c)
 		{
 			CardEnergyCost energyCost = c.EnergyCost;
@@ -43,7 +43,7 @@ public sealed class HemAndHaw : CustomCardModel
 			// {
 			// 	CardCmd.Upgrade(item);
 			// }
-			await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, base.Owner);
 		}
 	}
 	protected override void OnUpgrade()

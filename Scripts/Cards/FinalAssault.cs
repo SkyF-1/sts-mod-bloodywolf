@@ -10,15 +10,14 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class FinalAssault : CustomCardModel
+public sealed class FinalAssault : BloodywolfCardModel
 {
-    /// 最终攻克
-    private const string _calculatedHitsKey = "CalculatedHits";
+    /// 最终攻�?    
+	private const string _calculatedHitsKey = "CalculatedHits";
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -34,10 +33,9 @@ public sealed class FinalAssault : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target)).FromCard(this)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")

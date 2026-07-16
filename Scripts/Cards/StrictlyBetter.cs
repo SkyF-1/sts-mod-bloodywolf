@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class StrictlyBetter : CustomCardModel
+public sealed class StrictlyBetter : BloodywolfCardModel
 {
     /// 上位替代
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -30,18 +30,18 @@ public sealed class StrictlyBetter : CustomCardModel
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-	{
-		if (power.Owner == base.Owner.Creature && power is CloutPower)
-		{
-			var clout = base.Owner.Creature.GetPower<CloutPower>()?.Amount;
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        if (power.Owner == base.Owner.Creature && power is CloutPower)
+        {
+            var clout = base.Owner.Creature.GetPower<CloutPower>()?.Amount;
             if(clout >= base.DynamicVars[HotTakeVar.Key].BaseValue)
             {
                 base.EnergyCost.SetThisCombat(0);
@@ -50,8 +50,8 @@ public sealed class StrictlyBetter : CustomCardModel
             {
                 base.EnergyCost.SetThisCombat(base.EnergyCost.Canonical);
             }
-		}
-	}
+        }
+    }
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(6m);

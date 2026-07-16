@@ -13,12 +13,12 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Veto : CustomCardModel
+public sealed class Veto : BloodywolfCardModel
 {
     /// 不通过
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<CupLossPower>(4m),
+        new PowerVar<CupLossPower>(5m),
         new CardsVar(1)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
@@ -32,10 +32,10 @@ public sealed class Veto : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await PowerCmd.Apply<CupLossPower>(cardPlay.Target, DynamicVars[CupLossPower.Key].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<CupLossPower>(choiceContext, cardPlay.Target, DynamicVars[CupLossPower.Key].BaseValue, base.Owner.Creature, this);
         CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, base.DynamicVars.Cards.IntValue);
         CardPile pile = PileType.Draw.GetPile(base.Owner);
         if (pile.Cards.Count == 0)

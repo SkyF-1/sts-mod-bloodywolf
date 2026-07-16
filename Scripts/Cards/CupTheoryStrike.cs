@@ -15,7 +15,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class CupTheoryStrike : CustomCardModel
+public sealed class CupTheoryStrike : BloodywolfCardModel
 {/// 杯论打击
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
@@ -24,7 +24,7 @@ public sealed class CupTheoryStrike : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(12m, ValueProp.Move),
+        new DamageVar(16m, ValueProp.Move),
         new PowerVar<CupLossPower>(5m)
     };
 
@@ -33,7 +33,7 @@ public sealed class CupTheoryStrike : CustomCardModel
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
@@ -46,7 +46,7 @@ public sealed class CupTheoryStrike : CustomCardModel
 	{
 		if ( cardSource == this && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Apply<CupLossPower>(
+			await PowerCmd.Apply<CupLossPower>(choiceContext, 
             target, 
             base.DynamicVars["CupLossPower"].BaseValue, 
             base.Owner.Creature, 
@@ -56,6 +56,6 @@ public sealed class CupTheoryStrike : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(4m);
+		base.DynamicVars.Damage.UpgradeValueBy(6m);
 	}
 }

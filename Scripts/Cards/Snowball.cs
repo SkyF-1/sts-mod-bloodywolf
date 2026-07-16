@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Snowball : CustomCardModel
+public sealed class Snowball : BloodywolfCardModel
 {/// 滑坡
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
@@ -35,12 +35,12 @@ public sealed class Snowball : CustomCardModel
     };
 
 	public Snowball()
-		: base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+		: base(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)

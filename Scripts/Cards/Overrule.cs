@@ -10,7 +10,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Overrule : CustomCardModel
+public sealed class Overrule : BloodywolfCardModel
 {/// 不容分说
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
@@ -23,9 +23,9 @@ public sealed class Overrule : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<OverrulePower>(base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<OverrulePower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class FakeNews : CustomCardModel
+public sealed class FakeNews : BloodywolfCardModel
 {
     /// 不要不要
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -29,12 +29,13 @@ public sealed class FakeNews : CustomCardModel
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
         if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(
+            await PowerCmd.Apply<CloutPower>(choiceContext, 
                 base.Owner.Creature,
                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
                 base.Owner.Creature,
@@ -44,6 +45,10 @@ public sealed class FakeNews : CustomCardModel
             {
                 await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
             }
+        }
+        else if (cloutPower != null)
+        {
+            await PowerCmd.Remove(cloutPower);
         }
     }
 

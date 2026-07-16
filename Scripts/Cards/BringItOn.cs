@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class BringItOn : CustomCardModel
+public sealed class BringItOn : BloodywolfCardModel
 {/// 要打就来
 	public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -31,14 +31,14 @@ public sealed class BringItOn : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         IEnumerable<Player> enumerable = base.CombatState.Players.Where((Player p) => p.Creature.IsAlive);
         foreach (Player item in enumerable)
 		{
-            await PowerCmd.Apply<StrengthPower>(item.Creature, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, item.Creature, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
 		}
-        await PowerCmd.Apply<StrengthPower>(base.CombatState.HittableEnemies, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Strength.BaseValue, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

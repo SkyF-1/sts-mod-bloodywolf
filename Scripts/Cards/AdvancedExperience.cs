@@ -10,7 +10,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class AdvancedExperience : CustomCardModel
+public sealed class AdvancedExperience : BloodywolfCardModel
 {/// 先进经验
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	private CardModel? _mockGeneratedCard;
@@ -19,7 +19,7 @@ public sealed class AdvancedExperience : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		CardModel cardModel;
 		if (_mockGeneratedCard == null)
@@ -53,7 +53,7 @@ public sealed class AdvancedExperience : CustomCardModel
 		if (cardModel != null)
 		{
 			cardModel.SetToFreeThisTurn();
-			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
 		}
 	}
 

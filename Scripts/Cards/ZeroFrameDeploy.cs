@@ -15,7 +15,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ZeroFrameDeploy : CustomCardModel
+public sealed class ZeroFrameDeploy : BloodywolfCardModel
 {
     /// 零帧部署
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
@@ -26,16 +26,16 @@ public sealed class ZeroFrameDeploy : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取抽牌堆
+        // 获取抽牌�?
         CardPile drawPile = PileType.Draw.GetPile(base.Owner);
-        // 筛选符合条件的0费牌（非X费用，且为攻击/技能/能力）
+        // 筛选符合条件的0费牌（非X费用，且为攻�?技�?能力�?
         var zeroCostCards = drawPile.Cards.Where(Filter).ToList();
         if (zeroCostCards.Count == 0)
             return;
 
-        // 计算手牌剩余空间（手牌上限10）
+        // 计算手牌剩余空间（手牌上�?0�?
         int handCount = CardPile.GetCards(base.Owner, PileType.Hand).Count();
         int space = 10 - handCount;
         if (space <= 0)
@@ -49,7 +49,7 @@ public sealed class ZeroFrameDeploy : CustomCardModel
         }
     }
 
-    // 筛选逻辑：0费、非X费用、且类型为攻击/技能/能力
+    // 筛选逻辑�?费、非X费用、且类型为攻�?技�?能力
     private bool Filter(CardModel card)
     {
         // 最终费用为0且不是X费用

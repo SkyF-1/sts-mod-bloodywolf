@@ -12,17 +12,17 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class DoOrDie : CustomCardModel
+public sealed class DoOrDie : BloodywolfCardModel
 {
-    /// 背水一战
+    /// 背水一�?    
     public DoOrDie()
-        : base(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
+        : base(2, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {
     }
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // Clear all Clout
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
@@ -50,6 +50,6 @@ public sealed class DoOrDie : CustomCardModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Retain);
     }
 }

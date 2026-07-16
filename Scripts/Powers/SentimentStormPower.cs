@@ -7,28 +7,39 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class SentimentStormPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
-
-	public override PowerStackType StackType => PowerStackType.Counter;
+	private bool _shouldIgnoreNextInstance;
+	public override PowerStackType StackType => PowerStackType.Single;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-	public override async Task BeforeCardPlayed(CardPlay cardPlay)
+	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		if (cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Skill)
+		if (cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Attack && !cardPlay.IsAutoPlay)
 		{
-			await PowerCmd.Apply<CloutPower>(base.Owner, Amount, base.Owner, null);
+			if(_shouldIgnoreNextInstance)
+			{
+				_shouldIgnoreNextInstance = false;
+				return;
+			}
+			Flash();
+			await CardPileCmd.AutoPlayFromDrawPile(choiceContext, base.Owner.Player, Amount, CardPilePosition.Top, forceExhaust: false);
 		}
 	}
-	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side == base.Owner.Side)
 		{
 			await PowerCmd.Remove(this);
 		}
+	}
+	public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
+	{
+		_shouldIgnoreNextInstance = true;
 	}
 }

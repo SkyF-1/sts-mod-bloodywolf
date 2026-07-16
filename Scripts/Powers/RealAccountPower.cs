@@ -35,7 +35,7 @@ public sealed class RealAccountPower : CustomPowerModel
 
 	public override async Task AfterCardDrawnEarly(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 	{
-		if (card.Owner.Creature == base.Owner && card.Type == CardType.Attack && !base.Owner.CombatState.HittableEnemies.All((Creature c) => c.ShowsInfiniteHp))
+		if (card.Owner.Creature == base.Owner && card.Type == CardType.Attack )
 		{
 			AutoplayingCards.Add(card);
 			await CardCmd.AutoPlay(choiceContext, card, null);
@@ -55,7 +55,7 @@ public sealed class RealAccountPower : CustomPowerModel
 		return Task.CompletedTask;
 	}
 
-	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side == base.Owner.Side)
 		{

@@ -19,7 +19,7 @@ public class LandminePower : CustomPowerModel
     public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (side == base.Owner.Side)
         {
@@ -30,7 +30,7 @@ public class LandminePower : CustomPowerModel
                 .Unpowered()
                 .Targeting(base.Owner)
                 .WithHitFx("vfx/vfx_attack_blunt")
-                .Execute(choiceContext);
+                .Execute(new BlockingPlayerChoiceContext());
             await PowerCmd.Remove(this);
         }
     }

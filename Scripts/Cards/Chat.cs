@@ -16,7 +16,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Chat : CustomCardModel
+public sealed class Chat : BloodywolfCardModel
 {/// 杂谈
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -26,18 +26,17 @@ public sealed class Chat : CustomCardModel
     };
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-        new EnergyVar(1),
-        new CardsVar(1),
-        new RateVar(1m),
-		new CalculationBaseVar(0m),
-		new CalculationExtraVar(1m),
-		new CalculatedVar("times").WithMultiplier((CardModel card, Creature? _) =>
-        {
-            if (card?.CombatState?.HittableEnemies == null) return 0m;
-            int count = card.CombatState.HittableEnemies
-                .Count(c => c.GetPowerAmount<CupLossPower>() > 0);
-            return count;
-        })
+        new BlockVar(7m, ValueProp.Move),
+        new RateVar(1m)
+		// new CalculationBaseVar(0m),
+		// new CalculationExtraVar(1m),
+		// new CalculatedVar("times").WithMultiplier((CardModel card, Creature? _) =>
+        // {
+        //     if (card?.CombatState?.HittableEnemies == null) return 0m;
+        //     int count = card.CombatState.HittableEnemies
+        //         .Count(c => c.GetPowerAmount<CupLossPower>() > 0);
+        //     return count;
+        // })
 	};
     protected override bool ShouldGlowGoldInternal => base.CombatState != null && base.CombatState.HittableEnemies.Any(c => c.GetPowerAmount<CupLossPower>() > 0);
 	public Chat()
@@ -45,24 +44,31 @@ public sealed class Chat : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-        var timesVar = base.DynamicVars["times"] as CalculatedVar;
-        int times = timesVar != null ? (int)timesVar.Calculate(cardPlay.Target) : 0;
-        for(int i = 0; i < times; i++)
-        {
-            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
-            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-            await PowerCmd.Apply<CloutPower>(
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
+        await PowerCmd.Apply<ChatPower>(choiceContext, 
             base.Owner.Creature, 
             base.DynamicVars[RateVar.Key].BaseValue, 
             base.Owner.Creature, 
             this);
-        }
+
+        // var timesVar = base.DynamicVars["times"] as CalculatedVar;
+        // int times = timesVar != null ? (int)timesVar.Calculate(cardPlay.Target) : 0;
+        // for(int i = 0; i < times; i++)
+        // {
+        //     await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
+        //     await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+        //     await PowerCmd.Apply<CloutPower>(choiceContext, 
+        //     base.Owner.Creature, 
+        //     base.DynamicVars[RateVar.Key].BaseValue, 
+        //     base.Owner.Creature, 
+        //     this);
+        // }
 	}
 
 	protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

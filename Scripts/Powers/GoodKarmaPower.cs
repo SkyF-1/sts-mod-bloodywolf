@@ -19,7 +19,7 @@ public sealed class GoodKarmaPower : CustomPowerModel
         if (creature != base.Owner && cardSource?.Owner.Creature == base.Owner && !(amount <= 0m))
         {
             Flash();
-			await PlayerCmd.GainEnergy(1m, base.Owner.Player);
+			await PlayerCmd.GainEnergy(Amount, base.Owner.Player);
         }
     }
 }

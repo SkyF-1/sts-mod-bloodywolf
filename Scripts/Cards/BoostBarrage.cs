@@ -14,14 +14,14 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class BoostBarrage : CustomCardModel
+public sealed class BoostBarrage : BloodywolfCardModel
 {//鼓吹
 	protected override bool HasEnergyCostX => true;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new CalculationBaseVar(2m),
+		new CalculationBaseVar(5m),
 		new ExtraDamageVar(2m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0m)
 	};
@@ -31,7 +31,7 @@ public sealed class BoostBarrage : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).WithHitCount(ResolveEnergyXValue()).FromCard(this)

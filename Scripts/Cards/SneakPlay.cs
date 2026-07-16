@@ -15,11 +15,11 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class SneakPlay : CustomCardModel
+public sealed class SneakPlay : BloodywolfCardModel
 {/// 偷玩
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<SneakPlayPower>(1m)};
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<SneakPlayPower>(2m)};
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<StrengthPower>()
@@ -29,10 +29,10 @@ public sealed class SneakPlay : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CardPileCmd.Draw(choiceContext, 1m, base.Owner);
-		await PowerCmd.Apply<SneakPlayPower>(base.Owner.Creature, base.DynamicVars["SneakPlayPower"].BaseValue, base.Owner.Creature, this);
+		await PowerCmd.Apply<SneakPlayPower>(choiceContext, base.Owner.Creature, base.DynamicVars["SneakPlayPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

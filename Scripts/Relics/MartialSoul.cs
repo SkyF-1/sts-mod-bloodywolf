@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
@@ -22,6 +23,6 @@ public class MartialSoul : CustomRelicModel
     public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await PowerCmd.Apply<CloutPower>(base.Owner.Creature, 7m, base.Owner.Creature, null);
+		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner.Creature, 7m, base.Owner.Creature, null);
 	}
 }

@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class CrossCompare : CustomCardModel
+public sealed class CrossCompare : BloodywolfCardModel
 {/// 横向比较
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
@@ -30,7 +30,7 @@ public sealed class CrossCompare : CustomCardModel
     {
     }
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(base.CombatState)
@@ -41,11 +41,12 @@ public sealed class CrossCompare : CustomCardModel
 	{
 		if ((dealer == base.Owner.Creature || dealer?.PetOwner == base.Owner) && !target.IsPlayer && result.WasBlockBroken && cardSource == this)
 		{
-			await PowerCmd.Apply<CupLossPower>(target, base.DynamicVars["CupLossPower"].BaseValue, base.Owner.Creature, this);
+			await PowerCmd.Apply<CupLossPower>(choiceContext, target, base.DynamicVars["CupLossPower"].BaseValue, base.Owner.Creature, this);
 		}
 	}
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(2m);
+        base.DynamicVars[CupLossPower.Key].UpgradeValueBy(2m);
     }
 }

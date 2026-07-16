@@ -15,13 +15,12 @@ public sealed class UnrivaledPower : CustomPowerModel
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
-	public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+	public override decimal ModifyHandDraw(Player player, decimal count)
 	{
 		if (player != base.Owner.Player)
 		{
-			return;
+			return count;
 		}
-		Flash();
-		await CardPileCmd.Draw(choiceContext, base.Amount, player);
+		return count + (decimal)base.Amount;
 	}
 }

@@ -35,7 +35,7 @@ public sealed class CupLossPower : CustomPowerModel, IHealthBarForecastSource
             await CreatureCmd.GainBlock(dealer, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
         }
 	}
-	public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (!CombatManager.Instance.IsOverOrEnding && side == base.Owner.Side && !base.Owner.IsDead )
 		{

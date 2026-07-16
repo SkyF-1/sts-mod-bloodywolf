@@ -17,11 +17,12 @@ public sealed class CloutNextTurnPower : CustomPowerModel
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
-	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == base.Owner.Side)
 		{
-			await PowerCmd.Apply<CloutPower>(base.Owner, Amount, base.Owner, null);
+			Flash();
+			await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, Amount, base.Owner, null);
 			await PowerCmd.Remove(this);
 		}
 	}

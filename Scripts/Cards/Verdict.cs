@@ -13,7 +13,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Verdict : CustomCardModel
+public sealed class Verdict : BloodywolfCardModel
 {/// 定论
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(32m, ValueProp.Move) };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -23,19 +23,19 @@ public sealed class Verdict : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash", null, "heavy_attack.mp3")
 			.Execute(choiceContext);
 	}
-	public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{        
-        if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
+		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
 		{
-            base.EnergyCost.AddThisCombat(-1);
-        }
+			base.EnergyCost.AddThisCombat(-1);
+		}
 		return Task.CompletedTask;
 	}
 

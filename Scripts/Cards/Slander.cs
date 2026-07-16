@@ -9,11 +9,12 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Slander : CustomCardModel
+public sealed class Slander : BloodywolfCardModel
 {/// 诋毁
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
@@ -21,26 +22,31 @@ public sealed class Slander : CustomCardModel
         HoverTipFactory.FromPower<CloutPower>()
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
-            new DamageVar(9m, ValueProp.Move),
-        new RateVar(2m)
+        new DamageVar(9m, ValueProp.Move)
+        // new RateVar(2m)
     };
+    protected override bool ShouldGlowGoldInternal => base.CombatState.Enemies.Any((Creature c)=> c.GetPower<CupLossPower>() != null);
 
 	public Slander()
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		int count = 1;
+        if(cardPlay.Target.GetPower<CupLossPower>() != null)count = 2;
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+            .WithHitCount(count)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-        await PowerCmd.Apply<CloutPower>(
-            base.Owner.Creature, 
-            base.DynamicVars[RateVar.Key].BaseValue, 
-            base.Owner.Creature, 
-            this);
+
+        // await PowerCmd.Apply<CloutPower>(choiceContext, 
+        //     base.Owner.Creature, 
+        //     base.DynamicVars[RateVar.Key].BaseValue, 
+        //     base.Owner.Creature, 
+        //     this);
 	}
 
 	protected override void OnUpgrade()

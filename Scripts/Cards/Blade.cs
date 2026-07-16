@@ -13,7 +13,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Blade : CustomCardModel
+public sealed class Blade : BloodywolfCardModel
 {/// 利刃
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
@@ -25,7 +25,7 @@ public sealed class Blade : CustomCardModel
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
@@ -33,7 +33,7 @@ public sealed class Blade : CustomCardModel
 			.Execute(choiceContext);
 	}
 
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
 		{

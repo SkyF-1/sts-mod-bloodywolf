@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class TestYou : CustomCardModel
+public sealed class TestYou : BloodywolfCardModel
 {/// 考考你呀
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
@@ -20,23 +20,23 @@ public sealed class TestYou : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new BlockVar(8m, ValueProp.Move),
+        new BlockVar(15m, ValueProp.Move),
         new PowerVar<CupLossPower>(3m)
     };
 
 	public TestYou()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<TestYouPower>(base.Owner.Creature, base.DynamicVars["CupLossPower"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<TestYouPower>(choiceContext, base.Owner.Creature, base.DynamicVars["CupLossPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Block.UpgradeValueBy(3m);
+		base.DynamicVars.Block.UpgradeValueBy(5m);
 	}
 }

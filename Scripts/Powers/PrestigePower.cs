@@ -18,7 +18,7 @@ public sealed class PrestigePower : CustomPowerModel
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 
-	public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		if (!(amount <= 0m) && applier == base.Owner && power is CloutPower)
 		{
@@ -29,7 +29,7 @@ public sealed class PrestigePower : CustomPowerModel
 			if (creature != null)
 			{
 				VfxCmd.PlayOnCreatureCenter(creature, "vfx/vfx_attack_blunt");
-				await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), creature, Amount, ValueProp.Unpowered, base.Owner);
+				await CreatureCmd.Damage(choiceContext ?? new ThrowingPlayerChoiceContext(), creature, Amount, ValueProp.Unpowered, base.Owner);
 			}
 		}
 	}

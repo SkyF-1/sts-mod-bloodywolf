@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Review : CustomCardModel
+public sealed class Review : BloodywolfCardModel
 {/// 测评
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -27,9 +27,9 @@ public sealed class Review : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(
+        await PowerCmd.Apply<CloutPower>(choiceContext, 
         base.Owner.Creature, 
         base.DynamicVars[RateVar.Key].BaseValue, 
         base.Owner.Creature, 

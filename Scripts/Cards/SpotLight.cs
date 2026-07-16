@@ -13,8 +13,8 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class SpotLight : CustomCardModel
-{/// 焦点位
+public sealed class SpotLight : BloodywolfCardModel
+{/// 焦点�?
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
     new List<IHoverTip>
     {
@@ -29,14 +29,14 @@ public sealed class SpotLight : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public SpotLight()
-		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+		: base(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
-        await PowerCmd.Apply<DexterityPower>(base.Owner.Creature, -base.DynamicVars.Dexterity.BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, base.Owner.Creature, -base.DynamicVars.Dexterity.BaseValue, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

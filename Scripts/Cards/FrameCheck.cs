@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class FrameCheck : CustomCardModel
+public sealed class FrameCheck : BloodywolfCardModel
 {/// 盯帧
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
@@ -33,7 +33,7 @@ public sealed class FrameCheck : CustomCardModel
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
@@ -42,7 +42,7 @@ public sealed class FrameCheck : CustomCardModel
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<VulnerablePower>(
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, 
                 cardPlay.Target, 
                 base.DynamicVars.Vulnerable.BaseValue, 
                 base.Owner.Creature, 
@@ -53,5 +53,6 @@ public sealed class FrameCheck : CustomCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.DynamicVars.Vulnerable.UpgradeValueBy(1m);
 	}
 }

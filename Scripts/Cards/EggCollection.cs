@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class EggCollection : CustomCardModel
+public sealed class EggCollection : BloodywolfCardModel
 {
     /// 彩蛋征集
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -29,20 +29,20 @@ public sealed class EggCollection : CustomCardModel
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount + base.DynamicVars[RateVar.Key].BaseValue >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
     public EggCollection()
-        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, this);
 
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutNextTurnPower>(base.Owner.Creature, base.DynamicVars["bonusRate"].BaseValue, base.Owner.Creature, this);
+            await PowerCmd.Apply<CloutNextTurnPower>(choiceContext, base.Owner.Creature, base.DynamicVars["bonusRate"].BaseValue, base.Owner.Creature, this);
         }
     }
 

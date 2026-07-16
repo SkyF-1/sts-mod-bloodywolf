@@ -4,16 +4,17 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Unrivaled : CustomCardModel
+public sealed class Unrivaled : BloodywolfCardModel
 {/// 独步天下
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-	new CardsVar(3),
+	new BlockVar(16m, ValueProp.Move),
 	new PowerVar<UnrivaledPower>(2m)
 	];
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -23,10 +24,10 @@ public sealed class Unrivaled : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-		await PowerCmd.Apply<UnrivaledPower>(base.Owner.Creature, base.DynamicVars["UnrivaledPower"].BaseValue, base.Owner.Creature, this);
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
+		await PowerCmd.Apply<UnrivaledPower>(choiceContext, base.Owner.Creature, base.DynamicVars["UnrivaledPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

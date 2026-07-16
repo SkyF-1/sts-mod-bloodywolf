@@ -1,0 +1,26 @@
+using BaseLib.Abstracts;
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Factories;
+using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Services;
+
+namespace StsModBloodywolf.Scripts.Cards;
+
+[Pool(typeof(BloodywolfCardPool))]
+public abstract class BloodywolfCardModel : CustomCardModel
+{
+	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	protected abstract Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay);
+	protected sealed override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
+		await OnPlayEffect(choiceContext, cardPlay);
+	}
+    public BloodywolfCardModel(int baseCost, CardType type, CardRarity rarity, TargetType target, bool showInCardLibrary = true, bool autoAdd = true) : base(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
+    {
+    }
+}

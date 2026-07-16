@@ -13,7 +13,7 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class StrategicSetup : CustomCardModel
+public sealed class StrategicSetup : BloodywolfCardModel
 {
     /// 思路构建
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
@@ -23,20 +23,20 @@ public sealed class StrategicSetup : CustomCardModel
     };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new RateVar(2m)
+        new RateVar(3m)
     };
 
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
     public StrategicSetup()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 应用评定效果
-        await PowerCmd.Apply<CloutPower>(
+        await PowerCmd.Apply<CloutPower>(choiceContext, 
             base.Owner.Creature,
             base.DynamicVars[RateVar.Key].BaseValue,
             base.Owner.Creature,
@@ -45,7 +45,7 @@ public sealed class StrategicSetup : CustomCardModel
         CardModel clone = CreateClone();
         clone.EnergyCost.SetThisCombat(0);
         var cardPosition = CardPilePosition.Random;
-        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, addedByPlayer: true, position: cardPosition);
+        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, base.Owner, position: cardPosition);
     }
 
     protected override void OnUpgrade()

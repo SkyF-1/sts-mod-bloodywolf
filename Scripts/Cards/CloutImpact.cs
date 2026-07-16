@@ -13,9 +13,9 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class CloutImpact : CustomCardModel
+public sealed class CloutImpact : BloodywolfCardModel
 {
-    /// 影响力
+    /// 影响�?    
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(9m, ValueProp.Move),
@@ -31,7 +31,7 @@ public sealed class CloutImpact : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)

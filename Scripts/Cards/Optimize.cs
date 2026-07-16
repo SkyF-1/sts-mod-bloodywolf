@@ -14,7 +14,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Optimize : CustomCardModel
+public sealed class Optimize : BloodywolfCardModel
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(1), new RateVar(0m)};
 
@@ -22,11 +22,11 @@ public sealed class Optimize : CustomCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Optimize()
-		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+		: base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		IEnumerable<CardModel> cardModels = await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1, base.DynamicVars.Cards.IntValue), context: choiceContext, player: base.Owner, filter: null, source: this);
 		if (cardModels != null)
@@ -37,7 +37,7 @@ public sealed class Optimize : CustomCardModel
                 rateCount += cardModel.EnergyCost.GetAmountToSpend();
 			    await CardCmd.Exhaust(choiceContext, cardModel);
             }
-            await PowerCmd.Apply<CloutPower>(
+            await PowerCmd.Apply<CloutPower>(choiceContext, 
                 base.Owner.Creature, 
                 rateCount, 
                 base.Owner.Creature, 

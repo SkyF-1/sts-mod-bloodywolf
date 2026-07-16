@@ -12,7 +12,7 @@ using StsModBloodywolf.Scripts.Pools;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class LoveAndHate : CustomCardModel
+public sealed class LoveAndHate : BloodywolfCardModel
 {/// 爱恨交加
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -22,15 +22,15 @@ public sealed class LoveAndHate : CustomCardModel
 	};
 
 	public LoveAndHate()
-		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+		: base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
-		await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Block.BaseValue, ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.Move, this);
+		await CreatureCmd.Damage(choiceContext, base.CombatState.Enemies.ToList(), DynamicVars.Block.BaseValue, ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.Move, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()

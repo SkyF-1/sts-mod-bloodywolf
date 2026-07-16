@@ -12,16 +12,15 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Players;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
-using StsModBloodywolf.Scripts.Services;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(TokenCardPool))]
-public sealed class IBiteYou : CustomCardModel
+public sealed class IBiteYou : BloodywolfCardModel
 {/// 我咬死你
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(3m, ValueProp.Move),
+		new DamageVar(6m, ValueProp.Move),
         new RateVar(1m)
 	};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -33,11 +32,10 @@ public sealed class IBiteYou : CustomCardModel
 	{
 	}
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
 		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target);
-		await PowerCmd.Apply<CloutPower>(
+		await PowerCmd.Apply<CloutPower>(choiceContext, 
             base.Owner.Creature, 
             base.DynamicVars[RateVar.Key].BaseValue, 
             base.Owner.Creature, 
@@ -47,15 +45,15 @@ public sealed class IBiteYou : CustomCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(1m);
+		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 
-	public static async Task<CardModel?> CreateInHand(Player owner, CombatState combatState)
+	public static async Task<CardModel?> CreateInHand(Player owner, ICombatState combatState)
 	{
 		return (await CreateInHand(owner, 1, combatState)).FirstOrDefault();
 	}
 
-	public static async Task<IEnumerable<CardModel>> CreateInHand(Player owner, int count, CombatState combatState)
+	public static async Task<IEnumerable<CardModel>> CreateInHand(Player owner, int count, ICombatState combatState)
 	{
 		if (count == 0)
 		{
@@ -70,7 +68,7 @@ public sealed class IBiteYou : CustomCardModel
 		{
 			bites.Add(combatState.CreateCard<IBiteYou>(owner));
 		}
-		await CardPileCmd.AddGeneratedCardsToCombat(bites, PileType.Hand, addedByPlayer: true);
+		await CardPileCmd.AddGeneratedCardsToCombat(bites, PileType.Hand, owner);
 		return bites;
 	}
 }

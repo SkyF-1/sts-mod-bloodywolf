@@ -14,13 +14,13 @@ using StsModBloodywolf.Scripts.DynamicVars;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class ResonantWords : CustomCardModel
+public sealed class ResonantWords : BloodywolfCardModel
 {
     /// 掷地有声
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new HotTakeVar(3m),
-        new CalculationBaseVar(6m),
+        new CalculationBaseVar(8m),
         new ExtraDamageVar(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
             {
@@ -41,7 +41,7 @@ public sealed class ResonantWords : CustomCardModel
     {
     }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)
             .TargetingAllOpponents(base.CombatState)

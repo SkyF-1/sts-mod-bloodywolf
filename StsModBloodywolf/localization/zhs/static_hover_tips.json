@@ -3,6 +3,8 @@
     "BLOODYWOLF-RATE.title": "评定",
     "BLOODYWOLF-HOTTAKE.description": "有至少X层[gold]影响[/gold]时触发的额外效果。",
     "BLOODYWOLF-HOTTAKE.title": "言论X",
-    "BLOODYWOLF-CLOUTLOSS.description": "必须消耗足量的[gold]影响[/gold]层数才能打出并触发相应效果。",
-    "BLOODYWOLF-CLOUTLOSS.title": "失去影响"
+    "BLOODYWOLF-CLOUTLOSS.description": "这张牌必须消耗足量的[gold]影响[/gold]层数才能被手动打出。\n如果这张牌被自动打出，会尽可能地消耗所需的[gold]影响[/gold]层数。",
+    "BLOODYWOLF-CLOUTLOSS.title": "失去影响",
+    "BLOODYWOLF-CLOUTLOSSPOWER.description": "这个能力必须消耗足量的[gold]影响[/gold]层数才能生效。",
+    "BLOODYWOLF-CLOUTLOSSPOWER.title": "失去影响-能力"
 }

@@ -16,11 +16,6 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Slander : BloodywolfCardModel
 {/// 诋毁
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
         new DamageVar(9m, ValueProp.Move)
         // new RateVar(2m)

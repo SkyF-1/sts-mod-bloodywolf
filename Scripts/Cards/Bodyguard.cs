@@ -44,8 +44,12 @@ public sealed class Bodyguard : BloodywolfCardModel
         {
             await PowerCmd.Remove(cloutPower);
         }
-
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
+        
+        CardSelectorPrefs prefs;
+        if(PileType.Draw.GetPile(base.Owner).Cards.Count() == 1) 
+            prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, 1);
+        else 
+            prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
 		List<CardModel> cardsIn = (from c in PileType.Draw.GetPile(base.Owner).Cards
 			orderby c.Rarity, c.Id
 			select c).ToList();

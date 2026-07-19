@@ -22,7 +22,7 @@ public sealed class Controversy : BloodywolfCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new EnergyVar(1),
-        new CloutLossVar(1m)
+        new CloutLossPowerVar(1m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
     public Controversy()

@@ -23,18 +23,18 @@ public sealed class ControversyPower : CustomPowerModel
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new CloutLossVar(1m)
+        new CloutLossPowerVar(1m)
     };
 	public override async Task AfterEnergyReset(Player player)
 	{
 		if (player == base.Owner.Player)
 		{
 			decimal CloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
-			if (CloutValue >= base.DynamicVars[CloutLossVar.Key].BaseValue)
+			if (CloutValue >= base.DynamicVars[CloutLossPowerVar.Key].BaseValue)
 			{
 				await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), 
 				base.Owner, 
-				-base.DynamicVars[CloutLossVar.Key].BaseValue,
+				-base.DynamicVars[CloutLossPowerVar.Key].BaseValue,
 				base.Owner, 
 				null);
 				Flash();

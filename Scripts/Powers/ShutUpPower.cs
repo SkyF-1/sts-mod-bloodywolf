@@ -23,7 +23,7 @@ public sealed class ShutUpPower : CustomPowerModel
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new CloutLossVar(3m)
+        new CloutLossPowerVar(3m)
     };
 	public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
@@ -32,7 +32,7 @@ public sealed class ShutUpPower : CustomPowerModel
 			return amount;
 		}
 		decimal CloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
-		if (CloutValue < base.DynamicVars[CloutLossVar.Key].BaseValue)
+		if (CloutValue < base.DynamicVars[CloutLossPowerVar.Key].BaseValue)
 		{
 			return amount;
 		}

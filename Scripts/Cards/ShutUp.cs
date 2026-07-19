@@ -21,7 +21,8 @@ public sealed class ShutUp : BloodywolfCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<ShutUpPower>(1m)
+        new PowerVar<ShutUpPower>(1m),
+        new CloutLossPowerVar(3m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
     public ShutUp()

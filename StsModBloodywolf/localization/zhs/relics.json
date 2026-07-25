@@ -4,5 +4,12 @@
   "STSMODBLOODYWOLF-RABBIT_HEAD.flavor": "进塔前，他只是一个主播。",
   "STSMODBLOODYWOLF-MARTIAL_SOUL.title": "武魂真身",
   "STSMODBLOODYWOLF-MARTIAL_SOUL.description": "在每场战斗开始时，[gold]评定[/gold][blue]7[/blue]。",
-  "STSMODBLOODYWOLF-MARTIAL_SOUL.flavor": "你看到了什么，血狼破军。"
+  "STSMODBLOODYWOLF-MARTIAL_SOUL.flavor": "你看到了什么，血狼破军。",
+  "STSMODBLOODYWOLF-RABBIT_TEETH.title": "“狼牙”",
+  "STSMODBLOODYWOLF-RABBIT_TEETH.description": "在每场战斗开始时，选择任意张手牌[gold]变化[/gold]为[gold]我咬死你[/gold]。",
+  "STSMODBLOODYWOLF-RABBIT_TEETH.flavor": "他仍然相信这块牙齿能够回应他的期待。",
+  "STSMODBLOODYWOLF-RABBIT_TEETH.selectionScreenPrompt": "选择任意张牌[gold]变化[/gold]为[gold]我咬死你[/gold]",
+  "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.title": "消音麦",
+  "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.description": "每场战斗中，第一次打出耗能大于等于{EnergyThreshold:energyIcons()}的牌时，不消耗{Energy:energyIcons()}",
+  "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.flavor": "保护狼心糖的耳朵免受侵袭。"
 }

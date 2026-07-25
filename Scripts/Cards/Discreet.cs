@@ -31,17 +31,13 @@ public sealed class Discreet : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        // 基础格挡�?        
-        decimal blockAmount = base.DynamicVars["BaseBlock"].BaseValue;
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars["BaseBlock"].BaseValue, ValueProp.Move, cardPlay);
 
-        // 如果声望达到阈值（言�?），则加上额外格�?        
         if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            blockAmount += base.DynamicVars["BonusBlock"].BaseValue;
+            await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars["BonusBlock"].BaseValue, ValueProp.Move, cardPlay);
         }
 
-        // 应用格挡
-        await CreatureCmd.GainBlock(base.Owner.Creature, new BlockVar(blockAmount, ValueProp.Move), cardPlay);
 	}
 
 	protected override void OnUpgrade()

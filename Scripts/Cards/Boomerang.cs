@@ -20,7 +20,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Boomerang : BloodywolfCardModel
-{/// 回旋�?
+{/// 回旋�?
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(3m, ValueProp.Move),
@@ -42,8 +42,11 @@ public sealed class Boomerang : BloodywolfCardModel
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
+
+        if(!cardPlay.Target.IsAlive) return;
+        
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        // 言论条件（现已弃用�?
+        // 言论条件（现已弃用�?
         //if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             Creature targetCreature = cardPlay.Target;
@@ -53,7 +56,7 @@ public sealed class Boomerang : BloodywolfCardModel
             MoveState originalMove = monster.NextMove;
             if (originalMove == null) return;
 
-            // 1. 获取原状态的意图列表并复制一�?
+            // 1. 获取原状态的意图列表并复制一�?
             var oldIntents = originalMove.Intents;
             var newIntents = new List<AbstractIntent>(oldIntents) { new SingleAttackIntent(6) };
 
@@ -62,7 +65,7 @@ public sealed class Boomerang : BloodywolfCardModel
             if (performField == null) throw new Exception("Cannot find _onPerform field");
             var originalPerform = (Func<IReadOnlyList<Creature>, Task>)performField.GetValue(originalMove);
 
-            // 3. 组合新委托：原动�?+ 额外伤害
+            // 3. 组合新委托：原动�?+ 额外伤害
             async Task CombinedPerform(IReadOnlyList<Creature> targets)
             {
                 await originalPerform(targets);
@@ -83,7 +86,7 @@ public sealed class Boomerang : BloodywolfCardModel
                 FollowUpStateId = originalMove.FollowUpStateId ?? originalMove.FollowUpState?.Id,
                 MustPerformOnceBeforeTransitioning = originalMove.MustPerformOnceBeforeTransitioning
             };
-            // 5. 强制替换当前状�?
+            // 5. 强制替换当前状�?
             monster.SetMoveImmediate(tempMove, forceTransition: true);
 
             // 6. 刷新UI

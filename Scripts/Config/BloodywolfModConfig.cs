@@ -10,7 +10,7 @@ namespace StsModBloodywolf.Scripts.Config
         [ConfigSection("Audio Settings")]
 
         // 卡牌语音开关（单独控制）
-        public static bool EnableCardVoice { get; set; } = false;
+        public static bool EnableCardVoice { get; set; } = true;
 
         // 添加主音量控制（0 = 静音, 1 = 最大）
         [SliderRange(0, 1, 0.01)]

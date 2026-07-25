@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -19,7 +20,7 @@ public sealed class HighAndMighty : BloodywolfCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
         new BlockVar(17m, ValueProp.Move),
-        new BlockVar("givenBlock", 7m, ValueProp.Unpowered)
+        new GivenBlockVar(7m)
     };
 
 	public HighAndMighty()
@@ -29,11 +30,10 @@ public sealed class HighAndMighty : BloodywolfCardModel
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        BlockVar givenBlock = new BlockVar(base.DynamicVars["givenBlock"].BaseValue, ValueProp.Unpowered);
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
         foreach (Creature enemy in base.CombatState.HittableEnemies)
         {
-            await CreatureCmd.GainBlock(enemy, givenBlock, cardPlay);
+            await GiveBlock(enemy, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
         }
     }
 

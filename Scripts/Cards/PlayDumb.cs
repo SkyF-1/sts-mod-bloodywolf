@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
+using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 
@@ -17,7 +18,7 @@ public sealed class PlayDumb : BloodywolfCardModel
 	public override bool GainsBlock => true;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(10m, ValueProp.Move),
-        new BlockVar("givenBlock", 4m, ValueProp.Unpowered)
+        new GivenBlockVar(4m)
     ];
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
@@ -30,8 +31,7 @@ public sealed class PlayDumb : BloodywolfCardModel
 	{  
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		BlockVar givenBlock = new BlockVar(base.DynamicVars["givenBlock"].BaseValue, ValueProp.Unpowered);
-		await CreatureCmd.GainBlock(cardPlay.Target, givenBlock, cardPlay);
+		await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
 	}
 
 	protected override void OnUpgrade()

@@ -4,5 +4,5 @@ namespace StsModBloodywolf.Scripts.Pools;
 public class BloodywolfRelicPool : CustomRelicPoolModel
 {
     // 能量图标。
-    public override string EnergyColorName => "ironclad";
+    public override string EnergyColorName => "Bloodywolf";
 }

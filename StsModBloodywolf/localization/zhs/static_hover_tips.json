@@ -6,5 +6,7 @@
     "BLOODYWOLF-CLOUTLOSS.description": "这张牌必须消耗足量的[gold]影响[/gold]层数才能被手动打出。\n如果这张牌被自动打出，会尽可能地消耗所需的[gold]影响[/gold]层数。",
     "BLOODYWOLF-CLOUTLOSS.title": "失去影响",
     "BLOODYWOLF-CLOUTLOSSPOWER.description": "这个能力必须消耗足量的[gold]影响[/gold]层数才能生效。",
-    "BLOODYWOLF-CLOUTLOSSPOWER.title": "失去影响-能力"
+    "BLOODYWOLF-CLOUTLOSSPOWER.title": "失去影响-能力",
+    "BLOODYWOLF-GIVENBLOCK.description": "使目标获得格挡，此格挡数值不受加成。",
+    "BLOODYWOLF-GIVENBLOCK.title": "给予格挡"
 }

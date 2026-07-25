@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -18,7 +19,7 @@ public sealed class LoveAndHate : BloodywolfCardModel
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-        new BlockVar(7m, ValueProp.Unpowered)
+        new GivenBlockVar(7m)
 	};
 
 	public LoveAndHate()
@@ -29,12 +30,12 @@ public sealed class LoveAndHate : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
-		await CreatureCmd.Damage(choiceContext, base.CombatState.Enemies.ToList(), DynamicVars.Block.BaseValue, ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.Move, base.Owner.Creature, this);
+        await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
+		await CreatureCmd.Damage(choiceContext, base.CombatState.Enemies.ToList(), base.DynamicVars[GivenBlockVar.Key].BaseValue, ValueProp.Unpowered | ValueProp.Unblockable | ValueProp.Move, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-        base.DynamicVars.Block.UpgradeValueBy(2m);
+        base.DynamicVars[GivenBlockVar.Key].UpgradeValueBy(2m);
 	}
 }

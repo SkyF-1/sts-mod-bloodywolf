@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -16,7 +17,7 @@ public sealed class Troll : BloodywolfCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(11m, ValueProp.Move),
-        new BlockVar(4m, ValueProp.Unpowered)
+        new GivenBlockVar(4m)
     };
 
     public Troll()
@@ -34,7 +35,7 @@ public sealed class Troll : BloodywolfCardModel
             .Execute(choiceContext);
         if(cardPlay.Target.IsAlive)
         {
-            await CreatureCmd.GainBlock(cardPlay.Target, base.DynamicVars.Block, cardPlay);
+            await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
         }
     }
 

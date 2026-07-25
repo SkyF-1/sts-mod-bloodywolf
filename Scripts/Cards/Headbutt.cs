@@ -12,29 +12,30 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class SharpJab : BloodywolfCardModel
-{/// 锐气直击
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Exhaust };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CupLossPower>()
-    };
+public sealed class Headbutt : BloodywolfCardModel
+{/// 结晶打击
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<CupLossPower>(7m)
+        new DamageVar(7, ValueProp.Move),
+		new RepeatVar(2),
+        new PowerVar<FreeHotTakePower>(1m)
     ];
-	public SharpJab()
-		: base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+	public Headbutt()
+		: base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await PowerCmd.Apply<CupLossPower>(choiceContext, cardPlay.Target, DynamicVars[CupLossPower.Key].BaseValue, base.Owner.Creature, this);
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue)
+			.FromCard(this).Targeting(cardPlay.Target)
+			.WithHitFx("vfx/vfx_attack_slash")
+			.Execute(choiceContext);
+        await PowerCmd.Apply<FreeHotTakePower>(choiceContext, base.Owner.Creature, DynamicVars["FreeHotTakePower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["CupLossPower"].UpgradeValueBy(2m);
+		base.DynamicVars.Repeat.UpgradeValueBy(1);
 	}
 }

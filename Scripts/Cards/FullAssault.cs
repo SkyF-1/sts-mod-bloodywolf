@@ -19,7 +19,7 @@ public sealed class FullAssault : BloodywolfCardModel
 {/// 全军出击
     // public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
 
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(3)};
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(2)};
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>()};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -41,6 +41,6 @@ public sealed class FullAssault : BloodywolfCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Cards.UpgradeValueBy(2m);
+		base.DynamicVars.Cards.UpgradeValueBy(1m);
 	}
 }

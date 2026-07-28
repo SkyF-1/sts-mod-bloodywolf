@@ -13,7 +13,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class SharpJab : BloodywolfCardModel
-{/// 锐气直击
+{/// 锐气
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Exhaust };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {

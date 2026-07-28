@@ -14,26 +14,23 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class ColdShoulder : BloodywolfCardModel
-{/// 冷处�?
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
+{/// 冷处�?
+	protected override bool HasEnergyCostX => true;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Ethereal };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public ColdShoulder()
-		: base(1, CardType.Power, CardRarity.Rare, TargetType.None)
+		: base(0, CardType.Power, CardRarity.Rare, TargetType.None)
 	{
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ColdShoulderPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
+        await PowerCmd.Apply<ColdShoulderPower>(choiceContext, base.Owner.Creature, ResolveEnergyXValue(), base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.RemoveKeyword(CardKeyword.Ethereal);
     }
 }

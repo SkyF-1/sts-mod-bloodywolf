@@ -19,30 +19,21 @@ public sealed class ResonantWords : BloodywolfCardModel
     /// 掷地有声
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new HotTakeVar(3m),
-        new CalculationBaseVar(8m),
-        new ExtraDamageVar(1m),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
-            {
-                decimal cloutValue = card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-                if (cloutValue >= card.DynamicVars[HotTakeVar.Key].BaseValue)
-                {
-                    return card.CombatState.HittableEnemies.Sum(enemy => enemy.Block);
-                }
-                return 0;
-            })
+		new CalculationBaseVar(0m),
+		new ExtraDamageVar(1m),
+        new DynamicVar("Count", 2m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.Block)
     };
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
-
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
     public ResonantWords()
-        : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+        : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        for(int i = 0; i < DynamicVars["Count"].IntValue; i++)
         await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)
             .TargetingAllOpponents(base.CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
@@ -51,6 +42,6 @@ public sealed class ResonantWords : BloodywolfCardModel
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.CalculationBase.UpgradeValueBy(2m);
+        base.DynamicVars["Count"].UpgradeValueBy(1m);
     }
 }

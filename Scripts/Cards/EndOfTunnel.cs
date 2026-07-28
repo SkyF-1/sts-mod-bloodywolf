@@ -16,11 +16,12 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class EndOfTunnel : BloodywolfCardModel
-{
+{//苦尽甘来
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Innate };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(16m, ValueProp.Move),
+		new DamageVar(14m, ValueProp.Move),
 		new CalculationBaseVar(0m),
 		new CalculationExtraVar(1m),
 		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel c, Creature? __) => c.Owner.Creature.CombatState.RoundNumber)
@@ -45,6 +46,6 @@ public sealed class EndOfTunnel : BloodywolfCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(8m);
+		base.DynamicVars.Damage.UpgradeValueBy(4m);
 	}
 }

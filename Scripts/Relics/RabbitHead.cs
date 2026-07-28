@@ -27,4 +27,5 @@ public class RabbitHead : CustomRelicModel
 		Flash();
 		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner.Creature, 3m, base.Owner.Creature, null);
 	}
+    
 }

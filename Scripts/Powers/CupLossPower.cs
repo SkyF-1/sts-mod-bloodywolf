@@ -25,10 +25,6 @@ public sealed class CupLossPower : CustomPowerModel, IHealthBarForecastSource
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? __)
 	{
-		if (dealer == base.Owner && result.UnblockedDamage > 0)
-		{
-			await PowerCmd.TickDownDuration(this);
-		}
         if (dealer != null && dealer.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
         {
 			Flash();

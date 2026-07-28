@@ -10,6 +10,7 @@ using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -17,7 +18,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Slander : BloodywolfCardModel
 {/// 诋毁
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
-        new DamageVar(9m, ValueProp.Move)
+        new TrollVar(9m)
         // new RateVar(2m)
     };
     protected override bool ShouldGlowGoldInternal => base.CombatState.Enemies.Any((Creature c)=> c.GetPower<CupLossPower>() != null);
@@ -32,10 +33,10 @@ public sealed class Slander : BloodywolfCardModel
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		int count = 1;
         if(cardPlay.Target.GetPower<CupLossPower>() != null)count = 2;
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitCount(count)
-			.WithHitFx("vfx/vfx_attack_slash")
-			.Execute(choiceContext);
+        for(int i = 0; i < count; i++)
+        {
+            await MyCmd.Troll(choiceContext, cardPlay.Target, base.DynamicVars[TrollVar.Key].BaseValue, this);
+        }
 
         // await PowerCmd.Apply<CloutPower>(choiceContext, 
         //     base.Owner.Creature, 
@@ -46,6 +47,6 @@ public sealed class Slander : BloodywolfCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(3m);
+		base.DynamicVars[TrollVar.Key].UpgradeValueBy(3m);
 	}
 }

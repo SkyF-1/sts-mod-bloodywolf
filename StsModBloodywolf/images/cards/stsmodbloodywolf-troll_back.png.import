@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfr6u0ty3gul2"
-path="res://.godot/imported/stsmodbloodywolf-troll.png-bc9923e04806ad4649c9e734ad9cf05c.ctex"
+uid="uid://bcx2qxcjjilen"
+path="res://.godot/imported/stsmodbloodywolf-troll_back.png-25c4ebdaef7f8ed3fabeb2ef26d827bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-troll.png"
-dest_files=["res://.godot/imported/stsmodbloodywolf-troll.png-bc9923e04806ad4649c9e734ad9cf05c.ctex"]
+source_file="res://StsModBloodywolf/images/cards/stsmodbloodywolf-troll_back.png"
+dest_files=["res://.godot/imported/stsmodbloodywolf-troll_back.png-25c4ebdaef7f8ed3fabeb2ef26d827bf.ctex"]
 
 [params]
 

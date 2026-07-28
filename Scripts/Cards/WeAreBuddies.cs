@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -27,7 +28,7 @@ public sealed class WeAreBuddies : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{  
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
+		await MyCmd.GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
         await PowerCmd.Apply<TemporaryFreeAttackPower>(choiceContext, base.Owner.Creature, 1m, base.Owner.Creature, this);
 	}
 

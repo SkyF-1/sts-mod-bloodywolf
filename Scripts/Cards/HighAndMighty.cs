@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -33,7 +34,7 @@ public sealed class HighAndMighty : BloodywolfCardModel
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
         foreach (Creature enemy in base.CombatState.HittableEnemies)
         {
-            await GiveBlock(enemy, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
+            await MyCmd.GiveBlock(enemy, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
         }
     }
 

@@ -8,5 +8,7 @@
     "BLOODYWOLF-CLOUTLOSSPOWER.description": "这个能力必须消耗足量的[gold]影响[/gold]层数才能生效。",
     "BLOODYWOLF-CLOUTLOSSPOWER.title": "失去影响-能力",
     "BLOODYWOLF-GIVENBLOCK.description": "使目标获得格挡，此格挡数值不受加成。",
-    "BLOODYWOLF-GIVENBLOCK.title": "给予格挡"
+    "BLOODYWOLF-GIVENBLOCK.title": "给予格挡",
+    "BLOODYWOLF-TROLL.description": "被串的生物失去生命值，然后获得等量[gold]格挡[/gold]。",
+    "BLOODYWOLF-TROLL.title": "串"
 }

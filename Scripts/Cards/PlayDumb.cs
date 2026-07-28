@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -31,9 +32,9 @@ public sealed class PlayDumb : BloodywolfCardModel
 	{  
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
+        await MyCmd.GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
 	}
-
+	
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Block.UpgradeValueBy(3m);

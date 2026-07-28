@@ -7,21 +7,22 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Commands;
+using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Troll : BloodywolfCardModel
+public sealed class TrollBack : BloodywolfCardModel
 {
     /// 反串
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(11m, ValueProp.Move),
-        new GivenBlockVar(4m)
+        new TrollVar(1m)
     };
 
-    public Troll()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public TrollBack()
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
     }
 
@@ -29,18 +30,12 @@ public sealed class Troll : BloodywolfCardModel
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-        if(cardPlay.Target.IsAlive)
-        {
-            await GiveBlock(cardPlay.Target, base.DynamicVars[GivenBlockVar.Key].BaseValue, cardPlay);
-        }
+		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        await PowerCmd.Apply<TrollBackPower>(choiceContext, cardPlay.Target, DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(3m);
+        base.EnergyCost.UpgradeBy(-1);
     }
 }

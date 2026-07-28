@@ -9,17 +9,18 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Veto : BloodywolfCardModel
+public sealed class Stomp : BloodywolfCardModel
 {
-    /// 不通过
+    /// 踩头
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new PowerVar<CupLossPower>(5m),
-        new CardsVar(2)
+        new BlockVar(5m, ValueProp.Move),
+        new PowerVar<CupLossPower>(5m)
     };
     protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
     {
@@ -27,31 +28,20 @@ public sealed class Veto : BloodywolfCardModel
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-    public Veto()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
+    public Stomp()
+        : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
     {
     }
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
         await PowerCmd.Apply<CupLossPower>(choiceContext, cardPlay.Target, DynamicVars[CupLossPower.Key].BaseValue, base.Owner.Creature, this);
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, base.DynamicVars.Cards.IntValue);
-        CardPile pile = PileType.Draw.GetPile(base.Owner);
-        if (pile.Cards.Count == 0)
-        {
-            return;
-        }
-        IEnumerable<CardModel> cardModels = await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs);
-        foreach (CardModel cardModel in cardModels)
-        {
-            await CardPileCmd.Add(cardModel, PileType.Discard, CardPilePosition.Top);
-        }
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars[CupLossPower.Key].UpgradeValueBy(2m);
-        base.DynamicVars.Cards.UpgradeValueBy(1);
+        base.DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

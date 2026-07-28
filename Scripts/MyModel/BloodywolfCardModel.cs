@@ -24,10 +24,6 @@ public abstract class BloodywolfCardModel : CustomCardModel
 		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
 		await OnPlayEffect(choiceContext, cardPlay);
 	}
-	public static async Task<decimal> GiveBlock(Creature creature, decimal amount, CardPlay? cardPlay, bool fast = false)
-    {
-        return await CreatureCmd.GainBlock(creature, amount, ValueProp.Unpowered, cardPlay, fast);
-    }
 
     public BloodywolfCardModel(int baseCost, CardType type, CardRarity rarity, TargetType target, bool showInCardLibrary = true, bool autoAdd = true) : base(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
     {

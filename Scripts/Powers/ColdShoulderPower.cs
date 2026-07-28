@@ -8,37 +8,58 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using StsModBloodywolf.Scripts.Powers;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class ColdShoulderPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
-
-	public override PowerStackType StackType => PowerStackType.Single;
+    private bool _enable = false;
+    public bool Enable
+	{
+		get
+		{
+			return _enable;
+		}
+		set
+		{
+			AssertMutable();
+			_enable = value;
+		}
+	}
+	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-
-	public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
-    {
-        modifiedAmount = amount;
-        if (amount < 0 && canonicalPower is CloutPower && target == base.Owner)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+	{
+		if (participants.Contains(base.Owner))
+		{
+			if ((decimal)CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => e.HappenedThisTurn(Owner.CombatState) && e.CardPlay.Card.Owner.Creature == Owner) <= Amount)
+			{
+				Flash();
+				Enable = true;
+			}
+		}
+        else
         {
-            Flash();
-            modifiedAmount = 0m;
-            return true;
+            Enable = false;
         }
-        return false;
-    }
-
-    public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
-    {
-        if (card.Owner.Creature == base.Owner && card.Type == CardType.Attack)
+	}
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+	{
+        if(Enable == false)
         {
-            modifiedCost = originalCost + 1m;
-            return true;
+            return 1m;
         }
-        modifiedCost = originalCost;
-        return false;
-    }
+		if (target != base.Owner)
+		{
+			return 1m;
+		}
+		if (!props.IsPoweredAttack())
+		{
+			return 1m;
+		}
+		return 0.5m;
+	}
 }

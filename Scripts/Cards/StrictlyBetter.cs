@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -19,41 +20,49 @@ public sealed class StrictlyBetter : BloodywolfCardModel
     /// 上位替代
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(18m, ValueProp.Move),
-        new HotTakeVar(7m)
+        new TrollVar(6m),
     };
 
     public StrictlyBetter()
-        : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
     {
     }
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        base.EnergyCost.AddThisCombat(1);
     }
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-    {
-        if (power.Owner == base.Owner.Creature && power is CloutPower)
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+        if(base.Pile == null)
         {
-            var clout = base.Owner.Creature.GetPower<CloutPower>()?.Amount;
-            if(clout >= base.DynamicVars[HotTakeVar.Key].BaseValue)
-            {
-                base.EnergyCost.SetThisCombat(0);
-            }
-            else
-            {
-                base.EnergyCost.SetThisCombat(base.EnergyCost.Canonical);
-            }
+            return;
         }
-    }
+		if(base.Pile.Type != PileType.Hand)
+        {
+            return;
+        }
+        if (cardPlay.Card.EnergyCost.CostsX)
+        {
+            return;
+        }
+        if(cardPlay.Card.EnergyCost.GetWithModifiers(CostModifiers.All) >= base.EnergyCost.GetWithModifiers(CostModifiers.All))
+        {
+            return;
+        }
+        IReadOnlyList<Creature> hittableEnemies = base.CombatState.HittableEnemies;
+        if (hittableEnemies.Count != 0)
+		{
+            Creature target = base.Owner.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
+            await MyCmd.Troll(choiceContext, target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+		}
+	}
+
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(6m);
+        base.DynamicVars[TrollVar.Key].UpgradeValueBy(2m);
     }
 }

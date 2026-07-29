@@ -8,28 +8,24 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Players;
+using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class SentimentStormPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
-	private bool _shouldIgnoreNextInstance;
 	public override PowerStackType StackType => PowerStackType.Single;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 	{
-		if (cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Attack && !cardPlay.IsAutoPlay)
+		if (card.Owner.Creature != base.Owner)
 		{
-			if(_shouldIgnoreNextInstance)
-			{
-				_shouldIgnoreNextInstance = false;
-				return;
-			}
-			Flash();
-			await CardPileCmd.AutoPlayFromDrawPile(choiceContext, base.Owner.Player, Amount, CardPilePosition.Top, forceExhaust: false);
+			return;
 		}
+		Flash();
+		await MyCmd.Troll(choiceContext, base.Owner.CombatState.HittableEnemies.ToList(), Amount, base.Owner, null);
 	}
 	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
@@ -38,8 +34,8 @@ public sealed class SentimentStormPower : CustomPowerModel
 			await PowerCmd.Remove(this);
 		}
 	}
-	public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
-	{
-		_shouldIgnoreNextInstance = true;
-	}
+	// public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
+	// {
+	// 	_shouldIgnoreNextInstance = true;
+	// }
 }

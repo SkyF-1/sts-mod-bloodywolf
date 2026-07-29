@@ -11,5 +11,9 @@
   "STSMODBLOODYWOLF-RABBIT_TEETH.selectionScreenPrompt": "选择任意张牌[gold]变化[/gold]为[gold]我咬死你[/gold]",
   "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.title": "消音麦",
   "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.description": "每场战斗中，第一次打出耗能大于等于{EnergyThreshold:energyIcons()}的牌时，不消耗{Energy:energyIcons()}",
-  "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.flavor": "保护狼心糖的耳朵免受侵袭。"
+  "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.flavor": "保护狼心糖的耳朵免受侵袭。",
+  "STSMODBLOODYWOLF-CUP.title": "杯具",
+  "STSMODBLOODYWOLF-CUP.description": "在每场战斗开始时，[gold]串[/gold]掉所有敌人[blue]7[/blue]点生命。",
+  "STSMODBLOODYWOLF-CUP.flavor": "既是帽子，也是杯具。"
+
 }

@@ -16,31 +16,28 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class SentimentStorm : BloodywolfCardModel
 {/// 舆论风暴
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { 
-        new DamageVar(15m, ValueProp.Move),
-        new CardsVar(1)
+        new TrollVar(7m),
+        new CardsVar(2)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public SentimentStorm()
-		: base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+		: base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
-			.Execute(choiceContext);
         await PowerCmd.Apply<SentimentStormPower>(choiceContext, 
             base.Owner.Creature, 
-            base.DynamicVars.Cards.BaseValue, 
+            base.DynamicVars[TrollVar.Key].BaseValue, 
             base.Owner.Creature, 
             this);
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(6m);
+        base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using static MyHook;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
@@ -27,5 +29,5 @@ public class RabbitHead : CustomRelicModel
 		Flash();
 		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner.Creature, 3m, base.Owner.Creature, null);
 	}
-    
+
 }

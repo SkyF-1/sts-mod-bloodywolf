@@ -38,7 +38,6 @@ public sealed class Chat : BloodywolfCardModel
         //     return count;
         // })
 	};
-    protected override bool ShouldGlowGoldInternal => base.CombatState != null && base.CombatState.HittableEnemies.Any(c => c.GetPowerAmount<CupLossPower>() > 0);
 	public Chat()
 		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{

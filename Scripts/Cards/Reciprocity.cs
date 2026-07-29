@@ -11,11 +11,11 @@ namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Reciprocity : BloodywolfCardModel
-{/// 礼尚往�?
+{/// 礼尚往�?
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
 	public Reciprocity()
-		: base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+		: base(3, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 
@@ -26,6 +26,6 @@ public sealed class Reciprocity : BloodywolfCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.AddKeyword(CardKeyword.Innate);
+		base.EnergyCost.UpgradeBy(-1);
 	}
 }

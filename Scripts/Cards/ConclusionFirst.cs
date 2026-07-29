@@ -14,7 +14,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class ConclusionFirst : BloodywolfCardModel
 {/// 先说结论
-	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Innate, CardKeyword.Exhaust};
+	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
     { 
         new RateVar(2m),
@@ -51,6 +51,6 @@ public sealed class ConclusionFirst : BloodywolfCardModel
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars.Cards.UpgradeValueBy(1);
+        base.AddKeyword(CardKeyword.Innate);
     }
 }

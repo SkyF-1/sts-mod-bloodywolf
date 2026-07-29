@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.Modding;
 using BaseLib.Config;
 using StsModBloodywolf.Scripts.Config;
 using StsModBloodywolf.Scripts.Services;
+using MegaCrit.Sts2.Core.Combat;
+using StsModBloodywolf.Scripts.CombatHistory;
 
 namespace StsModBloodywolf.Scripts;
 
@@ -24,5 +26,6 @@ public class Entry
 		Log.Debug("Mod initialized!");
 		ModConfigRegistry.Register("StsModBloodywolf", new BloodywolfModConfig());
 		BloodywolfAudioService.Initialize();
+		CombatManager.Instance.CombatSetUp += _ => TrollHistoryManager.Clear();
 	}
 }

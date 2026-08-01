@@ -12,27 +12,25 @@ using StsModBloodywolf.Scripts.Powers;
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
-public sealed class Unrivaled : BloodywolfCardModel
-{/// 独步天下
+public sealed class Pursuit : BloodywolfCardModel
+{/// 乘胜追击
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
-		new PowerVar<UnrivaledPower>(1m),
-		new HotTakeVar(9m)
+		new PowerVar<PursuitPower>(1m)
 	];
-	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Eternal };
 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
-	public Unrivaled()
-		: base(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
+	public Pursuit()
+		: base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 	{
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<UnrivaledPower>(choiceContext, base.Owner.Creature, base.DynamicVars["UnrivaledPower"].BaseValue, base.Owner.Creature, this);
+		await PowerCmd.Apply<PursuitPower>(choiceContext, base.Owner.Creature, base.DynamicVars["PursuitPower"].BaseValue, base.Owner.Creature, this);
 	}
 
 	protected override void OnUpgrade()
 	{
-		base.EnergyCost.UpgradeBy(-1);
+		base.AddKeyword(CardKeyword.Innate);
 	}
 }

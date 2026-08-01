@@ -34,7 +34,7 @@
     "STSMODBLOODYWOLF-BRING_IT_ON.title": "要打就来",
     "STSMODBLOODYWOLF-BRING_IT_ON.description": "所有生物获得{StrengthPower:diff()}点[gold]力量[/gold]。",
     "STSMODBLOODYWOLF-UNRIVALED.title": "独步天下",
-    "STSMODBLOODYWOLF-UNRIVALED.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n你的回合开始时，额外抽2张牌。",
+    "STSMODBLOODYWOLF-UNRIVALED.description": "战斗结束时，[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n获得一个随机的[gold]稀有[/gold]遗物。",
     "STSMODBLOODYWOLF-CUP_THEORY_STRIKE.title": "杯论打击",
     "STSMODBLOODYWOLF-CUP_THEORY_STRIKE.description": "造成{Damage:diff()}点伤害。\n[gold]串[/gold]掉等量于所造成伤害的生命值。",
     "STSMODBLOODYWOLF-WHIP_YOU.title": "鞭子抽你",
@@ -61,7 +61,7 @@
     "STSMODBLOODYWOLF-REPUTATION_REVERSE.title": "风评反转",
     "STSMODBLOODYWOLF-REPUTATION_REVERSE.description": "失去{Bloodywolf-CloutLoss:diff()}[gold]影响[/gold]：\n抽{Cards:diff()}张牌。",
     "STSMODBLOODYWOLF-FINAL_ASSAULT.title": "最终攻克",
-    "STSMODBLOODYWOLF-FINAL_ASSAULT.description": "在这个回合内每打出过一张技能牌，就造成{Damage:diff()}点伤害一次。{InCombat:\n（命中{CalculatedHits:diff()}次）|}",
+    "STSMODBLOODYWOLF-FINAL_ASSAULT.description": "[gold]不能被打出[/gold]。\n造成{Damage:diff()}点伤害。\n这张牌在可以[gold]斩杀[/gold]敌人时从[gold]手牌[/gold]中自动打出。",
     "STSMODBLOODYWOLF-VERDICT.title": "定论",
     "STSMODBLOODYWOLF-VERDICT.description": "造成{Damage:diff()}点伤害。\n你每[gold]评定[/gold]过一次，这张牌的耗能减少1。",
     "STSMODBLOODYWOLF-NO_STREAM_TONIGHT.title": "今晚不播",
@@ -156,7 +156,7 @@
     "STSMODBLOODYWOLF-INFILTRATE.title": "渗透",
     "STSMODBLOODYWOLF-INFILTRATE.description": "敌人每有{perBlock:inverseDiff()}点[gold]格挡[/gold]，就给予其1层[gold]易伤[/gold]和[gold]虚弱[/gold]。",
     "STSMODBLOODYWOLF-FLOURISHING.title": "风生水起",
-    "STSMODBLOODYWOLF-FLOURISHING.description": "在你的下一回合，\n你每[gold]评定[/gold]一次，抽1张牌，获得{energyPrefix:energyIcons(1)}。",
+    "STSMODBLOODYWOLF-FLOURISHING.description": "在你的下一回合，\n你每[gold]评定[/gold]一次，抽1张牌。",
     "STSMODBLOODYWOLF-TEST_YOU.title": "考考你呀",
     "STSMODBLOODYWOLF-TEST_YOU.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n此次每格挡住一次敌人的攻击，就给予{CupLossPower:diff()}层\n[gold]杯级丧失[/gold]。",
     "STSMODBLOODYWOLF-EGG_COLLECTION.title": "彩蛋征集",
@@ -191,6 +191,8 @@
     "STSMODBLOODYWOLF-STOMP.title": "踩头",
     "STSMODBLOODYWOLF-STOMP.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n给予{CupLossPower:diff()}层[gold]杯级丧失[/gold]。",
     "STSMODBLOODYWOLF-SPIN.title": "话术",
-    "STSMODBLOODYWOLF-SPIN.description": "你额外[gold]串[/gold]掉{SpinPower:diff()}点生命。"
+    "STSMODBLOODYWOLF-SPIN.description": "你额外[gold]串[/gold]掉{SpinPower:diff()}点生命。",
+    "STSMODBLOODYWOLF-PURSUIT.title": "乘胜追击",
+    "STSMODBLOODYWOLF-PURSUIT.description": "你每次击破敌人的[gold]格挡[/gold]时，抽{PursuitPower:diff()}张牌。"
 
 }

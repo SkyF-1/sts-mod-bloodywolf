@@ -24,7 +24,7 @@ public sealed class FlourishingPower : CustomPowerModel
 		{
 			Flash();
 			await PowerCmd.Apply<RateToDrawPower>(new ThrowingPlayerChoiceContext(), base.Owner, base.Amount, base.Owner, null);
-			await PowerCmd.Apply<RateToEnergyPower>(new ThrowingPlayerChoiceContext(), base.Owner, base.Amount, base.Owner, null);
+			// await PowerCmd.Apply<RateToEnergyPower>(new ThrowingPlayerChoiceContext(), base.Owner, base.Amount, base.Owner, null);
 			await PowerCmd.Remove(this);
 		}
 	}

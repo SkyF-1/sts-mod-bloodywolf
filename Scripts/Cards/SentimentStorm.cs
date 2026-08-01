@@ -16,7 +16,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class SentimentStorm : BloodywolfCardModel
 {/// 舆论风暴
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { 
-        new TrollVar(7m),
+        new TrollVar(5m),
         new CardsVar(2)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";

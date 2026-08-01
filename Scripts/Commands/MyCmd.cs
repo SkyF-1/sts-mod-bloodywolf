@@ -14,6 +14,7 @@ public static class MyCmd
 {
     public static async Task<decimal> GiveBlock(Creature creature, decimal amount, CardPlay? cardPlay, bool fast = false)
     {
+        if(!creature.IsAlive) return -1;
         return await CreatureCmd.GainBlock(creature, amount, ValueProp.Unpowered, cardPlay, fast);
     }
 

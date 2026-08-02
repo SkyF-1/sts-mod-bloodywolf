@@ -18,7 +18,7 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class ZeroFrameDeploy : BloodywolfCardModel
 {
     /// 零帧部署
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust, CardKeyword.Innate};
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust};
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 
     public ZeroFrameDeploy()
@@ -64,6 +64,6 @@ public sealed class ZeroFrameDeploy : BloodywolfCardModel
 
     protected override void OnUpgrade()
     {
-        base.EnergyCost.UpgradeBy(-1);
+        base.AddKeyword(CardKeyword.Innate);
     }
 }

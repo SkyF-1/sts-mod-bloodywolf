@@ -80,6 +80,6 @@ public sealed class Clapback : BloodywolfCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(5m);
+		base.DynamicVars.Damage.UpgradeValueBy(3m);
 	}
 }

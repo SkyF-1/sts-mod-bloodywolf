@@ -1,6 +1,6 @@
 {
-    "STSMODBLOODYWOLF-CLOUT_POWER.description": "触发[gold]言论[/gold]的特殊效果。\n[gold]影响[/gold]层数每回合减少[blue]1[/blue]。",
-    "STSMODBLOODYWOLF-CLOUT_POWER.smartDescription": "触发[gold]言论[/gold]的特殊效果。\n[gold]影响[/gold]层数每回合减少[blue]1[/blue]。\n你现在有[blue]{Amount}[/blue]层[gold]影响[/gold]。",
+    "STSMODBLOODYWOLF-CLOUT_POWER.description": "[gold]影响[/gold]层数每回合减少[blue]1[/blue]。",
+    "STSMODBLOODYWOLF-CLOUT_POWER.smartDescription": "[gold]影响[/gold]层数每回合减少[blue]1[/blue]。",
     "STSMODBLOODYWOLF-CLOUT_POWER.title": "影响",
     "STSMODBLOODYWOLF-UNRIVALED_POWER.description": "战斗结束时，[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n获得一个随机的[gold]稀有[/gold]遗物。",
     "STSMODBLOODYWOLF-UNRIVALED_POWER.smartDescription": "战斗结束时，[gold]言论[/gold]{Bloodywolf-HotTake:diff()}：\n获得[blue]{Amount}[/blue]个随机的[gold]稀有[/gold]遗物。",
@@ -8,7 +8,7 @@
     "STSMODBLOODYWOLF-SUPER_CHAT_POWER.description": "醒目留言的生物在拥有格挡时受到的攻击伤害翻倍。",
     "STSMODBLOODYWOLF-SUPER_CHAT_POWER.smartDescription": "[blue]{Amount}[/blue]回合内，拥有格挡时受到的攻击伤害翻倍。",
     "STSMODBLOODYWOLF-SUPER_CHAT_POWER.title": "醒目留言",
-    "STSMODBLOODYWOLF-STICK_POWER.description": "黏住的玩家在下一回合开始时格挡不会消失。",
+    "STSMODBLOODYWOLF-STICK_POWER.description": "黏住的生物在下一回合开始时格挡不会消失。",
     "STSMODBLOODYWOLF-STICK_POWER.smartDescription": "你在下一回合开始时格挡不会消失。",
     "STSMODBLOODYWOLF-STICK_POWER.title": "黏住",
     "STSMODBLOODYWOLF-CUP_LOSS_POWER.description": "在回合结束时失去[gold]杯级丧失[/gold]层数的生命，并获得等量[gold]格挡[/gold]。\n[gold]杯级丧失[/gold]的生物在[gold]格挡[/gold]被削减时，会使攻击者获得等量[gold]格挡[/gold]。",

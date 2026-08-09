@@ -44,11 +44,8 @@ public sealed class Infiltrate : BloodywolfCardModel
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         int blockAmount = cardPlay.Target.Block;
         int Count = blockAmount / DynamicVars["perBlock"].IntValue;
-        for(int i = 0; i < Count; i++)
-        {
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
-            await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, 1m, base.Owner.Creature, this);
-        }
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, Count, base.Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, Count, base.Owner.Creature, this);
     }
 
 	protected override void OnUpgrade()

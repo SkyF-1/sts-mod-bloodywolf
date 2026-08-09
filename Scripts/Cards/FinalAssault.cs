@@ -54,6 +54,11 @@ public sealed class FinalAssault : BloodywolfCardModel
 		foreach(Creature creature in base.CombatState.HittableEnemies)
 			await TryPlay(creature);
 	}
+	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+	{
+		foreach(Creature creature in base.CombatState.HittableEnemies)
+			await TryPlay(creature);
+	}
 	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
 		foreach(Creature creature in base.CombatState.HittableEnemies)

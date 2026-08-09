@@ -20,7 +20,7 @@ public sealed class ReciprocityPower : CustomPowerModel
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	public override async Task AfterBlockGained(Creature creature, decimal amount, ValueProp props, CardModel? cardSource)
     {
-        if (creature != base.Owner && base.CombatState.CurrentSide == base.Owner.Side)
+        if (creature.IsEnemy && base.CombatState.CurrentSide == base.Owner.Side)
         {
             Flash();
             await CreatureCmd.GainBlock(base.Owner, amount, props, null);

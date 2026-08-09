@@ -14,6 +14,9 @@
   "STSMODBLOODYWOLF-NOISE_CANCELING_MICROPHONE.flavor": "保护狼心糖的耳朵免受侵袭。",
   "STSMODBLOODYWOLF-CUP.title": "杯具",
   "STSMODBLOODYWOLF-CUP.description": "在每场战斗开始时，[gold]串[/gold]掉所有敌人[blue]7[/blue]点生命。",
-  "STSMODBLOODYWOLF-CUP.flavor": "既是帽子，也是杯具。"
+  "STSMODBLOODYWOLF-CUP.flavor": "既是帽子，也是杯具。",
+  "STSMODBLOODYWOLF-LIVE_ROOM_RULE.title": "《直播间管理办法》",
+  "STSMODBLOODYWOLF-LIVE_ROOM_RULE.description": "你每次失去[gold]影响[/gold]时，所有敌人失去等量生命。",
+  "STSMODBLOODYWOLF-LIVE_ROOM_RULE.flavor": "“请问这里是实话最多，办法最少的直播间吗？”"
 
 }

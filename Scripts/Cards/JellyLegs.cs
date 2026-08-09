@@ -25,20 +25,25 @@ public sealed class JellyLegs : BloodywolfCardModel
         HoverTipFactory.FromPower<DexterityPower>()
     };
     public JellyLegs()
-        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+        : base(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new PowerVar<JellyLegsPower>(2m)
+        new EnergyVar(2),
+        new CardsVar(2),
+		new PowerVar<JellyLegsPower>(1m)
 	};
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+		await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue, base.Owner);
+		await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
         await PowerCmd.Apply<JellyLegsPower>(choiceContext, base.Owner.Creature, base.DynamicVars["JellyLegsPower"].BaseValue, base.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars["JellyLegsPower"].UpgradeValueBy(1m);
+        base.DynamicVars.Energy.UpgradeValueBy(1);
+        base.DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

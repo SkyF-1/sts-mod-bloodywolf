@@ -3,7 +3,7 @@
   "name": "血狼破军",
   "author": "SkyF",
   "description": "使用全新人物血狼破军攻克这座高塔。",
-  "version": "v1.1.4-alpha.1",
+  "version": "v1.1.4",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [

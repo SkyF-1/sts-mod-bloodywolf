@@ -34,14 +34,14 @@ public sealed class CloutImpact : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
 
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await DamageCmd.Attack(base.DynamicVars["BonusDamage"].BaseValue).FromCard(this)
+            await DamageCmd.Attack(base.DynamicVars["BonusDamage"].BaseValue).FromCard(this, cardPlay)
 			.TargetingRandomOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);

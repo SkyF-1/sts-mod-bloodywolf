@@ -34,7 +34,7 @@ public sealed class ResonantWords : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         for(int i = 0; i < DynamicVars["Count"].IntValue; i++)
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

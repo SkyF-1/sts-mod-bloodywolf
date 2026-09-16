@@ -34,7 +34,7 @@ public sealed class Landmine : BloodywolfCardModel
 	{
         var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
 		ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
-		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);

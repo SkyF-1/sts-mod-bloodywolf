@@ -54,7 +54,7 @@ public sealed class Clapback : BloodywolfCardModel
 		}
 		
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
@@ -69,14 +69,14 @@ public sealed class Clapback : BloodywolfCardModel
 			base.DynamicVars[CloutLossVar.Key].BaseValue = _baseCloutLoss;
 		}
 	}
-	protected override PileType GetResultPileTypeForCardPlay()
+	protected override CardLocation GetResultLocationForCardPlay()
 	{
-		PileType resultPileTypeForCardPlay = base.GetResultPileTypeForCardPlay();
-		if (resultPileTypeForCardPlay != PileType.Discard)
+		CardLocation resultLocationForCardPlay = base.GetResultLocationForCardPlay();
+		if (resultLocationForCardPlay.pileType == PileType.Discard)
 		{
-			return resultPileTypeForCardPlay;
+			resultLocationForCardPlay.pileType = PileType.Hand;
 		}
-		return PileType.Hand;
+		return resultLocationForCardPlay;
 	}
 	protected override void OnUpgrade()
 	{

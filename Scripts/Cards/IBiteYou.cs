@@ -34,7 +34,7 @@ public sealed class IBiteYou : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target);
+		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target);
 		await PowerCmd.Apply<CloutPower>(choiceContext, 
             base.Owner.Creature, 
             base.DynamicVars[RateVar.Key].BaseValue, 

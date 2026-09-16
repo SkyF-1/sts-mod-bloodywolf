@@ -31,7 +31,7 @@ public class LiveRoomRule : CustomRelicModel
 		if (!(amount >= 0m) && power.Owner == base.Owner.Creature && power is CloutPower)
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, base.Owner.Creature.CombatState.HittableEnemies, -amount, ValueProp.Unblockable | ValueProp.Unpowered, base.Owner.Creature, null);
+			await CreatureCmd.Damage(choiceContext, base.Owner.Creature.CombatState.HittableEnemies, -amount, ValueProp.Unblockable | ValueProp.Unpowered, base.Owner.Creature, null ,null);
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class LandminePower : CustomPowerModel
             ArgumentNullException.ThrowIfNull(SourceCard, "SourceCard");
             // 使用存储的可变卡牌实例
             await DamageCmd.Attack(base.Amount)
-                .FromCard(SourceCard)
+				.FromCard(SourceCard, null)
                 .Unpowered()
                 .Targeting(base.Owner)
                 .WithHitFx("vfx/vfx_attack_blunt")

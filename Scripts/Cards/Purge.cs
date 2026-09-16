@@ -51,11 +51,11 @@ public sealed class Purge : BloodywolfCardModel
 		{
 			num += 0.2f;
 		}
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(base.CombatState)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(base.CombatState)
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        //言论条�?
+        //言论条�?
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await PowerCmd.Apply<WeakPower>(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);

@@ -28,7 +28,7 @@ public sealed class Headbutt : BloodywolfCardModel
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue)
-			.FromCard(this).Targeting(cardPlay.Target)
+			.FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
         await PowerCmd.Apply<FreeHotTakePower>(choiceContext, base.Owner.Creature, DynamicVars["FreeHotTakePower"].BaseValue, base.Owner.Creature, this);

@@ -28,4 +28,5 @@ public abstract class BloodywolfCardModel : CustomCardModel
     public BloodywolfCardModel(int baseCost, CardType type, CardRarity rarity, TargetType target, bool showInCardLibrary = true, bool autoAdd = true) : base(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
     {
     }
+
 }

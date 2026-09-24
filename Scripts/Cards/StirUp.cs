@@ -17,7 +17,7 @@ public sealed class StirUp : BloodywolfCardModel
 {/// 带节�?
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(27m, ValueProp.Move),
+        new DamageVar(32m, ValueProp.Move),
         new CloutLossVar(3m),
         new CardsVar(1)
     };
@@ -57,6 +57,6 @@ public sealed class StirUp : BloodywolfCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(6m);
+		base.DynamicVars.Damage.UpgradeValueBy(10m);
 	}
 }

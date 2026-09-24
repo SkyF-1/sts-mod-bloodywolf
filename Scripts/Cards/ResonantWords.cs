@@ -17,11 +17,12 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class ResonantWords : BloodywolfCardModel
 {
     /// 掷地有声
+    public override TargetType TargetType => base.IsUpgraded ? TargetType.AllEnemies : TargetType.AnyEnemy;
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
+        new IntVar("Count", 2m),
 		new CalculationBaseVar(0m),
 		new ExtraDamageVar(1m),
-        new DynamicVar("Count", 2m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.Block)
     };
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
@@ -30,18 +31,24 @@ public sealed class ResonantWords : BloodywolfCardModel
         : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
-
-    protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlayEffect(PlayerChoiceContext ctx, CardPlay play)
     {
-        for(int i = 0; i < DynamicVars["Count"].IntValue; i++)
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay)
-            .TargetingAllOpponents(base.CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-    }
+        int count = DynamicVars["Count"].IntValue;
+        for (int i = 0; i < count; i++)
+        {
+            var cmd = DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
+                .FromCard(this, play)
+                .WithHitFx("vfx/vfx_attack_slash");
 
-    protected override void OnUpgrade()
-    {
-        base.DynamicVars["Count"].UpgradeValueBy(1m);
+            if (IsUpgraded)
+                cmd = cmd.TargetingAllOpponents(base.CombatState);
+            else
+            {
+                ArgumentNullException.ThrowIfNull(play.Target, "cardPlay.Target");
+                cmd = cmd.Targeting(play.Target);
+            }
+
+            await cmd.Execute(ctx);
+        }
     }
 }

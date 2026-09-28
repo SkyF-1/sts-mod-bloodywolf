@@ -128,7 +128,7 @@
     "STSMODBLOODYWOLF-LOVE_AND_HATE.title": "爱恨交加",
     "STSMODBLOODYWOLF-LOVE_AND_HATE.description": "给予{Bloodywolf-GivenBlock:diff()}点[gold]格挡[/gold]。\n然后所有敌人失去等量生命。",
     "STSMODBLOODYWOLF-LANDMINE.title": "爆了！",
-    "STSMODBLOODYWOLF-LANDMINE.description": "失去所有[gold]影响[/gold]，你手牌中的所有牌在本回合免费打出。\n本回合内你每打出一张牌，就在回合结束时[gold]评定[/gold]1。",
+    "STSMODBLOODYWOLF-LANDMINE.description": "失去所有[gold]影响[/gold]。\n你手牌中的所有牌在本回合免费打出。每打出一张牌，回合结束时[gold]评定[/gold]1。",
     "STSMODBLOODYWOLF-TALLY.title": "清点计算",
     "STSMODBLOODYWOLF-TALLY.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n每造成一次未被格挡的伤害，[gold]评定[/gold]{Bloodywolf-Rate:diff()}。",
     "STSMODBLOODYWOLF-ADVANCED_EXPERIENCE.title": "先进经验",

@@ -44,31 +44,38 @@ public sealed class FinalAssault : BloodywolfCardModel
 	{
 		await TryPlay(creature);
 	}
-	public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
+	public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
 	{
-		foreach(Creature creature in base.CombatState.HittableEnemies)
-			await TryPlay(creature);
-	}
-	public override async Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
-	{
-		foreach(Creature creature in base.CombatState.HittableEnemies)
-			await TryPlay(creature);
+		if (card != this || oldPileType == PileType.Hand || base.Pile?.Type != PileType.Hand)
+			return;
+
+		await TryPlayHittableEnemies();
 	}
 	public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		foreach(Creature creature in base.CombatState.HittableEnemies)
-			await TryPlay(creature);
+		await TryPlayHittableEnemies();
 	}
 	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 	{
-		foreach(Creature creature in base.CombatState.HittableEnemies)
+		await TryPlayHittableEnemies();
+	}
+	private async Task TryPlayHittableEnemies()
+	{
+		ICombatState? combatState = base.CombatState;
+		if (combatState == null) return;
+
+		foreach (Creature creature in combatState.HittableEnemies.ToList())
+		{
+			if (!creature.IsAlive) continue;
 			await TryPlay(creature);
+		}
 	}
 	private async Task TryPlay(Creature target)
 	{
 		if (!target.IsEnemy) return;
+		if (!target.IsAlive) return;
 		if (!CanBeKilled(target)) return;
-		if (base.Pile.Type != PileType.Hand) return;
+		if (base.Pile?.Type != PileType.Hand) return;
 		await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), this, target);
 	}
 

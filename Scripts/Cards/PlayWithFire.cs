@@ -37,7 +37,10 @@ public sealed class PlayWithFire : BloodywolfCardModel
 			await CardCmd.Exhaust(choiceContext, item);
 		}
         for(int i = 0; i < cardCount; i++)
-			await MyCmd.Troll(choiceContext, cardPlay.Target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+			await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+				.FromCard(this)
+				.Targeting(cardPlay.Target)
+				.Execute(choiceContext);
 	}
 
 	protected override void OnUpgrade()

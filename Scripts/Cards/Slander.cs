@@ -35,7 +35,10 @@ public sealed class Slander : BloodywolfCardModel
         if(cardPlay.Target.GetPower<CupLossPower>() != null)count = 2;
         for(int i = 0; i < count; i++)
         {
-            await MyCmd.Troll(choiceContext, cardPlay.Target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+            await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+                .FromCard(this)
+                .Targeting(cardPlay.Target)
+                .Execute(choiceContext);
         }
 
         // await PowerCmd.Apply<CloutPower>(choiceContext, 

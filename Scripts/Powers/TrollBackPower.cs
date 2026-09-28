@@ -30,7 +30,10 @@ public sealed class TrollBackPower : CustomPowerModel
         {
             Flash();
             for(int i = 0; i < Amount; i++)
-                await MyCmd.Troll(new BlockingPlayerChoiceContext(), base.Owner, amount, base.Applier, null);
+                await TrollCmd.Troll(amount)
+                    .From(base.Applier)
+                    .Targeting(base.Owner)
+                    .Execute(new BlockingPlayerChoiceContext());
         }
     }
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

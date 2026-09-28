@@ -16,6 +16,8 @@ namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class ShutUpPower : CustomPowerModel
 {
+	private bool _shouldConsume;
+
 	public override PowerType Type => PowerType.Buff;
 	public static string Key => "ShutUpPower";
 	public override PowerStackType StackType => PowerStackType.Counter;
@@ -27,22 +29,29 @@ public sealed class ShutUpPower : CustomPowerModel
     };
 	public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		if (target != base.Owner)
+		_shouldConsume = false;
+		if (target != base.Owner || amount <= 0m)
 		{
 			return amount;
 		}
-		decimal CloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
-		if (CloutValue < base.DynamicVars[CloutLossPowerVar.Key].BaseValue)
+		decimal cloutLoss = base.DynamicVars[CloutLossPowerVar.Key].BaseValue;
+		decimal cloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0m;
+		if (cloutValue < cloutLoss)
 		{
 			return amount;
 		}
-		if(amount > 0)
+		_shouldConsume = true;
+		return 0m;
+	}
+	public override async Task AfterModifyingHpLostAfterOsty()
+	{
+		if (!_shouldConsume)
 		{
-			PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, -base.DynamicVars[CloutLossPowerVar.Key].BaseValue, base.Owner, null);
-			Flash();
-			PowerCmd.Decrement(this);
-			return 0m;
+			return;
 		}
-		return amount;
+		_shouldConsume = false;
+		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, -base.DynamicVars[CloutLossPowerVar.Key].BaseValue, base.Owner, null);
+		Flash();
+		await PowerCmd.Decrement(this);
 	}
 }

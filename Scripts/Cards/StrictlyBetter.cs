@@ -56,8 +56,12 @@ public sealed class StrictlyBetter : BloodywolfCardModel
         IReadOnlyList<Creature> hittableEnemies = base.CombatState.HittableEnemies;
         if (hittableEnemies.Count != 0)
 		{
-            Creature target = base.Owner.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
-            await MyCmd.Troll(choiceContext, target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+            Creature? target = base.Owner.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
+            if (target == null) return;
+            await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+                .FromCard(this)
+                .Targeting(target)
+                .Execute(choiceContext);
 		}
 	}
 

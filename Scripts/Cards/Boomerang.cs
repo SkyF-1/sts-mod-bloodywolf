@@ -43,8 +43,10 @@ public sealed class Boomerang : BloodywolfCardModel
         int count = (int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target);
         for(int i = 0; i < count; i++)
         {
-            if(!cardPlay.Target.IsAlive) break;
-            await MyCmd.Troll(choiceContext, cardPlay.Target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+            await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+                .FromCard(this)
+                .Targeting(cardPlay.Target)
+                .Execute(choiceContext);
         }
 
         return;

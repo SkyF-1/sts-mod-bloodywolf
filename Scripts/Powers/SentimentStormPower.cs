@@ -15,7 +15,7 @@ namespace StsModBloodywolf.Scripts.Powers;
 public sealed class SentimentStormPower : CustomPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
-	public override PowerStackType StackType => PowerStackType.Single;
+	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
 	public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
@@ -24,8 +24,16 @@ public sealed class SentimentStormPower : CustomPowerModel
 		{
 			return;
 		}
+		ICombatState? combatState = base.Owner.CombatState;
+		if (combatState == null)
+		{
+			return;
+		}
 		Flash();
-		await MyCmd.Troll(choiceContext, base.Owner.CombatState.HittableEnemies.ToList(), Amount, base.Owner, null);
+		await TrollCmd.Troll(Amount)
+			.From(base.Owner)
+			.TargetingAllOpponents(combatState)
+			.Execute(choiceContext);
 	}
 	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{

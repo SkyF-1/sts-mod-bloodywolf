@@ -36,7 +36,10 @@ public sealed class GentleGuidance : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await MyCmd.Troll(choiceContext, cardPlay.Target, base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, this);
+        await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
     await PowerCmd.Apply<GentleGuidancePower>(choiceContext, cardPlay.Target, base.DynamicVars["GentleGuidancePower"].BaseValue, base.Owner.Creature, this);
     }
 

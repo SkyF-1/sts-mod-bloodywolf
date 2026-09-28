@@ -38,7 +38,10 @@ public sealed class CupTheoryStrike : BloodywolfCardModel
 		AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-        await MyCmd.Troll(choiceContext, cardPlay.Target, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage), base.Owner.Creature, this);
+		await TrollCmd.Troll(attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage))
+			.FromCard(this)
+			.Targeting(cardPlay.Target)
+			.Execute(choiceContext);
 	}
 	protected override void OnUpgrade()
 	{

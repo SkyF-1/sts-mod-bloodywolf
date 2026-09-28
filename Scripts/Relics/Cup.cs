@@ -36,12 +36,16 @@ public class Cup : CustomRelicModel
 	{
 		if (player == base.Owner)
 		{
-			ICombatState combatState = player.Creature.CombatState;
+			ICombatState? combatState = player.Creature.CombatState;
+			if (combatState == null) return;
 			if (base.Owner.PlayerCombatState.TurnNumber == 1)
 			{
 				Flash();
 				VfxCmd.PlayOnCreatureCenters(combatState.HittableEnemies, "vfx/vfx_attack_slash");
-				await MyCmd.Troll(choiceContext, combatState.HittableEnemies.ToList(), base.DynamicVars[TrollVar.Key].BaseValue, base.Owner.Creature, null);
+				await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
+					.From(base.Owner.Creature)
+					.TargetingAllOpponents(combatState)
+					.Execute(choiceContext);
 			}
 		}
 	}

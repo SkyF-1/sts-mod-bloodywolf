@@ -23,14 +23,12 @@ public sealed class CupLossPower : CustomPowerModel, IHealthBarForecastSource
 	public const string Key = "CupLossPower";
 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? __)
-	{
-        if (dealer != null && dealer.IsPlayer && target == base.Owner && result.BlockedDamage > 0)
-        {
-			Flash();
-            await CreatureCmd.GainBlock(dealer, new BlockVar(result.BlockedDamage, ValueProp.Unpowered), null);
-        }
-	}
+	// 注意：“格挡被削减时转移等量格挡”的逻辑不在这里实现，而是放在
+	// CupLossBlockTransferSingleton 中。原因是目标被击杀时游戏会跳过
+	// Hook.AfterDamageReceived，挂在目标身上的能力拿不到 DamageResult。
+	// 基类的 Flash() 是 protected，单例需要通过这个入口触发闪烁提示。
+	public void TriggerFlash() => Flash();
+
 	public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (!CombatManager.Instance.IsOverOrEnding && side == base.Owner.Side && !base.Owner.IsDead )

@@ -36,11 +36,12 @@ public sealed class CupTheoryStrike : BloodywolfCardModel
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
 		await TrollCmd.Troll(attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage))
 			.FromCard(this)
 			.Targeting(cardPlay.Target)
+			.WithHitFx("vfx/vfx_bloody_impact")
 			.Execute(choiceContext);
 	}
 	protected override void OnUpgrade()

@@ -23,6 +23,9 @@ public sealed class TrollCommand
     private IReadOnlyList<Creature>? _targets;
     private ICombatState? _combatState;
     private bool _hasTargeting;
+    private string? _hitVfx;
+    private string? _hitSfx;
+    private string? _tmpHitSfx;
 
     internal TrollCommand(decimal amount)
     {
@@ -69,6 +72,19 @@ public sealed class TrollCommand
         return this;
     }
 
+    /// <summary>
+    /// 为「串」的每次命中指定特效/音效，用法与 AttackCommand.WithHitFx 一致。
+    /// 例：.WithHitFx("vfx/vfx_bloody_impact")。
+    /// sfx 与 tmpSfx 都为空时不播放音效。
+    /// </summary>
+    public TrollCommand WithHitFx(string vfx, string? sfx = null, string? tmpSfx = null)
+    {
+        _hitVfx = vfx;
+        _hitSfx = sfx;
+        _tmpHitSfx = tmpSfx;
+        return this;
+    }
+
     public async Task<IEnumerable<DamageResult>> Execute(PlayerChoiceContext? choiceContext)
     {
         if (!_hasTargeting)
@@ -85,6 +101,8 @@ public sealed class TrollCommand
             if (!target.IsAlive) continue;
             ICombatState? combat = target.CombatState;
             if (combat == null) continue;
+
+            PlayHitFx(target);
 
             decimal modifiedAmount = MyHook.ModifyTrollDamage(combat, target, _amount, _dealer, _cardSource);
             IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
@@ -116,6 +134,21 @@ public sealed class TrollCommand
         }
 
         return allDamageResults;
+    }
+
+    /// <summary>播放本次命中的特效与音效（特效缺失时静默跳过）。</summary>
+    private void PlayHitFx(Creature target)
+    {
+        if (!string.IsNullOrEmpty(_hitVfx))
+        {
+            VfxCmd.PlayOnCreatureCenter(target, _hitVfx);
+        }
+
+        string? sfx = !string.IsNullOrEmpty(_hitSfx) ? _hitSfx : _tmpHitSfx;
+        if (!string.IsNullOrEmpty(sfx))
+        {
+            SfxCmd.Play(sfx, 1f);
+        }
     }
 
     private IEnumerable<Creature> GetPossibleTargets()

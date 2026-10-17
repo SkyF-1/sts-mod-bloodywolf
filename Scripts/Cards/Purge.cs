@@ -45,13 +45,13 @@ public sealed class Purge : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
-		NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NThinSliceVfx.Create(cardPlay.Target));
 		float num = base.Owner.Character.AttackAnimDelay;
 		if (SaveManager.Instance.PrefsSave.FastMode == FastModeType.Normal)
 		{
 			num += 0.2f;
 		}
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(base.CombatState)
+			.WithHitFx("vfx/vfx_giant_horizontal_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;

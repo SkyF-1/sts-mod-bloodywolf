@@ -48,7 +48,7 @@ public sealed class StirUp : BloodywolfCardModel
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_heavy_blunt")
 			.Execute(choiceContext);
         
 

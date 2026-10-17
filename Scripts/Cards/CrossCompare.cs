@@ -34,7 +34,7 @@ public sealed class CrossCompare : BloodywolfCardModel
     {
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_flying_slash")
             .Execute(choiceContext);
     }
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)

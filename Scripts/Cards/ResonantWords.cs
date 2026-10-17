@@ -38,7 +38,7 @@ public sealed class ResonantWords : BloodywolfCardModel
         {
             var cmd = DamageCmd.Attack(base.DynamicVars.CalculatedDamage)
                 .FromCard(this, play)
-                .WithHitFx("vfx/vfx_attack_slash");
+                .WithHitFx("vfx/vfx_scream");
 
             if (IsUpgraded)
                 cmd = cmd.TargetingAllOpponents(base.CombatState);

@@ -47,13 +47,13 @@ public sealed class Liquidate : BloodywolfCardModel, ITranscendenceCard
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NThinSliceVfx.Create(cardPlay.Target));
 		float num = base.Owner.Character.AttackAnimDelay;
 		if (SaveManager.Instance.PrefsSave.FastMode == FastModeType.Normal)
 		{
 			num += 0.2f;
 		}
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
+			.WithHitFx("vfx/vfx_attack_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;

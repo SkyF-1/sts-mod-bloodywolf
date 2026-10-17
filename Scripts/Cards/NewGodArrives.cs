@@ -33,7 +33,7 @@ public sealed class NewGodArrives : BloodywolfCardModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
 			.WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target)).FromCard(this, cardPlay)
 			.TargetingAllOpponents(base.CombatState)
-			.WithHitFx("vfx/vfx_attack_blunt")
+			.WithHitFx("vfx/vfx_fire_smoke_puff")
 			.Execute(choiceContext);
         
     }

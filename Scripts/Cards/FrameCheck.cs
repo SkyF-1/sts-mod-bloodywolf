@@ -37,7 +37,7 @@ public sealed class FrameCheck : BloodywolfCardModel
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_gaze")
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)

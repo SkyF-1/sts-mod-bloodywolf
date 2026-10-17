@@ -35,7 +35,7 @@ public sealed class CloutImpact : BloodywolfCardModel
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
 
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;

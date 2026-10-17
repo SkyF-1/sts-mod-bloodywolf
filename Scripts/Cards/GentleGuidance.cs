@@ -39,6 +39,7 @@ public sealed class GentleGuidance : BloodywolfCardModel
         await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_scream")
             .Execute(choiceContext);
     await PowerCmd.Apply<GentleGuidancePower>(choiceContext, cardPlay.Target, base.DynamicVars["GentleGuidancePower"].BaseValue, base.Owner.Creature, this);
     }

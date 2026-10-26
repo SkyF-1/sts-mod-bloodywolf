@@ -35,20 +35,21 @@ public sealed class WellMade : BloodywolfCardModel
 		if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue && drawnCards.Count > 0)
         {
 			List<CardModel> eligibleCards = drawnCards
-				.Where(card => card.EnergyCost.GetWithModifiers(CostModifiers.All) != 0 || card.EnergyCost.CostsX)
+				.Where(card => card.EnergyCost.GetWithModifiers(CostModifiers.All) != 0 && !card.EnergyCost.CostsX)
 				.ToList();
 			CardModel? card = eligibleCards.Count > 0
 				? base.Owner.RunState.Rng.CombatCardSelection.NextItem(eligibleCards)
 				: null;
-			if (card != null && IsUpgraded)
+			if (card != null)
 			{
 				MyCmd.SetFreeBeforeShuffled(card);
 			}
-			else if (card != null)
-			{
-				MyCmd.ReduceCostBeforeShuffled(card);
-			}
         }
 
+	}
+
+	protected override void OnUpgrade()
+	{
+		base.DynamicVars.Cards.UpgradeValueBy(1m);
 	}
 }

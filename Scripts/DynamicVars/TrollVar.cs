@@ -40,6 +40,7 @@ public class TrollVar : DynamicVar
         {
             // 注意：ModifyTrollDamage 需要在 MyHook 中定义
             num = MyHook.ModifyTrollDamage(card.CombatState, target, num, card.Owner.Creature, card);
+            num = MyHook.ModifyTrollDamageMultiplicative(card.CombatState, target, num, card.Owner.Creature, card);
         }
 
         // 3. 更新预览值

@@ -105,6 +105,7 @@ public sealed class TrollCommand
             PlayHitFx(target);
 
             decimal modifiedAmount = MyHook.ModifyTrollDamage(combat, target, _amount, _dealer, _cardSource);
+            modifiedAmount = MyHook.ModifyTrollDamageMultiplicative(combat, target, modifiedAmount, _dealer, _cardSource);
             IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
                 context,
                 target,

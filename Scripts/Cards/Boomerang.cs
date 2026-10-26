@@ -52,7 +52,6 @@ public sealed class Boomerang : BloodywolfCardModel
 
         return;
         
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         // 言论条件（现已弃用�?
         //if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         // {

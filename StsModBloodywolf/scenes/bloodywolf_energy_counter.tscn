@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqrrrouxybfhh"]
 
-[ext_resource type="Texture2D" uid="uid://23qurc6c0l5j" path="res://StsModBloodywolf/scenes/bloodywolf_energy_counter.png" id="2_iyqtu"]
+[ext_resource type="Texture2D" uid="uid://dmn3jetpf0bf2" path="res://StsModBloodywolf/images/energy_bloodywolf_big.png" id="1_05rbg"]
 
 [sub_resource type="Curve" id="Curve_ns61i"]
 _data = [Vector2(0.00596422, 0.0309963), 0.0, 4.46389, 0, 0, Vector2(0.298211, 0.736162), 0.832039, 0.832039, 0, 0, Vector2(0.99006, 0.932841), -0.247478, 0.0, 0, 0]
@@ -59,14 +59,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -52.0
-offset_right = 38.0
-offset_bottom = 18.0
+offset_left = 23.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_iyqtu")
+texture = ExtResource("1_05rbg")
 expand_mode = 1
 stretch_mode = 5
 

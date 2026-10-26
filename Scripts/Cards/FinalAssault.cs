@@ -1,5 +1,6 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,6 +13,8 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 using StsModBloodywolf.Scripts.Pools;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Hooks;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -20,6 +23,8 @@ public sealed class FinalAssault : BloodywolfCardModel
 {
     /// 最终攻�?
 	protected override bool IsPlayable => false;
+	private Creature? _deferredTarget;
+	private bool _deferredAutoPlayScheduled;
     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
@@ -76,7 +81,59 @@ public sealed class FinalAssault : BloodywolfCardModel
 		if (!target.IsAlive) return;
 		if (!CanBeKilled(target)) return;
 		if (base.Pile?.Type != PileType.Hand) return;
+
+		// Effects triggered outside a GameAction, such as the debug console, have
+		// no ActionExecutor pass to settle a lethal auto-play afterwards.
+		if (RunManager.Instance?.ActionExecutor.CurrentlyRunningAction == null)
+		{
+			ScheduleDeferredAutoPlay(target);
+			return;
+		}
+
 		await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), this, target);
+	}
+
+	private void ScheduleDeferredAutoPlay(Creature target)
+	{
+		if (_deferredAutoPlayScheduled) return;
+
+		_deferredTarget = target;
+		_deferredAutoPlayScheduled = true;
+		TaskHelper.RunSafely(ResolveDeferredAutoPlay());
+	}
+
+	private async Task ResolveDeferredAutoPlay()
+	{
+		try
+		{
+			// Let the current console command or hook chain finish before playing.
+			if (Engine.GetMainLoop() is SceneTree sceneTree)
+			{
+				await sceneTree.ToSignal(sceneTree, SceneTree.SignalName.ProcessFrame);
+			}
+			else
+			{
+				await Task.Yield();
+			}
+
+			Creature? target = _deferredTarget;
+			_deferredTarget = null;
+
+			if (target == null || !target.IsAlive || !target.IsHittable) return;
+			if (!CombatManager.Instance.IsInProgress || CombatManager.Instance.IsOverOrEnding) return;
+			if (base.Pile?.Type != PileType.Hand || !CanBeKilled(target)) return;
+
+			await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), this, target);
+
+			if (CombatManager.Instance.IsInProgress && CombatManager.Instance.IsEnding)
+			{
+				await CombatManager.Instance.CheckWinCondition();
+			}
+		}
+		finally
+		{
+			_deferredAutoPlayScheduled = false;
+		}
 	}
 
 	private bool CanBeKilled(Creature target)

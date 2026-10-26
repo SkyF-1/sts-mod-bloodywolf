@@ -42,7 +42,7 @@ public sealed class WhipYou : BloodywolfCardModel
 			num += 0.2f;
 		}
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_chain")
+			.WithHitFx("vfx/vfx_attack_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;

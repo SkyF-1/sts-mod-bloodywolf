@@ -27,7 +27,7 @@ public sealed class Verdict : BloodywolfCardModel
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
+			.WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3").WithHitVfxSpawnedAtBase()
 			.Execute(choiceContext);
 	}
 	public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)

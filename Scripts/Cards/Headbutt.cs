@@ -5,19 +5,17 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.HoverTips;
+using StsModBloodywolf.Scripts.CombatHistory;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 [Pool(typeof(BloodywolfCardPool))]
 public sealed class Headbutt : BloodywolfCardModel
-{/// 结晶打击
+{/// 我顶死你
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(7, ValueProp.Move),
-		new RepeatVar(2),
-        new PowerVar<FreeHotTakePower>(1m)
+        new DamageVar(5, ValueProp.Move),
+		new RepeatVar(2)
     ];
 	public Headbutt()
 		: base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
@@ -31,7 +29,17 @@ public sealed class Headbutt : BloodywolfCardModel
 			.FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
-        await PowerCmd.Apply<FreeHotTakePower>(choiceContext, base.Owner.Creature, DynamicVars["FreeHotTakePower"].BaseValue, base.Owner.Creature, this);
+
+        CardPlay? previousPlay = HotTakeHistory.LastTriggered(base.Owner);
+        if (previousPlay == null)
+        {
+            return;
+        }
+
+        await CardCmd.AutoPlay(
+            choiceContext,
+            previousPlay.Card.CreateDupe(base.Owner),
+            null);
 	}
 
 	protected override void OnUpgrade()

@@ -26,6 +26,10 @@ public class Entry
 		Log.Debug("Mod initialized!");
 		ModConfigRegistry.Register("StsModBloodywolf", new BloodywolfModConfig());
 		BloodywolfAudioService.Initialize();
-		CombatManager.Instance.CombatSetUp += _ => TrollHistoryManager.Clear();
+		CombatManager.Instance.CombatSetUp += _ =>
+		{
+			TrollHistoryManager.Clear();
+			HotTakeHistory.Clear();
+		};
 	}
 }

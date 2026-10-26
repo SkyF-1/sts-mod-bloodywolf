@@ -13,7 +13,14 @@ public static class MyHook
 
     public interface IModifyTrollDamageListener
     {
+        // 返回应用加法修正后的总伤害。
         decimal ModifyTrollDamage(ICombatState combatState, Creature? target, decimal originalDamage, Creature? dealer, CardModel? cardSource);
+    }
+
+    public interface IModifyTrollDamageMultiplicativeListener
+    {
+        // 返回伤害倍率，与原版 ModifyDamageMultiplicative 一致。
+        decimal ModifyTrollDamageMultiplicative(ICombatState combatState, Creature? target, decimal originalDamage, Creature? dealer, CardModel? cardSource);
     }
 
     /// <summary>
@@ -39,6 +46,20 @@ public static class MyHook
             if (model is IModifyTrollDamageListener modifier)
             {
                 modified = modifier.ModifyTrollDamage(combatState, target, modified, dealer, cardSource);
+                model.InvokeExecutionFinished();
+            }
+        }
+        return modified;
+    }
+
+    public static decimal ModifyTrollDamageMultiplicative(ICombatState combatState, Creature? target, decimal originalDamage, Creature? dealer, CardModel? cardSource)
+    {
+        decimal modified = originalDamage;
+        foreach (var model in SafeIterate(combatState))
+        {
+            if (model is IModifyTrollDamageMultiplicativeListener modifier)
+            {
+                modified *= modifier.ModifyTrollDamageMultiplicative(combatState, target, modified, dealer, cardSource);
                 model.InvokeExecutionFinished();
             }
         }

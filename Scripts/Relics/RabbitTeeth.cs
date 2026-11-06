@@ -18,7 +18,7 @@ public class RabbitTeeth : CustomRelicModel
 {
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>()};
     // 稀有度
-    public override RelicRarity Rarity => RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Rare;
     // 小图标
     public override string PackedIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
     // 轮廓图标

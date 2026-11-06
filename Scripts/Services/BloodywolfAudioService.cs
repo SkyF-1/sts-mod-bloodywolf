@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Godot;
-using MegaCrit.Sts2.Core.Runs; // 如果需要判断多人模式
+using MegaCrit.Sts2.Core.Models;
+using StsModBloodywolf.Scripts.Audio;
 using StsModBloodywolf.Scripts.Config;
 
 namespace StsModBloodywolf.Scripts.Services
 {
     public static class BloodywolfAudioService
     {
-        private const string AudioRoot = "res://StsModBloodywolf/audio";
-        private static readonly Dictionary<string, string> _audioPathByKey = new();
+        private const string LegacyAudioRoot = "res://StsModBloodywolf/audio";
         private static readonly Dictionary<string, AudioStream> _streamCache = new();
         private static Node? _audioHost;
         private static long _playerCounter;
@@ -18,25 +18,40 @@ namespace StsModBloodywolf.Scripts.Services
         {
             if (_initialized) return;
             _initialized = true;
-            GD.Print("[BloodywolfAudio] Start indexing audio from: " + AudioRoot);
-            IndexDirectory(AudioRoot);
-            GD.Print($"[BloodywolfAudio] Indexed {_audioPathByKey.Count} keys: {string.Join(", ", _audioPathByKey.Keys)}");
+            CardAudioCatalog.Initialize();
         }
 
-        public static void PlayCard(string cardKey, float volume = 1f)
+        public static void PlayCard(CardModel card, float volume = 1f)
         {
             if (!BloodywolfModConfig.EnableCardVoice) return;
-            TryPlay(cardKey, volume * (float)BloodywolfModConfig.MasterVolume);
+
+            var variant = CardAudioSettings.ResolveVariant(card.Id.Entry);
+            if (variant == null)
+                return;
+
+            var path = CardAudioCatalog.Find(card.Id.Entry, variant.Value)
+                ?? CardAudioCatalog.Find(card.Id.Entry, GetOtherVariant(variant.Value))
+                ?? FindLegacyPath(card.GetType().Name);
+
+            if (path != null)
+                TryPlayPath(path, volume * (float)BloodywolfModConfig.MasterVolume);
         }
 
         public static bool TryPlay(string key, float volume = 1f)
         {
             if (string.IsNullOrEmpty(key)) return false;
-            if (!_audioPathByKey.TryGetValue(NormalizeKey(key), out var path))
-            {
-                GD.PrintErr($"[BloodywolfAudio] Missing audio key: {key}");
-                return false;
-            }
+            var path = FindLegacyPath(key);
+            if (path == null) return false;
+            return TryPlayPath(path, volume);
+        }
+
+        public static bool HasLegacyAudio(string fileName)
+        {
+            return FindLegacyPath(fileName) != null;
+        }
+
+        private static bool TryPlayPath(string path, float volume)
+        {
             var stream = GetOrLoadStream(path);
             if (stream == null) return false;
 
@@ -53,6 +68,13 @@ namespace StsModBloodywolf.Scripts.Services
             player.Finished += player.QueueFree;
             player.Play();
             return true;
+        }
+
+        private static CardAudioVariant GetOtherVariant(CardAudioVariant variant)
+        {
+            return variant == CardAudioVariant.CardName
+                ? CardAudioVariant.Flavor
+                : CardAudioVariant.CardName;
         }
 
         private static AudioStream? GetOrLoadStream(string path)
@@ -82,54 +104,18 @@ namespace StsModBloodywolf.Scripts.Services
             return _audioHost;
         }
 
-        private static void IndexDirectory(string dirPath)
+        private static string? FindLegacyPath(string fileName)
         {
-            var dir = DirAccess.Open(dirPath);
-            if (dir == null) return;
-            dir.ListDirBegin();
-            while (true)
+            var key = System.IO.Path.GetFileNameWithoutExtension(fileName).ToLowerInvariant();
+            var basePath = $"{LegacyAudioRoot}/{key}";
+            foreach (var extension in new[] { ".ogg", ".wav", ".mp3", string.Empty })
             {
-                var file = dir.GetNext();
-                if (string.IsNullOrEmpty(file)) break;
-                if (file == "." || file == "..") continue;
-                var fullPath = dirPath + "/" + file;
-                if (dir.CurrentIsDir())
-                    IndexDirectory(fullPath);
-                else if (IsAudioFile(file))
-                {
-                    AddKey(file, fullPath);
-                }
-                else if (file.EndsWith(".import", StringComparison.OrdinalIgnoreCase))
-                {
-                    // 处理 .import 文件：提取原始文件名（去掉 .import）
-                    var originalName = file.Substring(0, file.Length - ".import".Length);
-                    if (IsAudioFile(originalName))
-                    {
-                        // 路径指向不带扩展名的文件（Godot 资源系统可以加载）
-                        var basePath = dirPath + "/" + originalName;
-                        AddKey(originalName, basePath);
-                    }
-                }
+                var candidate = basePath + extension;
+                if (ResourceLoader.Exists(candidate))
+                    return candidate;
             }
-            dir.ListDirEnd();
-        }
 
-        private static void AddKey(string fileName, string path)
-        {
-            var key = NormalizeKey(fileName);
-            if (!_audioPathByKey.ContainsKey(key))
-                _audioPathByKey[key] = path;
-        }
-
-        private static bool IsAudioFile(string fileName)
-        {
-            var ext = System.IO.Path.GetExtension(fileName).ToLowerInvariant();
-            return ext == ".mp3" || ext == ".wav" || ext == ".ogg";
-        }
-
-        private static string NormalizeKey(string key)
-        {
-            return System.IO.Path.GetFileNameWithoutExtension(key).ToLowerInvariant();
+            return null;
         }
 
         private static float LinearToDb(float linear)

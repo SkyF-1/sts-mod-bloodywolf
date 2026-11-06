@@ -1,5 +1,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Config;
+using Godot;
+using StsModBloodywolf.Scripts.Audio;
 
 namespace StsModBloodywolf.Scripts.Config
 {
@@ -17,5 +19,28 @@ namespace StsModBloodywolf.Scripts.Config
         [SliderLabelFormat("{0:0%}")]
         [ConfigHoverTip(false)]
         public static double MasterVolume { get; set; } = 0.8;
+
+        // 未单独覆盖的卡牌默认使用的音频类型。
+        public static CardAudioVariant DefaultCardAudioVariant { get; set; }
+            = CardAudioVariant.CardName;
+
+        public override void SetupConfigUI(Control optionContainer)
+        {
+            GenerateOptionsForAllProperties(optionContainer);
+
+            var overridesSection = CreateCollapsibleSection(
+                "Card Audio Overrides", collapsedByDefault: true);
+            optionContainer.AddChild(overridesSection);
+            CardAudioSettingsUi.Attach(overridesSection.ContentContainer);
+
+            AddRestoreDefaultsButton(optionContainer);
+            SetupFocusNeighbors(optionContainer);
+        }
+
+        protected override void RestoreDefaultsNoConfirm()
+        {
+            CardAudioSettings.ClearOverrides();
+            base.RestoreDefaultsNoConfirm();
+        }
     }
 }

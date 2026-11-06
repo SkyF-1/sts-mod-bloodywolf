@@ -21,7 +21,7 @@ public abstract class BloodywolfCardModel : CustomCardModel
 	protected abstract Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay);
 	protected sealed override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		BloodywolfAudioService.PlayCard(GetType().Name.ToLowerInvariant());
+		BloodywolfAudioService.PlayCard(this);
 		await OnPlayEffect(choiceContext, cardPlay);
 	}
 

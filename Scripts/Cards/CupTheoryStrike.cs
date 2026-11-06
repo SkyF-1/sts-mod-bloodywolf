@@ -23,8 +23,7 @@ public sealed class CupTheoryStrike : BloodywolfCardModel
 	protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new DamageVar(6m, ValueProp.Move),
-        new TrollVar(0m)
+        new TrollVar(10m)
     };
 
 	public CupTheoryStrike()
@@ -35,10 +34,7 @@ public sealed class CupTheoryStrike : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_blunt")
-			.Execute(choiceContext);
-		await TrollCmd.Troll(attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage))
+		await TrollCmd.Troll(base.DynamicVars[TrollVar.Key].BaseValue)
 			.FromCard(this)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_bloody_impact")
@@ -46,6 +42,6 @@ public sealed class CupTheoryStrike : BloodywolfCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(2m);
+		base.DynamicVars[TrollVar.Key].UpgradeValueBy(4m);
 	}
 }

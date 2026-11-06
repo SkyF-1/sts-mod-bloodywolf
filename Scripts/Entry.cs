@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Modding;
 using BaseLib.Config;
 using StsModBloodywolf.Scripts.Config;
 using StsModBloodywolf.Scripts.Services;
+using StsModBloodywolf.Scripts.Audio;
 using MegaCrit.Sts2.Core.Combat;
 using StsModBloodywolf.Scripts.CombatHistory;
 
@@ -25,6 +26,7 @@ public class Entry
 		ScriptManagerBridge.LookupScriptsInAssembly(typeof(Entry).Assembly);
 		Log.Debug("Mod initialized!");
 		ModConfigRegistry.Register("StsModBloodywolf", new BloodywolfModConfig());
+		CardAudioSettings.Initialize();
 		BloodywolfAudioService.Initialize();
 		CombatManager.Instance.CombatSetUp += _ =>
 		{

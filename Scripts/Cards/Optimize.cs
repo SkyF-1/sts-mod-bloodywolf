@@ -37,16 +37,15 @@ public sealed class Optimize : BloodywolfCardModel
                 rateCount += cardModel.EnergyCost.GetAmountToSpend();
 			    await CardCmd.Exhaust(choiceContext, cardModel);
             }
-            await PowerCmd.Apply<CloutPower>(choiceContext, 
-                base.Owner.Creature, 
-                rateCount, 
-                base.Owner.Creature, 
-                this);
+            int ratingCount = base.IsUpgraded ? 2 : 1;
+            for (int i = 0; i < ratingCount; i++)
+            {
+                await PowerCmd.Apply<CloutPower>(choiceContext,
+                    base.Owner.Creature,
+                    rateCount,
+                    base.Owner.Creature,
+                    this);
+            }
 		}
-	}
-
-	protected override void OnUpgrade()
-	{
-		base.DynamicVars.Cards.UpgradeValueBy(1m);
 	}
 }

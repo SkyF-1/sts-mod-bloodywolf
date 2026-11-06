@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,10 +11,9 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Unpack : BloodywolfCardModel
 {/// 解包
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
@@ -31,16 +28,16 @@ public sealed class Unpack : BloodywolfCardModel
 		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<CloutPower>(choiceContext, 
-            base.Owner.Creature, 
-            base.DynamicVars[RateVar.Key].BaseValue, 
-            base.Owner.Creature, 
+        await PowerCmd.Apply<CloutPower>(choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars[RateVar.Key].BaseValue,
+            base.Owner.Creature,
             this);
-        
+
     }
 
 	protected override void OnUpgrade()

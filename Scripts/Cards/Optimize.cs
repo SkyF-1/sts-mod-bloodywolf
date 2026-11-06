@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
@@ -13,13 +11,12 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Optimize : BloodywolfCardModel
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(1), new RateVar(0m)};
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<CloutPower>()};
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<CloutPower>()};
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Optimize()
 		: base(0, CardType.Skill, CardRarity.Common, TargetType.Self)

@@ -1,5 +1,3 @@
-// using BaseLib.Abstracts;
-// using BaseLib.Utils;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Entities.Cards;
 // using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -13,11 +11,11 @@
 
 // namespace StsModBloodywolf.Scripts.Cards;
 
-// [Pool(typeof(BloodywolfCardPool))]
+// [RegisterCard(typeof(BloodywolfCardPool))]
 // public sealed class BoostBarrage : BloodywolfCardModel
 // {//鼓吹
 // 	protected override bool HasEnergyCostX => true;
-//     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+//     public override string PortraitPath => AssetProfile.PortraitPath!;
 
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 // 	{

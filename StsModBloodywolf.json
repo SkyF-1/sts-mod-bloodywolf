@@ -1,15 +1,17 @@
 {
   "id": "StsModBloodywolf",
   "name": "血狼破军",
+  "pck_name": "StsModBloodywolf",
   "author": "SkyF",
   "description": "使用全新人物血狼破军攻克这座高塔。",
   "version": "v1.1.5-alpha.3",
   "has_pck": true,
   "has_dll": true,
+  "min_game_version": "0.111.0",
   "dependencies": [
     {
-    "id": "BaseLib",
-    "minVersion": "v3.3.1"
+      "id": "STS2-RitsuLib",
+      "min_version": "0.6.10"
     }
   ],
   "affects_gameplay": true

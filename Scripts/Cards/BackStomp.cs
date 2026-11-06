@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,7 +11,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class BackStomp : BloodywolfCardModel
 {
     /// 回踩
@@ -25,7 +22,7 @@ public sealed class BackStomp : BloodywolfCardModel
     };
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     public BackStomp()
         : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)

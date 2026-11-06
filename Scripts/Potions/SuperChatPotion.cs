@@ -1,5 +1,3 @@
-// using BaseLib.Abstracts;
-// using BaseLib.Utils;
 // using Godot;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,8 +13,8 @@
 
 // namespace StsModBloodywolf.Scripts.Potions;
 
-// [Pool(typeof(BloodywolfPotionPool))]
-// public sealed class SuperChatPotion : CustomPotionModel
+// [RegisterPotion(typeof(BloodywolfPotionPool))]
+// public sealed class SuperChatPotion : BloodywolfPotionModel
 // {
 // 	public override PotionRarity Rarity => PotionRarity.Common;
 
@@ -25,9 +23,9 @@
 // 	public override TargetType TargetType => TargetType.AnyEnemy;
 
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new PowerVar<SuperChatPower>(3m) };
-//     public override string? PackedImagePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}.png";
-//     public override string? PackedOutlinePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}_outline.png";
-// 	public override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<SuperChatPower>() };
+//     public override string? CustomImagePath => AssetProfile.ImagePath!;
+//     public override string? CustomOutlinePath => AssetProfile.OutlinePath!;
+// 	public override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<SuperChatPower>() };
 
 // 	protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
 // 	{

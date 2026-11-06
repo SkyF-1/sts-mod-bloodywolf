@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -14,17 +12,16 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class ShutUp : BloodywolfCardModel
 {
     /// 捂嘴
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new PowerVar<ShutUpPower>(1m),
         new CloutLossPowerVar(3m)
     };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
     public ShutUp()
         : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {

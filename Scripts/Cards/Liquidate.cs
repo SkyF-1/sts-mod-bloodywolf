@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -16,14 +14,16 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Char;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
-public sealed class Liquidate : BloodywolfCardModel, ITranscendenceCard
+[RegisterArchaicToothTranscendence(typeof(Purge))]
+[RegisterCharacterStarterCard(typeof(Bloodywolf))]
+public sealed class Liquidate : BloodywolfCardModel
 {/// 清算
-	public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<Purge>();
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<WeakPower>(),
         HoverTipFactory.FromPower<VulnerablePower>()
@@ -42,7 +42,7 @@ public sealed class Liquidate : BloodywolfCardModel, ITranscendenceCard
 		: base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{

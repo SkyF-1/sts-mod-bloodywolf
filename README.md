@@ -6,14 +6,14 @@
 https://glitchedreme.github.io/SlayTheSpire2ModdingTutorials/index.html
 
 ### 前置要求
-本mod目前使用https://github.com/Alchyr/BaseLib-StS2 作为前置开发。如果你想要游玩此mod，请务必一同下载此前置，并放在游戏根目录的mods文件夹中。
+本mod使用 [STS2-RitsuLib](https://github.com/BAKAOLC/STS2-RitsuLib) 作为前置开发。游玩前请安装完整的 `STS2-RitsuLib` 运行时目录。当前开发版本对应 RitsuLib `0.6.10` 和游戏 `0.111.0`。
 
-目前在开发中使用的BaseLib版本为v3.1.0。如果你使用更高或者更低版本的BaseLib，可能有发生问题的风险。如果你遇到问题，请报告给我。
+迁移到 RitsuLib 后，内容 ID、旧存档和旧版独立音效配置键不再直接兼容。
 
 ## 卡牌音效
 
-卡牌音效会自动扫描，不需要在代码中逐张登记。文件名必须使用卡牌的
-`Id.Entry` 小写形式：
+卡牌音效会自动扫描，不需要在代码中逐张登记。文件名沿用卡牌类名的蛇形写法和
+`stsmodbloodywolf-` 前缀：
 
 ```text
 StsModBloodywolf/audio/cards/name/stsmodbloodywolf-strike_wolf.ogg
@@ -23,4 +23,4 @@ StsModBloodywolf/audio/cards/flavor/stsmodbloodywolf-strike_wolf.ogg
 `name` 表示卡名语音，`flavor` 表示风味语音。每张卡可以只有其中一种，
 也可以两种都有。新增音频后需要在 Godot 中重新导入并导出 PCK。
 
-本mod将来有可能更换前置mod，可能导致更新后无法正常游玩。届时会更新README文档，特此告知。
+本mod已从 BaseLib 迁移至 RitsuLib。旧版本存档、运行记录和旧音效覆盖设置不保证兼容。

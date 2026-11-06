@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,14 +10,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class SentimentStorm : BloodywolfCardModel
 {/// 舆论风暴
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { 
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
         new TrollVar(5m),
         new CardsVar(2)
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public SentimentStorm()
 		: base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
@@ -28,10 +25,10 @@ public sealed class SentimentStorm : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<SentimentStormPower>(choiceContext, 
-            base.Owner.Creature, 
-            base.DynamicVars[TrollVar.Key].BaseValue, 
-            base.Owner.Creature, 
+        await PowerCmd.Apply<SentimentStormPower>(choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars[TrollVar.Key].BaseValue,
+            base.Owner.Creature,
             this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }

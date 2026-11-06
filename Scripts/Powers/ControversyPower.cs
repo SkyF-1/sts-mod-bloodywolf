@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -14,13 +13,13 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class ControversyPower : CustomPowerModel
+public sealed class ControversyPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new CloutLossPowerVar(1m)
@@ -32,10 +31,10 @@ public sealed class ControversyPower : CustomPowerModel
 			decimal CloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0;
 			if (CloutValue >= base.DynamicVars[CloutLossPowerVar.Key].BaseValue)
 			{
-				await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), 
-				base.Owner, 
+				await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(),
+				base.Owner,
 				-base.DynamicVars[CloutLossPowerVar.Key].BaseValue,
-				base.Owner, 
+				base.Owner,
 				null);
 				Flash();
 				await PlayerCmd.GainEnergy(Amount, player);

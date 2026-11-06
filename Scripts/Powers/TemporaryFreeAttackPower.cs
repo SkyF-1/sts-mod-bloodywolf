@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -7,24 +5,20 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.Powers;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Powers;using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class TemporaryFreeAttackPower : CustomPowerModel
+public sealed class TemporaryFreeAttackPower : BloodywolfPowerModel
 {
     public override PowerType Type => PowerType.Buff;
 	public const string Key = "TemporaryFreeAttackPower";
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
     public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
 	{

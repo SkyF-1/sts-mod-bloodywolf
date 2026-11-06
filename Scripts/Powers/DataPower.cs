@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -10,13 +9,13 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class DataPower : CustomPowerModel
+public sealed class DataPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
 	public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
     {

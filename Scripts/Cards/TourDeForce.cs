@@ -1,5 +1,3 @@
-// using BaseLib.Abstracts;
-// using BaseLib.Utils;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Entities.Cards;
 // using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,17 +9,17 @@
 
 // namespace StsModBloodywolf.Scripts.Cards;
 
-// [Pool(typeof(BloodywolfCardPool))]
+// [RegisterCard(typeof(BloodywolfCardPool))]
 // public sealed class TourDeForce : BloodywolfCardModel
 // {/// 绝活
-//     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+//     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
 //         new List<IHoverTip>
 //         {
 //             HoverTipFactory.FromPower<CloutPower>()
 //         };
 //     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(8m)];
-//     public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+//     public override string PortraitPath => AssetProfile.PortraitPath!;
 
 // 	public TourDeForce()
 // 		: base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
@@ -30,10 +28,10 @@
 
 // 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 //     {
-//         await PowerCmd.Apply<CloutPower>(choiceContext, 
-//         base.Owner.Creature, 
-//         base.DynamicVars[RateVar.Key].IntValue, 
-//         base.Owner.Creature, 
+//         await PowerCmd.Apply<CloutPower>(choiceContext,
+//         base.Owner.Creature,
+//         base.DynamicVars[RateVar.Key].IntValue,
+//         base.Owner.Creature,
 //         this);
 //     }
 

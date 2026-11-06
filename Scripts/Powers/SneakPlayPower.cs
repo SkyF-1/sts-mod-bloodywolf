@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -8,13 +7,13 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class SneakPlayPower : CustomPowerModel
+public sealed class SneakPlayPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
 public override async Task 	AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{

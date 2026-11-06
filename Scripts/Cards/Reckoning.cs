@@ -1,5 +1,3 @@
-// using BaseLib.Abstracts;
-// using BaseLib.Utils;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Models;
 // using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,10 +11,10 @@
 
 // namespace StsModBloodywolf.Scripts.Cards;
 
-// [Pool(typeof(BloodywolfCardPool))]
-// public sealed class Reckoning : CustomCardModel
+// [RegisterCard(typeof(BloodywolfCardPool))]
+// public sealed class Reckoning : ModCardTemplate
 // {/// 秋后算账
-// 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+// 	public override string PortraitPath => AssetProfile.PortraitPath!;
 
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
 // 	{
@@ -41,7 +39,7 @@
 //         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
 //         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
 //         {
-//             await PowerCmd.Apply<CloutPower>(choiceContext, 
+//             await PowerCmd.Apply<CloutPower>(choiceContext,
 //                 base.Owner.Creature,
 //                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
 //                 base.Owner.Creature,

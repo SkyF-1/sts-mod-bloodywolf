@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -9,13 +8,13 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class OverrulePower : CustomPowerModel
+public sealed class OverrulePower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 	public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? __)
 	{
 		if (dealer == base.Owner && props.IsPoweredAttack() && result.UnblockedDamage > 0)

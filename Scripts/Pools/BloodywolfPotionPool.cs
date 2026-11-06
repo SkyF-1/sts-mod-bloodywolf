@@ -1,8 +1,9 @@
-using BaseLib.Abstracts;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace StsModBloodywolf.Scripts.Pools;
-public class BloodywolfPotionPool : CustomPotionPoolModel
+public class BloodywolfPotionPool : TypeListPotionPoolModel
 {
-    // 能量图标。
-    public override string EnergyColorName => "ironclad";
+    public override string EnergyColorName => "Bloodywolf";
+    public override string? TextEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf.png";
+    public override string? BigEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf_big.png";
 }

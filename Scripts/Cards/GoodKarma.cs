@@ -1,5 +1,3 @@
-// using BaseLib.Abstracts;
-// using BaseLib.Utils;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Entities.Cards;
 // using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,10 +7,10 @@
 
 // namespace StsModBloodywolf.Scripts.Cards;
 
-// [Pool(typeof(BloodywolfCardPool))]
+// [RegisterCard(typeof(BloodywolfCardPool))]
 // public sealed class GoodKarma : BloodywolfCardModel
 // {/// 善有善报
-// 	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+// 	public override string PortraitPath => AssetProfile.PortraitPath!;
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<GoodKarmaPower>(1m)};
 // 	public GoodKarma()
 // 		: base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)

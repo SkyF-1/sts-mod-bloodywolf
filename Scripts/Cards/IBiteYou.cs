@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,10 +10,11 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Players;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(TokenCardPool))]
+[RegisterCard(typeof(TokenCardPool))]
 public sealed class IBiteYou : BloodywolfCardModel
 {/// 我咬死你
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -23,7 +22,7 @@ public sealed class IBiteYou : BloodywolfCardModel
 		new DamageVar(6m, ValueProp.Move),
         new RateVar(1m)
 	};
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
 
@@ -36,10 +35,10 @@ public sealed class IBiteYou : BloodywolfCardModel
 	{
 		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_bite");
-		await PowerCmd.Apply<CloutPower>(choiceContext, 
-            base.Owner.Creature, 
-            base.DynamicVars[RateVar.Key].BaseValue, 
-            base.Owner.Creature, 
+		await PowerCmd.Apply<CloutPower>(choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars[RateVar.Key].BaseValue,
+            base.Owner.Creature,
             this);
 		await attackCommand.Execute(choiceContext);
 	}

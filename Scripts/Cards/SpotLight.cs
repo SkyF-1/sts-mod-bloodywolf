@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,10 +10,9 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class SpotLight : BloodywolfCardModel
 {/// 焦点�?
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>(),
@@ -26,7 +23,7 @@ public sealed class SpotLight : BloodywolfCardModel
         new RateVar(6m),
         new PowerVar<DexterityPower>(1m)
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public SpotLight()
 		: base(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)

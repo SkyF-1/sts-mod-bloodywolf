@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -14,12 +12,11 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class JellyLegs : BloodywolfCardModel
 {
     /// 软脚
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    public override string PortraitPath => AssetProfile.PortraitPath!;
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<DexterityPower>()

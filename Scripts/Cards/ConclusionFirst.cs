@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,23 +9,22 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class ConclusionFirst : BloodywolfCardModel
 {/// 先说结论
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
-    { 
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
+    {
         new RateVar(2m),
         new CardsVar(2),
         new PowerVar<CupLossPower>(3m)
     };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>(),
         HoverTipFactory.FromPower<CupLossPower>()
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public ConclusionFirst()
 		: base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
@@ -36,15 +33,15 @@ public sealed class ConclusionFirst : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(choiceContext, 
-        base.Owner.Creature, 
-        base.DynamicVars[RateVar.Key].BaseValue, 
-        base.Owner.Creature, 
+        await PowerCmd.Apply<CloutPower>(choiceContext,
+        base.Owner.Creature,
+        base.DynamicVars[RateVar.Key].BaseValue,
+        base.Owner.Creature,
         this);
-        await PowerCmd.Apply<CupLossPower>(choiceContext, 
-        base.CombatState.HittableEnemies, 
-        base.DynamicVars[CupLossPower.Key].BaseValue, 
-        base.Owner.Creature, 
+        await PowerCmd.Apply<CupLossPower>(choiceContext,
+        base.CombatState.HittableEnemies,
+        base.DynamicVars[CupLossPower.Key].BaseValue,
+        base.Owner.Creature,
         this);
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }

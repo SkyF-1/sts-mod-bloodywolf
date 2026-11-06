@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,10 +11,9 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class FrameCheck : BloodywolfCardModel
 {/// 盯帧
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<VulnerablePower>()
     };
@@ -32,7 +29,7 @@ public sealed class FrameCheck : BloodywolfCardModel
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
@@ -42,10 +39,10 @@ public sealed class FrameCheck : BloodywolfCardModel
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, 
-                cardPlay.Target, 
-                base.DynamicVars.Vulnerable.BaseValue, 
-                base.Owner.Creature, 
+            await PowerCmd.Apply<VulnerablePower>(choiceContext,
+                cardPlay.Target,
+                base.DynamicVars.Vulnerable.BaseValue,
+                base.Owner.Creature,
                 this);
         }
 	}

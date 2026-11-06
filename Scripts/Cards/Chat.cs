@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -15,11 +13,10 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Chat : BloodywolfCardModel
 {/// 杂谈
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    public override string PortraitPath => AssetProfile.PortraitPath!;
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
@@ -46,10 +43,10 @@ public sealed class Chat : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        await PowerCmd.Apply<ChatPower>(choiceContext, 
-            base.Owner.Creature, 
-            base.DynamicVars[RateVar.Key].BaseValue, 
-            base.Owner.Creature, 
+        await PowerCmd.Apply<ChatPower>(choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars[RateVar.Key].BaseValue,
+            base.Owner.Creature,
             this);
 
         // var timesVar = base.DynamicVars["times"] as CalculatedVar;
@@ -58,10 +55,10 @@ public sealed class Chat : BloodywolfCardModel
         // {
         //     await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         //     await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        //     await PowerCmd.Apply<CloutPower>(choiceContext, 
-        //     base.Owner.Creature, 
-        //     base.DynamicVars[RateVar.Key].BaseValue, 
-        //     base.Owner.Creature, 
+        //     await PowerCmd.Apply<CloutPower>(choiceContext,
+        //     base.Owner.Creature,
+        //     base.DynamicVars[RateVar.Key].BaseValue,
+        //     base.Owner.Creature,
         //     this);
         // }
 	}

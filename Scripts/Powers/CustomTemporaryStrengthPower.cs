@@ -1,162 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Abstracts;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using STS2RitsuLib.Combat.Powers;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public abstract class CustomTemporaryStrengthPower : CustomPowerModel, ITemporaryPower
+public abstract class CustomTemporaryStrengthPower<TOrigin> :
+    ModTemporaryAppliedPowerTemplate<TOrigin, StrengthPower>
+    where TOrigin : AbstractModel
 {
-	private bool _shouldIgnoreNextInstance;
+    protected override bool IsPositive => true;
 
-	public override PowerType Type
-	{
-		get
-		{
-			if (!IsPositive)
-			{
-				return PowerType.Debuff;
-			}
-			return PowerType.Buff;
-		}
-	}
+    public override PowerAssetProfile AssetProfile
+    {
+        get
+        {
+            var name = Id.Entry.Replace("STS_MOD_BLOODYWOLF_POWER_", "").ToLowerInvariant();
+            var path = $"res://StsModBloodywolf/images/powers/stsmodbloodywolf-{name}.png";
+            return new PowerAssetProfile(path, path);
+        }
+    }
 
-	public override PowerStackType StackType => PowerStackType.Counter;
+    public override LocString Description => new(
+        "powers",
+        IsPositive ? "TEMPORARY_STRENGTH_POWER.description" : "TEMPORARY_STRENGTH_DOWN.description");
 
-	public abstract AbstractModel OriginModel { get; }
-
-	public PowerModel InternallyAppliedPower => ModelDb.Power<StrengthPower>();
-
-	protected virtual bool IsPositive => true;
-
-	private int Sign
-	{
-		get
-		{
-			if (!IsPositive)
-			{
-				return -1;
-			}
-			return 1;
-		}
-	}
-
-	public override LocString Title
-	{
-		get
-		{
-			AbstractModel originModel = OriginModel;
-			if (!(originModel is CardModel cardModel))
-			{
-				if (!(originModel is PotionModel potionModel))
-				{
-					if (originModel is RelicModel relicModel)
-					{
-						return relicModel.Title;
-					}
-					throw new InvalidOperationException();
-				}
-				return potionModel.Title;
-			}
-			return cardModel.TitleLocString;
-		}
-	}
-
-	public override LocString Description => new LocString("powers", IsPositive ? "TEMPORARY_STRENGTH_POWER.description" : "TEMPORARY_STRENGTH_DOWN.description");
-
-	protected override string SmartDescriptionLocKey
-	{
-		get
-		{
-			if (!IsPositive)
-			{
-				return "TEMPORARY_STRENGTH_DOWN.smartDescription";
-			}
-			return "TEMPORARY_STRENGTH_POWER.smartDescription";
-		}
-	}
-
-	protected override IEnumerable<IHoverTip> ExtraHoverTips
-	{
-		get
-		{
-			List<IHoverTip> list = new List<IHoverTip>();
-			List<IHoverTip> list2 = list;
-			AbstractModel originModel = OriginModel;
-			IEnumerable<IHoverTip> collection;
-			if (!(originModel is CardModel card))
-			{
-				if (!(originModel is PotionModel model))
-				{
-					if (!(originModel is RelicModel relic))
-					{
-						throw new InvalidOperationException();
-					}
-					collection = HoverTipFactory.FromRelic(relic);
-				}
-				else
-				{
-					collection = new List<IHoverTip>{HoverTipFactory.FromPotion(model)};
-				}
-			}
-			else
-			{
-				collection = new List<IHoverTip>{HoverTipFactory.FromCard(card)};
-			}
-			list2.AddRange(collection);
-			list.Add(HoverTipFactory.FromPower<StrengthPower>());
-			return new List<IHoverTip>(list);
-		}
-	}
-
-	public void IgnoreNextInstance()
-	{
-		_shouldIgnoreNextInstance = true;
-	}
-
-	public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
-	{
-		if (_shouldIgnoreNextInstance)
-		{
-			_shouldIgnoreNextInstance = false;
-		}
-		else
-		{
-			await PowerCmd.Apply<StrengthPower>(new BlockingPlayerChoiceContext(), target, (decimal)Sign * amount, applier, cardSource, silent: true);
-		}
-	}
-
-	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-	{
-		if (!(amount == (decimal)base.Amount) && power == this)
-		{
-			if (_shouldIgnoreNextInstance)
-			{
-				_shouldIgnoreNextInstance = false;
-			}
-			else
-			{
-				await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, (decimal)Sign * amount, applier, cardSource, silent: true);
-			}
-		}
-	}
-
-	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
-	{
-		if (side == base.Owner.Side)
-		{
-			Flash();
-			await PowerCmd.Remove(this);
-			await PowerCmd.Apply<StrengthPower>(new BlockingPlayerChoiceContext(), base.Owner, -Sign * base.Amount, base.Owner, null);
-		}
-	}
+    protected override string SmartDescriptionLocKey => IsPositive
+        ? "TEMPORARY_STRENGTH_POWER.smartDescription"
+        : "TEMPORARY_STRENGTH_DOWN.smartDescription";
 }

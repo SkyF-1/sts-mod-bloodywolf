@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -9,7 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class HemAndHawPower : CustomPowerModel
+public sealed class HemAndHawPower : BloodywolfPowerModel
 {
 	private int _cardsPlayedThisTurn;
 
@@ -18,8 +17,8 @@ public sealed class HemAndHawPower : CustomPowerModel
 	public override PowerStackType StackType => PowerStackType.Counter;
 
 	public override int DisplayAmount => _cardsPlayedThisTurn;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
 	public override bool ShouldPlay(CardModel card, AutoPlayType _)
 	{

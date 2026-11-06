@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,7 +10,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Veto : BloodywolfCardModel
 {
     /// 不通过
@@ -21,11 +18,11 @@ public sealed class Veto : BloodywolfCardModel
         new PowerVar<CupLossPower>(5m),
         new CardsVar(2)
     };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CupLossPower>()
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     public Veto()
         : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)

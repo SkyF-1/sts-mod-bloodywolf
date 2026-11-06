@@ -1,4 +1,3 @@
-// using BaseLib.Abstracts;
 // using MegaCrit.Sts2.Core.Combat;
 // using MegaCrit.Sts2.Core.Commands;
 // using MegaCrit.Sts2.Core.Entities.Powers;
@@ -9,24 +8,24 @@
 
 // namespace StsModBloodywolf.Scripts.Powers;
 
-// public sealed class SuperChatPower : CustomPowerModel
+// public sealed class SuperChatPower : BloodywolfPowerModel
 // {
 // 	public override PowerType Type => PowerType.Debuff;
 // 	public const string Key = "SuperChatPower";
 // 	public override PowerStackType StackType => PowerStackType.Counter;
-// 	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-//     public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+// 	public override string? CustomIconPath => AssetProfile.IconPath!;
+//     public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 //     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 // 	{
 // 		if (target != base.Owner)
 // 		{
 // 			return 1m;
 // 		}
-//         if ((props & ValueProp.Move) == 0) 
+//         if ((props & ValueProp.Move) == 0)
 //         {
 //             return 1m;
 //         }
-//         if ((props & ValueProp.Unpowered) != 0) 
+//         if ((props & ValueProp.Unpowered) != 0)
 //         {
 //             return 1m;
 //         }
@@ -43,5 +42,5 @@
 // 			await PowerCmd.TickDownDuration(this);
 // 		}
 // 	}
-	
+
 // }

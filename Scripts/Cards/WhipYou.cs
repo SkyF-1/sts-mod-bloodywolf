@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -16,7 +14,6 @@ using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class WhipYou : BloodywolfCardModel
 {/// 鞭子抽你
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -31,7 +28,7 @@ public sealed class WhipYou : BloodywolfCardModel
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
@@ -46,7 +43,7 @@ public sealed class WhipYou : BloodywolfCardModel
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        //言论条�?        
+        //言论条�?
 		if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);

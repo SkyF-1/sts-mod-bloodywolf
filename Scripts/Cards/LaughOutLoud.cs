@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,10 +16,9 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class LaughOutLoud : BloodywolfCardModel
 {/// 哈哈大笑
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<WeakPower>()
@@ -38,20 +35,20 @@ public sealed class LaughOutLoud : BloodywolfCardModel
 		: base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-        
+
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<WeakPower>(choiceContext, 
-                cardPlay.Target, 
-                base.DynamicVars.Weak.BaseValue, 
-                base.Owner.Creature, 
+            await PowerCmd.Apply<WeakPower>(choiceContext,
+                cardPlay.Target,
+                base.DynamicVars.Weak.BaseValue,
+                base.Owner.Creature,
                 this);
         }
     }

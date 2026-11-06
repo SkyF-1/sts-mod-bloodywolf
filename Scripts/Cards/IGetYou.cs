@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,16 +7,15 @@ using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class IGetYou : BloodywolfCardModel
-{/// 懂你意�?	
+{/// 懂你意�?
     public override bool GainsBlock => true;
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Retain, CardKeyword.Exhaust };
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
     new BlockVar(20m, ValueProp.Move),
     ];
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public IGetYou()
 		: base(1, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
@@ -26,7 +23,7 @@ public sealed class IGetYou : BloodywolfCardModel
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{   
+	{
         BlockVar givenBlock = new BlockVar(base.DynamicVars.Block.BaseValue, ValueProp.Unpowered);
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);

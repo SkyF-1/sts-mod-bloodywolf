@@ -1,4 +1,4 @@
-using BaseLib.Extensions;
+using STS2RitsuLib.Cards.DynamicVars;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -13,12 +13,12 @@ public class TrollVar : DynamicVar
 
     public TrollVar(decimal baseValue) : base(Key, baseValue)
     {
-        this.WithTooltip(LocKey);
+        this.WithSharedTooltip(LocKey);
     }
 
     public TrollVar(string name, decimal baseValue) : base(name, baseValue)
     {
-        this.WithTooltip(LocKey);
+        this.WithSharedTooltip(LocKey);
     }
 
     public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)

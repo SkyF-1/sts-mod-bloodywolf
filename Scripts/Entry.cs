@@ -1,13 +1,13 @@
-using Godot.Bridge;
 using HarmonyLib;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using BaseLib.Config;
 using StsModBloodywolf.Scripts.Config;
 using StsModBloodywolf.Scripts.Services;
 using StsModBloodywolf.Scripts.Audio;
 using MegaCrit.Sts2.Core.Combat;
 using StsModBloodywolf.Scripts.CombatHistory;
+using STS2RitsuLib;
+using STS2RitsuLib.Interop;
+using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace StsModBloodywolf.Scripts;
 
@@ -15,6 +15,9 @@ namespace StsModBloodywolf.Scripts;
 [ModInitializer("Init")]
 public class Entry
 {
+	public const string ModId = "StsModBloodywolf";
+	public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
+
 	// 初始化函数
 	public static void Init()
 	{
@@ -22,11 +25,11 @@ public class Entry
 		// 传入参数随意，只要不和其他人撞车即可
 		var harmony = new Harmony("sts2.SkyF.Bloodywolf");
 		harmony.PatchAll();
-		// 使得tscn可以加载自定义脚本
-		ScriptManagerBridge.LookupScriptsInAssembly(typeof(Entry).Assembly);
-		Log.Debug("Mod initialized!");
-		ModConfigRegistry.Register("StsModBloodywolf", new BloodywolfModConfig());
+		var assembly = typeof(Entry).Assembly;
+		RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
+		ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 		CardAudioSettings.Initialize();
+		Logger.Info("Mod initialized!");
 		BloodywolfAudioService.Initialize();
 		CombatManager.Instance.CombatSetUp += _ =>
 		{

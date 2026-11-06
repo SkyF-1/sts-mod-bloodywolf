@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,13 +9,13 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class ChatPower : CustomPowerModel
+public sealed class ChatPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 	public override async Task BeforeCardPlayed(CardPlay cardPlay)
 	{
 		if (cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Skill)

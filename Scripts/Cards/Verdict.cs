@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,11 +10,10 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Verdict : BloodywolfCardModel
 {/// 定论
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(32m, ValueProp.Move) };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Verdict()
 		: base(7, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
@@ -31,7 +28,7 @@ public sealed class Verdict : BloodywolfCardModel
 			.Execute(choiceContext);
 	}
 	public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
-	{        
+	{
 		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
 		{
 			base.EnergyCost.AddThisCombat(-1);

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -12,11 +10,10 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class FoolForm : BloodywolfCardModel
 {
-    /// 若智形�?
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    /// 若智形�?
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     public FoolForm()
         : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,7 +8,6 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class ReputationReverse : BloodywolfCardModel
 {
     /// 风评反转
@@ -25,7 +22,7 @@ public sealed class ReputationReverse : BloodywolfCardModel
     {
     }
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -33,7 +30,7 @@ public sealed class ReputationReverse : BloodywolfCardModel
         var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
         if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(choiceContext, 
+            await PowerCmd.Apply<CloutPower>(choiceContext,
                 base.Owner.Creature,
                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
                 base.Owner.Creature,

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -16,15 +14,14 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Potions;
 
-[Pool(typeof(BloodywolfPotionPool))]
-public sealed class ExposurePotion : CustomPotionModel
+public sealed class ExposurePotion : BloodywolfPotionModel
 {
 	public override PotionRarity Rarity => PotionRarity.Uncommon;
 	public override PotionUsage Usage => PotionUsage.CombatOnly;
 	public override TargetType TargetType => TargetType.Self;
-    public override string? CustomPackedImagePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomPackedOutlinePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}_outline.png";
-	public override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CloutPower>() };
+    public override string? CustomImagePath => AssetProfile.ImagePath!;
+    public override string? CustomOutlinePath => AssetProfile.OutlinePath!;
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CloutPower>() };
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new RateVar(5m)

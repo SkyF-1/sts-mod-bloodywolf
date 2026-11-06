@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,7 +12,6 @@ using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Slander : BloodywolfCardModel
 {/// 诋毁
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> {
@@ -27,7 +24,7 @@ public sealed class Slander : BloodywolfCardModel
 		: base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
@@ -42,10 +39,10 @@ public sealed class Slander : BloodywolfCardModel
                 .Execute(choiceContext);
         }
 
-        // await PowerCmd.Apply<CloutPower>(choiceContext, 
-        //     base.Owner.Creature, 
-        //     base.DynamicVars[RateVar.Key].BaseValue, 
-        //     base.Owner.Creature, 
+        // await PowerCmd.Apply<CloutPower>(choiceContext,
+        //     base.Owner.Creature,
+        //     base.DynamicVars[RateVar.Key].BaseValue,
+        //     base.Owner.Creature,
         //     this);
 	}
 

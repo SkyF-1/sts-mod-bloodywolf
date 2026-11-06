@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -14,15 +12,14 @@ using MegaCrit.Sts2.Core.CardSelection;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class FullAssault : BloodywolfCardModel
 {/// 全军出击
     // public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{CardKeyword.Exhaust};
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(2)};
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>()};
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{HoverTipFactory.FromCard<IBiteYou>()};
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public FullAssault()
 		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)

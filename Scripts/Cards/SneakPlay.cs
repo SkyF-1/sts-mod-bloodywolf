@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
@@ -14,13 +12,12 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class SneakPlay : BloodywolfCardModel
 {/// 偷玩
-	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new PowerVar<SneakPlayPower>(2m)};
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<StrengthPower>()
     };

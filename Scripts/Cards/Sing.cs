@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,10 +11,9 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Sing : BloodywolfCardModel
 {/// 歌唱
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<StrengthPower>()
@@ -32,24 +29,24 @@ public sealed class Sing : BloodywolfCardModel
 	{
 	}
     protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        await PowerCmd.Apply<FuckingTerriblePower>(choiceContext, 
+        await PowerCmd.Apply<FuckingTerriblePower>(choiceContext,
             base.CombatState.Enemies,
             CloutValue,
-            base.Owner.Creature, 
+            base.Owner.Creature,
             null);
         //言论条�?
         var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
         if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(choiceContext, 
-            base.Owner.Creature, 
+            await PowerCmd.Apply<CloutPower>(choiceContext,
+            base.Owner.Creature,
             -base.DynamicVars[CloutLossVar.Key].BaseValue,
-            base.Owner.Creature, 
+            base.Owner.Creature,
             null);
         }
     }

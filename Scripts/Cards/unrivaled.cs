@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,7 +9,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Unrivaled : BloodywolfCardModel
 {/// 独步天下
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -19,7 +16,7 @@ public sealed class Unrivaled : BloodywolfCardModel
 		new HotTakeVar(9m)
 	];
 	public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Eternal };
-	public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+	public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Unrivaled()
 		: base(3, CardType.Power, CardRarity.Ancient, TargetType.Self)

@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,7 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class LandminePower : CustomPowerModel
+public sealed class LandminePower : BloodywolfPowerModel
 {
     private sealed class Data
     {
@@ -20,8 +19,8 @@ public sealed class LandminePower : CustomPowerModel
 	public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 	public override int DisplayAmount => GetInternalData<Data>().cardsPlayed;
-    public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+    public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
     protected override object InitInternalData()
     {

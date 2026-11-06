@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -14,11 +12,10 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Tally : BloodywolfCardModel
 {
     /// 清点计算
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
@@ -35,7 +32,7 @@ public sealed class Tally : BloodywolfCardModel
     {
     }
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -50,10 +47,10 @@ public sealed class Tally : BloodywolfCardModel
 	{
 		if ( cardSource == this && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Apply<CloutPower>(choiceContext, 
-            base.Owner.Creature, 
-            base.DynamicVars[RateVar.Key].BaseValue, 
-            base.Owner.Creature, 
+			await PowerCmd.Apply<CloutPower>(choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars[RateVar.Key].BaseValue,
+            base.Owner.Creature,
             this);
 		}
 	}

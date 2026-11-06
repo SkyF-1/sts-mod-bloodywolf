@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -7,6 +6,8 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Powers;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Models;
 
 namespace StsModBloodywolf.Scripts.Singletons;
 
@@ -19,11 +20,10 @@ namespace StsModBloodywolf.Scripts.Singletons;
 /// Hook.AfterDamageGiven 无论目标是否死亡都会派发，且派发时机在 Kill 之前，
 /// 此时 Power 仍在目标身上，因此可以在单例里稳定完成转移。
 /// </summary>
-public class CupLossBlockTransferSingleton : CustomSingletonModel
+[RegisterSingleton]
+public class CupLossBlockTransferSingleton : HookedSingletonModel
 {
-    // receiveCombatHooks: true  → 注册为战斗内钩子订阅者（ModelDb.Init 时会实例化并订阅）
-    // receiveRunHooks: false    → 不需要战斗外的钩子
-    public CupLossBlockTransferSingleton() : base(true, false)
+    public CupLossBlockTransferSingleton() : base(HookType.Combat)
     {
     }
 

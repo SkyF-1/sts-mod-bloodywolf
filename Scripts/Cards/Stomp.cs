@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,7 +11,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Stomp : BloodywolfCardModel
 {
     /// 踩头
@@ -22,11 +19,11 @@ public sealed class Stomp : BloodywolfCardModel
         new BlockVar(5m, ValueProp.Move),
         new PowerVar<CupLossPower>(5m)
     };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CupLossPower>()
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     public Stomp()
         : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)

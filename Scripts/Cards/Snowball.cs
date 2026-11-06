@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,7 +12,6 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Snowball : BloodywolfCardModel
 {/// 滑坡
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -39,7 +36,7 @@ public sealed class Snowball : BloodywolfCardModel
 	{
 	}
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");

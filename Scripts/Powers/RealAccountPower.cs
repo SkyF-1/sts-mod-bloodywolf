@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,13 +9,13 @@ using MegaCrit.Sts2.Core.Combat;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class RealAccountPower : CustomPowerModel
+public sealed class RealAccountPower : BloodywolfPowerModel
 {
 	private HashSet<CardModel>? _autoplayingCards;
 
 	public override PowerType Type => PowerType.Buff;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 

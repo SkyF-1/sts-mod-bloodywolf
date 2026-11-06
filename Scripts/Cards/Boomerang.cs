@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -20,7 +18,6 @@ using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Boomerang : BloodywolfCardModel
 {/// 回旋�?
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -36,7 +33,7 @@ public sealed class Boomerang : BloodywolfCardModel
 	{
 	}
     // protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
@@ -51,7 +48,7 @@ public sealed class Boomerang : BloodywolfCardModel
         }
 
         return;
-        
+
         // 言论条件（现已弃用�?
         //if (cardPlay.Target.IsAlive && CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         // {

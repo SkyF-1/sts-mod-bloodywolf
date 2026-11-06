@@ -26,7 +26,7 @@ pivot_offset = Vector2(64, 64)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="BurstBack" type="CPUParticles2D" parent="."]
+[node name="EnergyVfxBack" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(65, 63)
 emitting = false
@@ -80,7 +80,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BurstFront" type="CPUParticles2D" parent="."]
+[node name="EnergyVfxFront" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(65, 63)
 emitting = false

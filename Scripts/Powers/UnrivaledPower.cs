@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Combat;
@@ -12,7 +11,7 @@ using StsModBloodywolf.Scripts.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class UnrivaledPower : CustomPowerModel
+public sealed class UnrivaledPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -27,8 +26,8 @@ public sealed class UnrivaledPower : CustomPowerModel
 		}
 	}
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 	public override Task AfterCombatEnd(CombatRoom room)
 	{
 		if(!ShouldGetReward) return Task.CompletedTask;

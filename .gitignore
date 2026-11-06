@@ -7,3 +7,6 @@
 
 # Generated card audio coverage report
 /还没有name的卡牌音效资源的卡牌列表.md
+
+# Generated C# language-service cache
+*.lscache

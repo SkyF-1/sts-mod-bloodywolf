@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,7 +10,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class StirUp : BloodywolfCardModel
 {/// 带节�?
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -27,30 +24,30 @@ public sealed class StirUp : BloodywolfCardModel
 		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
         if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(choiceContext, 
-                base.Owner.Creature, 
+            await PowerCmd.Apply<CloutPower>(choiceContext,
+                base.Owner.Creature,
                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature, 
+                base.Owner.Creature,
                 null);
         }
         else if (cloutPower != null)
         {
             await PowerCmd.Remove(cloutPower);
         }
-        
+
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_heavy_blunt").WithHitVfxSpawnedAtBase()
 			.Execute(choiceContext);
-        
+
 
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }

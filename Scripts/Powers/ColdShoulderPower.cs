@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -12,7 +11,7 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class ColdShoulderPower : CustomPowerModel
+public sealed class ColdShoulderPower : BloodywolfPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
     private bool _enable = false;
@@ -29,8 +28,8 @@ public sealed class ColdShoulderPower : CustomPowerModel
 		}
 	}
 	public override PowerStackType StackType => PowerStackType.Counter;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (participants.Contains(base.Owner))

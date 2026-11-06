@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,7 +11,6 @@ using StsModBloodywolf.Scripts.Commands;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class WellMade : BloodywolfCardModel
 {/// 制作精良
     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
@@ -21,7 +18,7 @@ public sealed class WellMade : BloodywolfCardModel
 	new HotTakeVar(5m),
 	new CardsVar(2)
     ];
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public WellMade()
 		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
@@ -29,13 +26,16 @@ public sealed class WellMade : BloodywolfCardModel
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{  
+	{
 		List<CardModel> drawnCards = (await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner)).ToList();
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
 		if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue && drawnCards.Count > 0)
         {
 			List<CardModel> eligibleCards = drawnCards
-				.Where(card => card.EnergyCost.GetWithModifiers(CostModifiers.All) != 0 && !card.EnergyCost.CostsX)
+				.Where(card =>
+					card.EnergyCost.GetWithModifiers(CostModifiers.All) > 0
+					&& !card.EnergyCost.CostsX
+					&& !card.Keywords.Contains(CardKeyword.Unplayable))
 				.ToList();
 			CardModel? card = eligibleCards.Count > 0
 				? base.Owner.RunState.Rng.CombatCardSelection.NextItem(eligibleCards)

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -12,13 +10,12 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class RetreatAll : BloodywolfCardModel
-{/// 全撤�?
+{/// 全撤�?
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(1m)];
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    public override string PortraitPath => AssetProfile.PortraitPath!;
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
@@ -29,7 +26,7 @@ public sealed class RetreatAll : BloodywolfCardModel
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{  
+	{
         IEnumerable<CardModel> cards = PileType.Hand.GetPile(base.Owner).Cards;
         decimal cardCount = cards.Count();
         await CardCmd.Discard(choiceContext, cards);

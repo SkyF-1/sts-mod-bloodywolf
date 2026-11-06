@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,19 +6,21 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Char;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
+[RegisterCharacterStarterCard(typeof(Bloodywolf))]
 public sealed class Review : BloodywolfCardModel
 {/// 测评
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) };
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
     };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Review()
 		: base(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
@@ -29,10 +29,10 @@ public sealed class Review : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(choiceContext, 
-        base.Owner.Creature, 
-        base.DynamicVars[RateVar.Key].BaseValue, 
-        base.Owner.Creature, 
+        await PowerCmd.Apply<CloutPower>(choiceContext,
+        base.Owner.Creature,
+        base.DynamicVars[RateVar.Key].BaseValue,
+        base.Owner.Creature,
         this);
     }
 

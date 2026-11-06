@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,11 +10,10 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class StrategicSetup : BloodywolfCardModel
 {
     /// 思路构建
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<CloutPower>()
@@ -26,7 +23,7 @@ public sealed class StrategicSetup : BloodywolfCardModel
         new RateVar(3m)
     };
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
     public StrategicSetup()
         : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
@@ -36,7 +33,7 @@ public sealed class StrategicSetup : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 应用评定效果
-        await PowerCmd.Apply<CloutPower>(choiceContext, 
+        await PowerCmd.Apply<CloutPower>(choiceContext,
             base.Owner.Creature,
             base.DynamicVars[RateVar.Key].BaseValue,
             base.Owner.Creature,

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -14,7 +12,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class HemAndHaw : BloodywolfCardModel
 {/// 支支吾吾
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{
@@ -22,7 +19,7 @@ public sealed class HemAndHaw : BloodywolfCardModel
 	new PowerVar<HemAndHawPower>(5m)
 	};
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public HemAndHaw()
 		: base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)

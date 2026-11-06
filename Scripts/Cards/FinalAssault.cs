@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,14 +16,13 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class FinalAssault : BloodywolfCardModel
 {
     /// 最终攻�?
 	protected override bool IsPlayable => false;
 	private Creature? _deferredTarget;
 	private bool _deferredAutoPlayScheduled;
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
 		new DamageVar(24m, ValueProp.Move)

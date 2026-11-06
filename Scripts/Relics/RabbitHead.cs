@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -11,21 +9,23 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Char;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-[Pool(typeof(BloodywolfRelicPool))]
-public class RabbitHead : CustomRelicModel
+[RegisterCharacterStarterRelic(typeof(Bloodywolf))]
+[RegisterTouchOfOrobasRefinement(typeof(MartialSoul))]
+public class RabbitHead : BloodywolfRelicModel
 {
-    public override RelicModel? GetUpgradeReplacement() => ModelDb.Relic<MartialSoul>();
     // 稀有度
     public override RelicRarity Rarity => RelicRarity.Starter;
     // 小图标
-    public override string PackedIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PackedIconPath => AssetProfile.IconPath!;
     // 轮廓图标
-    protected override string PackedIconOutlinePath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string PackedIconOutlinePath => AssetProfile.IconOutlinePath!;
     // 大图标
-    protected override string BigIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string BigIconPath => AssetProfile.BigIconPath!;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {

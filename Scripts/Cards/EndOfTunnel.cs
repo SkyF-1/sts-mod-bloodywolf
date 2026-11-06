@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -14,11 +12,10 @@ using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class EndOfTunnel : BloodywolfCardModel
 {//苦尽甘来
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>{ CardKeyword.Innate };
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
 		new DamageVar(14m, ValueProp.Move),
@@ -27,7 +24,7 @@ public sealed class EndOfTunnel : BloodywolfCardModel
 		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel c, Creature? __) => c.Owner.Creature.CombatState.RoundNumber)
 	};
 
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
 
 	public EndOfTunnel()
 		: base(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)

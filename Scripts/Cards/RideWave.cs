@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,10 +11,9 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class RideWave : BloodywolfCardModel
 {/// 热点话题
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => 
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
         HoverTipFactory.FromPower<StrengthPower>()
@@ -27,14 +24,14 @@ public sealed class RideWave : BloodywolfCardModel
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        await PowerCmd.Apply<RideWavePower>(choiceContext, 
+        await PowerCmd.Apply<RideWavePower>(choiceContext,
             base.Owner.Creature,
             CloutValue,
-            base.Owner.Creature, 
+            base.Owner.Creature,
             null);
     }
 

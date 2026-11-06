@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -12,7 +10,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class NewGodArrives : BloodywolfCardModel
 {/// 新神已至
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
@@ -27,15 +24,15 @@ public sealed class NewGodArrives : BloodywolfCardModel
 		: base(1, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 	{
 	}
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {	
+    {
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
 			.WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(cardPlay.Target)).FromCard(this, cardPlay)
 			.TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_fire_smoke_puff")
 			.Execute(choiceContext);
-        
+
     }
 
 	protected override void OnUpgrade()

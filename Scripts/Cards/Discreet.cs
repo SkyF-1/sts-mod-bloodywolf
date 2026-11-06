@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,7 +9,6 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Discreet : BloodywolfCardModel
 {// 谨言慎行
 	public override bool GainsBlock => true;
@@ -21,7 +18,7 @@ public sealed class Discreet : BloodywolfCardModel
     new HotTakeVar(3m),
     new BlockVar("BonusBlock", 4m, ValueProp.Move),
     ];
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Discreet()
 		: base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
@@ -29,7 +26,7 @@ public sealed class Discreet : BloodywolfCardModel
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{  
+	{
         decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars["BaseBlock"].BaseValue, ValueProp.Move, cardPlay);
 

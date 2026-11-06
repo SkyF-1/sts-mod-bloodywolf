@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,15 +13,14 @@ using StsModBloodywolf.Scripts.Pools;
 
 namespace StsModBloodywolf.Scripts.Potions;
 
-[Pool(typeof(BloodywolfPotionPool))]
-public sealed class FluidSentimentPotion : CustomPotionModel
+public sealed class FluidSentimentPotion : BloodywolfPotionModel
 {
 	public override PotionRarity Rarity => PotionRarity.Common;
 	public override PotionUsage Usage => PotionUsage.CombatOnly;
 	public override TargetType TargetType => TargetType.AllEnemies;
-    public override string? CustomPackedImagePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomPackedOutlinePath => $"res://StsModBloodywolf/images/potions/{Id.Entry.ToLowerInvariant()}_outline.png";
-	public override IEnumerable<IHoverTip> ExtraHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CupLossPower>() };
+    public override string? CustomImagePath => AssetProfile.ImagePath!;
+    public override string? CustomOutlinePath => AssetProfile.OutlinePath!;
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CupLossPower>() };
 
 	protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? _)
 	{

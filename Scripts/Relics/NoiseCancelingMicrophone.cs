@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -16,8 +14,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-[Pool(typeof(BloodywolfRelicPool))]
-public class NoiseCancelingMicrophone : CustomRelicModel
+public class NoiseCancelingMicrophone : BloodywolfRelicModel
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{
 		new EnergyVar("EnergyThreshold", 2),
@@ -39,11 +36,11 @@ public class NoiseCancelingMicrophone : CustomRelicModel
     // 稀有度
     public override RelicRarity Rarity => RelicRarity.Rare;
     // 小图标
-    public override string PackedIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PackedIconPath => AssetProfile.IconPath!;
     // 轮廓图标
-    protected override string PackedIconOutlinePath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string PackedIconOutlinePath => AssetProfile.IconOutlinePath!;
     // 大图标
-    protected override string BigIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string BigIconPath => AssetProfile.BigIconPath!;
 	public override Task BeforeCombatStart()
 	{
 		UsedThisCombat = false;

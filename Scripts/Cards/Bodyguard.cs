@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,16 +10,15 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-[Pool(typeof(BloodywolfCardPool))]
 public sealed class Bodyguard : BloodywolfCardModel
 {/// 护至身前
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> 
-    { 
+	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
+    {
         new CloutLossVar(3m)
     };
     protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
-    public override string PortraitPath => $"res://StsModBloodywolf/images/cards/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Bodyguard()
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
@@ -44,11 +41,11 @@ public sealed class Bodyguard : BloodywolfCardModel
         {
             await PowerCmd.Remove(cloutPower);
         }
-        
+
         CardSelectorPrefs prefs;
-        if(PileType.Draw.GetPile(base.Owner).Cards.Count() == 1) 
+        if(PileType.Draw.GetPile(base.Owner).Cards.Count() == 1)
             prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, 1);
-        else 
+        else
             prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
 		List<CardModel> cardsIn = (from c in PileType.Draw.GetPile(base.Owner).Cards
 			orderby c.Rarity, c.Id

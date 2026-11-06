@@ -23,18 +23,28 @@ namespace StsModBloodywolf.Scripts.Services
 
         public static void PlayCard(CardModel card, float volume = 1f)
         {
-            if (!BloodywolfModConfig.EnableCardVoice) return;
+            var settings = BloodywolfSettingsPage.Read();
+            if (!settings.EnableCardVoice) return;
 
             var variant = CardAudioSettings.ResolveVariant(card.Id.Entry);
             if (variant == null)
                 return;
 
+            var audioKey = GetAudioKey(card);
             var path = CardAudioCatalog.Find(card.Id.Entry, variant.Value)
+                ?? CardAudioCatalog.Find(audioKey, variant.Value)
                 ?? CardAudioCatalog.Find(card.Id.Entry, GetOtherVariant(variant.Value))
+                ?? CardAudioCatalog.Find(audioKey, GetOtherVariant(variant.Value))
                 ?? FindLegacyPath(card.GetType().Name);
 
             if (path != null)
-                TryPlayPath(path, volume * (float)BloodywolfModConfig.MasterVolume);
+                TryPlayPath(path, volume * (float)settings.MasterVolume);
+        }
+
+        public static string GetAudioKey(CardModel card)
+        {
+            return "stsmodbloodywolf-" +
+                   card.Id.Entry.Replace("STS_MOD_BLOODYWOLF_CARD_", "").ToLowerInvariant();
         }
 
         public static bool TryPlay(string key, float volume = 1f)

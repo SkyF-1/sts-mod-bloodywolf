@@ -1,4 +1,3 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,12 +11,12 @@ using static MyHook;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class SpinPower : CustomPowerModel, IModifyTrollDamageListener, IModifyTrollDamageMultiplicativeListener
+public sealed class SpinPower : BloodywolfPowerModel, IModifyTrollDamageListener, IModifyTrollDamageMultiplicativeListener
 {
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Single;
-	public override string? CustomPackedIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
-    public override string? CustomBigIconPath => $"res://StsModBloodywolf/images/powers/{Id.Entry.ToLowerInvariant()}.png";
+	public override string? CustomIconPath => AssetProfile.IconPath!;
+    public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 	public decimal ModifyTrollDamage(ICombatState combatState, Creature? target, decimal originalDamage, Creature? dealer, CardModel? cardSource)
     {
 		if (dealer != base.Owner)

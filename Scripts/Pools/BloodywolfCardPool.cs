@@ -1,23 +1,22 @@
 using Godot;
-using BaseLib.Abstracts;
+using STS2RitsuLib.Scaffolding.Content;
+using STS2RitsuLib.Utils;
 
 namespace StsModBloodywolf.Scripts.Pools;
-public class BloodywolfCardPool : CustomCardPoolModel
+public class BloodywolfCardPool : TypeListCardPoolModel
 {
-    // 卡池的ID。必须唯一防撞车。
     public override string Title => "BloodywolfCardPool";
+    public override string EnergyColorName => "Bloodywolf";
 
-    // 卡池的能量图标。暂时不支持加载，建议暂时使用原版，或者通过更改CardModel的EnergyIcon修改。
-    // public override string EnergyColorName => "colorless";
-    // 描述中使用的能量图标。大小为24x24。
     public override string? TextEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf.png";
-    // tooltip和卡牌左上角的能量图标。大小为74x74。
     public override string? BigEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf_big.png";
 
-    // 卡池的主题色。
-    public override Color DeckEntryCardColor => new("#1f97a7");
-    public override Color ShaderColor => new("#1f97a7");
+    public override Color DeckEntryCardColor => new("#1c3f6d");
+    public override Color EnergyOutlineColor => new("#1c3f6d");
 
-    // 卡池是否是无色。例如事件、状态等卡池就是无色的。
+    private static readonly Material? PoolFrameMaterialValue =
+        MaterialUtils.CreateReplaceHueShaderMaterial(0.12f, 0.59f, 0.65f);
+
+    public override Material? PoolFrameMaterial => PoolFrameMaterialValue;
     public override bool IsColorless => false;
 }

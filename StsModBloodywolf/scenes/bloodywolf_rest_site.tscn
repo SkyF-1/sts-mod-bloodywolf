@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://brkt8cuk3b3im"]
+[gd_scene load_steps=2 format=3 uid="uid://brkt8cuk3b3im"]
 
 [ext_resource type="Texture2D" uid="uid://b2y33lbwxu5s" path="res://StsModBloodywolf/scenes/bloodywolf_character.png" id="1_adw1b"]
-[ext_resource type="Script" uid="uid://iu0388kctddd" path="res://Scripts/BloodywolfRestSite.cs" id="1_tnb6u"]
 
 [node name="BloodywolfRestSite" type="Node2D"]
 position = Vector2(-2, 42)
 scale = Vector2(0.760006, 0.760006)
-script = ExtResource("1_tnb6u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(23.809334, -83.55197)
@@ -20,6 +18,14 @@ offset_left = 30.186
 offset_top = -99.5176
 offset_right = 30.186
 offset_bottom = -99.5176
+
+[node name="SelectionReticle" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -183.0
+offset_top = -318.0
+offset_right = 237.0
+offset_bottom = 292.0
 
 [node name="Hitbox" type="Control" parent="ControlRoot"]
 unique_name_in_owner = true

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Models;
 
 namespace StsModBloodywolf.Scripts.Singletons;
 
@@ -12,7 +13,8 @@ namespace StsModBloodywolf.Scripts.Singletons;
 /// 洗牌前减费单例。
 /// 局内调用 ReduceCost(card, n) 给卡减 n 费，洗牌时全部清空。
 /// </summary>
-public class CostReductionBeforeShuffledSingleton : CustomSingletonModel
+[RegisterSingleton]
+public class CostReductionBeforeShuffledSingleton : HookedSingletonModel
 {
     // 累积减费量：值是正数，表示减多少费
     private readonly Dictionary<CardModel, int> _costReductions = new();
@@ -20,7 +22,7 @@ public class CostReductionBeforeShuffledSingleton : CustomSingletonModel
     // 绝对费用覆盖：值是最终费用，优先级高于 _costReductions
     private readonly Dictionary<CardModel, int> _absoluteCosts = new();
 
-    public CostReductionBeforeShuffledSingleton() : base(true, true) { }
+    public CostReductionBeforeShuffledSingleton() : base(HookType.Combat) { }
 
     /// <summary>
     /// 让这张卡减 amount 费，可累加。
@@ -121,6 +123,8 @@ public class CostReductionBeforeShuffledSingleton : CustomSingletonModel
     {
         return card != null
             && !card.IsCanonical
-            && !card.EnergyCost.CostsX;
+            && card.EnergyCost.Canonical > 0
+            && !card.EnergyCost.CostsX
+            && !card.Keywords.Contains(CardKeyword.Unplayable);
     }
 }

@@ -1,5 +1,3 @@
-using BaseLib.Abstracts;
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -10,18 +8,17 @@ using StsModBloodywolf.Scripts.Powers;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-[Pool(typeof(BloodywolfRelicPool))]
-public sealed class Slicer : CustomRelicModel
+public sealed class Slicer : BloodywolfRelicModel
 {
     private const decimal MaxGold = 30m;
 
     public override RelicRarity Rarity => RelicRarity.Common;
 
-    public override string PackedIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    public override string PackedIconPath => AssetProfile.IconPath!;
 
-    protected override string PackedIconOutlinePath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string PackedIconOutlinePath => AssetProfile.IconOutlinePath!;
 
-    protected override string BigIconPath => $"res://StsModBloodywolf/images/relics/{Id.Entry.ToLowerInvariant()}.png";
+    protected override string BigIconPath => AssetProfile.BigIconPath!;
 
     public override async Task AfterCombatEnd(CombatRoom _)
     {

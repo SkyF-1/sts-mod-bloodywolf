@@ -15,7 +15,7 @@ public class BloodywolfCardPool : TypeListCardPoolModel
     public override Color EnergyOutlineColor => new("#1c3f6d");
 
     private static readonly Material? PoolFrameMaterialValue =
-        MaterialUtils.CreateReplaceHueShaderMaterial(0.12f, 0.59f, 0.65f);
+        MaterialUtils.CreateReplaceHueShaderMaterial(0.1098f, 0.2471f, 0.4275f);
 
     public override Material? PoolFrameMaterial => PoolFrameMaterialValue;
     public override bool IsColorless => false;

@@ -9,10 +9,12 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-public sealed class SponsorshipKing : BloodywolfRelicModel
+public sealed class SponsorshipKing : BloodywolfRelicModel, ISecondaryResourceHookListener
 {
     public override RelicRarity Rarity => RelicRarity.Shop;
 
@@ -24,7 +26,7 @@ public sealed class SponsorshipKing : BloodywolfRelicModel
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
-        HoverTipFactory.FromPower<CloutPower>(),
+        BloodywolfResources.CreateCloutHoverTip(),
         HoverTipFactory.FromPower<DexterityPower>()
     ];
 
@@ -34,17 +36,14 @@ public sealed class SponsorshipKing : BloodywolfRelicModel
 
     protected override string BigIconPath => AssetProfile.BigIconPath!;
 
-    public override async Task AfterPowerAmountChanged(
-        PlayerChoiceContext choiceContext,
-        PowerModel power,
-        decimal amount,
-        Creature? applier,
-        CardModel? cardSource)
+    public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
     {
-        if (applier == Owner.Creature && amount > 0m && power is CloutPower)
+        if (context.Player == Owner &&
+            context.Delta > 0 &&
+            context.Definition.Id == BloodywolfResources.CloutId)
         {
             Flash();
-            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+            await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), DynamicVars.Cards.BaseValue, Owner);
         }
     }
 

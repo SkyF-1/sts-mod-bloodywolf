@@ -7,6 +7,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -17,7 +19,8 @@ public sealed class NewGodArrives : BloodywolfCardModel
         new DamageVar(4m, ValueProp.Move),
 		new CalculationBaseVar(1m),
 		new CalculationExtraVar(1m),
-		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount / 2 ?? 0)
+		SecondaryResourceVars.For("CloutThreshold", BloodywolfResources.CloutId, 2m),
+		new CalculatedVar("CalculatedHits").WithMultiplier((CardModel card, Creature? _) => BloodywolfResources.GetClout(card.Owner) / 2)
     };
 
 	public NewGodArrives()

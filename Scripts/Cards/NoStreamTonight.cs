@@ -2,9 +2,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -13,35 +13,20 @@ public sealed class NoStreamTonight : BloodywolfCardModel
     /// 今晚不播
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new CloutLossVar(2m),
         new EnergyVar(2)
     };
-    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
     public NoStreamTonight()
         : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
     {
+        this.SecondaryCosts().Set(BloodywolfResources.CloutId, 2);
     }
 
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
-        {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-                base.Owner.Creature,
-                -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature,
-                this);
-            await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
-        }
-        else if (cloutPower != null)
-        {
-            await PowerCmd.Remove(cloutPower);
-        }
+        await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()

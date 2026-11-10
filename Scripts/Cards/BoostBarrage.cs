@@ -21,7 +21,7 @@
 // 	{
 // 		new CalculationBaseVar(5m),
 // 		new ExtraDamageVar(2m),
-// 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0m)
+// 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => BloodywolfResources.GetClout(card.Owner))
 // 	};
 
 // 	public BoostBarrage()

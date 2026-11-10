@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -27,7 +28,7 @@ public sealed class RideWave : BloodywolfCardModel
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int CloutValue = BloodywolfResources.GetClout(base.Owner);
         await PowerCmd.Apply<RideWavePower>(choiceContext,
             base.Owner.Creature,
             CloutValue,

@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
@@ -20,7 +21,7 @@ public sealed class ChatPower : BloodywolfPowerModel
 	{
 		if (cardPlay.Card.Owner == base.Owner.Player && cardPlay.Card.Type == CardType.Skill)
 		{
-			await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, Amount, base.Owner, null);
+			await BloodywolfResources.GainClout(base.Owner.Player, Amount, this);
 		}
 	}
 	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

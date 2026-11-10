@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Char;
+using StsModBloodywolf.Scripts.Resources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Relics;
@@ -34,7 +35,7 @@ public class RabbitHead : BloodywolfRelicModel
     public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, null);
+		await BloodywolfResources.GainClout(base.Owner, (int)base.DynamicVars[RateVar.Key].BaseValue, this);
 	}
 
 }

@@ -22,7 +22,7 @@
 //         new CloutLossVar(2m)
 //     };
 
-//     protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
+//     protected override bool IsPlayable => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
 //     public override string PortraitPath => AssetProfile.PortraitPath!;
 
@@ -34,19 +34,13 @@
 // 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 // 	{
 // 		// 失去1影响
-// 		decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-// 		var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
+// 		int cloutAmount = BloodywolfResources.GetClout(base.Owner);
 // 		if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
 // 		{
-// 			await PowerCmd.Apply<CloutPower>(choiceContext,
-// 				base.Owner.Creature,
-// 				-base.DynamicVars[CloutLossVar.Key].BaseValue,
-// 				base.Owner.Creature,
+// 			await BloodywolfResources.LoseClout(
+// 				base.Owner,
+// 				(int)base.DynamicVars[CloutLossVar.Key].BaseValue,
 // 				this);
-// 		}
-// 		else if (cloutPower != null)
-// 		{
-// 			await PowerCmd.Remove(cloutPower);
 // 		}
 
 // 		// 将弃牌堆�?张牌置于抽牌堆顶

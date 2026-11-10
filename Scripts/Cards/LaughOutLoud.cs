@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -29,7 +30,7 @@ public sealed class LaughOutLoud : BloodywolfCardModel
         new HotTakeVar(3m),
         new PowerVar<WeakPower>(2m)
     };
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].IntValue;
 
 	public LaughOutLoud()
 		: base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
@@ -42,7 +43,7 @@ public sealed class LaughOutLoud : BloodywolfCardModel
 
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
 
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int CloutValue = BloodywolfResources.GetClout(base.Owner);
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await PowerCmd.Apply<WeakPower>(choiceContext,

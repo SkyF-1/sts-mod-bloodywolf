@@ -9,6 +9,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -19,7 +21,7 @@ public sealed class Controversy : BloodywolfCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new EnergyVar(1),
-        new CloutLossPowerVar(1m)
+        SecondaryResourceVars.For("CloutSpend", BloodywolfResources.CloutId, 1m)
     };
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{base.EnergyHoverTip};
     public Controversy()

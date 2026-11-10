@@ -7,10 +7,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-public sealed class Blade : BloodywolfCardModel
+public sealed class Blade : BloodywolfCardModel, ISecondaryResourceHookListener
 {/// 利刃
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
@@ -30,9 +32,11 @@ public sealed class Blade : BloodywolfCardModel
 			.Execute(choiceContext);
 	}
 
-    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
+		if (context.Player == base.Owner &&
+			context.Delta > 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId)
 		{
 			CardPile? pile = base.Pile;
 			if (pile == null || pile.Type == PileType.Discard)

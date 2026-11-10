@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
@@ -27,6 +28,6 @@ public class MartialSoul : BloodywolfRelicModel
     public override async Task BeforeCombatStart()
 	{
 		Flash();
-		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, null);
+		await BloodywolfResources.GainClout(base.Owner, (int)base.DynamicVars[RateVar.Key].BaseValue, this);
 	}
 }

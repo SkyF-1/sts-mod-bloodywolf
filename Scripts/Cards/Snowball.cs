@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 
@@ -21,7 +22,7 @@ public sealed class Snowball : BloodywolfCardModel
         new ExtraDamageVar(1m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
             {
-                decimal cloutValue = card.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+                int cloutValue = BloodywolfResources.GetClout(card.Owner);
                 if (cloutValue >= card.DynamicVars[HotTakeVar.Key].BaseValue)
                 {
                     return card.DynamicVars["extraDamage"].BaseValue;
@@ -35,7 +36,7 @@ public sealed class Snowball : BloodywolfCardModel
 		: base(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

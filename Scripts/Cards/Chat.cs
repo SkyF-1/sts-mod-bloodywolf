@@ -4,11 +4,11 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -16,11 +16,6 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Chat : BloodywolfCardModel
 {/// 杂谈
     public override string PortraitPath => AssetProfile.PortraitPath!;
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
         new BlockVar(7m, ValueProp.Move),
@@ -55,10 +50,9 @@ public sealed class Chat : BloodywolfCardModel
         // {
         //     await PlayerCmd.GainEnergy(base.DynamicVars.Energy.BaseValue, base.Owner);
         //     await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        //     await PowerCmd.Apply<CloutPower>(choiceContext,
-        //     base.Owner.Creature,
-        //     base.DynamicVars[RateVar.Key].BaseValue,
-        //     base.Owner.Creature,
+        //     await BloodywolfResources.GainClout(
+        //     base.Owner,
+        //     (int)base.DynamicVars[RateVar.Key].BaseValue,
         //     this);
         // }
 	}

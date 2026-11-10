@@ -29,20 +29,19 @@
 // 		: base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 // 	{
 // 	}
-//     protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
+//     protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].IntValue;
 // 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 // 	{
 // 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 // 		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
 // 			.WithHitFx("vfx/vfx_attack_blunt")
 // 			.Execute(choiceContext);
-//         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+//         int cloutAmount = BloodywolfResources.GetClout(base.Owner);
 //         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
 //         {
-//             await PowerCmd.Apply<CloutPower>(choiceContext,
-//                 base.Owner.Creature,
-//                 -base.DynamicVars[CloutLossVar.Key].BaseValue,
-//                 base.Owner.Creature,
+//             await BloodywolfResources.LoseClout(
+//                 base.Owner,
+//                 (int)base.DynamicVars[CloutLossVar.Key].BaseValue,
 //                 this);
 //             if (!base.Keywords.Contains(CardKeyword.Exhaust) && !base.ExhaustOnNextPlay)
 //             {

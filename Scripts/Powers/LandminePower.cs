@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
@@ -44,7 +45,13 @@ public sealed class LandminePower : BloodywolfPowerModel
 			int cardsPlayed = GetInternalData<Data>().cardsPlayed;
 			if (cardsPlayed > 0)
             {
-				await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner, base.Amount * cardsPlayed, base.Owner, SourceCard);
+				if (base.Owner.Player is not { } player)
+					return;
+
+				await BloodywolfResources.GainClout(
+					player,
+					base.Amount * cardsPlayed,
+					(AbstractModel?)SourceCard ?? this);
             }
             await PowerCmd.Remove(this);
         }

@@ -3,10 +3,10 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -15,11 +15,6 @@ public sealed class RetreatAll : BloodywolfCardModel
     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(1m)];
     public override string PortraitPath => AssetProfile.PortraitPath!;
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
 	public RetreatAll()
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
@@ -28,9 +23,9 @@ public sealed class RetreatAll : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
         IEnumerable<CardModel> cards = PileType.Hand.GetPile(base.Owner).Cards;
-        decimal cardCount = cards.Count();
+        int cardCount = cards.Count();
         await CardCmd.Discard(choiceContext, cards);
-        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, cardCount, base.Owner.Creature, this);
+        await BloodywolfResources.GainClout(base.Owner, cardCount, this);
 	}
 
 	protected override void OnUpgrade()

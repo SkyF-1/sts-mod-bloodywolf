@@ -6,7 +6,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
-using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -15,33 +16,17 @@ public sealed class StirUp : BloodywolfCardModel
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(32m, ValueProp.Move),
-        new CloutLossVar(3m),
         new CardsVar(1)
     };
-    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
 	public StirUp()
 		: base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
+		this.SecondaryCosts().Set(BloodywolfResources.CloutId, 3);
 	}
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
-        {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-                base.Owner.Creature,
-                -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature,
-                null);
-        }
-        else if (cloutPower != null)
-        {
-            await PowerCmd.Remove(cloutPower);
-        }
-
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
 			.Targeting(cardPlay.Target)

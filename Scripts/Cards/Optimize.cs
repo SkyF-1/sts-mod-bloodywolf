@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -15,7 +16,7 @@ public sealed class Optimize : BloodywolfCardModel
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>{new CardsVar(1), new RateVar(0m)};
 
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<CloutPower>()};
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>{HoverTipFactory.FromKeyword(CardKeyword.Exhaust)};
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Optimize()
@@ -37,10 +38,9 @@ public sealed class Optimize : BloodywolfCardModel
             int ratingCount = base.IsUpgraded ? 2 : 1;
             for (int i = 0; i < ratingCount; i++)
             {
-                await PowerCmd.Apply<CloutPower>(choiceContext,
-                    base.Owner.Creature,
-                    rateCount,
-                    base.Owner.Creature,
+                await BloodywolfResources.GainClout(
+                    base.Owner,
+                    (int)rateCount,
                     this);
             }
 		}

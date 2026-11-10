@@ -5,43 +5,23 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.DynamicVars;
-using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 public sealed class Bodyguard : BloodywolfCardModel
 {/// 护至身前
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
-    {
-        new CloutLossVar(3m)
-    };
-    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
-
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Bodyguard()
 		: base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 	{
+		this.SecondaryCosts().Set(BloodywolfResources.CloutId, 3);
 	}
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
-        {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-                base.Owner.Creature,
-                -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature,
-                this);
-        }
-        else if (cloutPower != null)
-        {
-            await PowerCmd.Remove(cloutPower);
-        }
-
         CardSelectorPrefs prefs;
         if(PileType.Draw.GetPile(base.Owner).Cards.Count() == 1)
             prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, 1);
@@ -62,6 +42,6 @@ public sealed class Bodyguard : BloodywolfCardModel
 
 	protected override void OnUpgrade()
     {
-        base.DynamicVars[CloutLossVar.Key].UpgradeValueBy(-1m);
+        this.SecondaryCosts().Set(BloodywolfResources.CloutId, 2);
     }
 }

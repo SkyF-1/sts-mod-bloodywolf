@@ -10,10 +10,12 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
-public class LiveRoomRule : BloodywolfRelicModel
+public class LiveRoomRule : BloodywolfRelicModel, ISecondaryResourceHookListener
 {
     // 稀有度
     public override RelicRarity Rarity => RelicRarity.Uncommon;
@@ -23,12 +25,21 @@ public class LiveRoomRule : BloodywolfRelicModel
     protected override string PackedIconOutlinePath => AssetProfile.IconOutlinePath!;
     // 大图标
     protected override string BigIconPath => AssetProfile.BigIconPath!;
-	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (!(amount >= 0m) && power.Owner == base.Owner.Creature && power is CloutPower)
+		if (context.Delta < 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId &&
+			context.Player == base.Owner)
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, base.Owner.Creature.CombatState.HittableEnemies, -amount, ValueProp.Unblockable | ValueProp.Unpowered, base.Owner.Creature, null ,null);
+			await CreatureCmd.Damage(
+				new BlockingPlayerChoiceContext(),
+				base.Owner.Creature.CombatState.HittableEnemies,
+				-context.Delta,
+				ValueProp.Unblockable | ValueProp.Unpowered,
+				base.Owner.Creature,
+				null,
+				null);
 		}
 	}
 }

@@ -11,10 +11,12 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class FreeHotTakePower : BloodywolfPowerModel
+public sealed class FreeHotTakePower : BloodywolfPowerModel, ISecondaryResourceHookListener
 {
     public override PowerType Type => PowerType.Buff;
 	public const string Key = "FreeHotTakePower";
@@ -72,5 +74,16 @@ public sealed class FreeHotTakePower : BloodywolfPowerModel
 				await PowerCmd.Decrement(this);
 			}
 		}
+	}
+
+	public decimal ModifySecondaryResourceCost(SecondaryResourceCostContext context, decimal cost)
+	{
+		if (context.Definition.Id != BloodywolfResources.CloutId ||
+			context.Card.Owner.Creature != base.Owner ||
+			!context.Card.DynamicVars.Keys.Contains(HotTakeVar.Key) ||
+			context.Card.Pile?.Type is not (PileType.Hand or PileType.Play))
+			return cost;
+
+		return 0m;
 	}
 }

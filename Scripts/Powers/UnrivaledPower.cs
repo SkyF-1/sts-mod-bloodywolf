@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
@@ -22,7 +23,7 @@ public sealed class UnrivaledPower : BloodywolfPowerModel
 	{
 		get
 		{
-			return base.DynamicVars[HotTakeVar.Key].BaseValue <= (base.Owner.GetPower<CloutPower>()?.Amount ?? 0m);
+			return base.DynamicVars[HotTakeVar.Key].BaseValue <= BloodywolfResources.GetClout(base.Owner);
 		}
 	}
 	public override PowerStackType StackType => PowerStackType.Counter;

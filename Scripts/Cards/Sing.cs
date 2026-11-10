@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -28,26 +29,24 @@ public sealed class Sing : BloodywolfCardModel
 		: base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
 	}
-    protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    protected override bool ShouldGlowRedInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(base.CombatState, "base.CombatState");
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int clout = BloodywolfResources.GetClout(base.Owner);
         await PowerCmd.Apply<FuckingTerriblePower>(choiceContext,
             base.CombatState.Enemies,
-            CloutValue,
+            clout,
             base.Owner.Creature,
             null);
         //言论条�?
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
+        if (clout >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-            base.Owner.Creature,
-            -base.DynamicVars[CloutLossVar.Key].BaseValue,
-            base.Owner.Creature,
-            null);
+            await BloodywolfResources.LoseClout(
+                base.Owner,
+                (int)base.DynamicVars[CloutLossVar.Key].BaseValue,
+                this);
         }
     }
 

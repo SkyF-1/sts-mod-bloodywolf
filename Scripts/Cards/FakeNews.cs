@@ -3,9 +3,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -14,38 +14,23 @@ public sealed class FakeNews : BloodywolfCardModel
     /// 不要不要
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new CloutLossVar(1m),
         new BlockVar(9m, ValueProp.Move)
     };
-    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
 
     public FakeNews()
         : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
+        this.SecondaryCosts().Set(BloodywolfResources.CloutId, 1);
     }
 
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
+        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
+        if (!base.Keywords.Contains(CardKeyword.Exhaust) && !base.ExhaustOnNextPlay)
         {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-                base.Owner.Creature,
-                -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature,
-                this);
-            await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-            if (!base.Keywords.Contains(CardKeyword.Exhaust) && !base.ExhaustOnNextPlay)
-            {
-                await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
-            }
-        }
-        else if (cloutPower != null)
-        {
-            await PowerCmd.Remove(cloutPower);
+            await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
         }
     }
 

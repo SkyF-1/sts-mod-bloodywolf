@@ -8,12 +8,13 @@ using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.Commands;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 public sealed class WellMade : BloodywolfCardModel
 {/// 制作精良
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 	protected override IEnumerable<DynamicVar> CanonicalVars => [
 	new HotTakeVar(5m),
 	new CardsVar(2)
@@ -28,7 +29,7 @@ public sealed class WellMade : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		List<CardModel> drawnCards = (await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner)).ToList();
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int CloutValue = BloodywolfResources.GetClout(base.Owner);
 		if (CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue && drawnCards.Count > 0)
         {
 			List<CardModel> eligibleCards = drawnCards

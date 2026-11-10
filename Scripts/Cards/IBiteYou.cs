@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Players;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -35,10 +36,9 @@ public sealed class IBiteYou : BloodywolfCardModel
 	{
 		AttackCommand attackCommand = DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_bite");
-		await PowerCmd.Apply<CloutPower>(choiceContext,
-            base.Owner.Creature,
-            base.DynamicVars[RateVar.Key].BaseValue,
-            base.Owner.Creature,
+		await BloodywolfResources.GainClout(
+            base.Owner,
+            (int)base.DynamicVars[RateVar.Key].BaseValue,
             this);
 		await attackCommand.Execute(choiceContext);
 	}

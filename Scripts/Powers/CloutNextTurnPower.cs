@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
@@ -20,8 +21,11 @@ public sealed class CloutNextTurnPower : BloodywolfPowerModel
 	{
 		if (side == base.Owner.Side)
 		{
+			if (base.Owner.Player is not { } player)
+				return;
+
 			Flash();
-			await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, Amount, base.Owner, null);
+			await BloodywolfResources.GainClout(player, Amount, this);
 			await PowerCmd.Remove(this);
 		}
 	}

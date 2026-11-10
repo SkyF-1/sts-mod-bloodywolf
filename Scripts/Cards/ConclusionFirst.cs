@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -21,7 +22,6 @@ public sealed class ConclusionFirst : BloodywolfCardModel
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     new List<IHoverTip>
     {
-        HoverTipFactory.FromPower<CloutPower>(),
         HoverTipFactory.FromPower<CupLossPower>()
     };
     public override string PortraitPath => AssetProfile.PortraitPath!;
@@ -33,11 +33,10 @@ public sealed class ConclusionFirst : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(choiceContext,
-        base.Owner.Creature,
-        base.DynamicVars[RateVar.Key].BaseValue,
-        base.Owner.Creature,
-        this);
+        await BloodywolfResources.GainClout(
+            base.Owner,
+            (int)base.DynamicVars[RateVar.Key].BaseValue,
+            this);
         await PowerCmd.Apply<CupLossPower>(choiceContext,
         base.CombatState.HittableEnemies,
         base.DynamicVars[CupLossPower.Key].BaseValue,

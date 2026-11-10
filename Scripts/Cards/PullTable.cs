@@ -7,10 +7,12 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-public sealed class PullTable : BloodywolfCardModel
+public sealed class PullTable : BloodywolfCardModel, ISecondaryResourceHookListener
 {
 	private const string _increaseKey = "Increase";
 
@@ -49,14 +51,17 @@ public sealed class PullTable : BloodywolfCardModel
 			.Execute(choiceContext);
 	}
 
-	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
+		if (context.Player == base.Owner &&
+			context.Delta > 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId)
 		{
 			decimal baseValue = base.DynamicVars["Increase"].BaseValue;
-				base.DynamicVars.Damage.BaseValue += baseValue;
-				ExtraDamage += baseValue;
+			base.DynamicVars.Damage.BaseValue += baseValue;
+			ExtraDamage += baseValue;
 		}
+		return Task.CompletedTask;
 	}
 
 	protected override void OnUpgrade()

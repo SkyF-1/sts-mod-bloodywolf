@@ -7,14 +7,16 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
-using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 
 namespace StsModBloodywolf.Scripts.Powers;
 
 public sealed class ShutUpPower : BloodywolfPowerModel
 {
+	private const int CloutCost = 3;
 	private bool _shouldConsume;
 
 	public override PowerType Type => PowerType.Buff;
@@ -22,10 +24,10 @@ public sealed class ShutUpPower : BloodywolfPowerModel
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomIconPath => AssetProfile.IconPath!;
     public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
-	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
-    {
-        new CloutLossPowerVar(3m)
-    };
+	protected override IEnumerable<DynamicVar> CanonicalVars =>
+	[
+		SecondaryResourceVars.For("CloutSpend", BloodywolfResources.CloutId, CloutCost)
+	];
 	public override decimal ModifyHpLostAfterOstyLate(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
 		_shouldConsume = false;
@@ -33,9 +35,7 @@ public sealed class ShutUpPower : BloodywolfPowerModel
 		{
 			return amount;
 		}
-		decimal cloutLoss = base.DynamicVars[CloutLossPowerVar.Key].BaseValue;
-		decimal cloutValue = base.Owner.GetPower<CloutPower>()?.Amount ?? 0m;
-		if (cloutValue < cloutLoss)
+		if (BloodywolfResources.GetClout(base.Owner) < CloutCost)
 		{
 			return amount;
 		}
@@ -49,8 +49,13 @@ public sealed class ShutUpPower : BloodywolfPowerModel
 			return;
 		}
 		_shouldConsume = false;
-		await PowerCmd.Apply<CloutPower>(new BlockingPlayerChoiceContext(), base.Owner, -base.DynamicVars[CloutLossPowerVar.Key].BaseValue, base.Owner, null);
-		Flash();
-		await PowerCmd.Decrement(this);
+		if (base.Owner.Player is not { } player)
+			return;
+
+		if (await BloodywolfResources.SpendClout(player, CloutCost, source: this))
+		{
+			Flash();
+			await PowerCmd.Decrement(this);
+		}
 	}
 }

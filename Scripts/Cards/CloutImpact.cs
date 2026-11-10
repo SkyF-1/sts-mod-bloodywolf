@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -19,7 +20,7 @@ public sealed class CloutImpact : BloodywolfCardModel
         new HotTakeVar(3m),
         new DamageVar("BonusDamage", 5m, ValueProp.Move)
     };
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
@@ -35,7 +36,7 @@ public sealed class CloutImpact : BloodywolfCardModel
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
 
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int cloutAmount = BloodywolfResources.GetClout(base.Owner);
         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await DamageCmd.Attack(base.DynamicVars["BonusDamage"].BaseValue).FromCard(this, cardPlay)

@@ -3,8 +3,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
-using StsModBloodywolf.Scripts.Powers;
-using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -13,39 +13,23 @@ public sealed class ReputationReverse : BloodywolfCardModel
     /// 风评反转
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new CloutLossVar(2m),
         new CardsVar(3)
     };
-    protected override bool IsPlayable => (base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0) >= base.DynamicVars[CloutLossVar.Key].BaseValue;
     public ReputationReverse()
         : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
+        this.SecondaryCosts().Set(BloodywolfResources.CloutId, 2);
     }
 
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
-        var cloutPower = base.Owner.Creature.GetPower<CloutPower>();
-        if (cloutAmount >= base.DynamicVars[CloutLossVar.Key].BaseValue)
-        {
-            await PowerCmd.Apply<CloutPower>(choiceContext,
-                base.Owner.Creature,
-                -base.DynamicVars[CloutLossVar.Key].BaseValue,
-                base.Owner.Creature,
-                this);
-            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
-        }
-        else if (cloutPower != null)
-        {
-            await PowerCmd.Remove(cloutPower);
-        }
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }
 
     protected override void OnUpgrade()
     {
-        //base.DynamicVars[CloutLossVar.Key].UpgradeValueBy(-1m);
         base.DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

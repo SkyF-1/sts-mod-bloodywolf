@@ -39,10 +39,9 @@ public sealed class Slander : BloodywolfCardModel
                 .Execute(choiceContext);
         }
 
-        // await PowerCmd.Apply<CloutPower>(choiceContext,
-        //     base.Owner.Creature,
-        //     base.DynamicVars[RateVar.Key].BaseValue,
-        //     base.Owner.Creature,
+        // await BloodywolfResources.GainClout(
+        //     base.Owner,
+        //     (int)base.DynamicVars[RateVar.Key].BaseValue,
         //     this);
 	}
 

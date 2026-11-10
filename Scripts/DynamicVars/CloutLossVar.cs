@@ -1,20 +1,14 @@
-using STS2RitsuLib.Cards.DynamicVars;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.DynamicVars;
 
-public class CloutLossVar : DynamicVar
+public class CloutLossVar : SecondaryResourceVar
 {
     public const string Key = "Bloodywolf-CloutLoss";
-    public static readonly string LocKey = Key.ToUpperInvariant();
 
-    public CloutLossVar(decimal baseValue) : base(Key, baseValue)
-    {
-        this.WithSharedTooltip(LocKey);
-    }
+    public CloutLossVar(decimal baseValue) : base(Key, BloodywolfResources.CloutId, baseValue) { }
 
-    public CloutLossVar(string name, decimal baseValue) : base(name, baseValue)
-    {
-        this.WithSharedTooltip(LocKey);
-    }
+    public CloutLossVar(string name, decimal baseValue)
+        : base(name, BloodywolfResources.CloutId, baseValue) { }
 }

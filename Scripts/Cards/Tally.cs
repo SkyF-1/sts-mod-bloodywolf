@@ -5,21 +5,16 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
 public sealed class Tally : BloodywolfCardModel
 {
     /// 清点计算
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new DamageVar(2m, ValueProp.Move),
@@ -47,11 +42,10 @@ public sealed class Tally : BloodywolfCardModel
 	{
 		if ( cardSource == this && result.UnblockedDamage > 0)
 		{
-			await PowerCmd.Apply<CloutPower>(choiceContext,
-            base.Owner.Creature,
-            base.DynamicVars[RateVar.Key].BaseValue,
-            base.Owner.Creature,
-            this);
+			await BloodywolfResources.GainClout(
+                base.Owner,
+                (int)base.DynamicVars[RateVar.Key].BaseValue,
+                this);
 		}
 	}
     protected override void OnUpgrade()

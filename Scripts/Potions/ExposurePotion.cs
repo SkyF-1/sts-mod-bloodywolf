@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Potions;
 
@@ -21,13 +22,13 @@ public sealed class ExposurePotion : BloodywolfPotionModel
 	public override TargetType TargetType => TargetType.Self;
     public override string? CustomImagePath => AssetProfile.ImagePath!;
     public override string? CustomOutlinePath => AssetProfile.OutlinePath!;
-	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip> { HoverTipFactory.FromPower<CloutPower>() };
+	protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip> { BloodywolfResources.CreateCloutHoverTip() };
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
         new RateVar(5m)
     };
 	protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? __)
 	{
-        await PowerCmd.Apply<CloutPower>(choiceContext, base.Owner.Creature, base.DynamicVars[RateVar.Key].BaseValue, base.Owner.Creature, null);
+        await BloodywolfResources.GainClout(base.Owner, (int)base.DynamicVars[RateVar.Key].BaseValue, this);
 	}
 }

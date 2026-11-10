@@ -3,6 +3,8 @@ using MegaCrit.Sts2.Core.Modding;
 using StsModBloodywolf.Scripts.Config;
 using StsModBloodywolf.Scripts.Services;
 using StsModBloodywolf.Scripts.Audio;
+using StsModBloodywolf.Scripts.Hooks;
+using StsModBloodywolf.Scripts.Resources;
 using MegaCrit.Sts2.Core.Combat;
 using StsModBloodywolf.Scripts.CombatHistory;
 using STS2RitsuLib;
@@ -25,8 +27,10 @@ public class Entry
 		// 传入参数随意，只要不和其他人撞车即可
 		var harmony = new Harmony("sts2.SkyF.Bloodywolf");
 		harmony.PatchAll();
+		CloutUnplayableReasonInstaller.Install(harmony);
 		var assembly = typeof(Entry).Assembly;
 		RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
+		BloodywolfResources.Register();
 		ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 		CardAudioSettings.Initialize();
 		Logger.Info("Mod initialized!");

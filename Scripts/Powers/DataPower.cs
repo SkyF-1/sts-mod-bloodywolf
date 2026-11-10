@@ -6,10 +6,12 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class DataPower : BloodywolfPowerModel
+public sealed class DataPower : BloodywolfPowerModel, ISecondaryResourceHookListener
 {
 	public override PowerType Type => PowerType.Buff;
 
@@ -17,16 +19,16 @@ public sealed class DataPower : BloodywolfPowerModel
 	public override string? CustomIconPath => AssetProfile.IconPath!;
     public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
-	public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? giver, out decimal modifiedAmount)
+	public decimal ModifySecondaryResourceGain(SecondaryResourceContext context, decimal amount)
     {
-        modifiedAmount = amount;
-        if (amount > 0 && canonicalPower is CloutPower && giver == base.Owner && target == base.Owner)
+        if (amount > 0 &&
+			context.Player == base.Owner.Player &&
+			context.Definition.Id == BloodywolfResources.CloutId)
         {
             Flash();
-            modifiedAmount = amount + 1m;
             PowerCmd.TickDownDuration(this);
-            return true;
+            return amount + 1m;
         }
-        return false;
+        return amount;
     }
 }

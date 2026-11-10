@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -23,7 +24,7 @@ public sealed class WhipYou : BloodywolfCardModel
         new CardsVar(2)
 	};
 
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].IntValue;
 	public WhipYou()
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
@@ -42,7 +43,7 @@ public sealed class WhipYou : BloodywolfCardModel
 			.WithHitFx("vfx/vfx_attack_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int CloutValue = BloodywolfResources.GetClout(base.Owner);
         //言论条�?
 		if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {

@@ -2,11 +2,11 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
 using StsModBloodywolf.Scripts.Char;
+using StsModBloodywolf.Scripts.Resources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace StsModBloodywolf.Scripts.Cards;
@@ -15,11 +15,6 @@ namespace StsModBloodywolf.Scripts.Cards;
 public sealed class Review : BloodywolfCardModel
 {/// 测评
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new RateVar(2m) };
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-    new List<IHoverTip>
-    {
-        HoverTipFactory.FromPower<CloutPower>()
-    };
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
 	public Review()
@@ -29,11 +24,10 @@ public sealed class Review : BloodywolfCardModel
 
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<CloutPower>(choiceContext,
-        base.Owner.Creature,
-        base.DynamicVars[RateVar.Key].BaseValue,
-        base.Owner.Creature,
-        this);
+        await BloodywolfResources.GainClout(
+            base.Owner,
+            (int)base.DynamicVars[RateVar.Key].BaseValue,
+            this);
     }
 
 	protected override void OnUpgrade()

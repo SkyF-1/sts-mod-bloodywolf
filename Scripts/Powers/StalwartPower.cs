@@ -5,22 +5,32 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class StalwartPower : BloodywolfPowerModel
+public sealed class StalwartPower : BloodywolfPowerModel, ISecondaryResourceHookListener
 {
 	public override PowerType Type => PowerType.Debuff;
 
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override string? CustomIconPath => AssetProfile.IconPath!;
     public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
-	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (!(amount == 0m) && power.Owner == base.Applier && power is CloutPower)
+		if (context.Delta != 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId &&
+			context.Player == base.Applier?.Player)
 		{
 			Flash();
-			await CreatureCmd.Damage(choiceContext, base.Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
+			await CreatureCmd.Damage(
+				new BlockingPlayerChoiceContext(),
+				base.Owner,
+				Amount,
+				ValueProp.Unblockable | ValueProp.Unpowered,
+				null,
+				null);
 		}
 	}
 	public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)

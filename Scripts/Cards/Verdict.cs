@@ -7,10 +7,12 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
-public sealed class Verdict : BloodywolfCardModel
+public sealed class Verdict : BloodywolfCardModel, ISecondaryResourceHookListener
 {/// 定论
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new DamageVar(32m, ValueProp.Move) };
     public override string PortraitPath => AssetProfile.PortraitPath!;
@@ -27,9 +29,11 @@ public sealed class Verdict : BloodywolfCardModel
 			.WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3").WithHitVfxSpawnedAtBase()
 			.Execute(choiceContext);
 	}
-	public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (applier == base.Owner.Creature && !(amount <= 0m) && power is CloutPower)
+		if (context.Player == base.Owner &&
+			context.Delta > 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId)
 		{
 			base.EnergyCost.AddThisCombat(-1);
 		}

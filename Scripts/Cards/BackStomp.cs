@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -20,7 +21,7 @@ public sealed class BackStomp : BloodywolfCardModel
         new HotTakeVar(3m),
         new CardsVar(1)
     };
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
 
     public override string PortraitPath => AssetProfile.PortraitPath!;
 
@@ -36,7 +37,7 @@ public sealed class BackStomp : BloodywolfCardModel
 			.WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
 
-        decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int cloutAmount = BloodywolfResources.GetClout(base.Owner);
         if (cloutAmount >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, base.DynamicVars.Cards.IntValue);

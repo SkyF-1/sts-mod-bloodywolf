@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Relics;
 
@@ -22,7 +23,7 @@ public sealed class Slicer : BloodywolfRelicModel
 
     public override async Task AfterCombatEnd(CombatRoom _)
     {
-        decimal num = Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0m;
+        decimal num = BloodywolfResources.GetClout(Owner);
         decimal gold = Math.Min(num, MaxGold);
         if (gold <= 0m)
         {

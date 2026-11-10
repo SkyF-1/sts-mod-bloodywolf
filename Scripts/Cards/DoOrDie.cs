@@ -23,10 +23,10 @@
 //     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 //     {
 //         // Clear all Clout
-//         decimal cloutAmount = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+//         int cloutAmount = BloodywolfResources.GetClout(base.Owner);
 //         if (cloutAmount > 0)
 //         {
-//             await PowerCmd.Remove<CloutPower>(base.Owner.Creature);
+//             await BloodywolfResources.SpendClout(base.Owner, cloutAmount, this, this);
 //         }
 
 //         // Exhaust draw pile and discard pile

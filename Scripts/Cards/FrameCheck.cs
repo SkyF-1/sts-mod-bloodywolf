@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using StsModBloodywolf.Scripts.Pools;
 using StsModBloodywolf.Scripts.DynamicVars;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
 
 namespace StsModBloodywolf.Scripts.Cards;
 
@@ -23,7 +24,7 @@ public sealed class FrameCheck : BloodywolfCardModel
         new HotTakeVar(3m),
         new PowerVar<VulnerablePower>(2m)
     };
-    protected override bool ShouldGlowGoldInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].IntValue;
+    protected override bool ShouldGlowGoldInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].IntValue;
 
 	public FrameCheck()
 		: base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
@@ -36,7 +37,7 @@ public sealed class FrameCheck : BloodywolfCardModel
         await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_gaze")
 			.Execute(choiceContext);
-        decimal CloutValue = base.Owner.Creature.GetPower<CloutPower>()?.Amount ?? 0;
+        int CloutValue = BloodywolfResources.GetClout(base.Owner);
         if(CloutValue >= base.DynamicVars[HotTakeVar.Key].BaseValue)
         {
             await PowerCmd.Apply<VulnerablePower>(choiceContext,

@@ -12,11 +12,6 @@
 // [RegisterCard(typeof(BloodywolfCardPool))]
 // public sealed class TourDeForce : BloodywolfCardModel
 // {/// 绝活
-//     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-//         new List<IHoverTip>
-//         {
-//             HoverTipFactory.FromPower<CloutPower>()
-//         };
 //     public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword> { CardKeyword.Exhaust };
 // 	protected override IEnumerable<DynamicVar> CanonicalVars => [new RateVar(8m)];
 //     public override string PortraitPath => AssetProfile.PortraitPath!;
@@ -28,10 +23,9 @@
 
 // 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 //     {
-//         await PowerCmd.Apply<CloutPower>(choiceContext,
-//         base.Owner.Creature,
+//         await BloodywolfResources.GainClout(
+//         base.Owner,
 //         base.DynamicVars[RateVar.Key].IntValue,
-//         base.Owner.Creature,
 //         this);
 //     }
 

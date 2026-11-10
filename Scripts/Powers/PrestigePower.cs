@@ -4,12 +4,13 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Powers;
+using StsModBloodywolf.Scripts.Resources;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace StsModBloodywolf.Scripts.Powers;
 
-public sealed class PrestigePower : BloodywolfPowerModel
+public sealed class PrestigePower : BloodywolfPowerModel, ISecondaryResourceHookListener
 {
 	public override PowerType Type => PowerType.Buff;
 
@@ -17,9 +18,11 @@ public sealed class PrestigePower : BloodywolfPowerModel
 	public override string? CustomIconPath => AssetProfile.IconPath!;
     public override string? CustomBigIconPath => AssetProfile.BigIconPath!;
 
-	public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+	public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
 	{
-		if (!(amount <= 0m) && applier == base.Owner && power is CloutPower)
+		if (context.Delta > 0 &&
+			context.Definition.Id == BloodywolfResources.CloutId &&
+			context.Player == base.Owner.Player)
 		{
 			Flash();
 			await Cmd.CustomScaledWait(0.1f, 0.2f);
@@ -28,7 +31,7 @@ public sealed class PrestigePower : BloodywolfPowerModel
 			if (creature != null)
 			{
 				VfxCmd.PlayOnCreatureCenter(creature, "vfx/vfx_attack_blunt");
-				await CreatureCmd.Damage(choiceContext ?? new ThrowingPlayerChoiceContext(), creature, Amount, ValueProp.Unpowered, base.Owner);
+				await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), creature, Amount, ValueProp.Unpowered, base.Owner);
 			}
 		}
 	}

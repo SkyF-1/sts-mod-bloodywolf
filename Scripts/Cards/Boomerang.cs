@@ -32,7 +32,7 @@ public sealed class Boomerang : BloodywolfCardModel
 		: base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
-    // protected override bool ShouldGlowRedInternal => base.Owner.Creature.GetPower<CloutPower>()?.Amount >= base.DynamicVars[HotTakeVar.Key].BaseValue;
+    // protected override bool ShouldGlowRedInternal => BloodywolfResources.GetClout(base.Owner) >= base.DynamicVars[HotTakeVar.Key].BaseValue;
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

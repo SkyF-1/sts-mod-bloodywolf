@@ -13,7 +13,7 @@
   "STS_MOD_BLOODYWOLF_RELIC_NOISE_CANCELING_MICROPHONE.description": "每场战斗中，第一次打出耗能大于等于{EnergyThreshold:energyIcons()}的牌时，不消耗{Energy:energyIcons()}。",
   "STS_MOD_BLOODYWOLF_RELIC_NOISE_CANCELING_MICROPHONE.flavor": "保护狼心糖的耳朵免受侵袭。",
   "STS_MOD_BLOODYWOLF_RELIC_SLICER.title": "切片员",
-  "STS_MOD_BLOODYWOLF_RELIC_SLICER.description": "战斗结束时，获得与你[gold]影响[/gold]层数相等数量的[gold]金币[/gold]。（至多[blue]30[/blue]枚！）",
+  "STS_MOD_BLOODYWOLF_RELIC_SLICER.description": "战斗结束时，获得与你{secondaryResource:secondaryResourceIcons(clout,1)}数量相等的[gold]金币[/gold]。（至多[blue]30[/blue]枚！）",
   "STS_MOD_BLOODYWOLF_RELIC_SLICER.flavor": "你怎么在这？",
   "STS_MOD_BLOODYWOLF_RELIC_REMINISCENCE.title": "追忆",
   "STS_MOD_BLOODYWOLF_RELIC_REMINISCENCE.description": "你在每场战斗中打出的第[blue]{AttackThreshold:diff()}[/blue]张[gold]攻击牌[/gold]会在下个回合开始时回到你的[gold]手牌[/gold]且能免费打出。",
@@ -25,7 +25,7 @@
   "STS_MOD_BLOODYWOLF_RELIC_CUP.description": "在每场战斗开始时，[gold]串[/gold]掉所有敌人[blue]7[/blue]点生命。",
   "STS_MOD_BLOODYWOLF_RELIC_CUP.flavor": "我和我的兄♂弟共用一个杯级杯。",
   "STS_MOD_BLOODYWOLF_RELIC_LIVE_ROOM_RULE.title": "《直播间管理办法》",
-  "STS_MOD_BLOODYWOLF_RELIC_LIVE_ROOM_RULE.description": "你每次失去[gold]影响[/gold]时，所有敌人失去等量生命。",
+  "STS_MOD_BLOODYWOLF_RELIC_LIVE_ROOM_RULE.description": "你的{secondaryResource:secondaryResourceIcons(clout,1)}每次减少时，所有敌人失去等量生命。",
   "STS_MOD_BLOODYWOLF_RELIC_LIVE_ROOM_RULE.flavor": "“请问这里是实话最多，办法最少的直播间吗？”"
 
 }

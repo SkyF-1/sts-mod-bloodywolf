@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpy0e61anyk3o"
-path="res://.godot/imported/bloodywolf_arm_paper.png-cca9978c5344922ab847ee732c428a16.ctex"
+uid="uid://b3mu3dtomjfio"
+path="res://.godot/imported/clout_legacy_large.png-966b5c1480800e289e02d00d16493259.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/scenes/bloodywolf_arm_paper.png"
-dest_files=["res://.godot/imported/bloodywolf_arm_paper.png-cca9978c5344922ab847ee732c428a16.ctex"]
+source_file="res://StsModBloodywolf/images/resources/clout/clout_legacy_large.png"
+dest_files=["res://.godot/imported/clout_legacy_large.png-966b5c1480800e289e02d00d16493259.ctex"]
 
 [params]
 

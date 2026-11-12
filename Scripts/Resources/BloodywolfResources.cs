@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
@@ -6,6 +7,7 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.HoverTips;
 using StsModBloodywolf.Scripts.Char;
+using StsModBloodywolf.Scripts.UI;
 using STS2RitsuLib;
 using STS2RitsuLib.Combat.SecondaryResources;
 
@@ -34,55 +36,30 @@ public static class BloodywolfResources
                 turnStartPolicy: SecondaryResourceTurnStartPolicy.None,
                 persistencePolicy: SecondaryResourcePersistencePolicy.Combat,
                 locTable: SecondaryResourceDefinition.DefaultLocTable,
-                smallIconPath: "res://StsModBloodywolf/images/resources/clout_small.png",
-                largeIconPath: "res://StsModBloodywolf/images/resources/clout_large.png"));
+                smallIconPath: "res://StsModBloodywolf/images/resources/clout/clout_small.png",
+                largeIconPath: "res://StsModBloodywolf/images/resources/clout/clout_large.png"));
 
         registry.AlwaysShowInCombatUiForCharacter<Bloodywolf>(CloutLocalId);
 
         registry.RegisterCombatUi(
             "clout_combat_counter",
-            parent =>
-            {
-                var counter = NSecondaryResourceCounter.Create(
-                    CloutDefinition,
-                    new SecondaryResourceCounterStyle
-                    {
-                        CounterSize = new Vector2(74, 74),
-                        FontSize = 32,
-                        PositiveColor = new Color("#ffffff"),
-                        FormatAmount = static (amount, _) => amount.ToString(),
-                        IconStyle = SecondaryResourceIconStyle.Default with
-                        {
-                            Size = new Vector2(74, 74),
-                            HoverTip = SecondaryResourceHoverTipStyle.Default,
-                        },
-                    });
-                var energyCounter = parent.GetNodeOrNull<Control>("%EnergyCounterContainer");
-                if (energyCounter != null)
-                    counter.Position = energyCounter.Position + new Vector2(50, 40);
-                return counter;
-            },
-            context => context.Node.Bind(context.Player));
+            _ => InstantiateUiScene<CloutCombatCounterUi>(
+                "res://StsModBloodywolf/scenes/secondary_resources/clout_combat_counter.tscn"),
+            context => context.Node.Refresh(context));
 
         registry.RegisterCardUi(
             "clout_card_cost",
-            parent =>
-            {
-                var ui = NSecondaryResourceCardCostUi.Create(
-                    CloutId,
-                    new SecondaryResourceCardCostUiStyle
-                    {
-                        IconSize = new Vector2(48, 48),
-                        FontSize = 24,
-                    });
-                var energyIcon = parent.GetNodeOrNull<TextureRect>("%EnergyIcon");
-                if (energyIcon != null)
-                    ui.Position = energyIcon.Position + new Vector2(-8, 48);
-                return ui;
-            },
+            _ => InstantiateUiScene<CloutCardCostUi>(
+                "res://StsModBloodywolf/scenes/secondary_resources/clout_card_cost.tscn"),
             context => context.Node.Refresh(context));
 
         _registered = true;
+    }
+
+    private static T InstantiateUiScene<T>(string path) where T : Node
+    {
+        return PreloadManager.Cache.GetScene(path)
+            .Instantiate<T>(PackedScene.GenEditState.Disabled);
     }
 
     public static int GetClout(Player player)

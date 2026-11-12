@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rtbm1acokev0"
-path="res://.godot/imported/clout_small.png-4d4159cd81145ccd3f8267c7f6e5f4bb.ctex"
+uid="uid://dtp3ckm72e380"
+path="res://.godot/imported/bloodywolf_arm_scissors.png-c0313f65180a656dc914e118a1533dd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/resources/clout_small.png"
-dest_files=["res://.godot/imported/clout_small.png-4d4159cd81145ccd3f8267c7f6e5f4bb.ctex"]
+source_file="res://StsModBloodywolf/scenes/multiplayer_arms/bloodywolf_arm_scissors.png"
+dest_files=["res://.godot/imported/bloodywolf_arm_scissors.png-c0313f65180a656dc914e118a1533dd2.ctex"]
 
 [params]
 

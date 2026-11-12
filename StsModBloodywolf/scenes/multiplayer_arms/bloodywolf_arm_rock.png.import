@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://23qurc6c0l5j"
-path="res://.godot/imported/bloodywolf_energy_counter.png-cb8881fe3a0bc6366c3ee8f288536073.ctex"
+uid="uid://fphyjn1g2f1h"
+path="res://.godot/imported/bloodywolf_arm_rock.png-eb69fbda81e523aa93080072fdc7c6af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/scenes/bloodywolf_energy_counter.png"
-dest_files=["res://.godot/imported/bloodywolf_energy_counter.png-cb8881fe3a0bc6366c3ee8f288536073.ctex"]
+source_file="res://StsModBloodywolf/scenes/multiplayer_arms/bloodywolf_arm_rock.png"
+dest_files=["res://.godot/imported/bloodywolf_arm_rock.png-eb69fbda81e523aa93080072fdc7c6af.ctex"]
 
 [params]
 

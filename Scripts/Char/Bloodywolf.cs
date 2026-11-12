@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using Godot;
 using StsModBloodywolf.Scripts.Pools;
+using StsModBloodywolf.Scripts.Services;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Godot;
@@ -33,7 +35,7 @@ public class Bloodywolf : ModCharacterTemplate<BloodywolfCardPool, BloodywolfRel
             CharacterSelectIconPath: "res://StsModBloodywolf/images/char_select_bloodywolf.png",
             CharacterSelectLockedIconPath: "res://StsModBloodywolf/images/char_select_bloodywolf.png"),
         Audio: new CharacterAudioAssetSet(
-            CharacterSelectSfx: "res://StsModBloodywolf/audio/char/sfx.ogg",
+            CharacterSelectSfx: BloodywolfAudioService.CharacterSelectSfxEvent,
             CharacterTransitionSfx: "event:/sfx/ui/wipe_ironclad"),
         Multiplayer: new CharacterMultiplayerAssetSet(
             ArmPointingTexturePath: "res://StsModBloodywolf/scenes/bloodywolf_arm_pointing.png",

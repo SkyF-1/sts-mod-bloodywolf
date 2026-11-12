@@ -16,8 +16,8 @@ public sealed class Stomp : BloodywolfCardModel
     /// 踩头
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
     {
-        new BlockVar(5m, ValueProp.Move),
-        new PowerVar<CupLossPower>(5m)
+        new BlockVar(4m, ValueProp.Move),
+        new PowerVar<CupLossPower>(4m)
     };
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => new List<IHoverTip>
     {

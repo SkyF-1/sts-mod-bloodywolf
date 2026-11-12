@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxkb16kkjkrxo"]
+
+[ext_resource type="Script" uid="uid://bla2oxvror1ml" path="res://Scripts/UI/CloutCardCostUi.cs" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://fnv4h4sfxjje" path="res://StsModBloodywolf/images/resources/clout/clout_large.png" id="2_icon"]
+
+[node name="CloutCardCost" type="Control"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 58.0
+offset_bottom = 58.0
+pivot_offset = Vector2(29, 29)
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.37, 0.42, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 22
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

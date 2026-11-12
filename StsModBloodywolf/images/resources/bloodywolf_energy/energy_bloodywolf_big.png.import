@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fnv4h4sfxjje"
-path="res://.godot/imported/clout_large.png-ae5e1ae2cd0d0cbdc92e3ca7b93be3cd.ctex"
+uid="uid://dmn3jetpf0bf2"
+path="res://.godot/imported/energy_bloodywolf_big.png-07ceeb280e7e18ba7b4f537305f1212e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/images/resources/clout_large.png"
-dest_files=["res://.godot/imported/clout_large.png-ae5e1ae2cd0d0cbdc92e3ca7b93be3cd.ctex"]
+source_file="res://StsModBloodywolf/images/resources/bloodywolf_energy/energy_bloodywolf_big.png"
+dest_files=["res://.godot/imported/energy_bloodywolf_big.png-07ceeb280e7e18ba7b4f537305f1212e.ctex"]
 
 [params]
 

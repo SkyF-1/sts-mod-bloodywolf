@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f3o4vwyp60rf"
-path="res://.godot/imported/bloodywolf_arm_pointing.png-3e55a20a61063c2081f9addf21742350.ctex"
+uid="uid://cl8vsrd6k5xyw"
+path="res://.godot/imported/bloodywolf_energy_counter_layer_rotate.png-0ccd25eed9d0ed56203975de050db9d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://StsModBloodywolf/scenes/bloodywolf_arm_pointing.png"
-dest_files=["res://.godot/imported/bloodywolf_arm_pointing.png-3e55a20a61063c2081f9addf21742350.ctex"]
+source_file="res://StsModBloodywolf/images/resources/bloodywolf_energy/bloodywolf_energy_counter_layer_rotate.png"
+dest_files=["res://.godot/imported/bloodywolf_energy_counter_layer_rotate.png-0ccd25eed9d0ed56203975de050db9d8.ctex"]
 
 [params]
 

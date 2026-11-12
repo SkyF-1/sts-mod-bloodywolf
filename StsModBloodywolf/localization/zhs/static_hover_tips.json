@@ -1,8 +1,8 @@
 {
     "STS_MOD_BLOODYWOLF_SECONDARY_RESOURCE_CLOUT.title": "影响",
-    "STS_MOD_BLOODYWOLF_SECONDARY_RESOURCE_CLOUT.description": "你当前的影响（{secondaryResource:secondaryResourceIcons(clout,1)}）数。血狼破军的部分卡牌可能会需要{secondaryResource:secondaryResourceIcons(clout,1)}才能打出。\n每回合结束时，{secondaryResource:secondaryResourceIcons(clout,1)}会自然衰减。",
-    "BLOODYWOLF-RATE.description": "获得{Bloodywolf-Rate:secondaryResourceIcons()}。",
-    "BLOODYWOLF-RATE.title": "评定{Bloodywolf-Rate}",
+    "STS_MOD_BLOODYWOLF_SECONDARY_RESOURCE_CLOUT.description": "[red]每回合结束时衰减1。[/red]\n你当前的影响（{secondaryResource:secondaryResourceIcons(clout,1)}）数。血狼破军的部分卡牌可能会需要{secondaryResource:secondaryResourceIcons(clout,1)}才能打出。",
+    "BLOODYWOLF-RATE.description": "获得一定数量的{secondaryResource:secondaryResourceIcons(clout,1)}。",
+    "BLOODYWOLF-RATE.title": "评定",
     "BLOODYWOLF-HOTTAKE.description": "有至少[blue]{Bloodywolf-HotTake}[/blue]点{secondaryResource:secondaryResourceIcons(clout,1)}时触发的额外效果。",
     "BLOODYWOLF-HOTTAKE.title": "言论{Bloodywolf-HotTake}",
     "BLOODYWOLF-GIVENBLOCK.description": "使目标获得格挡，此格挡数值不受加成。",

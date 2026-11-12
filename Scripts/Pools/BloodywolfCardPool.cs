@@ -8,8 +8,8 @@ public class BloodywolfCardPool : TypeListCardPoolModel
     public override string Title => "BloodywolfCardPool";
     public override string EnergyColorName => "Bloodywolf";
 
-    public override string? TextEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf.png";
-    public override string? BigEnergyIconPath => "res://StsModBloodywolf/images/energy_bloodywolf_big.png";
+    public override string? TextEnergyIconPath => "res://StsModBloodywolf/images/resources/bloodywolf_energy/energy_bloodywolf_small.png";
+    public override string? BigEnergyIconPath => "res://StsModBloodywolf/images/resources/bloodywolf_energy/energy_bloodywolf_big.png";
 
     public override Color DeckEntryCardColor => new("#1c3f6d");
     public override Color EnergyOutlineColor => new("#1c3f6d");

@@ -8,6 +8,11 @@ namespace StsModBloodywolf.Scripts.Services
 {
     public static class BloodywolfAudioService
     {
+        public const string CharacterSelectSfxEvent =
+            "event:/mods/bloodywolf/character_select";
+        public const string CharacterSelectSfxPath =
+            "res://StsModBloodywolf/audio/char/sfx.ogg";
+
         private const string LegacyAudioRoot = "res://StsModBloodywolf/audio";
         private static readonly Dictionary<string, AudioStream> _streamCache = new();
         private static Node? _audioHost;
@@ -53,6 +58,11 @@ namespace StsModBloodywolf.Scripts.Services
             var path = FindLegacyPath(key);
             if (path == null) return false;
             return TryPlayPath(path, volume);
+        }
+
+        public static bool PlayCharacterSelect(float volume = 1f)
+        {
+            return TryPlayPath(CharacterSelectSfxPath, volume);
         }
 
         public static bool HasLegacyAudio(string fileName)

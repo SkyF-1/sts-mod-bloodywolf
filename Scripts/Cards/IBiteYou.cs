@@ -20,7 +20,7 @@ public sealed class IBiteYou : BloodywolfCardModel
 {/// 我咬死你
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar>
 	{
-		new DamageVar(6m, ValueProp.Move),
+		new DamageVar(4m, ValueProp.Move),
         new RateVar(1m)
 	};
     public override string PortraitPath => AssetProfile.PortraitPath!;
@@ -45,7 +45,7 @@ public sealed class IBiteYou : BloodywolfCardModel
 
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(3m);
+		base.DynamicVars.Damage.UpgradeValueBy(2m);
 	}
 
 	public static async Task<CardModel?> CreateInHand(Player owner, ICombatState combatState)

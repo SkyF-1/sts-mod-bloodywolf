@@ -17,12 +17,19 @@ namespace StsModBloodywolf.Scripts.Singletons;
 public class CostReductionBeforeShuffledSingleton : HookedSingletonModel
 {
     // 累积减费量：值是正数，表示减多少费
-    private readonly Dictionary<CardModel, int> _costReductions = new();
+    private Dictionary<CardModel, int> _costReductions = new();
 
     // 绝对费用覆盖：值是最终费用，优先级高于 _costReductions
-    private readonly Dictionary<CardModel, int> _absoluteCosts = new();
+    private Dictionary<CardModel, int> _absoluteCosts = new();
 
     public CostReductionBeforeShuffledSingleton() : base(HookType.Combat) { }
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _costReductions = new();
+        _absoluteCosts = new();
+    }
 
     /// <summary>
     /// 让这张卡减 amount 费，可累加。

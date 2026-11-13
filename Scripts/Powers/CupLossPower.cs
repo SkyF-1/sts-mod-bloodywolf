@@ -47,7 +47,18 @@ public sealed class CupLossPower : BloodywolfPowerModel, IHealthBarForecastSourc
 	{
 
 		decimal damage = base.Amount;
-		damage = Hook.ModifyDamage(base.Owner.CombatState.RunState, base.Owner.CombatState, base.Owner, null, damage, ValueProp.Unblockable | ValueProp.Unpowered, null, null, ModifyDamageHookType.All, CardPreviewMode.None, out IEnumerable<AbstractModel> _);
+		damage = Sts2Compat.ModifyDamagePreviewCompat(
+			base.Owner.CombatState.RunState,
+			base.Owner.CombatState,
+			base.Owner,
+			null,
+			damage,
+			ValueProp.Unblockable | ValueProp.Unpowered,
+			null,
+			null,
+			ModifyDamageHookType.All,
+			CardPreviewMode.None,
+			out IEnumerable<AbstractModel> _);
 		return (int)damage;
 	}
 	public IEnumerable<HealthBarForecastSegment> GetHealthBarForecastSegments(HealthBarForecastContext context)

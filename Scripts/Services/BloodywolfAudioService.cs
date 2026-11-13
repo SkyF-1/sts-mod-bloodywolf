@@ -3,6 +3,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Models;
 using StsModBloodywolf.Scripts.Audio;
 using StsModBloodywolf.Scripts.Config;
+using STS2RitsuLib.Audio;
 
 namespace StsModBloodywolf.Scripts.Services
 {
@@ -24,6 +25,9 @@ namespace StsModBloodywolf.Scripts.Services
             if (_initialized) return;
             _initialized = true;
             CardAudioCatalog.Initialize();
+            VirtualFmodEventRegistry.RegisterOneShot(
+                CharacterSelectSfxEvent,
+                CharacterSelectSfxPath);
         }
 
         public static void PlayCard(CardModel card, float volume = 1f)
@@ -58,11 +62,6 @@ namespace StsModBloodywolf.Scripts.Services
             var path = FindLegacyPath(key);
             if (path == null) return false;
             return TryPlayPath(path, volume);
-        }
-
-        public static bool PlayCharacterSelect(float volume = 1f)
-        {
-            return TryPlayPath(CharacterSelectSfxPath, volume);
         }
 
         public static bool HasLegacyAudio(string fileName)

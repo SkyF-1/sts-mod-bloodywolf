@@ -106,14 +106,13 @@ public sealed class TrollCommand
 
             decimal modifiedAmount = MyHook.ModifyTrollDamage(combat, target, _amount, _dealer, _cardSource);
             modifiedAmount = MyHook.ModifyTrollDamageMultiplicative(combat, target, modifiedAmount, _dealer, _cardSource);
-            IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
+            IEnumerable<DamageResult> damageResults = await Sts2Compat.DamageCalculatedCompat(
                 context,
                 target,
                 modifiedAmount,
                 ValueProp.Unpowered | ValueProp.Unblockable,
                 _dealer,
-                _cardSource,
-                null);
+                _cardSource);
 
             allDamageResults.AddRange(damageResults);
             if (!target.IsAlive) continue;

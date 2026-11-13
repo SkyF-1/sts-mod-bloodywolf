@@ -23,13 +23,12 @@ public sealed class SpinPower : BloodywolfPowerModel, IModifyTrollDamageListener
 		{
 			return originalDamage;
 		}
-        return originalDamage + (dealer.GetPower<StrengthPower>()?.ModifyDamageAdditive(
+        return originalDamage + (dealer.GetPower<StrengthPower>()?.ModifyDamageAdditiveCompat(
             target,
             originalDamage,
             ValueProp.Move,
             dealer,
-            cardSource,
-            null) ?? 0m);
+            cardSource) ?? 0m);
     }
 
     public decimal ModifyTrollDamageMultiplicative(ICombatState combatState, Creature? target, decimal originalDamage, Creature? dealer, CardModel? cardSource)
@@ -39,12 +38,11 @@ public sealed class SpinPower : BloodywolfPowerModel, IModifyTrollDamageListener
             return 1m;
         }
 
-        return target.GetPower<VulnerablePower>()?.ModifyDamageMultiplicative(
+        return target.GetPower<VulnerablePower>()?.ModifyDamageMultiplicativeCompat(
             target,
             originalDamage,
             ValueProp.Move,
             dealer,
-            cardSource,
-            null) ?? 1m;
+            cardSource) ?? 1m;
     }
 }

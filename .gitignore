@@ -8,5 +8,16 @@
 # Generated card audio coverage report
 /还没有name的卡牌音效资源的卡牌列表.md
 
+# Local game/reference assemblies (not distributable)
+/refs/
+
+# Local build and distribution artifacts
+/artifacts/
+/loader/bin/
+/loader/obj/
+
+# Godot temporary copies
+/windows/*.TMP
+
 # Generated C# language-service cache
 *.lscache

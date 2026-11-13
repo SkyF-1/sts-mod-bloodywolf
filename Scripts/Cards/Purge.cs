@@ -48,7 +48,7 @@ public sealed class Purge : BloodywolfCardModel
 		{
 			num += 0.2f;
 		}
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).TargetingAllOpponents(base.CombatState)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay).TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_giant_horizontal_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);

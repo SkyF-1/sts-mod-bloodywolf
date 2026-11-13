@@ -19,7 +19,7 @@ public static class HotTakeHistory
 
     public static CardPlay? LastTriggered(Player player)
     {
-        return _triggeredPlays.LastOrDefault(play => play.Player == player);
+        return _triggeredPlays.LastOrDefault(play => play.GetPlayerCompat() == player);
     }
 
     internal static void RecordIfTriggered(CardPlay cardPlay)

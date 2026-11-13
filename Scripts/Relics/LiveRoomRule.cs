@@ -32,13 +32,12 @@ public class LiveRoomRule : BloodywolfRelicModel, ISecondaryResourceHookListener
 			context.Player == base.Owner)
 		{
 			Flash();
-			await CreatureCmd.Damage(
+			await Sts2Compat.DamageCompat(
 				new BlockingPlayerChoiceContext(),
 				base.Owner.Creature.CombatState.HittableEnemies,
 				-context.Delta,
 				ValueProp.Unblockable | ValueProp.Unpowered,
 				base.Owner.Creature,
-				null,
 				null);
 		}
 	}

@@ -29,7 +29,7 @@ public sealed class CrossCompare : BloodywolfCardModel
     public override string PortraitPath => AssetProfile.PortraitPath!;
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay)
             .TargetingAllOpponents(base.CombatState)
 			.WithHitFx("vfx/vfx_flying_slash")
             .Execute(choiceContext);

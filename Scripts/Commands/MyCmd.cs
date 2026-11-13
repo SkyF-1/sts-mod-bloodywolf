@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using StsModBloodywolf.Scripts.Singletons;
+using STS2RitsuLib.Models;
 
 namespace StsModBloodywolf.Scripts.Commands;
 
@@ -15,8 +16,17 @@ public static class MyCmd
     // 洗牌前减费单例入口
     // ---------------------------------------------------------------------
 
-    private static CostReductionBeforeShuffledSingleton CostReductionBeforeShuffled
-        => ModelDb.Singleton<CostReductionBeforeShuffledSingleton>();
+    private static T GetRunModel<T>(CardModel card) where T : HookedSingletonModel
+    {
+#if STS2_API_0_113_0
+        return card.Owner.RunState.RunModels.OfType<T>().SingleOrDefault()
+            ?? throw new InvalidOperationException($"Current run does not contain {typeof(T).Name}.");
+#elif STS2_API_0_107_1
+        return ModelDb.Singleton<T>();
+#else
+#error Unsupported Sts2ApiCompat. Add an explicit MyCmd run-model branch.
+#endif
+    }
 
     // ---------------------------------------------------------------------
     // 洗牌前减费命令
@@ -27,7 +37,7 @@ public static class MyCmd
     /// </summary>
     public static void ReduceCostBeforeShuffled(CardModel card, int amount = 1)
     {
-        CostReductionBeforeShuffled.ReduceCost(card, amount);
+        GetRunModel<CostReductionBeforeShuffledSingleton>(card).ReduceCost(card, amount);
     }
 
     /// <summary>
@@ -39,7 +49,7 @@ public static class MyCmd
 
         foreach (var card in cards)
         {
-            CostReductionBeforeShuffled.ReduceCost(card, amount);
+            GetRunModel<CostReductionBeforeShuffledSingleton>(card).ReduceCost(card, amount);
         }
     }
 
@@ -48,7 +58,7 @@ public static class MyCmd
     /// </summary>
     public static void SetCostBeforeShuffled(CardModel card, int cost)
     {
-        CostReductionBeforeShuffled.SetCost(card, cost);
+        GetRunModel<CostReductionBeforeShuffledSingleton>(card).SetCost(card, cost);
     }
 
     /// <summary>
@@ -56,7 +66,7 @@ public static class MyCmd
     /// </summary>
     public static void SetFreeBeforeShuffled(CardModel card)
     {
-        CostReductionBeforeShuffled.SetCost(card, 0);
+        GetRunModel<CostReductionBeforeShuffledSingleton>(card).SetCost(card, 0);
     }
 
     /// <summary>
@@ -64,7 +74,7 @@ public static class MyCmd
     /// </summary>
     public static void ClearCostReductionBeforeShuffled(CardModel card)
     {
-        CostReductionBeforeShuffled.ClearCostReduction(card);
+        GetRunModel<CostReductionBeforeShuffledSingleton>(card).ClearCostReduction(card);
     }
 
     // ---------------------------------------------------------------------

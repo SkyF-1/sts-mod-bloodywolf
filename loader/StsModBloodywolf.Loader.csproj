@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>StsModBloodywolf.Loader</AssemblyName>
+    <RootNamespace>StsModBloodywolf.Loader</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <IsPackable>false</IsPackable>
+    <Sts2RefDir Condition="'$(Sts2RefDir)' == ''">$(MSBuildProjectDirectory)\..\refs\game\0.107.1</Sts2RefDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodotSharp" Version="4.5.1" />
+    <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(Sts2RefDir)\sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2RefDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Publicize Include="sts2" IncludeVirtualMembers="false" IncludeCompilerGeneratedMembers="false" />
+  </ItemGroup>
+
+  <Target Name="ValidateLoaderReferences" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(Sts2RefDir)\sts2.dll')"
+           Text="Missing loader game reference: '$(Sts2RefDir)\sts2.dll'." />
+    <Error Condition="!Exists('$(Sts2RefDir)\0Harmony.dll')"
+           Text="Missing loader Harmony reference: '$(Sts2RefDir)\0Harmony.dll'." />
+  </Target>
+</Project>

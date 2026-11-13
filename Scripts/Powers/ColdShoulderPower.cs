@@ -45,7 +45,13 @@ public sealed class ColdShoulderPower : BloodywolfPowerModel
             Enable = false;
         }
 	}
+#if STS2_API_0_107_1
+	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+#elif STS2_API_0_113_0
 	public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+#else
+#error Unsupported Sts2ApiCompat. Add an explicit ColdShoulderPower damage branch.
+#endif
 	{
         if(Enable == false)
         {

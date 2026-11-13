@@ -53,7 +53,7 @@ public sealed class Liquidate : BloodywolfCardModel
 		{
 			num += 0.2f;
 		}
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);

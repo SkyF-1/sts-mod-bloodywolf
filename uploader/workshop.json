@@ -1,0 +1,8 @@
+{
+  "title": "血狼破军MOD（逝玩版） | Bloodywolf",
+  "description": "",
+  "visibility": "public",
+  "changeNote": "支持游戏正式版与 beta，切换分支后自动加载对应版本。",
+  "tags": ["Characters"],
+  "dependencies": [3747602295]
+}

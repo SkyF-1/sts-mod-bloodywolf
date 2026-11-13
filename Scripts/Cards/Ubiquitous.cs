@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -27,7 +28,7 @@ public sealed class Ubiquitous : BloodywolfCardModel
         List<CardPoolModel> viablePools = ModelDb.AllCharacterCardPools
             .Where(pool => GetEligibleRares(pool).Any())
             .ToList();
-        rng.Shuffle(viablePools);
+        viablePools = viablePools.UnstableShuffle(rng);
 
         List<CardModel> choices = [];
         foreach (CardPoolModel pool in viablePools.Take(3))

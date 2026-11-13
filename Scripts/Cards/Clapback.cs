@@ -33,7 +33,7 @@ public sealed class Clapback : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
@@ -54,6 +54,13 @@ public sealed class Clapback : BloodywolfCardModel
 				costs.ClearDuration(SecondaryResourceCostDuration.ThisTurn);
 		}
 	}
+#if STS2_API_0_107_1
+	protected override PileType GetResultPileTypeForCardPlay()
+	{
+		PileType resultPileType = base.GetResultPileTypeForCardPlay();
+		return resultPileType == PileType.Discard ? PileType.Hand : resultPileType;
+	}
+#elif STS2_API_0_113_0
 	protected override CardLocation GetResultLocationForCardPlay()
 	{
 		CardLocation resultLocationForCardPlay = base.GetResultLocationForCardPlay();
@@ -63,6 +70,9 @@ public sealed class Clapback : BloodywolfCardModel
 		}
 		return resultLocationForCardPlay;
 	}
+#else
+#error Unsupported Sts2ApiCompat. Add an explicit Clapback result-location branch.
+#endif
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3m);

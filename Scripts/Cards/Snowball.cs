@@ -41,7 +41,7 @@ public sealed class Snowball : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCard(this, cardPlay)
+        await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).FromCardCompat(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_rock_shatter")
 			.Execute(choiceContext);

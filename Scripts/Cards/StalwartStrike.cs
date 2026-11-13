@@ -23,7 +23,7 @@ public sealed class StalwartStrike : BloodywolfCardModel
     protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/orbs/glass/vfx_glass_orb_evoke_impact")
 			.Execute(choiceContext);
         await PowerCmd.Apply<StalwartPower>(choiceContext, cardPlay.Target, DynamicVars["StalwartPower"].BaseValue, base.Owner.Creature, this);

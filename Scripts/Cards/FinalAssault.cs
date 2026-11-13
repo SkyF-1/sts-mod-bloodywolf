@@ -36,7 +36,7 @@ public sealed class FinalAssault : BloodywolfCardModel
 	protected override async Task OnPlayEffect(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this, cardPlay)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCardCompat(this, cardPlay)
 			.Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_dramatic_stab", null, "slash_attack.mp3")
 			.Execute(choiceContext);
@@ -154,7 +154,18 @@ public sealed class FinalAssault : BloodywolfCardModel
 
         if (runGlobalHooks)
         {
-			num = Hook.ModifyDamage(base.Owner.RunState, base.CombatState, target, base.Owner.Creature, base.DynamicVars.Damage.BaseValue, base.DynamicVars.Damage.Props, this, null, ModifyDamageHookType.All, previewMode, out IEnumerable<AbstractModel> _);
+			num = Sts2Compat.ModifyDamagePreviewCompat(
+				base.Owner.RunState,
+				base.CombatState,
+				target,
+				base.Owner.Creature,
+				base.DynamicVars.Damage.BaseValue,
+				base.DynamicVars.Damage.Props,
+				this,
+				null,
+				ModifyDamageHookType.All,
+				previewMode,
+				out IEnumerable<AbstractModel> _);
         }
         return num;
     }

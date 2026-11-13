@@ -23,7 +23,7 @@ public sealed class Headbutt : BloodywolfCardModel
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Repeat.IntValue)
-			.FromCard(this, cardPlay).Targeting(cardPlay.Target)
+			.FromCardCompat(this, cardPlay).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt")
 			.Execute(choiceContext);
 
@@ -35,7 +35,7 @@ public sealed class Headbutt : BloodywolfCardModel
 
         await CardCmd.AutoPlay(
             choiceContext,
-            previousPlay.Card.CreateDupe(base.Owner),
+            previousPlay.Card.CreateDupeCompat(base.Owner),
             null);
 	}
 
